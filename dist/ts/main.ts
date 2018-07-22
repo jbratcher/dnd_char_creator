@@ -8,12 +8,9 @@
     return Math.floor(Math.random() * ((18 - 3) + 1)) + 3;
   }
 
-  const setToMinMax = (score) => score > 18 ? score = 18 : score = 3;
-
+  const setToMinMax = score => score > 18 ? score = 18 : score = 3;
 
   // Declare Variables
-
-
 
   const rollStrength = document.querySelector('#rollStrength');
   const rolledStrength = document.querySelector('#rolledStrength');
@@ -93,7 +90,7 @@ submitButton.addEventListener('click', () =>{
 
     const $gender = document.querySelector('#gender').textContent;
 
-    const $age = document.querySelector('#age').textContent;
+    const $age = <HTMLInputElement>document.querySelector('#age');
 
     // Post info from character creation to preview area
 
@@ -106,8 +103,8 @@ submitButton.addEventListener('click', () =>{
     const genderPreview = <HTMLElement>document.querySelector('#genderPreview');
     genderPreview.textContent = $gender;
 
-    const agePreview = <HTMLElement>document.querySelector('#agePreview');
-    agePreview.textContent = $age;
+    const agePreview = <HTMLInputElement>document.querySelector('#agePreview');
+    agePreview.textContent = $age.value;
 
     // stats, align, class
 

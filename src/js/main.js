@@ -56,7 +56,7 @@ submitButton.addEventListener('click', function () {
     var $cls = document.querySelector('#cls');
     var selectedCls = $cls.options[$cls.selectedIndex];
     var $gender = document.querySelector('#gender').textContent;
-    var $age = document.querySelector('#age').textContent;
+    var $age = document.querySelector('#age');
     // Post info from character creation to preview area
     var namePreview = document.querySelector('#namePreview');
     namePreview.textContent = $name;
@@ -65,7 +65,7 @@ submitButton.addEventListener('click', function () {
     var genderPreview = document.querySelector('#genderPreview');
     genderPreview.textContent = $gender;
     var agePreview = document.querySelector('#agePreview');
-    agePreview.textContent = $age;
+    agePreview.textContent = $age.value;
     // stats, align, class
     var strengthPreview = document.querySelector('#strengthPreview');
     strengthPreview.textContent = $strength;
