@@ -42,7 +42,7 @@ rollCharisma.addEventListener('click', function () {
 var submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', function () {
     // Get info to create character
-    var $name = document.querySelector('#name').textContent;
+    var $name = document.querySelector('#name');
     var $race = document.querySelector('#race');
     var selectedRace = $race.options[$race.selectedIndex];
     var $strength = rolledStrength.textContent;
@@ -55,18 +55,25 @@ submitButton.addEventListener('click', function () {
     var selectedAlignment = $alignment.options[$alignment.selectedIndex];
     var $cls = document.querySelector('#cls');
     var selectedCls = $cls.options[$cls.selectedIndex];
+<<<<<<< HEAD
     var $gender = document.querySelector('#gender').textContent;
+=======
+    var $gender = document.querySelector('#gender');
+>>>>>>> 6b37e056d86acb43531fa1e58f0b2d5e3fa1be3e
     var $age = document.querySelector('#age');
     // Post info from character creation to preview area
     var namePreview = document.querySelector('#namePreview');
-    namePreview.textContent = $name;
+    namePreview.textContent = $name.value;
     var racePreview = document.querySelector('#racePreview');
     racePreview.textContent = selectedRace.textContent;
     var genderPreview = document.querySelector('#genderPreview');
-    genderPreview.textContent = $gender;
+    genderPreview.textContent = $gender.value;
     var agePreview = document.querySelector('#agePreview');
     agePreview.textContent = $age.value;
+<<<<<<< HEAD
     // stats, align, class
+=======
+>>>>>>> 6b37e056d86acb43531fa1e58f0b2d5e3fa1be3e
     var strengthPreview = document.querySelector('#strengthPreview');
     strengthPreview.textContent = $strength;
     var dexerityPreview = document.querySelector('#dexerityPreview');

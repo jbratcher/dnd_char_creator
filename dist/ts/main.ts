@@ -1,7 +1,4 @@
 
-
-
-
   // create function to get ability score 3-18
 
   const abilityScore = function(){
@@ -65,7 +62,7 @@
 submitButton.addEventListener('click', () =>{
 
     // Get info to create character
-    const $name = document.querySelector('#name').textContent;
+    const $name = <HTMLInputElement>document.querySelector('#name');
 
     const $race = <HTMLSelectElement>document.querySelector('#race');
     const selectedRace = $race.options[$race.selectedIndex];
@@ -88,25 +85,30 @@ submitButton.addEventListener('click', () =>{
     const $cls = <HTMLSelectElement>document.querySelector('#cls');
     const selectedCls = $cls.options[$cls.selectedIndex];
 
-    const $gender = document.querySelector('#gender').textContent;
+    const $gender = <HTMLInputElement>document.querySelector('#gender');
 
     const $age = <HTMLInputElement>document.querySelector('#age');
 
     // Post info from character creation to preview area
 
-    const namePreview = <HTMLElement>document.querySelector('#namePreview');
-    namePreview.textContent = $name;
+    const namePreview = document.querySelector('#namePreview');
+    namePreview.textContent = $name.value;
 
     const racePreview = <HTMLElement>document.querySelector('#racePreview');
     racePreview.textContent = selectedRace.textContent;
 
     const genderPreview = <HTMLElement>document.querySelector('#genderPreview');
-    genderPreview.textContent = $gender;
+    genderPreview.textContent = $gender.value;
 
+<<<<<<< HEAD
     const agePreview = <HTMLInputElement>document.querySelector('#agePreview');
     agePreview.textContent = $age.value;
 
     // stats, align, class
+=======
+    const agePreview = <HTMLElement>document.querySelector('#agePreview');
+    agePreview.textContent = $age.value;
+>>>>>>> 6b37e056d86acb43531fa1e58f0b2d5e3fa1be3e
 
     const strengthPreview = <HTMLElement>document.querySelector('#strengthPreview');
     strengthPreview.textContent = $strength;
