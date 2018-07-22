@@ -1,4 +1,4 @@
-// Character image array
+// Character image arrays
 var maleCharacterImages = [
     "https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWmOrOMDeUgAgx9IWjCZD9g5oBec8-fk8xZH9UuofS_VAOt3zb",
