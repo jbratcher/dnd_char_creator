@@ -53,4 +53,3 @@ var characterImages = exports.characterImages = {
         female: ["https://vignette.wikia.nocookie.net/bgtscc/images/9/99/Barbarian.jpg/revision/latest?cb=20161105214456", "https://i.kinja-img.com/gawker-media/image/upload/s--NdbChKcZ--/c_scale,f_auto,fl_progressive,q_80,w_800/18j3zwhxy85iyjpg.jpg", "https://cdna.artstation.com/p/assets/covers/images/001/568/198/large/denny-ibnu-barbarian-final-lr.jpg?1448720934", "https://i.pinimg.com/236x/30/9a/4e/309a4ecd64fefa487ebb20c2eb23d922--fantasy-characters-female-characters.jpg", "http://www.conceptart.org/forums/attachment.php?attachmentid=2239200&d=1490565589s"]
     }
 };
-console.log(characterImages.barbarian.male[0]);

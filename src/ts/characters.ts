@@ -192,4 +192,3 @@ export const characterImages = {
         ]
     }
 };
-console.log(characterImages.barbarian.male[0]);

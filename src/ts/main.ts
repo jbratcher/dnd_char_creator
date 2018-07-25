@@ -1,4 +1,4 @@
-import { characterImages } from './characters';
+import { characterImages } from './characters.js';
 
 // Utility functions
 
