@@ -40,7 +40,8 @@ gulp.task('sass', () =>
 gulp.task("tsc", () => {
   var tsResult = gulp.src("src/ts/*.ts")
       .pipe(ts({
-            noImplicitAny: false
+            noImplicitAny: false,
+            module: "ES6"
       }));
   return tsResult.js.pipe(gulp.dest("src/js"));
 });
