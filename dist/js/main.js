@@ -1,6 +1,6 @@
 'use strict';
 
-var _characters = require('./characters.js');
+var _characters = require('./characters');
 
 // Utility functions
 var randomIntFromRange = function randomIntFromRange(min, max) {

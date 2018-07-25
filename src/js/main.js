@@ -1,4 +1,4 @@
-import { characterImages } from './characters.js';
+import { characterImages } from './characters';
 // Utility functions
 var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
 var getCharacterImage = function (genderedImages) {
