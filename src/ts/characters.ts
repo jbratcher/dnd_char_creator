@@ -1,4 +1,4 @@
-export const characterImages = {
+export var characterImages = {
     barbarian: {
         male: [
             "https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg",

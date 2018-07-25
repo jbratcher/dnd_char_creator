@@ -92,12 +92,10 @@ submitButton.addEventListener('click', function () {
         // class if statement for male genders
         var characterImg = document.querySelector('#characterImg');
         characterImg.src = getCharacterImage(characterImages.barbarian.male);
-        console.log(characterImg.src);
     }
     else if ($gender.value.toLowerCase() === 'female') {
         var characterImg = document.querySelector('#characterImg');
         characterImg.src = getCharacterImage(characterImages.barbarian.female);
-        console.log(characterImg.src);
     }
     else {
         var characterImg = document.querySelector('#characterImg');
@@ -108,6 +106,5 @@ submitButton.addEventListener('click', function () {
         else if (!randomBoolean) {
             characterImg.src = getCharacterImage(characterImages.barbarian.female);
         }
-        console.log(randomBoolean);
     }
 });

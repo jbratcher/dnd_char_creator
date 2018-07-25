@@ -146,13 +146,11 @@ submitButton.addEventListener('click', () =>{
 
     const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
     characterImg.src = getCharacterImage(characterImages.barbarian.male);
-    console.log(characterImg.src)
 
   } else if($gender.value.toLowerCase() === 'female') {
 
     const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
     characterImg.src = getCharacterImage(characterImages.barbarian.female);
-    console.log(characterImg.src)
 
   } else {
 
@@ -163,8 +161,6 @@ submitButton.addEventListener('click', () =>{
     } else if (!randomBoolean) {
       characterImg.src = getCharacterImage(characterImages.barbarian.female);
     }
-    console.log(randomBoolean)
-
   }
 
 });
