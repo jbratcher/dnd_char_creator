@@ -4,8 +4,6 @@ import { characterImages } from './characters.js';
 
 const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-
-
 const getCharacterImage = (genderedImages) => {
   let randomIndex = randomIntFromRange(0, (genderedImages.length-1));
   return genderedImages[randomIndex];
@@ -77,6 +75,7 @@ submitButton.addEventListener('click', () =>{
 
   const $race = <HTMLSelectElement>document.querySelector('#race');
   const selectedRace = $race.options[$race.selectedIndex];
+  console.log(selectedRace.textContent);
 
   const $strength = rolledStrength.textContent;
 

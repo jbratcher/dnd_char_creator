@@ -50,6 +50,7 @@ submitButton.addEventListener('click', function () {
     var $name = document.querySelector('#name');
     var $race = document.querySelector('#race');
     var selectedRace = $race.options[$race.selectedIndex];
+    console.log(selectedRace.textContent);
     var $strength = rolledStrength.textContent;
     var $dexerity = rolledDexerity.textContent;
     var $constitution = rolledConstitition.textContent;
