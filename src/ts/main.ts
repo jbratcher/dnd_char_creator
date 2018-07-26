@@ -139,22 +139,61 @@ submitButton.addEventListener('click', () =>{
   alignmentPreview.textContent = selectedAlignment.textContent;
 
   // Get character preview image based on class and gender
+  
+  const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
+  console.log(clsPreview.textContent);
 
+  
   if($gender.value.toLowerCase() === 'male') {
 
     // class if statement for male genders
 
-    const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
-    characterImg.src = getCharacterImage(characterImages.barbarian.male);
+    if(clsPreview.textContent.toLowerCase() === 'barbarian') {
+      characterImg.src = getCharacterImage(characterImages.barbarian.male);
+      console.log('barbarian male');
+    } else if(clsPreview.textContent.toLowerCase() === 'bard') {
+      characterImg.src = getCharacterImage(characterImages.bard.male);
+      console.log('bard male');
+    } else if(clsPreview.textContent.toLowerCase() === 'cleric') {
+      characterImg.src = getCharacterImage(characterImages.cleric.male);
+      console.log('cleric male');
+    } else if(clsPreview.textContent.toLowerCase() === 'druid') {
+      characterImg.src = getCharacterImage(characterImages.druid.male);
+      console.log('druid male');
+    } else if(clsPreview.textContent.toLowerCase() === 'fighter') {
+      characterImg.src = getCharacterImage(characterImages.fighter.male);
+      console.log('fighter male');
+    }  else if(clsPreview.textContent.toLowerCase() === 'monk') {
+      characterImg.src = getCharacterImage(characterImages.monk.male);
+      console.log('monk male');
+    }  else if(clsPreview.textContent.toLowerCase() === 'paladin') {
+      characterImg.src = getCharacterImage(characterImages.paladin.male);
+      console.log('paladin male');
+    }  else if(clsPreview.textContent.toLowerCase() === 'ranger') {
+      characterImg.src = getCharacterImage(characterImages.ranger.male);
+      console.log('ranger male');
+    }  else if(clsPreview.textContent.toLowerCase() === 'rogue') {
+      characterImg.src = getCharacterImage(characterImages.fighter.male);
+      console.log('rogue male');
+    }  else if(clsPreview.textContent.toLowerCase() === 'soccerror') {
+      characterImg.src = getCharacterImage(characterImages.soccerror.male);
+      console.log('soccerror male');
+    }  else if(clsPreview.textContent.toLowerCase() === 'warlock') {
+      characterImg.src = getCharacterImage(characterImages.warlock.male);
+      console.log('warlock male');
+    }  else if(clsPreview.textContent.toLowerCase() === 'wizard') {
+      characterImg.src = getCharacterImage(characterImages.wizard.male);
+      console.log('wizard male');
+    } 
+    
+    
 
   } else if($gender.value.toLowerCase() === 'female') {
 
-    const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
     characterImg.src = getCharacterImage(characterImages.barbarian.female);
 
   } else {
 
-    const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
     let randomBoolean = Math.random() >= 0.5;
     if(randomBoolean) {
       characterImg.src = getCharacterImage(characterImages.barbarian.male);
