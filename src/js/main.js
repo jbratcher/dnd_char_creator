@@ -142,7 +142,54 @@ submitButton.addEventListener('click', function () {
         }
     }
     else if ($gender.value.toLowerCase() === 'female') {
-        characterImg.src = getCharacterImage(characterImages.barbarian.female);
+        if (clsPreview.textContent.toLowerCase() === 'barbarian') {
+            characterImg.src = getCharacterImage(characterImages.barbarian.female);
+            console.log('barbarian female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'bard') {
+            characterImg.src = getCharacterImage(characterImages.bard.female);
+            console.log('bard female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'cleric') {
+            characterImg.src = getCharacterImage(characterImages.cleric.female);
+            console.log('cleric female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'druid') {
+            characterImg.src = getCharacterImage(characterImages.druid.female);
+            console.log('druid female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'fighter') {
+            characterImg.src = getCharacterImage(characterImages.fighter.female);
+            console.log('fighter female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'monk') {
+            characterImg.src = getCharacterImage(characterImages.monk.female);
+            console.log('monk female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'paladin') {
+            characterImg.src = getCharacterImage(characterImages.paladin.female);
+            console.log('paladin female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'ranger') {
+            characterImg.src = getCharacterImage(characterImages.ranger.female);
+            console.log('ranger female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'rogue') {
+            characterImg.src = getCharacterImage(characterImages.fighter.female);
+            console.log('rogue female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'soccerror') {
+            characterImg.src = getCharacterImage(characterImages.soccerror.female);
+            console.log('soccerror female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'warlock') {
+            characterImg.src = getCharacterImage(characterImages.warlock.female);
+            console.log('warlock female');
+        }
+        else if (clsPreview.textContent.toLowerCase() === 'wizard') {
+            characterImg.src = getCharacterImage(characterImages.wizard.female);
+            console.log('wizard female');
+        }
     }
     else {
         var randomBoolean = Math.random() >= 0.5;
