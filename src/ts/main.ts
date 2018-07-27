@@ -2,7 +2,7 @@
 // imports
 ////////////////////////////////////////
 
-import { characterImages } from './characters.js';
+import { characterImages } from './characterImages.js';
 
 ////////////////////////////////////////
 // Utility functions
