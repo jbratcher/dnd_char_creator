@@ -29,10 +29,10 @@ const getCharacterImage = (genderedImages) => {
   return genderedImages[randomIndex];
 }
 
-// TODO: Add race to complete trifecta of charater image setting 
+// TODO: Add race to complete trifecta of charater image setting
 
-const getCharacterAttributes = (charCls,charGender) => {
-  return characterImages[charCls][charGender];
+const getCharacterAttributes = (charCls,charRace,charGender) => {
+  return characterImages[charRace][charCls][charGender];
 }
 
 ////////////////////////////////////////
@@ -127,6 +127,8 @@ submitButton.addEventListener('click', () => {
 
   const racePreview = <HTMLElement>document.querySelector('#racePreview');
   racePreview.textContent = selectedRace.textContent;
+  const charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  console.log(charRace);
 
   const genderPreview = <HTMLElement>document.querySelector('#genderPreview');
   genderPreview.textContent = $gender.value;
@@ -161,12 +163,12 @@ submitButton.addEventListener('click', () => {
   alignmentPreview.textContent = selectedAlignment.textContent;
 
   // Get character preview image based on class and gender
-  
+
   const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
-  
+
   const charImageSet = () => {
-    characterImg.src = getCharacterImage(getCharacterAttributes(charCls,charGender));
-    console.log(charCls,charGender);
+    characterImg.src = getCharacterImage(getCharacterAttributes(charCls,charRace,charGender));
+    console.log(charCls,charRace,charGender);
   }
 
   charImageSet();

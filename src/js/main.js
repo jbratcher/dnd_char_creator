@@ -20,9 +20,9 @@ var getCharacterImage = function (genderedImages) {
     var randomIndex = randomIntFromRange(0, (genderedImages.length - 1));
     return genderedImages[randomIndex];
 };
-// TODO: Add race to complete trifecta of charater image setting 
-var getCharacterAttributes = function (charCls, charGender) {
-    return characterImages[charCls][charGender];
+// TODO: Add race to complete trifecta of charater image setting
+var getCharacterAttributes = function (charCls, charRace, charGender) {
+    return characterImages[charRace][charCls][charGender];
 };
 ////////////////////////////////////////
 // Declare big 6 attributes
@@ -84,6 +84,8 @@ submitButton.addEventListener('click', function () {
     namePreview.textContent = $name.value;
     var racePreview = document.querySelector('#racePreview');
     racePreview.textContent = selectedRace.textContent;
+    var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    console.log(charRace);
     var genderPreview = document.querySelector('#genderPreview');
     genderPreview.textContent = $gender.value;
     var charGender = $gender.value.toLowerCase();
@@ -109,8 +111,8 @@ submitButton.addEventListener('click', function () {
     // Get character preview image based on class and gender
     var characterImg = document.querySelector('#characterImg');
     var charImageSet = function () {
-        characterImg.src = getCharacterImage(getCharacterAttributes(charCls, charGender));
-        console.log(charCls, charGender);
+        characterImg.src = getCharacterImage(getCharacterAttributes(charCls, charRace, charGender));
+        console.log(charCls, charRace, charGender);
     };
     charImageSet();
 });

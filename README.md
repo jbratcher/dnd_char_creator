@@ -3,11 +3,13 @@
 *** Work in progress ***
 Input your characters attributes and it displays your character's stats.
 
+Need help with image sourcing.
+
 [Demo Page](https://jbratcher.github.io/dnd_char_creator/)
 
 ### Version
 
-0.0.7
+0.0.2
 
 ## Install Dependencies
 
@@ -43,16 +45,16 @@ npm start
             -fontawesome-webfont.wotf2
             -FontAwesome.otf
         -font-awesome.min.css
-    /img
     /js
-        -index.js
+        -characters.js
         -main.js
     /scss
     -styles.scss
     /ts
+      -characters.ts
       -main.ts
--index.html
 -gulpfile.js
+-index.html
 -LICENSE
 -package.json
 -readme.md
@@ -88,6 +90,10 @@ gulp clean:dist
 * ???
 
 #### Change Log
+
+###### 0.0.2
+
+* Added feature to generate random character image from an array based on the character's class, race and gender.
 
 ###### 0.0.1
 
