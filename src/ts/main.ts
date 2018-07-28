@@ -10,6 +10,8 @@ import { characterImages } from './characterImages.js';
 
 const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
+const randomBoolean = () => Math.random() >= 0.5;
+
 const abilityScore = () => Math.floor(Math.random() * ((18 - 3) + 1)) + 3;
 
 const setToMinMax = score => score > 18 ? score = 18 : score = 3;
@@ -32,6 +34,14 @@ const getCharacterImage = (genderedImages) => {
 // TODO: Add race to complete trifecta of charater image setting
 
 const getCharacterAttributes = (charCls,charRace,charGender) => {
+  if(charGender !== 'male' && charGender !== "female") {
+    let gender = randomBoolean();
+    if(gender) {
+      charGender = "male";
+    } else if(!gender) {
+      charGender = "female";
+    }
+  }
   return characterImages[charRace][charCls][charGender];
 }
 
@@ -128,9 +138,8 @@ submitButton.addEventListener('click', () => {
   const racePreview = <HTMLElement>document.querySelector('#racePreview');
   racePreview.textContent = selectedRace.textContent;
   const charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-  console.log(charRace);
 
-  const genderPreview = <HTMLElement>document.querySelector('#genderPreview');
+  const genderPreview = <HTMLInputElement>document.querySelector('#genderPreview');
   genderPreview.textContent = $gender.value;
   const charGender = $gender.value.toLowerCase();
 
@@ -167,7 +176,8 @@ submitButton.addEventListener('click', () => {
   const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
   const charImageSet = () => {
-    characterImg.src = getCharacterImage(getCharacterAttributes(charCls,charRace,charGender));
+    const characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
+    characterImg.src = getCharacterImage(characterAttributes);
     console.log(charCls,charRace,charGender);
   }
 

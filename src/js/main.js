@@ -6,6 +6,7 @@ import { characterImages } from './characterImages.js';
 // Utility functions
 ////////////////////////////////////////
 var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
+var randomBoolean = function () { return Math.random() >= 0.5; };
 var abilityScore = function () { return Math.floor(Math.random() * ((18 - 3) + 1)) + 3; };
 var setToMinMax = function (score) { return score > 18 ? score = 18 : score = 3; };
 ////////////////////////////////////////
@@ -22,6 +23,15 @@ var getCharacterImage = function (genderedImages) {
 };
 // TODO: Add race to complete trifecta of charater image setting
 var getCharacterAttributes = function (charCls, charRace, charGender) {
+    if (charGender !== 'male' && charGender !== "female") {
+        var gender = randomBoolean();
+        if (gender) {
+            charGender = "male";
+        }
+        else if (!gender) {
+            charGender = "female";
+        }
+    }
     return characterImages[charRace][charCls][charGender];
 };
 ////////////////////////////////////////
@@ -85,7 +95,6 @@ submitButton.addEventListener('click', function () {
     var racePreview = document.querySelector('#racePreview');
     racePreview.textContent = selectedRace.textContent;
     var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    console.log(charRace);
     var genderPreview = document.querySelector('#genderPreview');
     genderPreview.textContent = $gender.value;
     var charGender = $gender.value.toLowerCase();
@@ -111,7 +120,8 @@ submitButton.addEventListener('click', function () {
     // Get character preview image based on class and gender
     var characterImg = document.querySelector('#characterImg');
     var charImageSet = function () {
-        characterImg.src = getCharacterImage(getCharacterAttributes(charCls, charRace, charGender));
+        var characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
+        characterImg.src = getCharacterImage(characterAttributes);
         console.log(charCls, charRace, charGender);
     };
     charImageSet();

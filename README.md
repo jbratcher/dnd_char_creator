@@ -1,15 +1,14 @@
 # D&D Character Creator
 
 *** Work in progress ***
-Input your characters attributes and it displays your character's stats.
+Input your characters attributes and it displays your character's images, stats, abilities and other useful info.
 
-Need help with image sourcing.
 
 [Demo Page](https://jbratcher.github.io/dnd_char_creator/)
 
 ### Version
 
-0.0.2
+0.0.3
 
 ## Install Dependencies
 
@@ -80,16 +79,24 @@ gulp clean:dist
 ## Features:
 
 * Random rolls between 3 - 18 for stats, selectable races, and classes
+* Randomly selects image from array based on race, class, and gender inputs
+* Generates character preview based on user inputs
 
 ## Future Features:
 
 * API for stats
+* Better sourcing for images
+* Based data on openSRD
 
 ## Known "bugs"
 
 * ???
 
 #### Change Log
+
+###### 0.0.3
+
+* Added support for non-binary genders, removed placeholder default values for race, class, and alignment, 
 
 ###### 0.0.2
 
