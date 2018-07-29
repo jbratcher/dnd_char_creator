@@ -6,3 +6,9 @@ body {
 
 ul {
   list-style-type: none; }
+
+#imgSection {
+  height: 40vh; }
+  #imgSection .img-fluid {
+    width: auto;
+    max-height: 100%; }
