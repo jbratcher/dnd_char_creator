@@ -14,18 +14,6 @@ const babel         = require('gulp-babel');  // compile js to es2015
 const ts            = require('gulp-typescript');
 const del           = require('del');
 
-// Move vendor files from node modules to src folders
-
-gulp.task('fonts', () =>
-  gulp.src('node_modules/font-awesome/css/fonts/*')
-    .pipe(gulp.dest('src/css/fonts'))
-);
-
-gulp.task('fa', () =>
-  gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
-    .pipe(gulp.dest('src/css/vendor'))
-);
-
 // Compile sass & inject into browser (watched)
 
 gulp.task('sass', () =>
@@ -121,6 +109,6 @@ gulp.task('clean:files', () => del(['dist/css/styles.css', 'dist/css/vendor/', '
 
 // Gulp default tasks
 
-gulp.task('default', gulp.parallel('sass', 'tsc', 'fonts', 'fa', 'img', 'browserSync'));
+gulp.task('default', gulp.parallel('sass', 'tsc', 'img', 'browserSync'));
 
 gulp.task('build', gulp.series('clean:dist', 'build:dist', 'sass', 'tsc', 'img', 'autoprefix', 'compilejs', 'useref', 'clean:files'));

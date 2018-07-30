@@ -9,7 +9,7 @@
         <title>D&D Charcter Creator</title>
         <!--build:css css/styles.min.css-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="src/css/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <link rel="stylesheet" href="src/css/styles.css">
         <!--endbuild-->
 
@@ -21,7 +21,7 @@
 
         <main class="row">
 
-          <section id="characterCreator" class="col-md-4 py-3">
+          <section id="characterCreator" class="col-md-4 py-5">
 
             <h1>Character Creator</h1>
 
@@ -106,7 +106,7 @@
 
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="alignment">Choose an alignment: </label>
+                <label class="input-group-text" for="alignment">Alignment: </label>
               </div>
               <select class="custom-select" id="alignment">
                 <option selected>Lawful Good</option>
@@ -123,39 +123,39 @@
 
             <div class="input-group-prepend mb-3">
 
-              <label class="input-group-text" for="name">Choose a Name: </label>
+              <label class="input-group-text" for="name">Name: </label>
 
-              <input type="text" id="name">
-
-            </div>
-
-            <div class="input-group-prepend mb-3">
-
-              <label class="input-group-text" for="gender">Choose a Gender: </label>
-
-              <input type="text" id="gender">
+              <input class="form-control" type="text" id="name">
 
             </div>
 
             <div class="input-group-prepend mb-3">
 
-              <label class="input-group-text" for="age">Choose a Starting Age: </label>
+              <label class="input-group-text" for="gender">Gender: </label>
 
-              <input type="text" id="age">
+              <input class="form-control" type="text" id="gender">
 
             </div>
 
-            <button id="submitButton" type="button">Create Character</button>
+            <div class="input-group-prepend mb-3">
+
+              <label class="input-group-text" for="age">Age: </label>
+
+              <input class="form-control" type="text" id="age">
+
+            </div>
+
+            <button  class="btn btn-dark" id="submitButton" type="button">Create Character</button>
 
           </form>
 
         </section>
 
-        <section id="characterPreview" class="col-md-6 mx-auto py-3">
+        <section id="characterPreview" class="col-md-6 mx-auto py-5">
 
           <h2>Preview Area</h2>
 
-          <section id="imgSection" class="col col md-6">
+          <section id="imgSection" class="col col md-6 my-5">
 
             <img id="characterImg" class="img-fluid rounded-circle d-block w-50 mx-auto" src="https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg" alt="character preview">
 
@@ -185,6 +185,18 @@
       <main>
 
     </div>
+
+    <footer class="container-fluid bg-dark py-3">
+
+      <div class="row align-items-center justify-content-around">
+
+        <h6 class="col-6-xs text-light mt-2">D&D OpenSRD UI 2018</h6>
+
+        <i class="col-6-xs fab fa-github fa-2x text-light"></i>
+
+      </div>
+
+    </footer>
 
     <script type="module" src="src/js/characterImages.js"></script>
     <script type="module" src="src/js/main.js"></script>
