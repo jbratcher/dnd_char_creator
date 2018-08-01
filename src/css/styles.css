@@ -19,12 +19,6 @@ ul {
 .nav-item {
   padding: 0 1rem; }
 
-#imgSection {
-  height: 50vh; }
-  #imgSection .img-fluid {
-    width: auto;
-    max-height: 100%; }
-
 footer {
   border-top: 0.5rem solid grey; }
   footer a i {
