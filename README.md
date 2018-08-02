@@ -87,6 +87,7 @@ gulp clean:dist
 * API for stats
 * Better sourcing for images
 * Based data on openSRD
+* Display abilities, bonuses, etc based on user input
 
 ## Known "bugs"
 
