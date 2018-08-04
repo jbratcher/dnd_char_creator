@@ -44,7 +44,7 @@
 
         <main class="row">
 
-          <section id="characterCreator" class="col-md-4 py-5">
+          <section id="characterCreator" class="col-md-6 py-5">
 
             <h1>Character Creator</h1>
 
@@ -184,73 +184,112 @@
               
             </section>
   
-              <img id="characterImg" class="img-fluid rounded-circle img-top d-block w-50 mx-auto py-2" src="https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg" alt="character preview">
+              <img id="characterImg" class="img-fluid rounded-circle img-top d-block w-25 mx-auto py-3" src="https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg" alt="character preview" />
               
-              <!-- TODO: fixed width columsn for li children -->
-              
-              <ul class="list-group list-group-flush">
+              <ul class="nav nav-tabs" id="charTabs" role="tablist">
                 
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Name: </b>
-                  <span id="namePreview" class="col"></span>
-                </li>
-  
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Race: </b>
-                  <span id="racePreview"></span>
-                </li>
-      
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Gender: </b>
-                  <span id="genderPreview"></span>
-                </li>
-      
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Age: </b>
-                  <span id="agePreview"></span>
-                </li>
-      
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Strength: </b>
-                  <span id="strengthPreview"></span>
+                <li class="nav-item">
+                  <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="false">
+                    General
+                  </a>
                 </li>
                 
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Dexerity: </b>
-                  <span id="dexerityPreview"></span>
+                <li class="nav-item">
+                  <a class="nav-link" id="proficiencies-tab" data-toggle="tab" href="#proficiencies" role="tab" aria-controls="proficiencies" aria-selected="false">
+                    Proficiencies
+                  </a>
                 </li>
                 
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Constitution: </b>
-                  <span id="constitutionPreview"></span>
-                </li>
-                
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Intelligence: </b>
-                  <span id="intelligencePreview"></span>
-                </li>
-                
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Wisdom: </b>
-                  <span id="wisdomPreview"></span>
-                </li>
-                
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Charisma: </b>
-                  <span id="charismaPreview"></span>
-                </li>
-      
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Alignment: </b>
-                  <span id="alignmentPreview"></span>
-                </li>
-      
-                <li class="list-group-item d-flex justify-content-between">
-                  <b>Class: </b>
-                  <span id="clsPreview"></span>
+                <li class="nav-item">
+                  <a class="nav-link" id="combat-tab" data-toggle="tab" href="#combat" role="tab" aria-controls="combat" aria-selected="false">
+                    Combat
+                  </a>
                 </li>
                 
               </ul>
+              
+              <div class="tab-content" id="CharTabsContent">
+                
+                <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                  
+                  <ul class="list-group list-group-flush">
+                
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Name: </b>
+                      <span id="namePreview"></span>
+                    </li>
+      
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Race: </b>
+                      <span id="racePreview"></span>
+                    </li>
+          
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Gender: </b>
+                      <span id="genderPreview"></span>
+                    </li>
+          
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Age: </b>
+                      <span id="agePreview"></span>
+                    </li>
+          
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Strength: </b>
+                      <span id="strengthPreview"></span>
+                    </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Dexerity: </b>
+                      <span id="dexerityPreview"></span>
+                    </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Constitution: </b>
+                      <span id="constitutionPreview"></span>
+                    </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Intelligence: </b>
+                      <span id="intelligencePreview"></span>
+                    </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Wisdom: </b>
+                      <span id="wisdomPreview"></span>
+                    </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Charisma: </b>
+                      <span id="charismaPreview"></span>
+                    </li>
+          
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Alignment: </b>
+                      <span id="alignmentPreview"></span>
+                    </li>
+          
+                    <li class="list-group-item d-flex justify-content-between">
+                      <b>Class: </b>
+                      <span id="clsPreview"></span>
+                    </li>
+                    
+                  </ul>
+                
+                </div>
+                
+              
+              
+              
+                <div class="tab-pane fade" id="proficiencies" role="tabpanel" aria-labelledby="proficiencies-tab">
+                  Proficiencies Tab
+                </div>
+                
+                <div class="tab-pane fade" id="combat" role="tabpanel" aria-labelledby="combat-tab">
+                  Combat Tab
+                </div>
+                  
+                </div>
 
             
               
