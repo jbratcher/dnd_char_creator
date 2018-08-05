@@ -24,18 +24,17 @@ ul {
   padding: 0 1rem;
 }
 
-// #imgSection {
-
-//   height: 50vh;
-
-//   .img-fluid {
-
-//     width: auto;
-//     max-height: 100%;
-
-//   }
-
-// }
+#characterPreview {
+  
+  .nav-link {
+      color: #212529;
+    
+    &:not(.active) {
+      color: #999;
+    }  
+  }
+  
+}
 
 footer {
 

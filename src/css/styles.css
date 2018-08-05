@@ -19,6 +19,11 @@ ul {
 .nav-item {
   padding: 0 1rem; }
 
+#characterPreview .nav-link {
+  color: #212529; }
+  #characterPreview .nav-link:not(.active) {
+    color: #999; }
+
 footer {
   border-top: 0.5rem solid grey; }
   footer a i {
