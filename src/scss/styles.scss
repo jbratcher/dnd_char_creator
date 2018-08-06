@@ -24,15 +24,11 @@ ul {
   padding: 0 1rem;
 }
 
-#characterPreview {
-  
-  .nav-link {
-      color: #212529;
+#charTabs {
     
-    &:not(.active) {
+    .nav-link:not(.active) {
       color: #999;
-    }  
-  }
+    }
   
 }
 
