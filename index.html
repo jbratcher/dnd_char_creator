@@ -20,7 +20,7 @@
       <section class="container-fluid" id="main-nav">
         
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">D&amp;D CC</a>
+          <a class="navbar-brand" href="#"><h1>D&amp;D CC</h1></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -47,380 +47,384 @@
         <main class="row">
 
           <section id="characterCreator" class="col-md-6 py-5">
-
-            <h1>Character Creator</h1>
-
-            <p>Enter you character information</p>
-
-            <form>
-
-              <div class="input-group-prepend mb-3">
-
-                <label class="input-group-text" for="cls">Choose a Class: </label>
-
-                <select class="custom-select" id="cls">
-                  <option selected>Barbarian</option>
-                  <option>Bard</option>
-                  <option>Cleric</option>
-                  <option>Druid</option>
-                  <option>Fighter</option>
-                  <option>Monk</option>
-                  <option>Paladin</option>
-                  <option>Ranger</option>
-                  <option>Rogue</option>
-                  <option>Soccerror</option>
-                  <option>Warlock</option>
-                  <option>Wizard</option>
-                </select>
-
-              </div>
-
-              <div class="input-group-prepend mb-3">
-
-                <label class="input-group-text" for="race">Choose a Race: </label>
-
-              <select class="custom-select" id="race">
-                <option selected>Dwarf</option>
-                <option>Elf</option>
-                <option>Half-Elf</option>
-                <option>Halfling</option>
-                <option>Half-Orc</option>
-                <option>Human</option>
-                <option>Gnome</option>
-              </select>
-
-            </div>
-
-            <p>Roll your ability scores<p>
-
-            <div class="input-group mb-3 d-flex justify-content-between">
-              <label class="h6">Strength: </label>
-              <span id="rolledStrength">-</span>
-              <button type="button" id="rollStrength" class="btn btn-dark btn-sm">Roll</button>
-            </div>
-
-            <div class="input-group mb-3 d-flex justify-content-between">
-              <label class="h6">Dexerity: </label>
-              <span id="rolledDexerity">-</span>
-              <button type="button" id="rollDexerity" class="btn btn-dark btn-sm">Roll</button>
-            </div>
-
-            <div class="input-group mb-3 d-flex justify-content-between">
-              <label class="h6">Constitution: </label>
-              <span id="rolledConstitition">-</span>
-              <button type="button" id="rollConstitution" class="btn btn-dark btn-sm">Roll</button>
-            </div>
-
-            <div class="input-group mb-3 d-flex justify-content-between">
-              <label class="h6">Intelligence: </label>
-              <span id="rolledIntelligence">-</span>
-              <button type="button" id="rollIntelligence" class="btn btn-dark btn-sm">Roll</button>
-            </div>
-
-            <div class="input-group mb-3 d-flex justify-content-between">
-              <label class="h6">Wisdom: </label>
-              <span id="rolledWisdom">-</span>
-              <button type="button" id="rollWisdom" class="btn btn-dark btn-sm">Roll</button>
-            </div>
-
-            <div class="input-group mb-3 d-flex justify-content-between">
-              <label class="h6">Charisma: </label>
-              <span id="rolledCharisma">-</span>
-              <button type="button" id="rollCharisma" class="btn btn-dark btn-sm">Roll</button>
-            </div>
-
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="alignment">Alignment: </label>
-              </div>
-              <select class="custom-select" id="alignment">
-                <option selected>Lawful Good</option>
-                <option>Neutral Good</option>
-                <option>Chaotic Good</option>
-                <option>Lawful Neutral</option>
-                <option>True Neutral</option>
-                <option>Chaotic Neutral</option>
-                <option>Lawful Evil</option>
-                <option>Neutral Evil</option>
-                <option>Chaotic Evil</option>
-              </select>
-            </div>
-
-            <div class="input-group-prepend mb-3">
-
-              <label class="input-group-text" for="name">Name: </label>
-
-              <input class="form-control" type="text" id="name">
-
-            </div>
-
-            <div class="input-group-prepend mb-3">
-
-              <label class="input-group-text" for="gender">Gender: </label>
-
-              <input class="form-control" type="text" id="gender">
-
-            </div>
-
-            <div class="input-group-prepend mb-3">
-
-              <label class="input-group-text" for="age">Age: </label>
-
-              <input class="form-control" type="text" id="age">
-
-            </div>
-
-            <button  class="btn btn-dark" id="submitButton" type="button">Create Character</button>
-
-          </form>
-
-        </section>
-
-        <section id="characterPreview" class="col-md-6 mx-auto py-5">
-          
-          <section class="card">
             
-            <section class="card-header">
+            <section class="card">
               
-              <h2 class="text-center">Preview Area</h2>
+              <section class="card-header">
+                
+                <h2 class="text-center">Character Creator</h1>
+                
+              </section>
               
-            </section>
+              <p class="lead p-3">Enter you character information</p>
+
+              <form class="px-3">
   
-              <img id="characterImg" class="img-fluid rounded-circle img-top d-block w-25 mx-auto py-3" src="https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg" alt="character preview" />
-              
-              <ul class="nav nav-tabs" id="charTabs" role="tablist">
-                
-                <li class="nav-item active">
-                  <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="false">
-                    General
-                  </a>
-                </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link" id="skills-tab" data-toggle="tab" href="#skills" role="tab" aria-controls="skills" aria-selected="false">
-                    Skills
-                  </a>
-                </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link" id="combat-tab" data-toggle="tab" href="#combat" role="tab" aria-controls="combat" aria-selected="false">
-                    Combat
-                  </a>
-                </li>
-                
-              </ul>
-              
-              <div class="tab-content" id="CharTabsContent">
-                
-                <div class="tab-pane active fade show" id="general" role="tabpanel" aria-labelledby="general-tab">
-                  
-                  <ul class="list-group list-group-flush">
-                
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Name: </b>
-                      <span id="namePreview"></span>
-                    </li>
-      
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Race: </b>
-                      <span id="racePreview"></span>
-                    </li>
-          
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Gender: </b>
-                      <span id="genderPreview"></span>
-                    </li>
-          
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Age: </b>
-                      <span id="agePreview"></span>
-                    </li>
-          
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Strength: </b>
-                      <span id="strengthPreview"></span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Dexerity: </b>
-                      <span id="dexerityPreview"></span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Constitution: </b>
-                      <span id="constitutionPreview"></span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Intelligence: </b>
-                      <span id="intelligencePreview"></span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Wisdom: </b>
-                      <span id="wisdomPreview"></span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Charisma: </b>
-                      <span id="charismaPreview"></span>
-                    </li>
-          
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Alignment: </b>
-                      <span id="alignmentPreview"></span>
-                    </li>
-          
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Class: </b>
-                      <span id="clsPreview"></span>
-                    </li>
-                    
-                  </ul>
-                
+                <div class="input-group-prepend my-3">
+  
+                  <label class="input-group-text" for="cls">Choose a Class: </label>
+  
+                  <select class="custom-select" id="cls">
+                    <option selected>Barbarian</option>
+                    <option>Bard</option>
+                    <option>Cleric</option>
+                    <option>Druid</option>
+                    <option>Fighter</option>
+                    <option>Monk</option>
+                    <option>Paladin</option>
+                    <option>Ranger</option>
+                    <option>Rogue</option>
+                    <option>Soccerror</option>
+                    <option>Warlock</option>
+                    <option>Wizard</option>
+                  </select>
+  
                 </div>
-              
-                <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
-                  
-                  <ul class="list-group list-group-flush">
-                
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Acrobatics <em>(Dex)</em>: </b>
-                      <span id="acrobaticsSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Animal Handling <em>(Wis)</em>: </b>
-                      <span id="animalHandlingsSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Arcana <em>(Int)</em>: </b>
-                      <span id="arcanasSkill">-</span>
-                    </li>
-
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Athletics <em>(Str)</em>: </b>
-                      <span id="athleticsSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Deception <em>(Cha)</em>: </b>
-                      <span id="deceptionSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>History <em>(Int)</em>: </b>
-                      <span id="historySkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Insight <em>(Wis)</em>: </b>
-                      <span id="insightSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Intimidation <em>(Cha)</em>: </b>
-                      <span id="intimidationSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Investigation <em>(Int)</em>: </b>
-                      <span id="investigationSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Medicine <em>(Wis)</em>: </b>
-                      <span id="medicineSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Nature <em>(Int)</em>: </b>
-                      <span id="natureSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Perception <em>(Wis)</em>: </b>
-                      <span id="perceptionSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>History <em>(Cha)</em>: </b>
-                      <span id="historySkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Performance <em>(Cha)</em>: </b>
-                      <span id="performanceSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Persuasion <em>(Cha)</em>: </b>
-                      <span id="persuasionSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Religion <em>(Int)</em>: </b>
-                      <span id="religionSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Slieght of Hand <em>(Dex)</em>: </b>
-                      <span id="slieghtOfHandSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Stealth <em>(Dex)</em>: </b>
-                      <span id="stealthSkill">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Survivial <em>(Wis)</em>: </b>
-                      <span id="survivalSkill">-</span>
-                    </li>
-                    
-                  </ul>
-                  
+  
+                <div class="input-group-prepend my-3">
+  
+                  <label class="input-group-text" for="race">Choose a Race: </label>
+  
+                  <select class="custom-select" id="race">
+                    <option selected>Dwarf</option>
+                    <option>Elf</option>
+                    <option>Half-Elf</option>
+                    <option>Halfling</option>
+                    <option>Half-Orc</option>
+                    <option>Human</option>
+                    <option>Gnome</option>
+                  </select>
+    
                 </div>
-                
-                <div class="tab-pane fade" id="combat" role="tabpanel" aria-labelledby="combat-tab">
-
-                  <ul class="list-group list-group-flush">
-                
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Armor Class: </b>
-                      <span id="armorClass">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Hit Points: </b>
-                      <span id="hitPoints">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Initiative: </b>
-                      <span id="initiative">-</span>
-                    </li>
-                    
-                    <li class="list-group-item d-flex justify-content-between">
-                      <b>Speed: </b>
-                      <span id="speed">-</span>
-                    </li>
-                    
-                  </ul>
-
+    
+                <p>Roll your ability scores<p>
+    
+                <div class="input-group my-3 d-flex justify-content-between">
+                  <label class="h6">Strength: </label>
+                  <span id="rolledStrength">-</span>
+                  <button type="button" id="rollStrength" class="btn btn-dark btn-sm">Roll</button>
                 </div>
-                  
+  
+                <div class="input-group my-3 d-flex justify-content-between">
+                  <label class="h6">Dexerity: </label>
+                  <span id="rolledDexerity">-</span>
+                  <button type="button" id="rollDexerity" class="btn btn-dark btn-sm">Roll</button>
                 </div>
-
-            
+    
+                <div class="input-group my-3 d-flex justify-content-between">
+                  <label class="h6">Constitution: </label>
+                  <span id="rolledConstitition">-</span>
+                  <button type="button" id="rollConstitution" class="btn btn-dark btn-sm">Roll</button>
+                </div>
+    
+                <div class="input-group my-3 d-flex justify-content-between">
+                  <label class="h6">Intelligence: </label>
+                  <span id="rolledIntelligence">-</span>
+                  <button type="button" id="rollIntelligence" class="btn btn-dark btn-sm">Roll</button>
+                </div>
+  
+                <div class="input-group my-3 d-flex justify-content-between">
+                  <label class="h6">Wisdom: </label>
+                  <span id="rolledWisdom">-</span>
+                  <button type="button" id="rollWisdom" class="btn btn-dark btn-sm">Roll</button>
+                </div>
+    
+                <div class="input-group my-3 d-flex justify-content-between">
+                  <label class="h6">Charisma: </label>
+                  <span id="rolledCharisma">-</span>
+                  <button type="button" id="rollCharisma" class="btn btn-dark btn-sm">Roll</button>
+                </div>
+    
+                <div class="input-group my-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="alignment">Alignment: </label>
+                  </div>
+                  <select class="custom-select" id="alignment">
+                    <option selected>Lawful Good</option>
+                    <option>Neutral Good</option>
+                    <option>Chaotic Good</option>
+                    <option>Lawful Neutral</option>
+                    <option>True Neutral</option>
+                    <option>Chaotic Neutral</option>
+                    <option>Lawful Evil</option>
+                    <option>Neutral Evil</option>
+                    <option>Chaotic Evil</option>
+                  </select>
+                </div>
+    
+                <div class="input-group-prepend my-3">
+    
+                  <label class="input-group-text" for="name">Name: </label>
+    
+                  <input class="form-control" type="text" id="name">
+    
+                </div>
+    
+                <div class="input-group-prepend my-3">
+    
+                  <label class="input-group-text" for="gender">Gender: </label>
+    
+                  <input class="form-control" type="text" id="gender">
+    
+                </div>
+    
+                <div class="input-group-prepend my-3">
+    
+                  <label class="input-group-text" for="age">Age: </label>
+    
+                  <input class="form-control" type="text" id="age">
+    
+                </div>
+    
+                <button class="btn btn-dark mb-3" id="submitButton" type="button">Create Character</button>
+    
+              </form>
+    
+            </section>
               
           </section>
 
-          
-
-        </section>
+          <section id="characterPreview" class="col-md-6 mx-auto py-5">
+            
+            <section class="card">
+              
+              <section class="card-header">
+                
+                <h2 class="text-center">Preview Area</h2>
+                
+              </section>
+    
+                <img id="characterImg" class="img-fluid rounded-circle img-top d-block w-25 mx-auto py-3" src="https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg" alt="character preview" />
+                
+                <ul class="nav nav-tabs" id="charTabs" role="tablist">
+                  
+                  <li class="nav-item active">
+                    <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="false">
+                      General
+                    </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" id="skills-tab" data-toggle="tab" href="#skills" role="tab" aria-controls="skills" aria-selected="false">
+                      Skills
+                    </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" id="combat-tab" data-toggle="tab" href="#combat" role="tab" aria-controls="combat" aria-selected="false">
+                      Combat
+                    </a>
+                  </li>
+                  
+                </ul>
+                
+                <div class="tab-content" id="CharTabsContent">
+                  
+                  <div class="tab-pane active fade show" id="general" role="tabpanel" aria-labelledby="general-tab">
+                    
+                    <ul class="list-group list-group-flush">
+                  
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Name: </b>
+                        <span id="namePreview"></span>
+                      </li>
+        
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Race: </b>
+                        <span id="racePreview"></span>
+                      </li>
+            
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Gender: </b>
+                        <span id="genderPreview"></span>
+                      </li>
+            
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Age: </b>
+                        <span id="agePreview"></span>
+                      </li>
+            
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Strength: </b>
+                        <span id="strengthPreview"></span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Dexerity: </b>
+                        <span id="dexerityPreview"></span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Constitution: </b>
+                        <span id="constitutionPreview"></span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Intelligence: </b>
+                        <span id="intelligencePreview"></span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Wisdom: </b>
+                        <span id="wisdomPreview"></span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Charisma: </b>
+                        <span id="charismaPreview"></span>
+                      </li>
+            
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Alignment: </b>
+                        <span id="alignmentPreview"></span>
+                      </li>
+            
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Class: </b>
+                        <span id="clsPreview"></span>
+                      </li>
+                      
+                    </ul>
+                  
+                  </div>
+                
+                  <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
+                    
+                    <ul class="list-group list-group-flush">
+                  
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Acrobatics <em>(Dex)</em>: </b>
+                        <span id="acrobaticsSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Animal Handling <em>(Wis)</em>: </b>
+                        <span id="animalHandlingsSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Arcana <em>(Int)</em>: </b>
+                        <span id="arcanasSkill">-</span>
+                      </li>
+  
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Athletics <em>(Str)</em>: </b>
+                        <span id="athleticsSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Deception <em>(Cha)</em>: </b>
+                        <span id="deceptionSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>History <em>(Int)</em>: </b>
+                        <span id="historySkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Insight <em>(Wis)</em>: </b>
+                        <span id="insightSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Intimidation <em>(Cha)</em>: </b>
+                        <span id="intimidationSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Investigation <em>(Int)</em>: </b>
+                        <span id="investigationSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Medicine <em>(Wis)</em>: </b>
+                        <span id="medicineSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Nature <em>(Int)</em>: </b>
+                        <span id="natureSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Perception <em>(Wis)</em>: </b>
+                        <span id="perceptionSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>History <em>(Cha)</em>: </b>
+                        <span id="historySkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Performance <em>(Cha)</em>: </b>
+                        <span id="performanceSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Persuasion <em>(Cha)</em>: </b>
+                        <span id="persuasionSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Religion <em>(Int)</em>: </b>
+                        <span id="religionSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Slieght of Hand <em>(Dex)</em>: </b>
+                        <span id="slieghtOfHandSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Stealth <em>(Dex)</em>: </b>
+                        <span id="stealthSkill">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Survivial <em>(Wis)</em>: </b>
+                        <span id="survivalSkill">-</span>
+                      </li>
+                      
+                    </ul>
+                    
+                  </div>
+                  
+                  <div class="tab-pane fade" id="combat" role="tabpanel" aria-labelledby="combat-tab">
+  
+                    <ul class="list-group list-group-flush">
+                  
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Armor Class: </b>
+                        <span id="armorClass">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Hit Points: </b>
+                        <span id="hitPoints">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Initiative: </b>
+                        <span id="initiative">-</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Speed: </b>
+                        <span id="speed">-</span>
+                      </li>
+                      
+                    </ul>
+  
+                  </div>
+                    
+                  </div>
+                
+            </section>
+  
+          </section>
 
       <main>
 
