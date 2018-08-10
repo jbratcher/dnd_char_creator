@@ -7,6 +7,9 @@ body {
 ul {
   list-style-type: none; }
 
+b > em {
+  font-weight: normal; }
+
 #main-nav {
   padding-right: 0;
   padding-left: 0;

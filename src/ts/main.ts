@@ -3,6 +3,7 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
+import { Classes } from './classes.js';
 
 ////////////////////////////////////////
 // Utility functions
@@ -31,7 +32,8 @@ const getCharacterImage = (genderedImages) => {
   return genderedImages[randomIndex];
 }
 
-// TODO: Add race to complete trifecta of charater image setting
+// Get Character Attributes to set preview image
+// TODO: use attributes to set other output
 
 const getCharacterAttributes = (charCls,charRace,charGender) => {
   if(charGender !== 'male' && charGender !== "female") {
@@ -182,5 +184,19 @@ submitButton.addEventListener('click', () => {
   }
 
   charImageSet();
+  
+  // Proficiencies section
+  
+  const hitPoints = () => {
+
+    // roll for hit points
+    let hitpoints = String(randomIntFromRange(1,Classes[charCls].hitdie));
+    // output hit points to hitpoints element
+    const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
+    hitPointPreview.textContent = hitpoints;
+    
+  }
+  
+  hitPoints();
 
 });
