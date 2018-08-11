@@ -47,6 +47,38 @@ const getCharacterAttributes = (charCls,charRace,charGender) => {
   return characterImages[charRace][charCls][charGender];
 }
 
+const getAbitlityScoreModifier = (ability) => {
+  
+  let score = ability;
+  let mod = 0;
+  if(score === 1) {
+    mod -= 5;
+  } else if(score === 2 || score === 3) {
+    mod -= 4;
+  } else if(score === 4 || score === 5) {
+    mod -= 3;
+  } else if (score === 6 || score === 7) {
+    mod -= 2;
+  } else if(score === 8 || score === 9) {
+    mod -= 1;
+  } else if(score === 10 || score === 11) {
+    mod = 0;
+  } else if(score === 12 || score === 13) {
+    mod += 1;
+  } else if(score === 14 || score === 15) {
+    mod += 2;
+  } else if(score === 16 || score === 17) {
+    mod += 3
+  } else if(score === 18 || score === 19) {
+    mod += 4;
+  } else {
+    mod = 0;
+  }
+  
+  return mod;
+  
+}
+
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
@@ -198,5 +230,22 @@ submitButton.addEventListener('click', () => {
   }
   
   hitPoints();
+  
+  const armorClass = () => {
+    
+    // get base armor class
+    let base = 10;
+    // add dex modifier
+    let dexMod = getAbitlityScoreModifier(Number($dexerity))
+    // add worn armor modifier
+    // calculate total
+    let ac = String(base + dexMod);
+    const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
+    armorClassPreview.textContent = ac;
+    console.log(ac);
+    
+  }
+  
+  armorClass();
 
 });
