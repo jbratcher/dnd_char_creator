@@ -6,7 +6,40 @@ Object.defineProperty(exports, "__esModule", {
 // Classes object for data
 var Classes = exports.Classes = {
     barbarian: {
-        hitdie: 12 // 1d12 so 12 max
+        hitdie: 12
+    },
+    bard: {
+        hitdie: 8
+    },
+    cleric: {
+        hitdie: 8
+    },
+    druid: {
+        hitdie: 8
+    },
+    fighter: {
+        hitdie: 10
+    },
+    monk: {
+        hitdie: 8
+    },
+    paladin: {
+        hitdie: 10
+    },
+    ranger: {
+        hitdie: 10
+    },
+    rogue: {
+        hitdie: 8
+    },
+    soccerror: {
+        hitdie: 6
+    },
+    warlock: {
+        hitdie: 8
+    },
+    wizard: {
+        hitdie: 6
     }
 };
 var Races = exports.Races = {

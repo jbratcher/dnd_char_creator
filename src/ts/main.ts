@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
-import { Classes, Races } from './classes.js';
+import { Classes, Races } from './info.js';
 
 ////////////////////////////////////////
 // Utility functions
@@ -51,29 +51,7 @@ const getAbitlityScoreModifier = (ability) => {
   
   let score = ability;
   let mod = 0;
-  if(score === 1) {
-    mod -= 5;
-  } else if(score === 2 || score === 3) {
-    mod -= 4;
-  } else if(score === 4 || score === 5) {
-    mod -= 3;
-  } else if (score === 6 || score === 7) {
-    mod -= 2;
-  } else if(score === 8 || score === 9) {
-    mod -= 1;
-  } else if(score === 10 || score === 11) {
-    mod = 0;
-  } else if(score === 12 || score === 13) {
-    mod += 1;
-  } else if(score === 14 || score === 15) {
-    mod += 2;
-  } else if(score === 16 || score === 17) {
-    mod += 3
-  } else if(score === 18 || score === 19) {
-    mod += 4;
-  } else {
-    mod = 0;
-  }
+  mod = Math.floor((score / 2) - 5)
   
   return mod;
   
@@ -137,66 +115,66 @@ submitButton.addEventListener('click', () => {
 
   // Get info to create character
 
-  const $name = <HTMLInputElement>document.querySelector('#name');
+  const name = <HTMLInputElement>document.querySelector('#name');
 
-  const $race = <HTMLSelectElement>document.querySelector('#race');
-  const selectedRace = $race.options[$race.selectedIndex];
+  const race = <HTMLSelectElement>document.querySelector('#race');
+  const selectedRace = race.options[race.selectedIndex];
 
-  const $strength = rolledStrength.textContent;
+  const strength = rolledStrength.textContent;
 
-  const $dexerity = rolledDexerity.textContent;
+  const dexerity = rolledDexerity.textContent;
 
-  const $constitution = rolledConstitition.textContent;
+  const constitution = rolledConstitition.textContent;
 
-  const $intelligence = rolledIntelligence.textContent;
+  const intelligence = rolledIntelligence.textContent;
 
-  const $wisdom = rolledWisdom.textContent;
+  const wisdom = rolledWisdom.textContent;
 
-  const $charisma = rolledCharisma.textContent;
+  const charisma = rolledCharisma.textContent;
 
-  const $alignment = <HTMLSelectElement>document.querySelector('#alignment');
-  const selectedAlignment = $alignment.options[$alignment.selectedIndex];
+  const alignment = <HTMLSelectElement>document.querySelector('#alignment');
+  const selectedAlignment = alignment.options[alignment.selectedIndex];
 
-  const $cls = <HTMLSelectElement>document.querySelector('#cls');
-  const selectedCls = $cls.options[$cls.selectedIndex];
+  const cls = <HTMLSelectElement>document.querySelector('#cls');
+  const selectedCls = cls.options[cls.selectedIndex];
 
-  const $gender = <HTMLInputElement>document.querySelector('#gender');
+  const gender = <HTMLInputElement>document.querySelector('#gender');
 
-  const $age = <HTMLInputElement>document.querySelector('#age');
+  const age = <HTMLInputElement>document.querySelector('#age');
 
   // Post info from character creation to preview area
 
   const namePreview = document.querySelector('#namePreview');
-  namePreview.textContent = $name.value;
+  namePreview.textContent = name.value;
 
   const racePreview = <HTMLElement>document.querySelector('#racePreview');
   racePreview.textContent = selectedRace.textContent;
   const charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
 
   const genderPreview = <HTMLInputElement>document.querySelector('#genderPreview');
-  genderPreview.textContent = $gender.value;
-  const charGender = $gender.value.toLowerCase();
+  genderPreview.textContent = gender.value;
+  const charGender = gender.value.toLowerCase();
 
   const agePreview = <HTMLElement>document.querySelector('#agePreview');
-  agePreview.textContent = $age.value;
+  agePreview.textContent = age.value;
 
   const strengthPreview = <HTMLElement>document.querySelector('#strengthPreview');
-  strengthPreview.textContent = $strength;
+  strengthPreview.textContent = strength;
 
   const dexerityPreview = <HTMLElement>document.querySelector('#dexerityPreview');
-  dexerityPreview.textContent = $dexerity;
+  dexerityPreview.textContent = dexerity;
 
   const constitutionPreview = <HTMLElement>document.querySelector('#constitutionPreview');
-  constitutionPreview.textContent = $constitution;
+  constitutionPreview.textContent = constitution;
 
   const wisdomPreview = <HTMLElement>document.querySelector('#wisdomPreview');
-  wisdomPreview.textContent = $wisdom;
+  wisdomPreview.textContent = wisdom;
 
   const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePreview');
-  intelligencePreview.textContent = $intelligence;
+  intelligencePreview.textContent = intelligence;
 
   const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
-  charismaPreview.textContent = $charisma;
+  charismaPreview.textContent = charisma;
 
   const clsPreview = <HTMLElement>document.querySelector('#clsPreview');
   clsPreview.textContent = selectedCls.textContent;
@@ -221,9 +199,14 @@ submitButton.addEventListener('click', () => {
   
   const hitPoints = () => {
 
+    // reserved for level advancements
     // roll for hit points
-    let hitpoints = String(randomIntFromRange(1,Classes[charCls].hitdie));
-    // output hit points to hitpoints element
+    // let hitpoints = String(randomIntFromRange(1,Classes[charCls].hitdie));
+    
+    // 1st level is max hit points + constiution modifier
+    
+    let mod = getAbitlityScoreModifier(Number(constitution))
+    let hitpoints = (Classes[charCls].hitdie + mod);
     const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
     hitPointPreview.textContent = hitpoints;
     
@@ -236,13 +219,12 @@ submitButton.addEventListener('click', () => {
   const armorClass = () => {
     
     let base = 10;
-    let dexMod = getAbitlityScoreModifier(Number($dexerity))
+    let dexMod = getAbitlityScoreModifier(Number(dexerity))
     // TODO add worn armor modifier
     let ac = String(base + dexMod);
     const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
     armorClassPreview.textContent = ac;
-    console.log(ac);
-    
+
   }
   
   armorClass();
@@ -251,12 +233,11 @@ submitButton.addEventListener('click', () => {
   
   const initiativeMod = () => {
     
-    let dexMod = getAbitlityScoreModifier(Number($dexerity))
+    let dexMod = getAbitlityScoreModifier(Number(dexerity))
     let mod = String(dexMod);
     const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
     initiativeModPreview.textContent = mod;
-    console.log(mod);
-    
+
   }
   
   initiativeMod();
@@ -267,8 +248,7 @@ submitButton.addEventListener('click', () => {
     
     const speedPreview = <HTMLElement>document.querySelector('#speed');
     speedPreview.textContent = Races[charRace].speed;
-    console.log(Races[charRace].speed);
-    
+
   }
   
   baseSpeed();
