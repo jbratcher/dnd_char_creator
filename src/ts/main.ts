@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
-import { Classes } from './classes.js';
+import { Classes, Races } from './classes.js';
 
 ////////////////////////////////////////
 // Utility functions
@@ -231,14 +231,13 @@ submitButton.addEventListener('click', () => {
   
   hitPoints();
   
+  // Get dexerity and armor modifier and set armor class
+  
   const armorClass = () => {
     
-    // get base armor class
     let base = 10;
-    // add dex modifier
     let dexMod = getAbitlityScoreModifier(Number($dexerity))
-    // add worn armor modifier
-    // calculate total
+    // TODO add worn armor modifier
     let ac = String(base + dexMod);
     const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
     armorClassPreview.textContent = ac;
@@ -247,5 +246,31 @@ submitButton.addEventListener('click', () => {
   }
   
   armorClass();
+  
+  // Get dexerity modifier and set initiative bonus
+  
+  const initiativeMod = () => {
+    
+    let dexMod = getAbitlityScoreModifier(Number($dexerity))
+    let mod = String(dexMod);
+    const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
+    initiativeModPreview.textContent = mod;
+    console.log(mod);
+    
+  }
+  
+  initiativeMod();
+  
+  // Get base speed based on chosen race
+  
+  const baseSpeed = () => {
+    
+    const speedPreview = <HTMLElement>document.querySelector('#speed');
+    speedPreview.textContent = Races[charRace].speed;
+    console.log(Races[charRace].speed);
+    
+  }
+  
+  baseSpeed();
 
 });

@@ -2,7 +2,7 @@
 // imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
-import { Classes } from './classes.js';
+import { Classes, Races } from './classes.js';
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -174,17 +174,31 @@ submitButton.addEventListener('click', function () {
         hitPointPreview.textContent = hitpoints;
     };
     hitPoints();
+    // Get dexerity and armor modifier and set armor class
     var armorClass = function () {
-        // get base armor class
         var base = 10;
-        // add dex modifier
         var dexMod = getAbitlityScoreModifier(Number($dexerity));
-        // add worn armor modifier
-        // calculate total
+        // TODO add worn armor modifier
         var ac = String(base + dexMod);
         var armorClassPreview = document.querySelector('#armorClass');
         armorClassPreview.textContent = ac;
         console.log(ac);
     };
     armorClass();
+    // Get dexerity modifier and set initiative bonus
+    var initiativeMod = function () {
+        var dexMod = getAbitlityScoreModifier(Number($dexerity));
+        var mod = String(dexMod);
+        var initiativeModPreview = document.querySelector('#initiative');
+        initiativeModPreview.textContent = mod;
+        console.log(mod);
+    };
+    initiativeMod();
+    // Get base speed based on chosen race
+    var baseSpeed = function () {
+        var speedPreview = document.querySelector('#speed');
+        speedPreview.textContent = Races[charRace].speed;
+        console.log(Races[charRace].speed);
+    };
+    baseSpeed();
 });
