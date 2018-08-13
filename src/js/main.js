@@ -135,9 +135,6 @@ submitButton.addEventListener('click', function () {
     charImageSet();
     // Proficiencies section
     var hitPoints = function () {
-        // reserved for level advancements
-        // roll for hit points
-        // let hitpoints = String(randomIntFromRange(1,Classes[charCls].hitdie));
         // 1st level is max hit points + constiution modifier
         var mod = getAbitlityScoreModifier(Number(constitution));
         var hitpoints = (Classes[charCls].hitdie + mod);
@@ -169,4 +166,18 @@ submitButton.addEventListener('click', function () {
         speedPreview.textContent = Races[charRace].speed;
     };
     baseSpeed();
+    // TODO: move to level up button 
+    var addHitPoints = function () {
+        // get current hitpoints
+        var hitPointPreview = document.querySelector('#hitPoints');
+        var currentHitPoints = hitPointPreview.textContent;
+        // roll for hit points to add
+        var mod = getAbitlityScoreModifier(Number(constitution));
+        var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
+        var hitPointsToAdd = (rolledHitPoints + mod);
+        // add hitpoints to current total and display
+        hitPointPreview.textContent = currentHitPoints + hitPointsToAdd;
+    };
 });
+// Level advancement button submit
+// todo: add event listener to button
