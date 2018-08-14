@@ -80,7 +80,8 @@ rollCharisma.addEventListener('click', function () {
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
 var submitButton = document.querySelector('#submitButton');
-submitButton.addEventListener('click', function () {
+submitButton.addEventListener('click', function (e) {
+    e.preventDefault();
     // Get info to create character
     var name = document.querySelector('#name');
     var race = document.querySelector('#race');
@@ -166,18 +167,34 @@ submitButton.addEventListener('click', function () {
         speedPreview.textContent = Races[charRace].speed;
     };
     baseSpeed();
-    // TODO: move to level up button 
-    var addHitPoints = function () {
-        // get current hitpoints
-        var hitPointPreview = document.querySelector('#hitPoints');
-        var currentHitPoints = hitPointPreview.textContent;
-        // roll for hit points to add
-        var mod = getAbitlityScoreModifier(Number(constitution));
-        var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
-        var hitPointsToAdd = (rolledHitPoints + mod);
-        // add hitpoints to current total and display
-        hitPointPreview.textContent = currentHitPoints + hitPointsToAdd;
+    // return variables for use in level up submitButton
+    return {
+        charCls: charCls,
+        charRace: charRace,
+        charGender: charGender,
+        constiution: constitution
     };
 });
 // Level advancement button submit
-// todo: add event listener to button
+// const levelUpButton = document.querySelector('#levelUpButton');
+//
+// levelUpButton.addEventListener('click', (e) => {
+//
+//   e.preventDefault();
+//
+//   const addHitPoints = () => {
+//
+//     // get current hitpoints
+//     const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
+//     let currentHitPoints = hitPointPreview.textContent;
+//     // roll for hit points to add
+//     let mod = getAbitlityScoreModifier(Number(this.constitution))
+//     let rolledHitPoints = randomIntFromRange(1, Classes[this.charCls].hitdie)
+//     let hitPointsToAdd = (rolledHitPoints + mod);
+//     // add hitpoints to current total and display
+//     hitPointPreview.textContent =  currentHitPoints + hitPointsToAdd;
+//   }
+//
+//   addHitPoints();
+//
+// });

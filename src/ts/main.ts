@@ -48,13 +48,13 @@ const getCharacterAttributes = (charCls,charRace,charGender) => {
 }
 
 const getAbitlityScoreModifier = (ability) => {
-  
+
   let score = ability;
   let mod = 0;
   mod = Math.floor((score / 2) - 5)
-  
+
   return mod;
-  
+
 }
 
 ////////////////////////////////////////
@@ -111,7 +111,9 @@ rollCharisma.addEventListener('click', () => {
 
 const submitButton = document.querySelector('#submitButton');
 
-submitButton.addEventListener('click', () => {
+submitButton.addEventListener('click', (e) => {
+
+  e.preventDefault();
 
   // Get info to create character
 
@@ -194,26 +196,26 @@ submitButton.addEventListener('click', () => {
   }
 
   charImageSet();
-  
+
   // Proficiencies section
-  
+
   const hitPoints = () => {
-    
+
     // 1st level is max hit points + constiution modifier
-    
+
     let mod = getAbitlityScoreModifier(Number(constitution))
     let hitpoints = (Classes[charCls].hitdie + mod);
     const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
     hitPointPreview.textContent = hitpoints;
-    
+
   }
-  
+
   hitPoints();
-  
+
   // Get dexerity and armor modifier and set armor class
-  
+
   const armorClass = () => {
-    
+
     let base = 10;
     let dexMod = getAbitlityScoreModifier(Number(dexerity))
     // TODO add worn armor modifier
@@ -222,57 +224,65 @@ submitButton.addEventListener('click', () => {
     armorClassPreview.textContent = ac;
 
   }
-  
+
   armorClass();
-  
+
   // Get dexerity modifier and set initiative bonus
-  
+
   const initiativeMod = () => {
-    
+
     let dexMod = getAbitlityScoreModifier(Number(dexerity))
     let mod = String(dexMod);
     const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
     initiativeModPreview.textContent = mod;
 
   }
-  
+
   initiativeMod();
-  
+
   // Get base speed based on chosen race
-  
+
   const baseSpeed = () => {
-    
+
     const speedPreview = <HTMLElement>document.querySelector('#speed');
     speedPreview.textContent = Races[charRace].speed;
 
   }
-  
+
   baseSpeed();
-  
-  // TODO: move to level up button 
-  
-  const addHitPoints = () => {
-  
-    // get current hitpoints
-    const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
-    let currentHitPoints = hitPointPreview.textContent;
-    // roll for hit points to add
-    let mod = getAbitlityScoreModifier(Number(constitution))
-    let rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie)
-    let hitPointsToAdd = (rolledHitPoints + mod);
-    // add hitpoints to current total and display
-    hitPointPreview.textContent =  currentHitPoints + hitPointsToAdd;
-}
+
+  // return variables for use in level up submitButton
+
+  return {
+    charCls: charCls,
+    charRace: charRace,
+    charGender: charGender,
+    constiution: constitution
+  }
 
 });
 
 // Level advancement button submit
 
-
-// todo: add event listener to button
-
-
-
-
-
-
+// const levelUpButton = document.querySelector('#levelUpButton');
+//
+// levelUpButton.addEventListener('click', (e) => {
+//
+//   e.preventDefault();
+//
+//   const addHitPoints = () => {
+//
+//     // get current hitpoints
+//     const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
+//     let currentHitPoints = hitPointPreview.textContent;
+//     // roll for hit points to add
+//     let mod = getAbitlityScoreModifier(Number(this.constitution))
+//     let rolledHitPoints = randomIntFromRange(1, Classes[this.charCls].hitdie)
+//     let hitPointsToAdd = (rolledHitPoints + mod);
+//     // add hitpoints to current total and display
+//     hitPointPreview.textContent =  currentHitPoints + hitPointsToAdd;
+//   }
+//
+//   addHitPoints();
+//
+// });
