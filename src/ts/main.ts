@@ -47,7 +47,7 @@ const getCharacterAttributes = (charCls,charRace,charGender) => {
   return characterImages[charRace][charCls][charGender];
 }
 
-const getAbitlityScoreModifier = (ability) => {
+const getAbilityScoreModifier = (ability) => {
 
   let score = ability;
   let mod = 0;
@@ -106,6 +106,62 @@ rollCharisma.addEventListener('click', () => {
 });
 
 ////////////////////////////////////////////////////////////
+// Get character info input elements
+////////////////////////////////////////////////////////////
+
+const name = <HTMLInputElement>document.querySelector('#name');
+
+const race = <HTMLSelectElement>document.querySelector('#race');
+
+const alignment = <HTMLSelectElement>document.querySelector('#alignment');
+
+const cls = <HTMLSelectElement>document.querySelector('#cls');
+
+const gender = <HTMLInputElement>document.querySelector('#gender');
+
+const age = <HTMLInputElement>document.querySelector('#age');
+
+////////////////////////////////////////////////////////////
+// Get character info preview elements
+////////////////////////////////////////////////////////////
+
+// Info section
+
+const namePreview = document.querySelector('#namePreview');
+
+const racePreview = <HTMLElement>document.querySelector('#racePreview');
+
+const genderPreview = <HTMLInputElement>document.querySelector('#genderPreview');
+
+const agePreview = <HTMLElement>document.querySelector('#agePreview');
+
+const strengthPreview = <HTMLElement>document.querySelector('#strengthPreview');
+
+const dexerityPreview = <HTMLElement>document.querySelector('#dexerityPreview');
+
+const constitutionPreview = <HTMLElement>document.querySelector('#constitutionPreview');
+
+const wisdomPreview = <HTMLElement>document.querySelector('#wisdomPreview');
+
+const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePreview');
+
+const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
+
+const clsPreview = <HTMLElement>document.querySelector('#clsPreview');
+
+const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview');
+
+const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
+
+// Proficiencies Section
+
+  // TODO: add Proficiencies elements
+
+// Combat section
+
+const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
+
+////////////////////////////////////////////////////////////
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
 
@@ -115,11 +171,8 @@ submitButton.addEventListener('click', (e) => {
 
   e.preventDefault();
 
-  // Get info to create character
+  // Get info to create characte
 
-  const name = <HTMLInputElement>document.querySelector('#name');
-
-  const race = <HTMLSelectElement>document.querySelector('#race');
   const selectedRace = race.options[race.selectedIndex];
 
   const strength = rolledStrength.textContent;
@@ -134,78 +187,60 @@ submitButton.addEventListener('click', (e) => {
 
   const charisma = rolledCharisma.textContent;
 
-  const alignment = <HTMLSelectElement>document.querySelector('#alignment');
   const selectedAlignment = alignment.options[alignment.selectedIndex];
 
-  const cls = <HTMLSelectElement>document.querySelector('#cls');
   const selectedCls = cls.options[cls.selectedIndex];
-
-  const gender = <HTMLInputElement>document.querySelector('#gender');
-
-  const age = <HTMLInputElement>document.querySelector('#age');
 
   // Post info from character creation to preview area
 
-  const namePreview = document.querySelector('#namePreview');
   namePreview.textContent = name.value;
 
-  const racePreview = <HTMLElement>document.querySelector('#racePreview');
   racePreview.textContent = selectedRace.textContent;
   const charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
 
-  const genderPreview = <HTMLInputElement>document.querySelector('#genderPreview');
   genderPreview.textContent = gender.value;
   const charGender = gender.value.toLowerCase();
 
-  const agePreview = <HTMLElement>document.querySelector('#agePreview');
   agePreview.textContent = age.value;
 
-  const strengthPreview = <HTMLElement>document.querySelector('#strengthPreview');
   strengthPreview.textContent = strength;
 
-  const dexerityPreview = <HTMLElement>document.querySelector('#dexerityPreview');
   dexerityPreview.textContent = dexerity;
 
-  const constitutionPreview = <HTMLElement>document.querySelector('#constitutionPreview');
   constitutionPreview.textContent = constitution;
 
-  const wisdomPreview = <HTMLElement>document.querySelector('#wisdomPreview');
   wisdomPreview.textContent = wisdom;
 
-  const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePreview');
   intelligencePreview.textContent = intelligence;
 
-  const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
   charismaPreview.textContent = charisma;
 
-  const clsPreview = <HTMLElement>document.querySelector('#clsPreview');
   clsPreview.textContent = selectedCls.textContent;
   const charCls = selectedCls.textContent.toLowerCase();
 
-  const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview');
   alignmentPreview.textContent = selectedAlignment.textContent;
 
-  // Get character preview image based on class and gender
-
-  const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
+  // Get character preview image based on class, race, and gender
 
   const charImageSet = () => {
     const characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
     characterImg.src = getCharacterImage(characterAttributes);
-    console.log(charCls,charRace,charGender);
   }
 
   charImageSet();
 
   // Proficiencies section
 
+    // Add logic for Proficiencies section
+
+  // Combat Section
+
   const hitPoints = () => {
 
     // 1st level is max hit points + constiution modifier
 
-    let mod = getAbitlityScoreModifier(Number(constitution))
+    let mod = getAbilityScoreModifier(Number(constitution))
     let hitpoints = (Classes[charCls].hitdie + mod);
-    const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
     hitPointPreview.textContent = hitpoints;
 
   }
@@ -217,7 +252,7 @@ submitButton.addEventListener('click', (e) => {
   const armorClass = () => {
 
     let base = 10;
-    let dexMod = getAbitlityScoreModifier(Number(dexerity))
+    let dexMod = getAbilityScoreModifier(Number(dexerity))
     // TODO add worn armor modifier
     let ac = String(base + dexMod);
     const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
@@ -231,7 +266,7 @@ submitButton.addEventListener('click', (e) => {
 
   const initiativeMod = () => {
 
-    let dexMod = getAbitlityScoreModifier(Number(dexerity))
+    let dexMod = getAbilityScoreModifier(Number(dexerity))
     let mod = String(dexMod);
     const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
     initiativeModPreview.textContent = mod;
@@ -253,36 +288,34 @@ submitButton.addEventListener('click', (e) => {
 
   // return variables for use in level up submitButton
 
-  return {
-    charCls: charCls,
-    charRace: charRace,
-    charGender: charGender,
-    constiution: constitution
-  }
 
 });
 
 // Level advancement button submit
 
-// const levelUpButton = document.querySelector('#levelUpButton');
-//
-// levelUpButton.addEventListener('click', (e) => {
-//
-//   e.preventDefault();
-//
-//   const addHitPoints = () => {
-//
-//     // get current hitpoints
-//     const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
-//     let currentHitPoints = hitPointPreview.textContent;
-//     // roll for hit points to add
-//     let mod = getAbitlityScoreModifier(Number(this.constitution))
-//     let rolledHitPoints = randomIntFromRange(1, Classes[this.charCls].hitdie)
-//     let hitPointsToAdd = (rolledHitPoints + mod);
-//     // add hitpoints to current total and display
-//     hitPointPreview.textContent =  currentHitPoints + hitPointsToAdd;
-//   }
-//
-//   addHitPoints();
-//
-// });
+const levelUpButton = document.querySelector('#levelUpButton');
+
+levelUpButton.addEventListener('click', (e) => {
+
+  const constitution = rolledConstitition.textContent;
+  const selectedCls = cls.options[cls.selectedIndex];
+  const charCls = selectedCls.textContent.toLowerCase();
+
+  e.preventDefault();
+
+  const addHitPoints = () => {
+
+    // get current hitpoints
+    let currentHitPoints = Number(hitPointPreview.textContent);
+    // roll for hit points to add
+    let mod = getAbilityScoreModifier(constitution)
+    let rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie)
+    let hitPointsToAdd = (rolledHitPoints + mod);
+    // add hitpoints to current total and display
+    hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
+    console.log(`current hit points: ${currentHitPoints}\n Hit Points to Add: ${hitPointsToAdd}\n Total Hit points ${hitPointPreview.textContent}`)
+  }
+
+  addHitPoints();
+
+});

@@ -26,17 +26,17 @@ var getCharacterImage = function (genderedImages) {
 // TODO: use attributes to set other output
 var getCharacterAttributes = function (charCls, charRace, charGender) {
     if (charGender !== 'male' && charGender !== "female") {
-        var gender = randomBoolean();
-        if (gender) {
+        var gender_1 = randomBoolean();
+        if (gender_1) {
             charGender = "male";
         }
-        else if (!gender) {
+        else if (!gender_1) {
             charGender = "female";
         }
     }
     return characterImages[charRace][charCls][charGender];
 };
-var getAbitlityScoreModifier = function (ability) {
+var getAbilityScoreModifier = function (ability) {
     var score = ability;
     var mod = 0;
     mod = Math.floor((score / 2) - 5);
@@ -77,14 +77,42 @@ rollCharisma.addEventListener('click', function () {
     setScore(rolledCharisma);
 });
 ////////////////////////////////////////////////////////////
+// Get character info input elements
+////////////////////////////////////////////////////////////
+var name = document.querySelector('#name');
+var race = document.querySelector('#race');
+var alignment = document.querySelector('#alignment');
+var cls = document.querySelector('#cls');
+var gender = document.querySelector('#gender');
+var age = document.querySelector('#age');
+////////////////////////////////////////////////////////////
+// Get character info preview elements
+////////////////////////////////////////////////////////////
+// Info section
+var namePreview = document.querySelector('#namePreview');
+var racePreview = document.querySelector('#racePreview');
+var genderPreview = document.querySelector('#genderPreview');
+var agePreview = document.querySelector('#agePreview');
+var strengthPreview = document.querySelector('#strengthPreview');
+var dexerityPreview = document.querySelector('#dexerityPreview');
+var constitutionPreview = document.querySelector('#constitutionPreview');
+var wisdomPreview = document.querySelector('#wisdomPreview');
+var intelligencePreview = document.querySelector('#intelligencePreview');
+var charismaPreview = document.querySelector('#charismaPreview');
+var clsPreview = document.querySelector('#clsPreview');
+var alignmentPreview = document.querySelector('#alignmentPreview');
+var characterImg = document.querySelector('#characterImg');
+// Proficiencies Section
+// TODO: add Proficiencies elements
+// Combat section
+var hitPointPreview = document.querySelector('#hitPoints');
+////////////////////////////////////////////////////////////
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
 var submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', function (e) {
     e.preventDefault();
-    // Get info to create character
-    var name = document.querySelector('#name');
-    var race = document.querySelector('#race');
+    // Get info to create characte
     var selectedRace = race.options[race.selectedIndex];
     var strength = rolledStrength.textContent;
     var dexerity = rolledDexerity.textContent;
@@ -92,61 +120,44 @@ submitButton.addEventListener('click', function (e) {
     var intelligence = rolledIntelligence.textContent;
     var wisdom = rolledWisdom.textContent;
     var charisma = rolledCharisma.textContent;
-    var alignment = document.querySelector('#alignment');
     var selectedAlignment = alignment.options[alignment.selectedIndex];
-    var cls = document.querySelector('#cls');
     var selectedCls = cls.options[cls.selectedIndex];
-    var gender = document.querySelector('#gender');
-    var age = document.querySelector('#age');
     // Post info from character creation to preview area
-    var namePreview = document.querySelector('#namePreview');
     namePreview.textContent = name.value;
-    var racePreview = document.querySelector('#racePreview');
     racePreview.textContent = selectedRace.textContent;
     var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    var genderPreview = document.querySelector('#genderPreview');
     genderPreview.textContent = gender.value;
     var charGender = gender.value.toLowerCase();
-    var agePreview = document.querySelector('#agePreview');
     agePreview.textContent = age.value;
-    var strengthPreview = document.querySelector('#strengthPreview');
     strengthPreview.textContent = strength;
-    var dexerityPreview = document.querySelector('#dexerityPreview');
     dexerityPreview.textContent = dexerity;
-    var constitutionPreview = document.querySelector('#constitutionPreview');
     constitutionPreview.textContent = constitution;
-    var wisdomPreview = document.querySelector('#wisdomPreview');
     wisdomPreview.textContent = wisdom;
-    var intelligencePreview = document.querySelector('#intelligencePreview');
     intelligencePreview.textContent = intelligence;
-    var charismaPreview = document.querySelector('#charismaPreview');
     charismaPreview.textContent = charisma;
-    var clsPreview = document.querySelector('#clsPreview');
     clsPreview.textContent = selectedCls.textContent;
     var charCls = selectedCls.textContent.toLowerCase();
-    var alignmentPreview = document.querySelector('#alignmentPreview');
     alignmentPreview.textContent = selectedAlignment.textContent;
-    // Get character preview image based on class and gender
-    var characterImg = document.querySelector('#characterImg');
+    // Get character preview image based on class, race, and gender
     var charImageSet = function () {
         var characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
         characterImg.src = getCharacterImage(characterAttributes);
-        console.log(charCls, charRace, charGender);
     };
     charImageSet();
     // Proficiencies section
+    // Add logic for Proficiencies section
+    // Combat Section
     var hitPoints = function () {
         // 1st level is max hit points + constiution modifier
-        var mod = getAbitlityScoreModifier(Number(constitution));
+        var mod = getAbilityScoreModifier(Number(constitution));
         var hitpoints = (Classes[charCls].hitdie + mod);
-        var hitPointPreview = document.querySelector('#hitPoints');
         hitPointPreview.textContent = hitpoints;
     };
     hitPoints();
     // Get dexerity and armor modifier and set armor class
     var armorClass = function () {
         var base = 10;
-        var dexMod = getAbitlityScoreModifier(Number(dexerity));
+        var dexMod = getAbilityScoreModifier(Number(dexerity));
         // TODO add worn armor modifier
         var ac = String(base + dexMod);
         var armorClassPreview = document.querySelector('#armorClass');
@@ -155,7 +166,7 @@ submitButton.addEventListener('click', function (e) {
     armorClass();
     // Get dexerity modifier and set initiative bonus
     var initiativeMod = function () {
-        var dexMod = getAbitlityScoreModifier(Number(dexerity));
+        var dexMod = getAbilityScoreModifier(Number(dexerity));
         var mod = String(dexMod);
         var initiativeModPreview = document.querySelector('#initiative');
         initiativeModPreview.textContent = mod;
@@ -168,33 +179,24 @@ submitButton.addEventListener('click', function (e) {
     };
     baseSpeed();
     // return variables for use in level up submitButton
-    return {
-        charCls: charCls,
-        charRace: charRace,
-        charGender: charGender,
-        constiution: constitution
-    };
 });
 // Level advancement button submit
-// const levelUpButton = document.querySelector('#levelUpButton');
-//
-// levelUpButton.addEventListener('click', (e) => {
-//
-//   e.preventDefault();
-//
-//   const addHitPoints = () => {
-//
-//     // get current hitpoints
-//     const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
-//     let currentHitPoints = hitPointPreview.textContent;
-//     // roll for hit points to add
-//     let mod = getAbitlityScoreModifier(Number(this.constitution))
-//     let rolledHitPoints = randomIntFromRange(1, Classes[this.charCls].hitdie)
-//     let hitPointsToAdd = (rolledHitPoints + mod);
-//     // add hitpoints to current total and display
-//     hitPointPreview.textContent =  currentHitPoints + hitPointsToAdd;
-//   }
-//
-//   addHitPoints();
-//
-// });
+var levelUpButton = document.querySelector('#levelUpButton');
+levelUpButton.addEventListener('click', function (e) {
+    var constitution = rolledConstitition.textContent;
+    var selectedCls = cls.options[cls.selectedIndex];
+    var charCls = selectedCls.textContent.toLowerCase();
+    e.preventDefault();
+    var addHitPoints = function () {
+        // get current hitpoints
+        var currentHitPoints = Number(hitPointPreview.textContent);
+        // roll for hit points to add
+        var mod = getAbilityScoreModifier(constitution);
+        var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
+        var hitPointsToAdd = (rolledHitPoints + mod);
+        // add hitpoints to current total and display
+        hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
+        console.log("current hit points: " + currentHitPoints + "\n Hit Points to Add: " + hitPointsToAdd + "\n Total Hit points " + hitPointPreview.textContent);
+    };
+    addHitPoints();
+});
