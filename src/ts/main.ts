@@ -125,6 +125,14 @@ const age = <HTMLInputElement>document.querySelector('#age');
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
 
+// Level and experience Section
+
+const currentLevel = <HTMLElement>document.querySelector('#currentLevel')
+
+const currentExperience = <HTMLElement>document.querySelector('#currentExperience');
+
+const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewExperience');
+
 // Info section
 
 const namePreview = document.querySelector('#namePreview');
@@ -303,6 +311,14 @@ levelUpButton.addEventListener('click', (e) => {
 
   e.preventDefault();
 
+  const charLevelUp = () => {
+
+    currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
+
+  }
+
+  charLevelUp();
+
   const addHitPoints = () => {
 
     // get current hitpoints
@@ -317,5 +333,25 @@ levelUpButton.addEventListener('click', (e) => {
   }
 
   addHitPoints();
+
+});
+
+const addNewExperienceButton = document.querySelector('#addExp');
+
+addNewExperienceButton.addEventListener('click', (e) => {
+
+  e.preventDefault();
+
+  const addExp = () => {
+
+      let currentExpNum = Number(currentExperience.textContent);
+      let newExpNum = Number(addNewExperienceInput.value)
+      currentExperience.textContent = String(currentExpNum + newExpNum);
+
+  }
+
+  addExp();
+
+  addNewExperienceInput.value = null;
 
 });

@@ -88,6 +88,10 @@ var age = document.querySelector('#age');
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
+// Level and experience Section
+var currentLevel = document.querySelector('#currentLevel');
+var currentExperience = document.querySelector('#currentExperience');
+var addNewExperienceInput = document.querySelector('#addNewExperience');
 // Info section
 var namePreview = document.querySelector('#namePreview');
 var racePreview = document.querySelector('#racePreview');
@@ -187,6 +191,10 @@ levelUpButton.addEventListener('click', function (e) {
     var selectedCls = cls.options[cls.selectedIndex];
     var charCls = selectedCls.textContent.toLowerCase();
     e.preventDefault();
+    var charLevelUp = function () {
+        currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
+    };
+    charLevelUp();
     var addHitPoints = function () {
         // get current hitpoints
         var currentHitPoints = Number(hitPointPreview.textContent);
@@ -199,4 +207,15 @@ levelUpButton.addEventListener('click', function (e) {
         console.log("current hit points: " + currentHitPoints + "\n Hit Points to Add: " + hitPointsToAdd + "\n Total Hit points " + hitPointPreview.textContent);
     };
     addHitPoints();
+});
+var addNewExperienceButton = document.querySelector('#addExp');
+addNewExperienceButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    var addExp = function () {
+        var currentExpNum = Number(currentExperience.textContent);
+        var newExpNum = Number(addNewExperienceInput.value);
+        currentExperience.textContent = String(currentExpNum + newExpNum);
+    };
+    addExp();
+    addNewExperienceInput.value = null;
 });
