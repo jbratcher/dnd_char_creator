@@ -1,14 +1,14 @@
 # D&D Character Creator
 
-*** Work in progress ***
 Input your characters attributes and it displays your character's images, stats, abilities and other useful info.
 
+Still in development but already has many useful features.
 
 [Demo Page](https://jbratcher.github.io/dnd_char_creator/)
 
 ### Version
 
-0.0.3
+0.0.5
 
 ## Install Dependencies
 
@@ -91,9 +91,18 @@ gulp clean:dist
 
 ## Known "bugs"
 
-* ???
+* active class on general tab not working unless clicked
 
 #### Change Log
+
+###### 0.0.5
+
+* Added logic for level, experience and hitpoints 
+
+
+###### 0.0.4
+
+* Added tabs for character preview section (general, proficiencies, and combat 
 
 ###### 0.0.3
 

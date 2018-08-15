@@ -182,7 +182,6 @@ submitButton.addEventListener('click', function (e) {
         speedPreview.textContent = Races[charRace].speed;
     };
     baseSpeed();
-    // return variables for use in level up submitButton
 });
 // Level advancement button submit
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -202,6 +201,9 @@ levelUpButton.addEventListener('click', function (e) {
         var mod = getAbilityScoreModifier(constitution);
         var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
         var hitPointsToAdd = (rolledHitPoints + mod);
+        if (rolledHitPoints + mod <= 0) {
+            hitPointsToAdd = 1;
+        }
         // add hitpoints to current total and display
         hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
         console.log("current hit points: " + currentHitPoints + "\n Hit Points to Add: " + hitPointsToAdd + "\n Total Hit points " + hitPointPreview.textContent);

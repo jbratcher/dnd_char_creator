@@ -294,9 +294,6 @@ submitButton.addEventListener('click', (e) => {
 
   baseSpeed();
 
-  // return variables for use in level up submitButton
-
-
 });
 
 // Level advancement button submit
@@ -327,6 +324,9 @@ levelUpButton.addEventListener('click', (e) => {
     let mod = getAbilityScoreModifier(constitution)
     let rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie)
     let hitPointsToAdd = (rolledHitPoints + mod);
+    if(rolledHitPoints + mod <= 0) {
+      hitPointsToAdd = 1;
+    }
     // add hitpoints to current total and display
     hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
     console.log(`current hit points: ${currentHitPoints}\n Hit Points to Add: ${hitPointsToAdd}\n Total Hit points ${hitPointPreview.textContent}`)
