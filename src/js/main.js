@@ -2,7 +2,7 @@
 // imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
-import { Classes, Races } from './info.js';
+import { Classes, Races, Levels } from './info.js';
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -91,6 +91,7 @@ var age = document.querySelector('#age');
 // Level and experience Section
 var currentLevel = document.querySelector('#currentLevel');
 var currentExperience = document.querySelector('#currentExperience');
+var experienceNextLevel = document.querySelector('#experienceNextLevel');
 var addNewExperienceInput = document.querySelector('#addNewExperience');
 // Info section
 var namePreview = document.querySelector('#namePreview');
@@ -192,6 +193,7 @@ levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
     var charLevelUp = function () {
         currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
+        experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
     };
     charLevelUp();
     var addHitPoints = function () {

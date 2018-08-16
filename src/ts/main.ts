@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
-import { Classes, Races } from './info.js';
+import { Classes, Races, Levels } from './info.js';
 
 ////////////////////////////////////////
 // Utility functions
@@ -35,7 +35,7 @@ const getCharacterImage = (genderedImages) => {
 // Get Character Attributes to set preview image
 // TODO: use attributes to set other output
 
-const getCharacterAttributes = (charCls,charRace,charGender) => {
+const getCharacterAttributes = (charCls, charRace, charGender) => {
   if(charGender !== 'male' && charGender !== "female") {
     let gender = randomBoolean();
     if(gender) {
@@ -130,6 +130,8 @@ const age = <HTMLInputElement>document.querySelector('#age');
 const currentLevel = <HTMLElement>document.querySelector('#currentLevel')
 
 const currentExperience = <HTMLElement>document.querySelector('#currentExperience');
+
+const experienceNextLevel = <HTMLElement>document.querySelector('#experienceNextLevel');
 
 const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewExperience');
 
@@ -311,6 +313,7 @@ levelUpButton.addEventListener('click', (e) => {
   const charLevelUp = () => {
 
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
+    experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
 
   }
 
