@@ -2,7 +2,7 @@
 
 Character creator for an openSRD-based roleplaying game.  Puts together all the info you need to start playing now and not have to worry about calculations for bonuses.    
 
-[Demo Page](https://jbratcher.github.io/dnd_char_creator/)
+[Demo Page](https://jbratcher.github.io/openSRD_character_creator/)
 
 ### Version
 
