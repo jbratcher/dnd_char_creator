@@ -1,8 +1,6 @@
-# D&D Character Creator
+# OpenSRD Character Creator
 
-Input your characters attributes and it displays your character's images, stats, abilities and other useful info.
-
-Still in development but already has many useful features.
+Character creator for an openSRD-based roleplaying game.  Puts together all the info you need to start playing now and not have to worry about calculations for bonuses.    
 
 [Demo Page](https://jbratcher.github.io/dnd_char_creator/)
 
@@ -78,9 +76,12 @@ gulp clean:dist
 
 ## Features:
 
-* Random rolls between 3 - 18 for stats, selectable races, and classes
+* Random rolls between for stats, selectable races, and classes
 * Randomly selects image from array based on race, class, and gender inputs
 * Generates character preview based on user inputs
+* Calculates hit points, armor class, initiative and speed
+* Calculates hit point gain on level up
+* Add experience and keep a running tottal
 
 ## Future Features:
 
@@ -97,16 +98,16 @@ gulp clean:dist
 
 ###### 0.0.5
 
-* Added logic for level, experience and hitpoints 
+* Added logic for level, experience and hitpoints
 
 
 ###### 0.0.4
 
-* Added tabs for character preview section (general, proficiencies, and combat 
+* Added tabs for character preview section (general, proficiencies, and combat
 
 ###### 0.0.3
 
-* Added support for non-binary genders, removed placeholder default values for race, class, and alignment, 
+* Added support for non-binary genders, removed placeholder default values for race, class, and alignment,
 
 ###### 0.0.2
 
