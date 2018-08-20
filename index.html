@@ -74,138 +74,233 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" id="skillsBuildTab" data-toggle="tab" href="#skillsBuildTab" role="tab" aria-controls="skillsBuild" aria-selected="false">
+                    <a class="nav-link" id="skillsBuildTab" data-toggle="tab" href="#skillsBuild" role="tab" aria-controls="skillsBuild" aria-selected="false">
                       Skills
                     </a>
                   </li>
 
                 </ul>
+                
+              <!-- Character Builder form -->
 
               <form class="px-3">
-
-                <div class="input-group-prepend my-3">
-
-                  <label class="input-group-text" for="cls">Choose a Class: </label>
-
-                  <select class="custom-select" id="cls">
-                    <option selected>Barbarian</option>
-                    <option>Bard</option>
-                    <option>Cleric</option>
-                    <option>Druid</option>
-                    <option>Fighter</option>
-                    <option>Monk</option>
-                    <option>Paladin</option>
-                    <option>Ranger</option>
-                    <option>Rogue</option>
-                    <option>Soccerror</option>
-                    <option>Warlock</option>
-                    <option>Wizard</option>
-                  </select>
-
-                </div>
-
-                <div class="input-group-prepend my-3">
-
-                  <label class="input-group-text" for="race">Choose a Race: </label>
-
-                  <select class="custom-select" id="race">
-                    <option selected>Dwarf</option>
-                    <option>Elf</option>
-                    <option>Gnome</option>
-                    <option>Half-Elf</option>
-                    <option>Halfling</option>
-                    <option>Half-Orc</option>
-                    <option>Human</option>
-                  </select>
-
-                </div>
-
-                <p>Roll your ability scores<p>
-
-                <div class="input-group my-3 d-flex justify-content-between">
-                  <label class="h6">Strength: </label>
-                  <span id="rolledStrength">-</span>
-                  <button type="button" id="rollStrength" class="btn btn-dark btn-sm">Roll</button>
-                </div>
-
-                <div class="input-group my-3 d-flex justify-content-between">
-                  <label class="h6">Dexerity: </label>
-                  <span id="rolledDexerity">-</span>
-                  <button type="button" id="rollDexerity" class="btn btn-dark btn-sm">Roll</button>
-                </div>
-
-                <div class="input-group my-3 d-flex justify-content-between">
-                  <label class="h6">Constitution: </label>
-                  <span id="rolledConstitition">-</span>
-                  <button type="button" id="rollConstitution" class="btn btn-dark btn-sm">Roll</button>
-                </div>
-
-                <div class="input-group my-3 d-flex justify-content-between">
-                  <label class="h6">Intelligence: </label>
-                  <span id="rolledIntelligence">-</span>
-                  <button type="button" id="rollIntelligence" class="btn btn-dark btn-sm">Roll</button>
-                </div>
-
-                <div class="input-group my-3 d-flex justify-content-between">
-                  <label class="h6">Wisdom: </label>
-                  <span id="rolledWisdom">-</span>
-                  <button type="button" id="rollWisdom" class="btn btn-dark btn-sm">Roll</button>
-                </div>
-
-                <div class="input-group my-3 d-flex justify-content-between">
-                  <label class="h6">Charisma: </label>
-                  <span id="rolledCharisma">-</span>
-                  <button type="button" id="rollCharisma" class="btn btn-dark btn-sm">Roll</button>
-                </div>
-
-                <div class="input-group my-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="alignment">Alignment: </label>
+                
+                <div class="tab-content" id="CharTabsContent">
+                
+                  <!-- General Tab -->
+                  
+                  <div class="tab-pane active fade show" id="generalBuild" role="tabpanel" aria-labelledby="generalBuildTab">
+  
+                    <div class="input-group-prepend my-3">
+    
+                      <label class="input-group-text" for="cls">Choose a Class: </label>
+    
+                      <select class="custom-select" id="cls">
+                        <option selected>Barbarian</option>
+                        <option>Bard</option>
+                        <option>Cleric</option>
+                        <option>Druid</option>
+                        <option>Fighter</option>
+                        <option>Monk</option>
+                        <option>Paladin</option>
+                        <option>Ranger</option>
+                        <option>Rogue</option>
+                        <option>Soccerror</option>
+                        <option>Warlock</option>
+                        <option>Wizard</option>
+                      </select>
+    
+                    </div>
+    
+                    <div class="input-group-prepend my-3">
+    
+                      <label class="input-group-text" for="race">Choose a Race: </label>
+    
+                      <select class="custom-select" id="race">
+                        <option selected>Dwarf</option>
+                        <option>Elf</option>
+                        <option>Gnome</option>
+                        <option>Half-Elf</option>
+                        <option>Halfling</option>
+                        <option>Half-Orc</option>
+                        <option>Human</option>
+                      </select>
+    
+                    </div>
+    
+                    <p>Roll your ability scores<p>
+    
+                    <div class="input-group my-3 d-flex justify-content-between">
+                      <label class="h6">Strength: </label>
+                      <span id="rolledStrength">-</span>
+                      <button type="button" id="rollStrength" class="btn btn-dark btn-sm">Roll</button>
+                    </div>
+    
+                    <div class="input-group my-3 d-flex justify-content-between">
+                      <label class="h6">Dexerity: </label>
+                      <span id="rolledDexerity">-</span>
+                      <button type="button" id="rollDexerity" class="btn btn-dark btn-sm">Roll</button>
+                    </div>
+    
+                    <div class="input-group my-3 d-flex justify-content-between">
+                      <label class="h6">Constitution: </label>
+                      <span id="rolledConstitition">-</span>
+                      <button type="button" id="rollConstitution" class="btn btn-dark btn-sm">Roll</button>
+                    </div>
+    
+                    <div class="input-group my-3 d-flex justify-content-between">
+                      <label class="h6">Intelligence: </label>
+                      <span id="rolledIntelligence">-</span>
+                      <button type="button" id="rollIntelligence" class="btn btn-dark btn-sm">Roll</button>
+                    </div>
+    
+                    <div class="input-group my-3 d-flex justify-content-between">
+                      <label class="h6">Wisdom: </label>
+                      <span id="rolledWisdom">-</span>
+                      <button type="button" id="rollWisdom" class="btn btn-dark btn-sm">Roll</button>
+                    </div>
+    
+                    <div class="input-group my-3 d-flex justify-content-between">
+                      <label class="h6">Charisma: </label>
+                      <span id="rolledCharisma">-</span>
+                      <button type="button" id="rollCharisma" class="btn btn-dark btn-sm">Roll</button>
+                    </div>
+    
+                    <div class="input-group my-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="alignment">Alignment: </label>
+                      </div>
+                      <select class="custom-select" id="alignment">
+                        <option selected>Lawful Good</option>
+                        <option>Neutral Good</option>
+                        <option>Chaotic Good</option>
+                        <option>Lawful Neutral</option>
+                        <option>True Neutral</option>
+                        <option>Chaotic Neutral</option>
+                        <option>Lawful Evil</option>
+                        <option>Neutral Evil</option>
+                        <option>Chaotic Evil</option>
+                      </select>
+                    </div>
+    
+                    <div class="input-group-prepend my-3">
+    
+                      <label class="input-group-text" for="name">Name: </label>
+    
+                      <input class="form-control" type="text" id="name">
+    
+                    </div>
+    
+                    <div class="input-group-prepend my-3">
+    
+                      <label class="input-group-text" for="gender">Gender: </label>
+    
+                      <input class="form-control" type="text" id="gender">
+    
+                    </div>
+    
+                    <div class="input-group-prepend my-3">
+    
+                      <label class="input-group-text" for="age">Age: </label>
+    
+                      <input class="form-control" type="text" id="age">
+    
+                    </div>
+                  
                   </div>
-                  <select class="custom-select" id="alignment">
-                    <option selected>Lawful Good</option>
-                    <option>Neutral Good</option>
-                    <option>Chaotic Good</option>
-                    <option>Lawful Neutral</option>
-                    <option>True Neutral</option>
-                    <option>Chaotic Neutral</option>
-                    <option>Lawful Evil</option>
-                    <option>Neutral Evil</option>
-                    <option>Chaotic Evil</option>
-                  </select>
+                  
+                  <!-- Skills Tab -->
+                  
+                  <div class="tab-pane fade" id="skillsBuild" role="tabpanel" aria-labelledby="skillsBuildTab">
+                    
+                    <div class="input-group my-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="skillSelect1">Skills: </label>
+                      </div>
+                      <select class="custom-select" id="skillsSelect1">
+                        <option selected>Acrobatics</option>
+                        <option>Animal Handling</option>
+                        <option>Arcana</option>
+                        <option>Athletics</option>
+                        <option>Deception</option>
+                        <option>History</option>
+                        <option>Insight</option>
+                        <option>Intimidation</option>
+                        <option>Medicine</option>
+                        <option>Nature</option>
+                        <option>Perception</option>
+                        <option>Performance</option>
+                        <option>Persuasion</option>
+                        <option>Religion</option>
+                        <option>Slieght of Hand</option>
+                        <option>Stealth</option>
+                        <option>Survivial</option>
+                      </select>
+                    </div>
+                    
+                    <div class="input-group my-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="skillSelect2">Skills: </label>
+                      </div>
+                      <select class="custom-select" id="skillsSelect2">
+                        <option selected>Acrobatics</option>
+                        <option>Animal Handling</option>
+                        <option>Arcana</option>
+                        <option>Athletics</option>
+                        <option>Deception</option>
+                        <option>History</option>
+                        <option>Insight</option>
+                        <option>Intimidation</option>
+                        <option>Medicine</option>
+                        <option>Nature</option>
+                        <option>Perception</option>
+                        <option>Performance</option>
+                        <option>Persuasion</option>
+                        <option>Religion</option>
+                        <option>Slieght of Hand</option>
+                        <option>Stealth</option>
+                        <option>Survivial</option>
+                      </select>
+                    </div>
+                    
+                    <div class="input-group my-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="skillSelect3">Skills: </label>
+                      </div>
+                      <select class="custom-select" id="skillsSelect3">
+                        <option selected>Acrobatics</option>
+                        <option>Animal Handling</option>
+                        <option>Arcana</option>
+                        <option>Athletics</option>
+                        <option>Deception</option>
+                        <option>History</option>
+                        <option>Insight</option>
+                        <option>Intimidation</option>
+                        <option>Medicine</option>
+                        <option>Nature</option>
+                        <option>Perception</option>
+                        <option>Performance</option>
+                        <option>Persuasion</option>
+                        <option>Religion</option>
+                        <option>Slieght of Hand</option>
+                        <option>Stealth</option>
+                        <option>Survivial</option>
+                      </select>
+                    </div>
+                    
+                  </div>
+  
+                  <button class="btn btn-dark mb-3" id="submitButton" type="button">Create Character</button>
+                
                 </div>
-
-                <div class="input-group-prepend my-3">
-
-                  <label class="input-group-text" for="name">Name: </label>
-
-                  <input class="form-control" type="text" id="name">
-
-                </div>
-
-                <div class="input-group-prepend my-3">
-
-                  <label class="input-group-text" for="gender">Gender: </label>
-
-                  <input class="form-control" type="text" id="gender">
-
-                </div>
-
-                <div class="input-group-prepend my-3">
-
-                  <label class="input-group-text" for="age">Age: </label>
-
-                  <input class="form-control" type="text" id="age">
-
-                </div>
-
-                <button class="btn btn-dark mb-3" id="submitButton" type="button">Create Character</button>
 
               </form>
 
             </section>
 
           </section>
+
+          <!-- Character Preview Section -->
 
           <section id="characterPreview" class="col-md-6 mx-auto py-5">
 
@@ -409,11 +504,6 @@
                       </li>
 
                       <li class="list-group-item d-flex justify-content-between">
-                        <b>History <em>(Cha)</em>: </b>
-                        <span id="historySkill">-</span>
-                      </li>
-
-                      <li class="list-group-item d-flex justify-content-between">
                         <b>Performance <em>(Cha)</em>: </b>
                         <span id="performanceSkill">-</span>
                       </li>
@@ -475,7 +565,7 @@
 
                   </div>
 
-                  </div>
+                </div>
 
             </section>
 

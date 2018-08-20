@@ -6,40 +6,76 @@ Object.defineProperty(exports, "__esModule", {
 // Classes object for data
 var Classes = exports.Classes = {
     barbarian: {
-        hitdie: 12
+        hitdie: 12,
+        skills: {
+            number: 2
+        }
     },
     bard: {
-        hitdie: 8
+        hitdie: 8,
+        skills: {
+            number: 3
+        }
     },
     cleric: {
-        hitdie: 8
+        hitdie: 8,
+        skills: {
+            number: 2
+        }
     },
     druid: {
-        hitdie: 8
+        hitdie: 8,
+        skills: {
+            number: 2
+        }
     },
     fighter: {
-        hitdie: 10
+        hitdie: 10,
+        skills: {
+            number: 2
+        }
     },
     monk: {
-        hitdie: 8
+        hitdie: 8,
+        skills: {
+            number: 2
+        }
     },
     paladin: {
-        hitdie: 10
+        hitdie: 10,
+        skills: {
+            number: 2
+        }
     },
     ranger: {
-        hitdie: 10
+        hitdie: 10,
+        skills: {
+            number: 3
+        }
     },
     rogue: {
-        hitdie: 8
+        hitdie: 8,
+        skills: {
+            number: 4
+        }
     },
     soccerror: {
-        hitdie: 6
+        hitdie: 6,
+        skills: {
+            number: 2
+        }
     },
     warlock: {
-        hitdie: 8
+        hitdie: 8,
+        skills: {
+            number: 2
+        }
     },
     wizard: {
-        hitdie: 6
+        hitdie: 6,
+        skills: {
+            number: 2
+        }
     }
 };
 var Races = exports.Races = {
