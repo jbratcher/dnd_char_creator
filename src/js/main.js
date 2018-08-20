@@ -7,9 +7,9 @@ import { Classes, Races, Levels } from './info.js';
 // Utility functions
 ////////////////////////////////////////
 var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
-var randomBoolean = function () { return Math.random() >= 0.5; };
+var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a true or false value
 var abilityScore = function () { return Math.floor(Math.random() * ((18 - 3) + 1)) + 3; };
-var setToMinMax = function (score) { return score > 18 ? score = 18 : score = 3; };
+var setToMinMax = function (score) { return score > 18 ? 18 : score < 3 ? 3 : score; };
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////

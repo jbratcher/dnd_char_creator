@@ -11,11 +11,11 @@ import { Classes, Races, Levels } from './info.js';
 
 const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-const randomBoolean = () => Math.random() >= 0.5;
+const randomBoolean = () => Math.random() >= 0.5;  // Get a true or false value
 
 const abilityScore = () => Math.floor(Math.random() * ((18 - 3) + 1)) + 3;
 
-const setToMinMax = score => score > 18 ? score = 18 : score = 3;
+const setToMinMax = score => score > 18 ? 18 : score < 3 ? 3 : score;
 
 ////////////////////////////////////////
 // Set/Get functions
