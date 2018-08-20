@@ -18,7 +18,7 @@ b > em {
 .nav-item {
   padding: 0 1rem; }
 
-#charTabs .nav-link:not(.active) {
+#buildTabs .nav-link:not(.active), #charTabs .nav-link:not(.active) {
   color: #999; }
 
 footer {
