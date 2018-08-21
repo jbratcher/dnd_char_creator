@@ -109,6 +109,8 @@ rollCharisma.addEventListener('click', () => {
 // Get character info input elements
 ////////////////////////////////////////////////////////////
 
+// General Info
+
 const name = <HTMLInputElement>document.querySelector('#name');
 
 const race = <HTMLSelectElement>document.querySelector('#race');
@@ -120,6 +122,14 @@ const cls = <HTMLSelectElement>document.querySelector('#cls');
 const gender = <HTMLInputElement>document.querySelector('#gender');
 
 const age = <HTMLInputElement>document.querySelector('#age');
+
+// Skill select
+
+const skill1 = <HTMLSelectElement>document.querySelector('skillsSelect1');
+
+const skill2 = <HTMLSelectElement>document.querySelector('skillsSelect2');
+
+const skill3 = <HTMLSelectElement>document.querySelector('skillsSelect3');
 
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
@@ -165,7 +175,39 @@ const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
 // Proficiencies Section
 
-  // TODO: add Proficiencies elements
+const acrobaticsSkill = <HTMLElement>document.querySelector('#acrobaticsSkill');
+
+const animalHandlingsSkill = <HTMLElement>document.querySelector('#animalHandlingsSkill');
+
+const arcanaSkill = <HTMLElement>document.querySelector('#arcanaSkill');
+
+const athleticsSkill = <HTMLElement>document.querySelector('#athleticsSkill');
+
+const deceptionSkill = <HTMLElement>document.querySelector('#deceptionSkill');
+
+const historySkill = <HTMLElement>document.querySelector('#historySkill');
+
+const intimidationSkill = <HTMLElement>document.querySelector('#intimidationSkill');
+
+const investigationSkill = <HTMLElement>document.querySelector('#investigationSkill');
+
+const medicineSkill = <HTMLElement>document.querySelector('#medicineSkill');
+
+const natureSkill = <HTMLElement>document.querySelector('#natureSkill');
+
+const perceptionSkill = <HTMLElement>document.querySelector('#perceptionSkill');
+
+const performanceSkill = <HTMLElement>document.querySelector('#performanceSkill');
+
+const persuasionSkill = <HTMLElement>document.querySelector('#persuasionSkill');
+
+const religionSkill = <HTMLElement>document.querySelector('#religionSkill');
+
+const slieghtOfHandSkill = <HTMLElement>document.querySelector('#slieghtOfHandSkill');
+
+const stealthSkill = <HTMLElement>document.querySelector('#stealthSkill');
+
+const survivalSkill = <HTMLElement>document.querySelector('#survivalSkill');
 
 // Combat section
 
@@ -182,6 +224,8 @@ submitButton.addEventListener('click', (e) => {
   e.preventDefault();
 
   // Get info to create characte
+
+  // General info
 
   const selectedRace = race.options[race.selectedIndex];
 
@@ -200,6 +244,14 @@ submitButton.addEventListener('click', (e) => {
   const selectedAlignment = alignment.options[alignment.selectedIndex];
 
   const selectedCls = cls.options[cls.selectedIndex];
+  
+  // Skills
+  
+  const selectedSkill1 = skill1.options[skill1.selectedIndex];
+  
+  const selectedSkill2 = skill1.options[skill2.selectedIndex];
+  
+  const selectedSkill3 = skill1.options[skill3.selectedIndex];
 
   // Post info from character creation to preview area
 

@@ -79,12 +79,17 @@ rollCharisma.addEventListener('click', function () {
 ////////////////////////////////////////////////////////////
 // Get character info input elements
 ////////////////////////////////////////////////////////////
+// General Info
 var name = document.querySelector('#name');
 var race = document.querySelector('#race');
 var alignment = document.querySelector('#alignment');
 var cls = document.querySelector('#cls');
 var gender = document.querySelector('#gender');
 var age = document.querySelector('#age');
+// Skill select
+var skill1 = document.querySelector('skillsSelect1');
+var skill2 = document.querySelector('skillsSelect2');
+var skill3 = document.querySelector('skillsSelect3');
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
@@ -108,7 +113,23 @@ var clsPreview = document.querySelector('#clsPreview');
 var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
 // Proficiencies Section
-// TODO: add Proficiencies elements
+var acrobaticsSkill = document.querySelector('#acrobaticsSkill');
+var animalHandlingsSkill = document.querySelector('#animalHandlingsSkill');
+var arcanaSkill = document.querySelector('#arcanaSkill');
+var athleticsSkill = document.querySelector('#athleticsSkill');
+var deceptionSkill = document.querySelector('#deceptionSkill');
+var historySkill = document.querySelector('#historySkill');
+var intimidationSkill = document.querySelector('#intimidationSkill');
+var investigationSkill = document.querySelector('#investigationSkill');
+var medicineSkill = document.querySelector('#medicineSkill');
+var natureSkill = document.querySelector('#natureSkill');
+var perceptionSkill = document.querySelector('#perceptionSkill');
+var performanceSkill = document.querySelector('#performanceSkill');
+var persuasionSkill = document.querySelector('#persuasionSkill');
+var religionSkill = document.querySelector('#religionSkill');
+var slieghtOfHandSkill = document.querySelector('#slieghtOfHandSkill');
+var stealthSkill = document.querySelector('#stealthSkill');
+var survivalSkill = document.querySelector('#survivalSkill');
 // Combat section
 var hitPointPreview = document.querySelector('#hitPoints');
 ////////////////////////////////////////////////////////////
@@ -118,6 +139,7 @@ var submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Get info to create characte
+    // General info
     var selectedRace = race.options[race.selectedIndex];
     var strength = rolledStrength.textContent;
     var dexerity = rolledDexerity.textContent;
@@ -127,6 +149,10 @@ submitButton.addEventListener('click', function (e) {
     var charisma = rolledCharisma.textContent;
     var selectedAlignment = alignment.options[alignment.selectedIndex];
     var selectedCls = cls.options[cls.selectedIndex];
+    // Skills
+    var selectedSkill1 = skill1.options[skill1.selectedIndex];
+    var selectedSkill2 = skill1.options[skill2.selectedIndex];
+    var selectedSkill3 = skill1.options[skill3.selectedIndex];
     // Post info from character creation to preview area
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
