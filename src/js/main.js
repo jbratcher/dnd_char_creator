@@ -3,6 +3,10 @@
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
 import { Classes, Races, Levels } from './info.js';
+// interface hacks
+// interface ArrayConstructor {
+// 	from(arrayLike: any, mapFn?, thisArg?): Array<any>;
+// }
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -87,9 +91,9 @@ var cls = document.querySelector('#cls');
 var gender = document.querySelector('#gender');
 var age = document.querySelector('#age');
 // Skill select
-var skill1 = document.querySelector('skillsSelect1');
-var skill2 = document.querySelector('skillsSelect2');
-var skill3 = document.querySelector('skillsSelect3');
+var skill1 = document.querySelector('#skillsSelect1');
+var skill2 = document.querySelector('#skillsSelect2');
+var skill3 = document.querySelector('#skillsSelect3');
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
@@ -169,6 +173,22 @@ submitButton.addEventListener('click', function (e) {
     clsPreview.textContent = selectedCls.textContent;
     var charCls = selectedCls.textContent.toLowerCase();
     alignmentPreview.textContent = selectedAlignment.textContent;
+    // Skills preview section
+    var skillsPreviewList = document.querySelector('#skillsPreviewList');
+    var skillsPreviewListItems = skillsPreviewList.children;
+    var highlightSkills = function () {
+        for (var i = 0; i < skillsPreviewListItems.length; i++) {
+            if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
+                || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
+                || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
+                skillsPreviewListItems[i].style.color = 'green';
+            }
+            else {
+                skillsPreviewListItems[i].style.color = '#ccc';
+            }
+        }
+    };
+    highlightSkills();
     // Get character preview image based on class, race, and gender
     var charImageSet = function () {
         var characterAttributes = getCharacterAttributes(charCls, charRace, charGender);

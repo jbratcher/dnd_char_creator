@@ -5,6 +5,12 @@
 import { characterImages } from './characterImages.js';
 import { Classes, Races, Levels } from './info.js';
 
+// interface hacks
+
+// interface ArrayConstructor {
+// 	from(arrayLike: any, mapFn?, thisArg?): Array<any>;
+// }
+
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -125,11 +131,11 @@ const age = <HTMLInputElement>document.querySelector('#age');
 
 // Skill select
 
-const skill1 = <HTMLSelectElement>document.querySelector('skillsSelect1');
+const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
 
-const skill2 = <HTMLSelectElement>document.querySelector('skillsSelect2');
+const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
 
-const skill3 = <HTMLSelectElement>document.querySelector('skillsSelect3');
+const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
 
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
@@ -248,7 +254,7 @@ submitButton.addEventListener('click', (e) => {
   // Skills
   
   const selectedSkill1 = skill1.options[skill1.selectedIndex];
-  
+
   const selectedSkill2 = skill1.options[skill2.selectedIndex];
   
   const selectedSkill3 = skill1.options[skill3.selectedIndex];
@@ -281,6 +287,30 @@ submitButton.addEventListener('click', (e) => {
   const charCls = selectedCls.textContent.toLowerCase();
 
   alignmentPreview.textContent = selectedAlignment.textContent;
+  
+  // Skills preview section
+  
+  const skillsPreviewList = document.querySelector('#skillsPreviewList');
+  const skillsPreviewListItems = skillsPreviewList.children;
+  
+  const highlightSkills = () => {
+    
+    for(let i = 0; i < skillsPreviewListItems.length; i++) {
+
+      if(
+        (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill1.textContent.trim()
+        || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill2.textContent.trim()
+        || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
+        ) {
+        (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
+      } else {
+        (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
+      }
+    }
+    
+  }
+  
+  highlightSkills();
 
   // Get character preview image based on class, race, and gender
 
