@@ -229,7 +229,7 @@ submitButton.addEventListener('click', (e) => {
 
   e.preventDefault();
 
-  // Get info to create characte
+  // Get info to create character
 
   // General info
 
@@ -260,6 +260,10 @@ submitButton.addEventListener('click', (e) => {
   const selectedSkill3 = skill1.options[skill3.selectedIndex];
 
   // Post info from character creation to preview area
+  
+  currentLevel.textContent = '1';
+  
+  experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
 
   namePreview.textContent = name.value;
 
@@ -395,7 +399,8 @@ levelUpButton.addEventListener('click', (e) => {
   const charLevelUp = () => {
 
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-    experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
+    experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+    // proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
 
   }
 
@@ -414,7 +419,6 @@ levelUpButton.addEventListener('click', (e) => {
     }
     // add hitpoints to current total and display
     hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
-    console.log(`current hit points: ${currentHitPoints}\n Hit Points to Add: ${hitPointsToAdd}\n Total Hit points ${hitPointPreview.textContent}`)
   }
 
   addHitPoints();

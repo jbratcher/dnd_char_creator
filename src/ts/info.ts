@@ -106,26 +106,91 @@ export var Races = {
 }
 
 export var Levels = [
-
-  0,
-  300,
-  900,
-  2700,
-  6500,
-  14000,
-  23000,
-  34000,
-  48000,
-  64000,
-  85000,
-  100000,
-  120000,
-  140000,
-  165000,
-  195000,
-  225000,
-  265000,
-  305000,
-  335000
-
+    
+    {
+        experience: 0,
+        bonus: 0
+    },
+    {
+        experience: 300,
+        bonus: 2
+    },
+    {
+        experience: 900,
+        bonus: 2
+    },
+    {
+        experience: 2700,
+        bonus: 2
+    },
+    {
+        experience: 6500,
+        bonus: 2
+    },
+    
+    {
+        experience: 14000,
+        bonus: 3
+    },
+    {
+        experience: 23000,
+        bonus: 3
+    },
+    {
+        experience: 34000,
+        bonus: 3
+    },
+    {
+        experience: 48000,
+        bonus: 3
+    },
+    {
+        experience: 64000,
+        bonus: 4
+    },
+    {
+        experience: 85000,
+        bonus: 4
+    },
+    {
+        experience: 100000,
+        bonus: 4
+    },
+    {
+        experience: 120000,
+        bonus: 4
+    },
+    {
+        experience: 140000,
+        bonus: 5
+    },
+    {
+        experience: 165000,
+        bonus: 5
+    },
+    {
+        experience: 195000,
+        bonus: 5
+    },
+    {
+        experience: 225000,
+        bonus: 5
+    },
+    {
+        experience: 265000,
+        bonus: 6
+    },
+    {
+        experience: 265000,
+        bonus: 6
+    },
+    {
+        experience: 305000,
+        bonus: 6
+    },
+    {
+        experience: 335000,
+        bonus: 6
+    },
+  
 ]

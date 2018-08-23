@@ -142,7 +142,7 @@ var hitPointPreview = document.querySelector('#hitPoints');
 var submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', function (e) {
     e.preventDefault();
-    // Get info to create characte
+    // Get info to create character
     // General info
     var selectedRace = race.options[race.selectedIndex];
     var strength = rolledStrength.textContent;
@@ -158,6 +158,8 @@ submitButton.addEventListener('click', function (e) {
     var selectedSkill2 = skill1.options[skill2.selectedIndex];
     var selectedSkill3 = skill1.options[skill3.selectedIndex];
     // Post info from character creation to preview area
+    currentLevel.textContent = '1';
+    experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
     var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
@@ -239,7 +241,8 @@ levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
     var charLevelUp = function () {
         currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-        experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
+        experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+        // proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
     };
     charLevelUp();
     var addHitPoints = function () {
@@ -254,7 +257,6 @@ levelUpButton.addEventListener('click', function (e) {
         }
         // add hitpoints to current total and display
         hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
-        console.log("current hit points: " + currentHitPoints + "\n Hit Points to Add: " + hitPointsToAdd + "\n Total Hit points " + hitPointPreview.textContent);
     };
     addHitPoints();
 });
