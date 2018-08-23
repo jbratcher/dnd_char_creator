@@ -300,6 +300,8 @@ submitButton.addEventListener('click', (e) => {
   const highlightSkills = () => {
     
     for(let i = 0; i < skillsPreviewListItems.length; i++) {
+      
+      let proficiencyBonus = String(Levels[currentLevel.textContent].bonus)
 
       if(
         (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill1.textContent.trim()
@@ -307,6 +309,7 @@ submitButton.addEventListener('click', (e) => {
         || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
         ) {
         (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
+        (<HTMLElement>skillsPreviewListItems[i]).childNodes[5].textContent = proficiencyBonus;
       } else {
         (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
       }

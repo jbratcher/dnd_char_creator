@@ -180,10 +180,12 @@ submitButton.addEventListener('click', function (e) {
     var skillsPreviewListItems = skillsPreviewList.children;
     var highlightSkills = function () {
         for (var i = 0; i < skillsPreviewListItems.length; i++) {
+            var proficiencyBonus = String(Levels[currentLevel.textContent].bonus);
             if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
                 || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
                 || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
                 skillsPreviewListItems[i].style.color = 'green';
+                skillsPreviewListItems[i].childNodes[5].textContent = proficiencyBonus;
             }
             else {
                 skillsPreviewListItems[i].style.color = '#ccc';
