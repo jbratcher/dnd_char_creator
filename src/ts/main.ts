@@ -181,6 +181,18 @@ const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
 // Proficiencies Section
 
+// DOM Elements
+
+const selectedSkill1 = skill1.options[skill1.selectedIndex];
+
+const selectedSkill2 = skill1.options[skill2.selectedIndex];
+  
+const selectedSkill3 = skill1.options[skill3.selectedIndex];
+
+const skillsPreviewList = document.querySelector('#skillsPreviewList');
+
+const skillsPreviewListItems = skillsPreviewList.children;
+
 const acrobaticsSkill = <HTMLElement>document.querySelector('#acrobaticsSkill');
 
 const animalHandlingsSkill = <HTMLElement>document.querySelector('#animalHandlingsSkill');
@@ -214,6 +226,26 @@ const slieghtOfHandSkill = <HTMLElement>document.querySelector('#slieghtOfHandSk
 const stealthSkill = <HTMLElement>document.querySelector('#stealthSkill');
 
 const survivalSkill = <HTMLElement>document.querySelector('#survivalSkill');
+
+// Skill functions
+
+const highlightSkills = () => {
+    
+  for(let i = 0; i < skillsPreviewListItems.length; i++) {
+
+    if(
+      (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill1.textContent.trim()
+      || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill2.textContent.trim()
+      || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
+      ) {
+      (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
+      (<HTMLElement>skillsPreviewListItems[i]).childNodes[5].textContent = String(Levels[currentLevel.textContent].bonus);
+    } else {
+      (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
+    }
+  }
+  
+}
 
 // Combat section
 
@@ -263,7 +295,7 @@ submitButton.addEventListener('click', (e) => {
   
   currentLevel.textContent = '1';
   
-  experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
+  experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
 
   namePreview.textContent = name.value;
 
@@ -293,29 +325,6 @@ submitButton.addEventListener('click', (e) => {
   alignmentPreview.textContent = selectedAlignment.textContent;
   
   // Skills preview section
-  
-  const skillsPreviewList = document.querySelector('#skillsPreviewList');
-  const skillsPreviewListItems = skillsPreviewList.children;
-  
-  const highlightSkills = () => {
-    
-    for(let i = 0; i < skillsPreviewListItems.length; i++) {
-      
-      let proficiencyBonus = String(Levels[currentLevel.textContent].bonus)
-
-      if(
-        (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill1.textContent.trim()
-        || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill2.textContent.trim()
-        || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
-        ) {
-        (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
-        (<HTMLElement>skillsPreviewListItems[i]).childNodes[5].textContent = proficiencyBonus;
-      } else {
-        (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
-      }
-    }
-    
-  }
   
   highlightSkills();
 
@@ -403,7 +412,6 @@ levelUpButton.addEventListener('click', (e) => {
 
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
     experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
-    // proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
 
   }
 
@@ -425,6 +433,8 @@ levelUpButton.addEventListener('click', (e) => {
   }
 
   addHitPoints();
+  
+  highlightSkills();
 
 });
 
