@@ -117,6 +117,12 @@ var clsPreview = document.querySelector('#clsPreview');
 var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
 // Proficiencies Section
+// DOM Elements
+var selectedSkill1 = skill1.options[skill1.selectedIndex];
+var selectedSkill2 = skill1.options[skill2.selectedIndex];
+var selectedSkill3 = skill1.options[skill3.selectedIndex];
+var skillsPreviewList = document.querySelector('#skillsPreviewList');
+var skillsPreviewListItems = skillsPreviewList.children;
 var acrobaticsSkill = document.querySelector('#acrobaticsSkill');
 var animalHandlingsSkill = document.querySelector('#animalHandlingsSkill');
 var arcanaSkill = document.querySelector('#arcanaSkill');
@@ -134,6 +140,20 @@ var religionSkill = document.querySelector('#religionSkill');
 var slieghtOfHandSkill = document.querySelector('#slieghtOfHandSkill');
 var stealthSkill = document.querySelector('#stealthSkill');
 var survivalSkill = document.querySelector('#survivalSkill');
+// Skill functions
+var highlightSkills = function () {
+    for (var i = 0; i < skillsPreviewListItems.length; i++) {
+        if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
+            || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
+            || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
+            skillsPreviewListItems[i].style.color = 'green';
+            skillsPreviewListItems[i].childNodes[5].textContent = String(Levels[currentLevel.textContent].bonus);
+        }
+        else {
+            skillsPreviewListItems[i].style.color = '#ccc';
+        }
+    }
+};
 // Combat section
 var hitPointPreview = document.querySelector('#hitPoints');
 ////////////////////////////////////////////////////////////
@@ -159,7 +179,7 @@ submitButton.addEventListener('click', function (e) {
     var selectedSkill3 = skill1.options[skill3.selectedIndex];
     // Post info from character creation to preview area
     currentLevel.textContent = '1';
-    experienceNextLevel.textContent = String(Levels[currentLevel.textContent]);
+    experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
     var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
@@ -176,20 +196,6 @@ submitButton.addEventListener('click', function (e) {
     var charCls = selectedCls.textContent.toLowerCase();
     alignmentPreview.textContent = selectedAlignment.textContent;
     // Skills preview section
-    var skillsPreviewList = document.querySelector('#skillsPreviewList');
-    var skillsPreviewListItems = skillsPreviewList.children;
-    var highlightSkills = function () {
-        for (var i = 0; i < skillsPreviewListItems.length; i++) {
-            if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
-                || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
-                || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
-                skillsPreviewListItems[i].style.color = 'green';
-            }
-            else {
-                skillsPreviewListItems[i].style.color = '#ccc';
-            }
-        }
-    };
     highlightSkills();
     // Get character preview image based on class, race, and gender
     var charImageSet = function () {
@@ -242,7 +248,6 @@ levelUpButton.addEventListener('click', function (e) {
     var charLevelUp = function () {
         currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
         experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
-        // proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
     };
     charLevelUp();
     var addHitPoints = function () {
@@ -259,6 +264,7 @@ levelUpButton.addEventListener('click', function (e) {
         hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
     };
     addHitPoints();
+    highlightSkills();
 });
 var addNewExperienceButton = document.querySelector('#addExp');
 addNewExperienceButton.addEventListener('click', function (e) {
