@@ -6,7 +6,7 @@ Character creator for an openSRD-based roleplaying game.  Puts together all the 
 
 ### Version
 
-0.0.5
+0.0.6
 
 ## Install Dependencies
 
@@ -82,6 +82,7 @@ gulp clean:dist
 * Calculates hit points, armor class, initiative and speed
 * Calculates hit point gain on level up
 * Add experience and keep a running tottal
+* Highlights chosen skills and displays calculated proficiency
 
 ## Future Features:
 
@@ -96,10 +97,13 @@ gulp clean:dist
 
 #### Change Log
 
+###### 0.0.6
+
+* Added proficiency bonus logic and display to skill preview
+
 ###### 0.0.5
 
 * Added logic for level, experience and hitpoints
-
 
 ###### 0.0.4
 
