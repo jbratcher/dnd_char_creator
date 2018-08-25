@@ -3,10 +3,6 @@
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
 import { Classes, Races, Levels } from './info.js';
-// interface hacks
-// interface ArrayConstructor {
-// 	from(arrayLike: any, mapFn?, thisArg?): Array<any>;
-// }
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -116,6 +112,7 @@ var charismaPreview = document.querySelector('#charismaPreview');
 var clsPreview = document.querySelector('#clsPreview');
 var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
+var proficiencyBonus = document.querySelector('#proficiencyBonusPreview');
 // Proficiencies Section
 // DOM Elements
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -195,26 +192,8 @@ submitButton.addEventListener('click', function (e) {
     clsPreview.textContent = selectedCls.textContent;
     var charCls = selectedCls.textContent.toLowerCase();
     alignmentPreview.textContent = selectedAlignment.textContent;
+    proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
     // Skills preview section
-<<<<<<< HEAD
-    var skillsPreviewList = document.querySelector('#skillsPreviewList');
-    var skillsPreviewListItems = skillsPreviewList.children;
-    var highlightSkills = function () {
-        for (var i = 0; i < skillsPreviewListItems.length; i++) {
-            var proficiencyBonus = String(Levels[currentLevel.textContent].bonus);
-            if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
-                || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
-                || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
-                skillsPreviewListItems[i].style.color = 'green';
-                skillsPreviewListItems[i].childNodes[5].textContent = proficiencyBonus;
-            }
-            else {
-                skillsPreviewListItems[i].style.color = '#ccc';
-            }
-        }
-    };
-=======
->>>>>>> proficiencyBonus
     highlightSkills();
     // Get character preview image based on class, race, and gender
     var charImageSet = function () {
@@ -283,6 +262,8 @@ levelUpButton.addEventListener('click', function (e) {
         hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
     };
     addHitPoints();
+    var addProficiencyBonus = function () { return proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus); };
+    addProficiencyBonus();
     highlightSkills();
 });
 var addNewExperienceButton = document.querySelector('#addExp');

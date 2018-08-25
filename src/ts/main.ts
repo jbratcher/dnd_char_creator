@@ -5,12 +5,6 @@
 import { characterImages } from './characterImages.js';
 import { Classes, Races, Levels } from './info.js';
 
-// interface hacks
-
-// interface ArrayConstructor {
-// 	from(arrayLike: any, mapFn?, thisArg?): Array<any>;
-// }
-
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -179,6 +173,8 @@ const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview'
 
 const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
+const proficiencyBonus = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
+
 // Proficiencies Section
 
 // DOM Elements
@@ -324,6 +320,8 @@ submitButton.addEventListener('click', (e) => {
 
   alignmentPreview.textContent = selectedAlignment.textContent;
   
+  proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
+  
   // Skills preview section
   
   highlightSkills();
@@ -433,6 +431,10 @@ levelUpButton.addEventListener('click', (e) => {
   }
 
   addHitPoints();
+  
+  const addProficiencyBonus = () => proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
+  
+  addProficiencyBonus();
   
   highlightSkills();
 
