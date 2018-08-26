@@ -13,16 +13,18 @@ const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min +
 
 const randomBoolean = () => Math.random() >= 0.5;  // Get a true or false value
 
-const abilityScore = () => Math.floor(Math.random() * ((18 - 3) + 1)) + 3;
+const rollAbilityScore = () => Math.floor(Math.random() * ((18 - 3) + 1)) + 3;
 
 const setToMinMax = score => score > 18 ? 18 : score < 3 ? 3 : score;
+
+const singleWord = /(\w+)/;
 
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
 
 const setScore = (scoreDisplay) => {
-  let score = abilityScore();
+  let score = rollAbilityScore();
   setToMinMax(score);
   scoreDisplay.textContent = score.toString();
 }
@@ -47,11 +49,10 @@ const getCharacterAttributes = (charCls, charRace, charGender) => {
   return characterImages[charRace][charCls][charGender];
 }
 
-const getAbilityScoreModifier = (ability) => {
+const getAbilityScoreModifier = (abilityScore) => {
 
-  let score = ability;
   let mod = 0;
-  mod = Math.floor((score / 2) - 5)
+  mod = Math.floor((abilityScore / 2) - 5)
 
   return mod;
 
@@ -171,6 +172,10 @@ const genderPreview = <HTMLInputElement>document.querySelector('#genderPreview')
 
 const agePreview = <HTMLElement>document.querySelector('#agePreview');
 
+let abilityScoreList = document.querySelector('#abilityScoreList');
+
+let abilityScoreListItems = abilityScoreList.children;
+
 const strengthPreview = <HTMLElement>document.querySelector('#strengthPreview');
 
 const dexerityPreview = <HTMLElement>document.querySelector('#dexerityPreview');
@@ -243,6 +248,23 @@ const survivalSkill = <HTMLElement>document.querySelector('#survivalSkill');
 
 // Skill functions
 
+const lookupAbilityScore = (ability) => {
+  
+  abilityScoreList = document.querySelector('#abilityScoreList');
+  abilityScoreListItems = abilityScoreList.children;
+  let abilityScore;
+
+    for(let i = 0; i < abilityScoreListItems.length; i++) {
+      let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      if(string.toLowerCase() === ability) {
+        let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+        return abilityScore;
+      }
+            
+    }
+  
+}
+
 const highlightSkills = () => {
   
   selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -259,8 +281,12 @@ const highlightSkills = () => {
       || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill2.textContent.trim()
       || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
       ) {
-      (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
-      appendSigntoValue(proficiencyBonus, skillsPreviewListItems[i].childNodes[5]);
+        (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
+        let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));  // get ability that modifies skill
+        let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());  // get ability score for that skill
+        let abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+        let totalMod = abilityScoreMod + proficiencyBonus;
+        appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
     } else {
       (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
     }

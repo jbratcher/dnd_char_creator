@@ -8,13 +8,14 @@ import { Classes, Races, Levels } from './info.js';
 ////////////////////////////////////////
 var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
 var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a true or false value
-var abilityScore = function () { return Math.floor(Math.random() * ((18 - 3) + 1)) + 3; };
+var rollAbilityScore = function () { return Math.floor(Math.random() * ((18 - 3) + 1)) + 3; };
 var setToMinMax = function (score) { return score > 18 ? 18 : score < 3 ? 3 : score; };
+var singleWord = /(\w+)/;
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
 var setScore = function (scoreDisplay) {
-    var score = abilityScore();
+    var score = rollAbilityScore();
     setToMinMax(score);
     scoreDisplay.textContent = score.toString();
 };
@@ -36,10 +37,9 @@ var getCharacterAttributes = function (charCls, charRace, charGender) {
     }
     return characterImages[charRace][charCls][charGender];
 };
-var getAbilityScoreModifier = function (ability) {
-    var score = ability;
+var getAbilityScoreModifier = function (abilityScore) {
     var mod = 0;
-    mod = Math.floor((score / 2) - 5);
+    mod = Math.floor((abilityScore / 2) - 5);
     return mod;
 };
 // Append sign to value
@@ -118,6 +118,8 @@ var namePreview = document.querySelector('#namePreview');
 var racePreview = document.querySelector('#racePreview');
 var genderPreview = document.querySelector('#genderPreview');
 var agePreview = document.querySelector('#agePreview');
+var abilityScoreList = document.querySelector('#abilityScoreList');
+var abilityScoreListItems = abilityScoreList.children;
 var strengthPreview = document.querySelector('#strengthPreview');
 var dexerityPreview = document.querySelector('#dexerityPreview');
 var constitutionPreview = document.querySelector('#constitutionPreview');
@@ -154,6 +156,18 @@ var slieghtOfHandSkill = document.querySelector('#slieghtOfHandSkill');
 var stealthSkill = document.querySelector('#stealthSkill');
 var survivalSkill = document.querySelector('#survivalSkill');
 // Skill functions
+var lookupAbilityScore = function (ability) {
+    abilityScoreList = document.querySelector('#abilityScoreList');
+    abilityScoreListItems = abilityScoreList.children;
+    var abilityScore;
+    for (var i = 0; i < abilityScoreListItems.length; i++) {
+        var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+        if (string.toLowerCase() === ability) {
+            var abilityScore_1 = abilityScoreListItems[i].childNodes[3].textContent;
+            return abilityScore_1;
+        }
+    }
+};
 var highlightSkills = function () {
     selectedSkill1 = skill1.options[skill1.selectedIndex];
     selectedSkill2 = skill1.options[skill2.selectedIndex];
@@ -165,7 +179,11 @@ var highlightSkills = function () {
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
             skillsPreviewListItems[i].style.color = 'green';
-            appendSigntoValue(proficiencyBonus, skillsPreviewListItems[i].childNodes[5]);
+            var skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent)); // get ability that modifies skill
+            var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase()); // get ability score for that skill
+            var abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+            var totalMod = abilityScoreMod + proficiencyBonus;
+            appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
         }
         else {
             skillsPreviewListItems[i].style.color = '#ccc';

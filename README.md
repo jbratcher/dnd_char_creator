@@ -81,15 +81,14 @@ gulp clean:dist
 * Generates character preview based on user inputs
 * Calculates hit points, armor class, initiative and speed
 * Calculates hit point gain on level up
-* Add experience and keep a running tottal
-* Highlights chosen skills and displays calculated proficiency
+* Add experience and keeps a running tottal
+* Highlights chosen skills and displays calculated bonus from proficiency and ability score modifiers
 
 ## Future Features:
 
-* API for stats
-* Better sourcing for images
-* Based data on openSRD
-* Display abilities, bonuses, etc based on user input
+* Display abilities, racial, and class specific skills
+* Add attack roll functionality
+* 
 
 ## Known "bugs"
 
@@ -100,6 +99,7 @@ gulp clean:dist
 ###### 0.0.6
 
 * Added proficiency bonus logic and display to skill preview
+* Added skill modifier logic to modify skill bonuses
 
 ###### 0.0.5
 

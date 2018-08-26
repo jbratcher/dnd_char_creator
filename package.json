@@ -1,6 +1,6 @@
 {
   "name": "openSRD_character_creator",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "openSRD based character creation tool",
   "main": "main.js",
   "scripts": {
