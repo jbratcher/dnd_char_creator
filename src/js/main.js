@@ -42,6 +42,21 @@ var getAbilityScoreModifier = function (ability) {
     mod = Math.floor((score / 2) - 5);
     return mod;
 };
+// Append sign to value
+var appendSigntoValue = function (value, node) {
+    var sign;
+    if (value > 0) {
+        sign = "+";
+    }
+    else if (value < 0) {
+        sign = "-";
+    }
+    else {
+        sign = "";
+    }
+    value = Math.abs(value);
+    node.textContent = sign + " " + value;
+};
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
@@ -112,7 +127,8 @@ var charismaPreview = document.querySelector('#charismaPreview');
 var clsPreview = document.querySelector('#clsPreview');
 var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
-var proficiencyBonus = document.querySelector('#proficiencyBonusPreview');
+var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
+var proficiencyBonus = 0;
 // Proficiencies Section
 // DOM Elements
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -139,12 +155,17 @@ var stealthSkill = document.querySelector('#stealthSkill');
 var survivalSkill = document.querySelector('#survivalSkill');
 // Skill functions
 var highlightSkills = function () {
+    selectedSkill1 = skill1.options[skill1.selectedIndex];
+    selectedSkill2 = skill1.options[skill2.selectedIndex];
+    selectedSkill3 = skill1.options[skill3.selectedIndex];
+    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     for (var i = 0; i < skillsPreviewListItems.length; i++) {
+        skillsPreviewListItems[i].childNodes[5].textContent = "-";
         if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
             skillsPreviewListItems[i].style.color = 'green';
-            skillsPreviewListItems[i].childNodes[5].textContent = String(Levels[currentLevel.textContent].bonus);
+            appendSigntoValue(proficiencyBonus, skillsPreviewListItems[i].childNodes[5]);
         }
         else {
             skillsPreviewListItems[i].style.color = '#ccc';
@@ -177,6 +198,7 @@ submitButton.addEventListener('click', function (e) {
     // Post info from character creation to preview area
     currentLevel.textContent = '1';
     experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
     var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
@@ -192,9 +214,10 @@ submitButton.addEventListener('click', function (e) {
     clsPreview.textContent = selectedCls.textContent;
     var charCls = selectedCls.textContent.toLowerCase();
     alignmentPreview.textContent = selectedAlignment.textContent;
-    proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
+    proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
     // Skills preview section
     highlightSkills();
+    appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
     // Get character preview image based on class, race, and gender
     var charImageSet = function () {
         var characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
@@ -242,6 +265,7 @@ levelUpButton.addEventListener('click', function (e) {
     var constitution = rolledConstitition.textContent;
     var selectedCls = cls.options[cls.selectedIndex];
     var charCls = selectedCls.textContent.toLowerCase();
+    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     e.preventDefault();
     var charLevelUp = function () {
         currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
@@ -262,8 +286,9 @@ levelUpButton.addEventListener('click', function (e) {
         hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
     };
     addHitPoints();
-    var addProficiencyBonus = function () { return proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus); };
+    var addProficiencyBonus = function () { return proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus); };
     addProficiencyBonus();
+    appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
     highlightSkills();
 });
 var addNewExperienceButton = document.querySelector('#addExp');

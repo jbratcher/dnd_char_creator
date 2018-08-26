@@ -57,6 +57,22 @@ const getAbilityScoreModifier = (ability) => {
 
 }
 
+// Append sign to value
+
+const appendSigntoValue = (value, node) => {
+  let sign;
+  if(value > 0) {
+    sign = "+";
+  } else if(value < 0) {
+    sign = "-";
+  } else {
+    sign = "";
+  }
+  value = Math.abs(value);
+  node.textContent = `${sign} ${value}`
+  
+}
+
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
@@ -173,17 +189,19 @@ const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview'
 
 const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
-const proficiencyBonus = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
+const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
+
+let proficiencyBonus = 0;
 
 // Proficiencies Section
 
 // DOM Elements
 
-const selectedSkill1 = skill1.options[skill1.selectedIndex];
+let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
-const selectedSkill2 = skill1.options[skill2.selectedIndex];
+let selectedSkill2 = skill1.options[skill2.selectedIndex];
   
-const selectedSkill3 = skill1.options[skill3.selectedIndex];
+let selectedSkill3 = skill1.options[skill3.selectedIndex];
 
 const skillsPreviewList = document.querySelector('#skillsPreviewList');
 
@@ -226,8 +244,15 @@ const survivalSkill = <HTMLElement>document.querySelector('#survivalSkill');
 // Skill functions
 
 const highlightSkills = () => {
+  
+  selectedSkill1 = skill1.options[skill1.selectedIndex];
+  selectedSkill2 = skill1.options[skill2.selectedIndex];
+  selectedSkill3 = skill1.options[skill3.selectedIndex];
+  proficiencyBonus = Levels[currentLevel.textContent].bonus;
     
   for(let i = 0; i < skillsPreviewListItems.length; i++) {
+    
+    skillsPreviewListItems[i].childNodes[5].textContent = "-";
 
     if(
       (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill1.textContent.trim()
@@ -235,7 +260,7 @@ const highlightSkills = () => {
       || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
       ) {
       (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
-      (<HTMLElement>skillsPreviewListItems[i]).childNodes[5].textContent = String(Levels[currentLevel.textContent].bonus);
+      appendSigntoValue(proficiencyBonus, skillsPreviewListItems[i].childNodes[5]);
     } else {
       (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
     }
@@ -292,6 +317,8 @@ submitButton.addEventListener('click', (e) => {
   currentLevel.textContent = '1';
   
   experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+  
+  proficiencyBonus = Levels[currentLevel.textContent].bonus;
 
   namePreview.textContent = name.value;
 
@@ -320,11 +347,13 @@ submitButton.addEventListener('click', (e) => {
 
   alignmentPreview.textContent = selectedAlignment.textContent;
   
-  proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
+  proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
   
   // Skills preview section
   
   highlightSkills();
+  
+  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 
   // Get character preview image based on class, race, and gender
 
@@ -391,7 +420,7 @@ submitButton.addEventListener('click', (e) => {
   }
 
   baseSpeed();
-
+  
 });
 
 // Level advancement button submit
@@ -403,6 +432,7 @@ levelUpButton.addEventListener('click', (e) => {
   const constitution = rolledConstitition.textContent;
   const selectedCls = cls.options[cls.selectedIndex];
   const charCls = selectedCls.textContent.toLowerCase();
+  proficiencyBonus = Levels[currentLevel.textContent].bonus;
 
   e.preventDefault();
 
@@ -432,12 +462,14 @@ levelUpButton.addEventListener('click', (e) => {
 
   addHitPoints();
   
-  const addProficiencyBonus = () => proficiencyBonus.textContent = String(Levels[currentLevel.textContent].bonus);
+  const addProficiencyBonus = () => proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
   
   addProficiencyBonus();
+
+  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
   
   highlightSkills();
-
+  
 });
 
 const addNewExperienceButton = document.querySelector('#addExp');
