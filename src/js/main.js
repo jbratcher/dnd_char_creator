@@ -97,10 +97,15 @@ var currentExperience = document.querySelector('#currentExperience');
 var experienceNextLevel = document.querySelector('#experienceNextLevel');
 var addNewExperienceInput = document.querySelector('#addNewExperience');
 // Info section
+// General
 var namePreview = document.querySelector('#namePreview');
 var racePreview = document.querySelector('#racePreview');
 var genderPreview = document.querySelector('#genderPreview');
 var agePreview = document.querySelector('#agePreview');
+var clsPreview = document.querySelector('#clsPreview');
+var alignmentPreview = document.querySelector('#alignmentPreview');
+var characterImg = document.querySelector('#characterImg');
+// Ability scores
 var abilityScoreList = document.querySelector('#abilityScoreList');
 var abilityScoreListItems = abilityScoreList.children;
 var strengthPreview = document.querySelector('#strengthPreview');
@@ -109,13 +114,9 @@ var constitutionPreview = document.querySelector('#constitutionPreview');
 var wisdomPreview = document.querySelector('#wisdomPreview');
 var intelligencePreview = document.querySelector('#intelligencePreview');
 var charismaPreview = document.querySelector('#charismaPreview');
-var clsPreview = document.querySelector('#clsPreview');
-var alignmentPreview = document.querySelector('#alignmentPreview');
-var characterImg = document.querySelector('#characterImg');
 var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
 var proficiencyBonus = 0;
-// Proficiencies Section
-// DOM Elements
+// Skills
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
 var selectedSkill2 = skill1.options[skill2.selectedIndex];
 var selectedSkill3 = skill1.options[skill3.selectedIndex];

@@ -148,6 +148,8 @@ const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewE
 
 // Info section
 
+// General
+
 const namePreview = document.querySelector('#namePreview');
 
 const racePreview = <HTMLElement>document.querySelector('#racePreview');
@@ -155,6 +157,14 @@ const racePreview = <HTMLElement>document.querySelector('#racePreview');
 const genderPreview = <HTMLInputElement>document.querySelector('#genderPreview');
 
 const agePreview = <HTMLElement>document.querySelector('#agePreview');
+
+const clsPreview = <HTMLElement>document.querySelector('#clsPreview');
+
+const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview');
+
+const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
+
+// Ability scores
 
 let abilityScoreList = document.querySelector('#abilityScoreList');
 
@@ -172,19 +182,11 @@ const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePr
 
 const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
 
-const clsPreview = <HTMLElement>document.querySelector('#clsPreview');
-
-const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview');
-
-const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
-
 const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
 
 let proficiencyBonus = 0;
 
-// Proficiencies Section
-
-// DOM Elements
+// Skills
 
 let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
