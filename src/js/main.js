@@ -11,49 +11,32 @@ var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a true 
 var rollAbilityScore = function () { return Math.floor(Math.random() * ((18 - 3) + 1)) + 3; };
 var setToMinMax = function (score) { return score > 18 ? 18 : score < 3 ? 3 : score; };
 var singleWord = /(\w+)/;
+var modifier;
+var sign;
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
 var setScore = function (scoreDisplay) {
     var score = rollAbilityScore();
     setToMinMax(score);
-    scoreDisplay.textContent = score.toString();
+    scoreDisplay.textContent = String(score);
 };
 var getCharacterImage = function (genderedImages) {
     var randomIndex = randomIntFromRange(0, (genderedImages.length - 1));
     return genderedImages[randomIndex];
 };
 // Get Character Attributes to set preview image
-// TODO: use attributes to set other output
 var getCharacterAttributes = function (charCls, charRace, charGender) {
     if (charGender !== 'male' && charGender !== "female") {
         var gender_1 = randomBoolean();
-        if (gender_1) {
-            charGender = "male";
-        }
-        else if (!gender_1) {
-            charGender = "female";
-        }
+        gender_1 ? charGender = "male" : charGender = "female";
     }
     return characterImages[charRace][charCls][charGender];
 };
-var getAbilityScoreModifier = function (abilityScore) {
-    var mod = 0;
-    mod = Math.floor((abilityScore / 2) - 5);
-    return mod;
-};
+var getAbilityScoreModifier = function (abilityScore) { return modifier = Math.floor((abilityScore / 2) - 5); };
 // Append sign to value
 var appendSigntoValue = function (value, node) {
-    var sign;
-    if (value > 0) {
-        sign = "+";
-    }
-    else if (value < 0) {
-        sign = "-";
-    }
-    else {
-        sign = "";
-    }
+    value > 0 ? sign = "+" : sign = "-";
     value = Math.abs(value);
     node.textContent = sign + " " + value;
 };

@@ -19,59 +19,43 @@ const setToMinMax = score => score > 18 ? 18 : score < 3 ? 3 : score;
 
 const singleWord = /(\w+)/;
 
+let modifier: number;
+
+let sign: string;
+
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
 
 const setScore = (scoreDisplay) => {
-  let score = rollAbilityScore();
+  let score: number = rollAbilityScore();
   setToMinMax(score);
-  scoreDisplay.textContent = score.toString();
+  scoreDisplay.textContent = String(score);
 }
 
 const getCharacterImage = (genderedImages) => {
-  let randomIndex = randomIntFromRange(0, (genderedImages.length-1));
+  let randomIndex: number = randomIntFromRange(0, (genderedImages.length-1));
   return genderedImages[randomIndex];
 }
 
 // Get Character Attributes to set preview image
-// TODO: use attributes to set other output
 
 const getCharacterAttributes = (charCls, charRace, charGender) => {
   if(charGender !== 'male' && charGender !== "female") {
     let gender = randomBoolean();
-    if(gender) {
-      charGender = "male";
-    } else if(!gender) {
-      charGender = "female";
-    }
+    gender ? charGender = "male" : charGender = "female";
   }
   return characterImages[charRace][charCls][charGender];
 }
 
-const getAbilityScoreModifier = (abilityScore) => {
-
-  let mod = 0;
-  mod = Math.floor((abilityScore / 2) - 5)
-
-  return mod;
-
-}
-
+const getAbilityScoreModifier = abilityScore => modifier = Math.floor((abilityScore / 2) - 5);
+  
 // Append sign to value
 
 const appendSigntoValue = (value, node) => {
-  let sign;
-  if(value > 0) {
-    sign = "+";
-  } else if(value < 0) {
-    sign = "-";
-  } else {
-    sign = "";
-  }
+  value > 0 ? sign = "+" : sign = "-";
   value = Math.abs(value);
-  node.textContent = `${sign} ${value}`
-  
+  node.textContent = `${sign} ${value}`;
 }
 
 ////////////////////////////////////////
