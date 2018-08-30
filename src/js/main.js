@@ -40,6 +40,11 @@ var appendSigntoValue = function (value, node) {
     value = Math.abs(value);
     node.textContent = sign + " " + value;
 };
+// set ability modifier to element helper
+var setAbilityModifierToElement = function (ability, modFunction, elementAndMethod) {
+    var modifier = modFunction;
+    elementAndMethod = modifier;
+};
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
@@ -96,8 +101,10 @@ var currentLevel = document.querySelector('#currentLevel');
 var currentExperience = document.querySelector('#currentExperience');
 var experienceNextLevel = document.querySelector('#experienceNextLevel');
 var addNewExperienceInput = document.querySelector('#addNewExperience');
-// Info section
-// General
+////////////////////////////////////////////////////////////
+// General information
+////////////////////////////////////////////////////////////
+// General variables
 var namePreview = document.querySelector('#namePreview');
 var racePreview = document.querySelector('#racePreview');
 var genderPreview = document.querySelector('#genderPreview');
@@ -105,7 +112,49 @@ var agePreview = document.querySelector('#agePreview');
 var clsPreview = document.querySelector('#clsPreview');
 var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
-// Ability scores
+var selectedAlignment = alignment.options[alignment.selectedIndex];
+var selectedCls = cls.options[cls.selectedIndex];
+var charCls = selectedCls.textContent.toLowerCase();
+var selectedRace = race.options[race.selectedIndex];
+var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+var charGender = gender.value.toLowerCase();
+var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
+var proficiencyBonus = 0;
+// General buttons
+var levelUpButton = document.querySelector('#levelUpButton');
+var addNewExperienceButton = document.querySelector('#addExp');
+// General functions
+var charImageSet = function () {
+    var characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
+    characterImg.src = getCharacterImage(characterAttributes);
+};
+var charLevelUp = function () {
+    currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
+    experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+};
+var addHitPoints = function () {
+    var currentHitPoints = Number(hitPointPreview.textContent);
+    var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
+    modifier = getAbilityScoreModifier(constitution);
+    var hitPointsToAdd = (rolledHitPoints + modifier);
+    if (rolledHitPoints + modifier <= 0) {
+        hitPointsToAdd = 1;
+    }
+    hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
+};
+var updateProficiencyBonus = function () {
+    proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
+    appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
+};
+var addExp = function () {
+    var currentExpNum = Number(currentExperience.textContent);
+    var newExpNum = Number(addNewExperienceInput.value);
+    currentExperience.textContent = String(currentExpNum + newExpNum);
+};
+////////////////////////////////////////////////////////////
+// Ability Scores
+////////////////////////////////////////////////////////////
+// Ability score variables
 var abilityScoreList = document.querySelector('#abilityScoreList');
 var abilityScoreListItems = abilityScoreList.children;
 var strengthPreview = document.querySelector('#strengthPreview');
@@ -114,9 +163,17 @@ var constitutionPreview = document.querySelector('#constitutionPreview');
 var wisdomPreview = document.querySelector('#wisdomPreview');
 var intelligencePreview = document.querySelector('#intelligencePreview');
 var charismaPreview = document.querySelector('#charismaPreview');
-var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
-var proficiencyBonus = 0;
+var strength = rolledStrength.textContent;
+var dexerity = rolledDexerity.textContent;
+var constitution = rolledConstitition.textContent;
+var intelligence = rolledIntelligence.textContent;
+var wisdom = rolledWisdom.textContent;
+var charisma = rolledCharisma.textContent;
+// Ability Score functions
+////////////////////////////////////////////////////////////
 // Skills
+////////////////////////////////////////////////////////////
+// Skill variables
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
 var selectedSkill2 = skill1.options[skill2.selectedIndex];
 var selectedSkill3 = skill1.options[skill3.selectedIndex];
@@ -141,9 +198,11 @@ var stealthSkill = document.querySelector('#stealthSkill');
 var survivalSkill = document.querySelector('#survivalSkill');
 // Skill functions
 var lookupAbilityScore = function (ability) {
+    // Get current values of required info
     abilityScoreList = document.querySelector('#abilityScoreList');
     abilityScoreListItems = abilityScoreList.children;
     var abilityScore;
+    // if abilityScore matches abilityScore in list return number value of abilityScore
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         if (string.toLowerCase() === ability) {
@@ -153,59 +212,88 @@ var lookupAbilityScore = function (ability) {
     }
 };
 var highlightSkills = function () {
+    // Get current values of required info
     selectedSkill1 = skill1.options[skill1.selectedIndex];
     selectedSkill2 = skill1.options[skill2.selectedIndex];
     selectedSkill3 = skill1.options[skill3.selectedIndex];
     proficiencyBonus = Levels[currentLevel.textContent].bonus;
+    // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present  
     for (var i = 0; i < skillsPreviewListItems.length; i++) {
+        // reset modifier node to '-'
         skillsPreviewListItems[i].childNodes[5].textContent = "-";
         if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
             skillsPreviewListItems[i].style.color = 'green';
-            var skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent)); // get ability that modifies skill
-            var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase()); // get ability score for that skill
+            // get ability that modifies skill
+            var skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
+            // get ability score for that skill
+            var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
             var abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
             var totalMod = abilityScoreMod + proficiencyBonus;
             appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
         }
         else {
+            // if no match dim selectiong
             skillsPreviewListItems[i].style.color = '#ccc';
         }
     }
 };
-// Combat section
+////////////////////////////////////////////////////////////
+// Combat
+////////////////////////////////////////////////////////////
+// Combat variables
 var hitPointPreview = document.querySelector('#hitPoints');
+var armorClassPreview = document.querySelector('#armorClass');
+var initiativeModPreview = document.querySelector('#initiative');
+var speedPreview = document.querySelector('#speed');
+// Combat functions
+var hitPoints = function () {
+    // 1st level is max hit points + constiution modifier
+    var modifier = getAbilityScoreModifier(Number(constitution));
+    var hitpoints = (Classes[charCls].hitdie + modifier);
+    hitPointPreview.textContent = String(hitpoints);
+};
+var armorClass = function () {
+    var base = 10;
+    var dexMod = getAbilityScoreModifier(Number(dexerity));
+    var armorMod = 0;
+    var ac = String(base + dexMod + armorMod);
+    armorClassPreview.textContent = ac;
+};
+var initiativeMod = function () {
+    var dexMod = getAbilityScoreModifier(Number(dexerity));
+    initiativeModPreview.textContent = String(dexMod);
+};
+var baseSpeed = function () {
+    speedPreview.textContent = Races[charRace].speed;
+};
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
 var submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', function (e) {
     e.preventDefault();
-    // Get info to create character
-    // General info
-    var selectedRace = race.options[race.selectedIndex];
-    var strength = rolledStrength.textContent;
-    var dexerity = rolledDexerity.textContent;
-    var constitution = rolledConstitition.textContent;
-    var intelligence = rolledIntelligence.textContent;
-    var wisdom = rolledWisdom.textContent;
-    var charisma = rolledCharisma.textContent;
-    var selectedAlignment = alignment.options[alignment.selectedIndex];
-    var selectedCls = cls.options[cls.selectedIndex];
-    // Skills
-    var selectedSkill1 = skill1.options[skill1.selectedIndex];
-    var selectedSkill2 = skill1.options[skill2.selectedIndex];
-    var selectedSkill3 = skill1.options[skill3.selectedIndex];
+    // Get current state of require info
+    selectedRace = race.options[race.selectedIndex];
+    strength = rolledStrength.textContent;
+    dexerity = rolledDexerity.textContent;
+    constitution = rolledConstitition.textContent;
+    intelligence = rolledIntelligence.textContent;
+    wisdom = rolledWisdom.textContent;
+    charisma = rolledCharisma.textContent;
+    selectedAlignment = alignment.options[alignment.selectedIndex];
+    selectedCls = cls.options[cls.selectedIndex];
+    charCls = selectedCls.textContent.toLowerCase();
+    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    charGender = gender.value.toLowerCase();
     // Post info from character creation to preview area
     currentLevel.textContent = '1';
     experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
     proficiencyBonus = Levels[currentLevel.textContent].bonus;
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
-    var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
     genderPreview.textContent = gender.value;
-    var charGender = gender.value.toLowerCase();
     agePreview.textContent = age.value;
     strengthPreview.textContent = strength;
     dexerityPreview.textContent = dexerity;
@@ -214,93 +302,36 @@ submitButton.addEventListener('click', function (e) {
     intelligencePreview.textContent = intelligence;
     charismaPreview.textContent = charisma;
     clsPreview.textContent = selectedCls.textContent;
-    var charCls = selectedCls.textContent.toLowerCase();
     alignmentPreview.textContent = selectedAlignment.textContent;
-    proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
-    // Skills preview section
+    updateProficiencyBonus();
+    // Highlight selected skills and append skill modifier
     highlightSkills();
-    appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
     // Get character preview image based on class, race, and gender
-    var charImageSet = function () {
-        var characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
-        characterImg.src = getCharacterImage(characterAttributes);
-    };
     charImageSet();
-    // Proficiencies section
-    // Add logic for Proficiencies section
-    // Combat Section
-    var hitPoints = function () {
-        // 1st level is max hit points + constiution modifier
-        var mod = getAbilityScoreModifier(Number(constitution));
-        var hitpoints = (Classes[charCls].hitdie + mod);
-        hitPointPreview.textContent = hitpoints;
-    };
+    // Set initial hit point value for 1st level
     hitPoints();
     // Get dexerity and armor modifier and set armor class
-    var armorClass = function () {
-        var base = 10;
-        var dexMod = getAbilityScoreModifier(Number(dexerity));
-        // TODO add worn armor modifier
-        var ac = String(base + dexMod);
-        var armorClassPreview = document.querySelector('#armorClass');
-        armorClassPreview.textContent = ac;
-    };
     armorClass();
     // Get dexerity modifier and set initiative bonus
-    var initiativeMod = function () {
-        var dexMod = getAbilityScoreModifier(Number(dexerity));
-        var mod = String(dexMod);
-        var initiativeModPreview = document.querySelector('#initiative');
-        initiativeModPreview.textContent = mod;
-    };
     initiativeMod();
     // Get base speed based on chosen race
-    var baseSpeed = function () {
-        var speedPreview = document.querySelector('#speed');
-        speedPreview.textContent = Races[charRace].speed;
-    };
     baseSpeed();
 });
 // Level advancement button submit
-var levelUpButton = document.querySelector('#levelUpButton');
 levelUpButton.addEventListener('click', function (e) {
-    var constitution = rolledConstitition.textContent;
-    var selectedCls = cls.options[cls.selectedIndex];
-    var charCls = selectedCls.textContent.toLowerCase();
-    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     e.preventDefault();
-    var charLevelUp = function () {
-        currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-        experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
-    };
+    // Get current state of required variables
+    constitution = rolledConstitition.textContent;
+    selectedCls = cls.options[cls.selectedIndex];
+    charCls = selectedCls.textContent.toLowerCase();
+    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     charLevelUp();
-    var addHitPoints = function () {
-        // get current hitpoints
-        var currentHitPoints = Number(hitPointPreview.textContent);
-        // roll for hit points to add
-        var mod = getAbilityScoreModifier(constitution);
-        var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
-        var hitPointsToAdd = (rolledHitPoints + mod);
-        if (rolledHitPoints + mod <= 0) {
-            hitPointsToAdd = 1;
-        }
-        // add hitpoints to current total and display
-        hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
-    };
     addHitPoints();
-    var addProficiencyBonus = function () { return proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus); };
-    addProficiencyBonus();
-    appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
+    updateProficiencyBonus();
     highlightSkills();
 });
-var addNewExperienceButton = document.querySelector('#addExp');
 addNewExperienceButton.addEventListener('click', function (e) {
     e.preventDefault();
-    var addExp = function () {
-        var currentExpNum = Number(currentExperience.textContent);
-        var newExpNum = Number(addNewExperienceInput.value);
-        currentExperience.textContent = String(currentExpNum + newExpNum);
-    };
     addExp();
     addNewExperienceInput.value = null;
 });

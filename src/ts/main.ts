@@ -58,6 +58,13 @@ const appendSigntoValue = (value, node) => {
   node.textContent = `${sign} ${value}`;
 }
 
+// set ability modifier to element helper
+
+const setAbilityModifierToElement = (ability, modFunction, elementAndMethod) => {
+  let modifier = modFunction;
+  elementAndMethod = modifier;
+}
+
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
@@ -146,9 +153,11 @@ const experienceNextLevel = <HTMLElement>document.querySelector('#experienceNext
 
 const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewExperience');
 
-// Info section
+////////////////////////////////////////////////////////////
+// General information
+////////////////////////////////////////////////////////////
 
-// General
+// General variables
 
 const namePreview = document.querySelector('#namePreview');
 
@@ -164,7 +173,67 @@ const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview'
 
 const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
-// Ability scores
+let selectedAlignment = alignment.options[alignment.selectedIndex];
+
+let selectedCls = cls.options[cls.selectedIndex];
+
+let charCls = selectedCls.textContent.toLowerCase();
+
+let selectedRace = race.options[race.selectedIndex];
+
+let charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+
+let charGender = gender.value.toLowerCase();
+
+const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
+
+let proficiencyBonus = 0;
+
+// General buttons
+
+const levelUpButton = document.querySelector('#levelUpButton');
+
+const addNewExperienceButton = document.querySelector('#addExp');
+
+// General functions
+
+const charImageSet = () => {
+  let characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
+  characterImg.src = getCharacterImage(characterAttributes);
+}
+
+const charLevelUp = () => {
+  currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
+  experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+}
+
+const addHitPoints = () => {
+  let currentHitPoints = Number(hitPointPreview.textContent);
+  let rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie)
+  modifier = getAbilityScoreModifier(constitution)
+  let hitPointsToAdd = (rolledHitPoints + modifier);
+  if(rolledHitPoints + modifier <= 0) {
+    hitPointsToAdd = 1;
+  }
+  hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
+}
+
+const updateProficiencyBonus = () => {
+  proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
+  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview); 
+}
+
+const addExp = () => {
+    let currentExpNum = Number(currentExperience.textContent);
+    let newExpNum = Number(addNewExperienceInput.value)
+    currentExperience.textContent = String(currentExpNum + newExpNum);
+}
+
+////////////////////////////////////////////////////////////
+// Ability Scores
+////////////////////////////////////////////////////////////
+
+// Ability score variables
 
 let abilityScoreList = document.querySelector('#abilityScoreList');
 
@@ -182,11 +251,25 @@ const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePr
 
 const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
 
-const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
+let strength = rolledStrength.textContent;
 
-let proficiencyBonus = 0;
+let dexerity = rolledDexerity.textContent;
 
+let constitution = rolledConstitition.textContent;
+
+let intelligence = rolledIntelligence.textContent;
+
+let wisdom = rolledWisdom.textContent;
+
+let charisma = rolledCharisma.textContent;
+
+// Ability Score functions
+
+////////////////////////////////////////////////////////////
 // Skills
+////////////////////////////////////////////////////////////
+
+// Skill variables
 
 let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
@@ -235,54 +318,89 @@ const survivalSkill = <HTMLElement>document.querySelector('#survivalSkill');
 // Skill functions
 
 const lookupAbilityScore = (ability) => {
-  
+  // Get current values of required info
   abilityScoreList = document.querySelector('#abilityScoreList');
   abilityScoreListItems = abilityScoreList.children;
   let abilityScore;
-
+    // if abilityScore matches abilityScore in list return number value of abilityScore
     for(let i = 0; i < abilityScoreListItems.length; i++) {
       let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       if(string.toLowerCase() === ability) {
         let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
         return abilityScore;
       }
-            
     }
-  
 }
 
 const highlightSkills = () => {
-  
+  // Get current values of required info
   selectedSkill1 = skill1.options[skill1.selectedIndex];
   selectedSkill2 = skill1.options[skill2.selectedIndex];
   selectedSkill3 = skill1.options[skill3.selectedIndex];
   proficiencyBonus = Levels[currentLevel.textContent].bonus;
-    
+  // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present  
   for(let i = 0; i < skillsPreviewListItems.length; i++) {
-    
+    // reset modifier node to '-'
     skillsPreviewListItems[i].childNodes[5].textContent = "-";
-
     if(
       (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill1.textContent.trim()
       || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill2.textContent.trim()
       || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
       ) {
         (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
-        let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));  // get ability that modifies skill
-        let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());  // get ability score for that skill
+        // get ability that modifies skill
+        let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
+        // get ability score for that skill
+        let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
         let abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
         let totalMod = abilityScoreMod + proficiencyBonus;
         appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
     } else {
+      // if no match dim selectiong
       (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
     }
   }
-  
 }
 
-// Combat section
+////////////////////////////////////////////////////////////
+// Combat
+////////////////////////////////////////////////////////////
 
-const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
+// Combat variables
+
+const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints');
+
+const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
+
+const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
+
+const speedPreview = <HTMLElement>document.querySelector('#speed');
+
+// Combat functions
+
+const hitPoints = () => {
+  // 1st level is max hit points + constiution modifier
+  let modifier: number = getAbilityScoreModifier(Number(constitution))
+  let hitpoints: number = (Classes[charCls].hitdie + modifier);
+  hitPointPreview.textContent = String(hitpoints);
+}
+
+const armorClass = () => {
+  let base: number = 10;
+  let dexMod: number = getAbilityScoreModifier(Number(dexerity))
+  let armorMod: number = 0;
+  let ac = String(base + dexMod + armorMod);
+  armorClassPreview.textContent = ac;
+}
+
+const initiativeMod = () => {
+  let dexMod: number = getAbilityScoreModifier(Number(dexerity))
+  initiativeModPreview.textContent = String(dexMod);
+}
+
+const baseSpeed = () => {
+  speedPreview.textContent = Races[charRace].speed;
+}
 
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
@@ -290,39 +408,35 @@ const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints')
 
 const submitButton = document.querySelector('#submitButton');
 
-submitButton.addEventListener('click', (e) => {
+submitButton.addEventListener('click', e => {
 
   e.preventDefault();
 
-  // Get info to create character
+  // Get current state of require info
 
-  // General info
+  selectedRace = race.options[race.selectedIndex];
 
-  const selectedRace = race.options[race.selectedIndex];
+  strength = rolledStrength.textContent;
 
-  const strength = rolledStrength.textContent;
+  dexerity = rolledDexerity.textContent;
 
-  const dexerity = rolledDexerity.textContent;
+  constitution = rolledConstitition.textContent;
 
-  const constitution = rolledConstitition.textContent;
+  intelligence = rolledIntelligence.textContent;
 
-  const intelligence = rolledIntelligence.textContent;
+  wisdom = rolledWisdom.textContent;
 
-  const wisdom = rolledWisdom.textContent;
+  charisma = rolledCharisma.textContent;
 
-  const charisma = rolledCharisma.textContent;
+  selectedAlignment = alignment.options[alignment.selectedIndex];
 
-  const selectedAlignment = alignment.options[alignment.selectedIndex];
-
-  const selectedCls = cls.options[cls.selectedIndex];
+  selectedCls = cls.options[cls.selectedIndex];
   
-  // Skills
+  charCls = selectedCls.textContent.toLowerCase();
   
-  const selectedSkill1 = skill1.options[skill1.selectedIndex];
-
-  const selectedSkill2 = skill1.options[skill2.selectedIndex];
+  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
   
-  const selectedSkill3 = skill1.options[skill3.selectedIndex];
+  charGender = gender.value.toLowerCase();
 
   // Post info from character creation to preview area
   
@@ -335,10 +449,8 @@ submitButton.addEventListener('click', (e) => {
   namePreview.textContent = name.value;
 
   racePreview.textContent = selectedRace.textContent;
-  const charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
 
   genderPreview.textContent = gender.value;
-  const charGender = gender.value.toLowerCase();
 
   agePreview.textContent = age.value;
 
@@ -355,81 +467,32 @@ submitButton.addEventListener('click', (e) => {
   charismaPreview.textContent = charisma;
 
   clsPreview.textContent = selectedCls.textContent;
-  const charCls = selectedCls.textContent.toLowerCase();
 
   alignmentPreview.textContent = selectedAlignment.textContent;
   
-  proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
+  updateProficiencyBonus();
   
-  // Skills preview section
+  // Highlight selected skills and append skill modifier
   
   highlightSkills();
-  
-  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 
   // Get character preview image based on class, race, and gender
 
-  const charImageSet = () => {
-    const characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
-    characterImg.src = getCharacterImage(characterAttributes);
-  }
-
   charImageSet();
 
-  // Proficiencies section
-
-    // Add logic for Proficiencies section
-
-  // Combat Section
-
-  const hitPoints = () => {
-
-    // 1st level is max hit points + constiution modifier
-
-    let mod = getAbilityScoreModifier(Number(constitution))
-    let hitpoints = (Classes[charCls].hitdie + mod);
-    hitPointPreview.textContent = hitpoints;
-
-  }
+  // Set initial hit point value for 1st level
 
   hitPoints();
 
   // Get dexerity and armor modifier and set armor class
 
-  const armorClass = () => {
-
-    let base = 10;
-    let dexMod = getAbilityScoreModifier(Number(dexerity))
-    // TODO add worn armor modifier
-    let ac = String(base + dexMod);
-    const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
-    armorClassPreview.textContent = ac;
-
-  }
-
   armorClass();
 
   // Get dexerity modifier and set initiative bonus
 
-  const initiativeMod = () => {
-
-    let dexMod = getAbilityScoreModifier(Number(dexerity))
-    let mod = String(dexMod);
-    const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
-    initiativeModPreview.textContent = mod;
-
-  }
-
   initiativeMod();
 
   // Get base speed based on chosen race
-
-  const baseSpeed = () => {
-
-    const speedPreview = <HTMLElement>document.querySelector('#speed');
-    speedPreview.textContent = Races[charRace].speed;
-
-  }
 
   baseSpeed();
   
@@ -437,66 +500,30 @@ submitButton.addEventListener('click', (e) => {
 
 // Level advancement button submit
 
-const levelUpButton = document.querySelector('#levelUpButton');
-
-levelUpButton.addEventListener('click', (e) => {
-
-  const constitution = rolledConstitition.textContent;
-  const selectedCls = cls.options[cls.selectedIndex];
-  const charCls = selectedCls.textContent.toLowerCase();
-  proficiencyBonus = Levels[currentLevel.textContent].bonus;
-
+levelUpButton.addEventListener('click', e => {
+  
   e.preventDefault();
+  
+  // Get current state of required variables
 
-  const charLevelUp = () => {
-
-    currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-    experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
-
-  }
+  constitution = rolledConstitition.textContent;
+  selectedCls = cls.options[cls.selectedIndex];
+  charCls = selectedCls.textContent.toLowerCase();
+  proficiencyBonus = Levels[currentLevel.textContent].bonus;
 
   charLevelUp();
 
-  const addHitPoints = () => {
-
-    // get current hitpoints
-    let currentHitPoints = Number(hitPointPreview.textContent);
-    // roll for hit points to add
-    let mod = getAbilityScoreModifier(constitution)
-    let rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie)
-    let hitPointsToAdd = (rolledHitPoints + mod);
-    if(rolledHitPoints + mod <= 0) {
-      hitPointsToAdd = 1;
-    }
-    // add hitpoints to current total and display
-    hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
-  }
-
   addHitPoints();
   
-  const addProficiencyBonus = () => proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
-  
-  addProficiencyBonus();
-
-  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
+  updateProficiencyBonus();
   
   highlightSkills();
   
 });
 
-const addNewExperienceButton = document.querySelector('#addExp');
-
-addNewExperienceButton.addEventListener('click', (e) => {
+addNewExperienceButton.addEventListener('click', e => {
 
   e.preventDefault();
-
-  const addExp = () => {
-
-      let currentExpNum = Number(currentExperience.textContent);
-      let newExpNum = Number(addNewExperienceInput.value)
-      currentExperience.textContent = String(currentExpNum + newExpNum);
-
-  }
 
   addExp();
 
