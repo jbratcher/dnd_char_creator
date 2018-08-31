@@ -1,5 +1,5 @@
 ////////////////////////////////////////
-// imports
+// Imports
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
@@ -135,9 +135,15 @@ const age = <HTMLInputElement>document.querySelector('#age');
 
 const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
 
+let skill1list = skill1.children;
+
 const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
 
+let skill2list = skill2.children;
+
 const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
+
+let skill3list = skill3.children;
 
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
@@ -529,4 +535,51 @@ addNewExperienceButton.addEventListener('click', e => {
 
   addNewExperienceInput.value = null;
 
+});
+
+// dynamically change available skills based on characger class
+
+cls.addEventListener('change', () => {
+  
+  selectedCls = cls.options[cls.selectedIndex];
+  
+  // get selected cls
+  
+  if(selectedCls.text === 'Barbarian') {
+    
+    console.log(selectedCls);
+    
+    // loop through skills lists highlighting skills that are available for this class
+    
+    const highlightAvailableSkills = () => {
+      
+      // let availableSkills = Classes[cls].availableSkills
+      let availableSkills = 'Acrobatics'
+         
+      for(let i = 0; i < skill1list.length; i++) {
+        
+        console.log(skill1list);
+
+        if(
+          (<HTMLSelectElement>skill1list[i]).text === availableSkills
+          || (<HTMLSelectElement>skill2list[i]).text === availableSkills
+          || (<HTMLSelectElement>skill3list[i]).text === availableSkills
+          ) {
+            (<HTMLSelectElement>skill1list[i]).style.color = 'green';
+            // get ability that modifies skill
+        } else {
+          // if no match dim selection
+          (<HTMLSelectElement>skill1list[i]).style.color = '#ccc';
+        }
+      }
+    }
+    
+    highlightAvailableSkills();
+    
+    
+    
+  }
+  
+
+  
 });

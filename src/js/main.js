@@ -1,5 +1,5 @@
 ////////////////////////////////////////
-// imports
+// Imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
 import { Classes, Races, Levels } from './info.js';
@@ -91,8 +91,11 @@ var gender = document.querySelector('#gender');
 var age = document.querySelector('#age');
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
+var skill1list = skill1.children;
 var skill2 = document.querySelector('#skillsSelect2');
+var skill2list = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
+var skill3list = skill3.children;
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
@@ -334,4 +337,31 @@ addNewExperienceButton.addEventListener('click', function (e) {
     e.preventDefault();
     addExp();
     addNewExperienceInput.value = null;
+});
+// dynamically change available skills based on characger class
+cls.addEventListener('change', function () {
+    selectedCls = cls.options[cls.selectedIndex];
+    // get selected cls
+    if (selectedCls.text === 'Barbarian') {
+        console.log(selectedCls);
+        // loop through skills lists highlighting skills that are available for this class
+        var highlightAvailableSkills = function () {
+            // let availableSkills = Classes[cls].availableSkills
+            var availableSkills = 'Acrobatics';
+            for (var i = 0; i < skill1list.length; i++) {
+                console.log(skill1list);
+                if (skill1list[i].text === availableSkills
+                    || skill2list[i].text === availableSkills
+                    || skill3list[i].text === availableSkills) {
+                    skill1list[i].style.color = 'green';
+                    // get ability that modifies skill
+                }
+                else {
+                    // if no match dim selection
+                    skill1list[i].style.color = '#ccc';
+                }
+            }
+        };
+        highlightAvailableSkills();
+    }
 });
