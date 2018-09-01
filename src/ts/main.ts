@@ -554,32 +554,31 @@ cls.addEventListener('change', () => {
     const highlightAvailableSkills = () => {
       
       // let availableSkills = Classes[cls].availableSkills
-      let availableSkills = 'Acrobatics'
-         
-      for(let i = 0; i < skill1list.length; i++) {
+      let availableSkills = Classes.barbarian.availableSkills;
+      
+      availableSkills.forEach(skill => {
         
-        console.log(skill1list);
-
-        if(
-          (<HTMLSelectElement>skill1list[i]).text === availableSkills
-          || (<HTMLSelectElement>skill2list[i]).text === availableSkills
-          || (<HTMLSelectElement>skill3list[i]).text === availableSkills
-          ) {
-            (<HTMLSelectElement>skill1list[i]).style.color = 'green';
-            // get ability that modifies skill
-        } else {
-          // if no match dim selection
-          (<HTMLSelectElement>skill1list[i]).style.color = '#ccc';
+        console.log(skill);
+        
+        for(let i = 0; i < skill1list.length; i++) {
+    
+          if(
+            String(skill1list[i].textContent) === skill) {
+              (<HTMLSelectElement>skill1list[i]).style.color = 'green';
+          } else {
+            console.log('nope');
+          }
+        
         }
-      }
+        
+      })
+        
+        
     }
     
     highlightAvailableSkills();
-    
-    
-    
+        
   }
-  
-
-  
+    
 });
+  

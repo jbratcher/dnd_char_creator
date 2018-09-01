@@ -9,7 +9,8 @@ var Classes = exports.Classes = {
         hitdie: 12,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
     },
     bard: {
         hitdie: 8,

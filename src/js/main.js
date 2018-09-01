@@ -347,20 +347,18 @@ cls.addEventListener('change', function () {
         // loop through skills lists highlighting skills that are available for this class
         var highlightAvailableSkills = function () {
             // let availableSkills = Classes[cls].availableSkills
-            var availableSkills = 'Acrobatics';
-            for (var i = 0; i < skill1list.length; i++) {
-                console.log(skill1list);
-                if (skill1list[i].text === availableSkills
-                    || skill2list[i].text === availableSkills
-                    || skill3list[i].text === availableSkills) {
-                    skill1list[i].style.color = 'green';
-                    // get ability that modifies skill
+            var availableSkills = Classes.barbarian.availableSkills;
+            availableSkills.forEach(function (skill) {
+                console.log(skill);
+                for (var i = 0; i < skill1list.length; i++) {
+                    if (String(skill1list[i].textContent) === skill) {
+                        skill1list[i].style.color = 'green';
+                    }
+                    else {
+                        console.log('nope');
+                    }
                 }
-                else {
-                    // if no match dim selection
-                    skill1list[i].style.color = '#ccc';
-                }
-            }
+            });
         };
         highlightAvailableSkills();
     }
