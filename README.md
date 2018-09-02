@@ -6,7 +6,7 @@ Character creator for an openSRD-based roleplaying game.  Puts together all the 
 
 ### Version
 
-0.0.6
+0.0.7
 
 ## Install Dependencies
 
@@ -43,12 +43,14 @@ npm start
             -FontAwesome.otf
         -font-awesome.min.css
     /js
-        -characters.js
+        -characterImages.js
+        info.js
         -main.js
     /scss
     -styles.scss
     /ts
-      -characters.ts
+      -characterImages.ts
+      info.ts
       -main.ts
 -gulpfile.js
 -index.html
@@ -83,6 +85,7 @@ gulp clean:dist
 * Calculates hit point gain on level up
 * Add experience and keeps a running tottal
 * Highlights chosen skills and displays calculated bonus from proficiency and ability score modifiers
+* Dynamically highlights available skills on class selection
 
 ## Future Features:
 
@@ -93,8 +96,13 @@ gulp clean:dist
 ## Known "bugs"
 
 * active class on general tab not working unless clicked
+* default class selection not recognized
 
 #### Change Log
+
+###### 0.0.7
+
+* Highlight available skills dynamically on class selection
 
 ###### 0.0.6
 
