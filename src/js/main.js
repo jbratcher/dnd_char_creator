@@ -13,6 +13,8 @@ var setToMinMax = function (score) { return score > 18 ? 18 : score < 3 ? 3 : sc
 var singleWord = /(\w+)/;
 var modifier;
 var sign;
+var totalMod;
+var abilityScoreMod;
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
@@ -177,6 +179,7 @@ var charisma = rolledCharisma.textContent;
 // Skills
 ////////////////////////////////////////////////////////////
 // Skill variables
+var availableSkills = Classes[charCls].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
 var selectedSkill2 = skill1.options[skill2.selectedIndex];
 var selectedSkill3 = skill1.options[skill3.selectedIndex];
@@ -214,6 +217,13 @@ var lookupAbilityScore = function (ability) {
         }
     }
 };
+var getSkillModifier = function (skillText) {
+    var skillAbility = (singleWord.exec(skillText));
+    // get ability score for that skill
+    var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
+    abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+    return totalMod = abilityScoreMod + proficiencyBonus;
+};
 var highlightSkills = function () {
     // Get current values of required info
     selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -229,21 +239,22 @@ var highlightSkills = function () {
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
             skillsPreviewListItems[i].style.color = 'green';
             // get ability that modifies skill
-            var skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
-            // get ability score for that skill
-            var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
-            var abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
-            var totalMod = abilityScoreMod + proficiencyBonus;
+            getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
+            // let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
+            // // get ability score for that skill
+            // let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
+            // let abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+            // let totalMod = abilityScoreMod + proficiencyBonus;
             appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
         }
         else {
-            // if no match dim selectiong
+            // if no match dim selection
             skillsPreviewListItems[i].style.color = '#ccc';
         }
     }
 };
 var highlightAvailableSkills = function () {
-    var availableSkills = Classes[charCls].availableSkills;
+    availableSkills = Classes[charCls].availableSkills;
     for (var i = 0; i < skill1list.length; i++) {
         skill1list[i].style.color = '#eee';
     }

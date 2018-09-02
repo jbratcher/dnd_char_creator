@@ -23,6 +23,10 @@ let modifier: number;
 
 let sign: string;
 
+let totalMod: number;
+
+let abilityScoreMod: number;
+
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
@@ -277,6 +281,8 @@ let charisma = rolledCharisma.textContent;
 
 // Skill variables
 
+let availableSkills = Classes[charCls].availableSkills;
+
 let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
 let selectedSkill2 = skill1.options[skill2.selectedIndex];
@@ -338,6 +344,16 @@ const lookupAbilityScore = (ability) => {
     }
 }
 
+const getSkillModifier = skillText => {
+  
+  let skillAbility = (singleWord.exec(skillText));
+  // get ability score for that skill
+  let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
+  abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+  return totalMod = abilityScoreMod + proficiencyBonus; 
+  
+};
+
 const highlightSkills = () => {
   // Get current values of required info
   selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -355,14 +371,15 @@ const highlightSkills = () => {
       ) {
         (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
         // get ability that modifies skill
-        let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
-        // get ability score for that skill
-        let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
-        let abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
-        let totalMod = abilityScoreMod + proficiencyBonus;
+        getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
+        // let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
+        // // get ability score for that skill
+        // let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
+        // let abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+        // let totalMod = abilityScoreMod + proficiencyBonus;
         appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
     } else {
-      // if no match dim selectiong
+      // if no match dim selection
       (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
     }
   }
@@ -370,7 +387,7 @@ const highlightSkills = () => {
 
 const highlightAvailableSkills = () => {
     
-  let availableSkills = Classes[charCls].availableSkills
+  availableSkills = Classes[charCls].availableSkills;
   
   for(let i = 0; i < skill1list.length; i++) {
     (<HTMLSelectElement>skill1list[i]).style.color = '#eee';
