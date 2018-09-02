@@ -242,6 +242,25 @@ var highlightSkills = function () {
         }
     }
 };
+var highlightAvailableSkills = function () {
+    var availableSkills = Classes[charCls].availableSkills;
+    for (var i = 0; i < skill1list.length; i++) {
+        skill1list[i].style.color = '#eee';
+    }
+    var _loop_1 = function (i) {
+        availableSkills.forEach(function (skill) {
+            if (String(skill1list[i].textContent) === skill) {
+                skill1list[i].style.color = 'green';
+            }
+            else {
+                console.log('nope');
+            }
+        });
+    };
+    for (var i = 0; i < skill1list.length; i++) {
+        _loop_1(i);
+    }
+};
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////
@@ -341,23 +360,7 @@ addNewExperienceButton.addEventListener('click', function (e) {
 // dynamically change available skills based on characger class
 cls.addEventListener('change', function () {
     selectedCls = cls.options[cls.selectedIndex];
-    var clsName = selectedCls.text.toLowerCase();
-    console.log(clsName);
+    charCls = selectedCls.text.toLowerCase();
     // loop through skills lists highlighting skills that are available for this class
-    var highlightAvailableSkills = function () {
-        var availableSkills = Classes[clsName].availableSkills;
-        // let availableSkills = Classes.barbarian.availableSkills;
-        availableSkills.forEach(function (skill) {
-            console.log(skill);
-            for (var i = 0; i < skill1list.length; i++) {
-                if (String(skill1list[i].textContent) === skill) {
-                    skill1list[i].style.color = 'green';
-                }
-                else {
-                    console.log('nope');
-                }
-            }
-        });
-    };
     highlightAvailableSkills();
 });

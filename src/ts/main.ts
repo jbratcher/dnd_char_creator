@@ -368,6 +368,30 @@ const highlightSkills = () => {
   }
 }
 
+const highlightAvailableSkills = () => {
+    
+  let availableSkills = Classes[charCls].availableSkills
+  
+  for(let i = 0; i < skill1list.length; i++) {
+    (<HTMLSelectElement>skill1list[i]).style.color = '#eee';
+  }
+    
+    for(let i = 0; i < skill1list.length; i++) {
+      
+      availableSkills.forEach(skill => {
+    
+        if(String(skill1list[i].textContent) === skill) {
+            (<HTMLSelectElement>skill1list[i]).style.color = 'green';
+        } else {
+          console.log('nope');
+        }
+    
+      })
+    
+    }
+  
+}
+
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////
@@ -543,36 +567,9 @@ cls.addEventListener('change', () => {
   
   selectedCls = cls.options[cls.selectedIndex];
   
-  let clsName = selectedCls.text.toLowerCase();
-  
-  console.log(clsName);
-  
+  charCls = selectedCls.text.toLowerCase();
+
   // loop through skills lists highlighting skills that are available for this class
-  
-  const highlightAvailableSkills = () => {
-    
-    let availableSkills = Classes[clsName].availableSkills
-    // let availableSkills = Classes.barbarian.availableSkills;
-    
-    availableSkills.forEach(skill => {
-      
-      console.log(skill);
-      
-      for(let i = 0; i < skill1list.length; i++) {
-  
-        if(
-          String(skill1list[i].textContent) === skill) {
-            (<HTMLSelectElement>skill1list[i]).style.color = 'green';
-        } else {
-          console.log('nope');
-        }
-      
-      }
-      
-    })
-      
-      
-  }
   
   highlightAvailableSkills();
     

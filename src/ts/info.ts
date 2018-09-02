@@ -30,6 +30,7 @@ export var Classes = {
             "History",
             "Insight",
             "Intimidation",
+            "Investigation",
             "Medicine",
             "Nature",
             "Perception",
