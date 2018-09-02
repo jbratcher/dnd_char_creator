@@ -341,25 +341,23 @@ addNewExperienceButton.addEventListener('click', function (e) {
 // dynamically change available skills based on characger class
 cls.addEventListener('change', function () {
     selectedCls = cls.options[cls.selectedIndex];
-    // get selected cls
-    if (selectedCls.text === 'Barbarian') {
-        console.log(selectedCls);
-        // loop through skills lists highlighting skills that are available for this class
-        var highlightAvailableSkills = function () {
-            // let availableSkills = Classes[cls].availableSkills
-            var availableSkills = Classes.barbarian.availableSkills;
-            availableSkills.forEach(function (skill) {
-                console.log(skill);
-                for (var i = 0; i < skill1list.length; i++) {
-                    if (String(skill1list[i].textContent) === skill) {
-                        skill1list[i].style.color = 'green';
-                    }
-                    else {
-                        console.log('nope');
-                    }
+    var clsName = selectedCls.text.toLowerCase();
+    console.log(clsName);
+    // loop through skills lists highlighting skills that are available for this class
+    var highlightAvailableSkills = function () {
+        var availableSkills = Classes[clsName].availableSkills;
+        // let availableSkills = Classes.barbarian.availableSkills;
+        availableSkills.forEach(function (skill) {
+            console.log(skill);
+            for (var i = 0; i < skill1list.length; i++) {
+                if (String(skill1list[i].textContent) === skill) {
+                    skill1list[i].style.color = 'green';
                 }
-            });
-        };
-        highlightAvailableSkills();
-    }
+                else {
+                    console.log('nope');
+                }
+            }
+        });
+    };
+    highlightAvailableSkills();
 });

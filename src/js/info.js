@@ -18,67 +18,177 @@ export var Classes = {
         hitdie: 8,
         skills: {
             number: 3
-        }
+        },
+        availableSkills: [
+            "Acrobatics",
+            "Animal Handling",
+            "Arcana",
+            "Athletics",
+            "Deception",
+            "History",
+            "Insight",
+            "Intimidation",
+            "Medicine",
+            "Nature",
+            "Perception",
+            "Performance",
+            "Persuasion",
+            "Religion",
+            "Slieght of Hand",
+            "Stealth",
+            "Survival"
+        ]
     },
     cleric: {
         hitdie: 8,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "History",
+            "Insight",
+            "Medicine",
+            "Persuasion",
+            "Religion"
+        ]
     },
     druid: {
         hitdie: 8,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "Animal Handling",
+            "Arcana",
+            "Insight",
+            "Medicine",
+            "Nature",
+            "Perception",
+            "Religion",
+            "Survival"
+        ]
     },
     fighter: {
         hitdie: 10,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "Acrobatics",
+            "Animal Handling",
+            "Athletics",
+            "History",
+            "Insight",
+            "Intimidation",
+            "Perception",
+            "Survival"
+        ]
     },
     monk: {
         hitdie: 8,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "Acrobatics",
+            "Athletics",
+            "History",
+            "Insight",
+            "Religion",
+            "Stealth"
+        ]
     },
     paladin: {
         hitdie: 10,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "Athletics",
+            "Insight",
+            "Intimidation",
+            "Medicine",
+            "Persuasion",
+            "Religion"
+        ]
     },
     ranger: {
         hitdie: 10,
         skills: {
             number: 3
-        }
+        },
+        availableSkills: [
+            "Animal Handling",
+            "Athletics",
+            "Insight",
+            "Investigation",
+            "Nature",
+            "Perception",
+            "Stealth",
+            "Survival"
+        ]
     },
     rogue: {
         hitdie: 8,
         skills: {
             number: 4
-        }
+        },
+        availableSkills: [
+            "Acrobatics",
+            "Athletics",
+            "Deception",
+            "Insight",
+            "Intimidation",
+            "Investigation",
+            "Perception",
+            "Performance",
+            "Persuasion",
+            "Slieght of Hand",
+            "Stealth"
+        ]
     },
-    soccerror: {
+    sorcerer: {
         hitdie: 6,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "Arcana",
+            "Deception",
+            "Insight",
+            "Intimidation",
+            "Persuasion",
+            "Religion"
+        ]
     },
     warlock: {
         hitdie: 8,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "Arcana",
+            "Deception",
+            "History",
+            "Intimidation",
+            "Investigation",
+            "Nature",
+            "Religion"
+        ]
     },
     wizard: {
         hitdie: 6,
         skills: {
             number: 2
-        }
+        },
+        availableSkills: [
+            "Arcana",
+            "History",
+            "Insight",
+            "Investigation",
+            "Medicine",
+            "Religion"
+        ]
     }
 };
 export var Races = {

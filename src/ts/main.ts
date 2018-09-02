@@ -543,42 +543,38 @@ cls.addEventListener('change', () => {
   
   selectedCls = cls.options[cls.selectedIndex];
   
-  // get selected cls
+  let clsName = selectedCls.text.toLowerCase();
   
-  if(selectedCls.text === 'Barbarian') {
+  console.log(clsName);
+  
+  // loop through skills lists highlighting skills that are available for this class
+  
+  const highlightAvailableSkills = () => {
     
-    console.log(selectedCls);
+    let availableSkills = Classes[clsName].availableSkills
+    // let availableSkills = Classes.barbarian.availableSkills;
     
-    // loop through skills lists highlighting skills that are available for this class
-    
-    const highlightAvailableSkills = () => {
+    availableSkills.forEach(skill => {
       
-      // let availableSkills = Classes[cls].availableSkills
-      let availableSkills = Classes.barbarian.availableSkills;
+      console.log(skill);
       
-      availableSkills.forEach(skill => {
-        
-        console.log(skill);
-        
-        for(let i = 0; i < skill1list.length; i++) {
-    
-          if(
-            String(skill1list[i].textContent) === skill) {
-              (<HTMLSelectElement>skill1list[i]).style.color = 'green';
-          } else {
-            console.log('nope');
-          }
-        
+      for(let i = 0; i < skill1list.length; i++) {
+  
+        if(
+          String(skill1list[i].textContent) === skill) {
+            (<HTMLSelectElement>skill1list[i]).style.color = 'green';
+        } else {
+          console.log('nope');
         }
-        
-      })
-        
-        
-    }
-    
-    highlightAvailableSkills();
-        
+      
+      }
+      
+    })
+      
+      
   }
+  
+  highlightAvailableSkills();
     
 });
   
