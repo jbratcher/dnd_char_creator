@@ -134,9 +134,6 @@ var charImageSet = function () {
     characterImg.src = getCharacterImage(characterAttributes);
 };
 var charLevelUp = function () {
-    if (currentLevel.textContent === "20") {
-        return;
-    }
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
     experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
     updateProficiencyBonus();
@@ -255,20 +252,46 @@ var highlightSkills = function () {
 var highlightAvailableSkills = function () {
     availableSkills = Classes[charCls].availableSkills;
     for (var i = 0; i < skill1list.length; i++) {
-        skill1list[i].style.color = '#eee';
+        skill1list[i].style.display = 'none';
+    }
+    for (var i = 0; i < skill2list.length; i++) {
+        skill2list[i].style.display = 'none';
+    }
+    for (var i = 0; i < skill3list.length; i++) {
+        skill3list[i].style.display = 'none';
     }
     var _loop_1 = function (i) {
         availableSkills.forEach(function (skill) {
             if (String(skill1list[i].textContent) === skill) {
-                skill1list[i].style.color = 'green';
-            }
-            else {
-                console.log('nope');
+                skill1list[i].style.display = 'block';
+                skill1list[i].style.color = 'black';
             }
         });
     };
     for (var i = 0; i < skill1list.length; i++) {
         _loop_1(i);
+    }
+    var _loop_2 = function (i) {
+        availableSkills.forEach(function (skill) {
+            if (String(skill2list[i].textContent) === skill) {
+                skill2list[i].style.display = 'block';
+                skill2list[i].style.color = 'black';
+            }
+        });
+    };
+    for (var i = 0; i < skill2list.length; i++) {
+        _loop_2(i);
+    }
+    var _loop_3 = function (i) {
+        availableSkills.forEach(function (skill) {
+            if (String(skill3list[i].textContent) === skill) {
+                skill3list[i].style.display = 'block';
+                skill3list[i].style.color = 'black';
+            }
+        });
+    };
+    for (var i = 0; i < skill3list.length; i++) {
+        _loop_3(i);
     }
 };
 ////////////////////////////////////////////////////////////
@@ -320,7 +343,7 @@ submitButton.addEventListener('click', function (e) {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
     charGender = gender.value.toLowerCase();
     // Post info from character creation to preview area
-    currentLevel.textContent = '1';
+    currentLevel.textContent = String(Levels[0].level);
     experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
@@ -355,6 +378,9 @@ levelUpButton.addEventListener('click', function (e) {
     constitution = rolledConstitition.textContent;
     selectedCls = cls.options[cls.selectedIndex];
     charCls = selectedCls.textContent.toLowerCase();
+    if (currentLevel.textContent === "20") {
+        return;
+    }
     charLevelUp();
     addHitPoints();
     highlightSkills();

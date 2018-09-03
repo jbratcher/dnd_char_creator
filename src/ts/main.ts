@@ -213,9 +213,6 @@ const charImageSet = () => {
 }
 
 const charLevelUp = () => {
-  if(currentLevel.textContent === "20") {
-    return;
-  }
   currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
   experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
   updateProficiencyBonus();
@@ -389,7 +386,15 @@ const highlightAvailableSkills = () => {
   availableSkills = Classes[charCls].availableSkills;
   
   for(let i = 0; i < skill1list.length; i++) {
-    (<HTMLSelectElement>skill1list[i]).style.color = '#eee';
+    (<HTMLSelectElement>skill1list[i]).style.display = 'none';
+  }
+  
+  for(let i = 0; i < skill2list.length; i++) {
+    (<HTMLSelectElement>skill2list[i]).style.display = 'none';
+  }
+  
+  for(let i = 0; i < skill3list.length; i++) {
+    (<HTMLSelectElement>skill3list[i]).style.display = 'none';
   }
     
     for(let i = 0; i < skill1list.length; i++) {
@@ -397,10 +402,35 @@ const highlightAvailableSkills = () => {
       availableSkills.forEach(skill => {
     
         if(String(skill1list[i].textContent) === skill) {
-            (<HTMLSelectElement>skill1list[i]).style.color = 'green';
-        } else {
-          console.log('nope');
-        }
+            (<HTMLSelectElement>skill1list[i]).style.display = 'block';
+            (<HTMLSelectElement>skill1list[i]).style.color = 'black';
+        } 
+    
+      })
+    
+    }
+    
+    for(let i = 0; i < skill2list.length; i++) {
+      
+      availableSkills.forEach(skill => {
+    
+        if(String(skill2list[i].textContent) === skill) {
+            (<HTMLSelectElement>skill2list[i]).style.display = 'block';
+            (<HTMLSelectElement>skill2list[i]).style.color = 'black';
+        } 
+    
+      })
+    
+    }
+    
+    for(let i = 0; i < skill3list.length; i++) {
+      
+      availableSkills.forEach(skill => {
+    
+        if(String(skill3list[i].textContent) === skill) {
+            (<HTMLSelectElement>skill3list[i]).style.display = 'block';
+            (<HTMLSelectElement>skill3list[i]).style.color = 'black';
+        } 
     
       })
     
@@ -486,7 +516,7 @@ submitButton.addEventListener('click', e => {
 
   // Post info from character creation to preview area
   
-  currentLevel.textContent = '1';
+  currentLevel.textContent = String(Levels[0].level);
   
   experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
 
@@ -553,6 +583,10 @@ levelUpButton.addEventListener('click', e => {
   constitution = rolledConstitition.textContent;
   selectedCls = cls.options[cls.selectedIndex];
   charCls = selectedCls.textContent.toLowerCase();
+  
+  if(currentLevel.textContent === "20") {
+    return;
+  }
 
   charLevelUp();
 
