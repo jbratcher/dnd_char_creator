@@ -197,7 +197,7 @@ let charGender = gender.value.toLowerCase();
 
 const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
 
-let proficiencyBonus = 0;
+let proficiencyBonus: number;
 
 // General buttons
 
@@ -213,8 +213,12 @@ const charImageSet = () => {
 }
 
 const charLevelUp = () => {
+  if(currentLevel.textContent === "20") {
+    return;
+  }
   currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
   experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+  updateProficiencyBonus();
 }
 
 const addHitPoints = () => {
@@ -229,6 +233,7 @@ const addHitPoints = () => {
 }
 
 const updateProficiencyBonus = () => {
+  proficiencyBonus = Levels[currentLevel.textContent].bonus;
   proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
   appendSigntoValue(proficiencyBonus, proficiencyBonusPreview); 
 }
@@ -359,7 +364,7 @@ const highlightSkills = () => {
   selectedSkill1 = skill1.options[skill1.selectedIndex];
   selectedSkill2 = skill1.options[skill2.selectedIndex];
   selectedSkill3 = skill1.options[skill3.selectedIndex];
-  proficiencyBonus = Levels[currentLevel.textContent].bonus;
+  updateProficiencyBonus();
   // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present  
   for(let i = 0; i < skillsPreviewListItems.length; i++) {
     // reset modifier node to '-'
@@ -370,13 +375,7 @@ const highlightSkills = () => {
       || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
       ) {
         (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
-        // get ability that modifies skill
         getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-        // let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
-        // // get ability score for that skill
-        // let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
-        // let abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
-        // let totalMod = abilityScoreMod + proficiencyBonus;
         appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
     } else {
       // if no match dim selection
@@ -490,8 +489,6 @@ submitButton.addEventListener('click', e => {
   currentLevel.textContent = '1';
   
   experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
-  
-  proficiencyBonus = Levels[currentLevel.textContent].bonus;
 
   namePreview.textContent = name.value;
 
@@ -556,13 +553,10 @@ levelUpButton.addEventListener('click', e => {
   constitution = rolledConstitition.textContent;
   selectedCls = cls.options[cls.selectedIndex];
   charCls = selectedCls.textContent.toLowerCase();
-  proficiencyBonus = Levels[currentLevel.textContent].bonus;
 
   charLevelUp();
 
   addHitPoints();
-  
-  updateProficiencyBonus();
   
   highlightSkills();
   

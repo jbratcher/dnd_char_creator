@@ -124,7 +124,7 @@ var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
 var charGender = gender.value.toLowerCase();
 var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
-var proficiencyBonus = 0;
+var proficiencyBonus;
 // General buttons
 var levelUpButton = document.querySelector('#levelUpButton');
 var addNewExperienceButton = document.querySelector('#addExp');
@@ -134,8 +134,12 @@ var charImageSet = function () {
     characterImg.src = getCharacterImage(characterAttributes);
 };
 var charLevelUp = function () {
+    if (currentLevel.textContent === "20") {
+        return;
+    }
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
     experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+    updateProficiencyBonus();
 };
 var addHitPoints = function () {
     var currentHitPoints = Number(hitPointPreview.textContent);
@@ -148,6 +152,7 @@ var addHitPoints = function () {
     hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
 };
 var updateProficiencyBonus = function () {
+    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
     appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 };
@@ -229,7 +234,7 @@ var highlightSkills = function () {
     selectedSkill1 = skill1.options[skill1.selectedIndex];
     selectedSkill2 = skill1.options[skill2.selectedIndex];
     selectedSkill3 = skill1.options[skill3.selectedIndex];
-    proficiencyBonus = Levels[currentLevel.textContent].bonus;
+    updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present  
     for (var i = 0; i < skillsPreviewListItems.length; i++) {
         // reset modifier node to '-'
@@ -238,13 +243,7 @@ var highlightSkills = function () {
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
             || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
             skillsPreviewListItems[i].style.color = 'green';
-            // get ability that modifies skill
             getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-            // let skillAbility = (singleWord.exec(skillsPreviewListItems[i].childNodes[3].textContent));
-            // // get ability score for that skill
-            // let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
-            // let abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
-            // let totalMod = abilityScoreMod + proficiencyBonus;
             appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
         }
         else {
@@ -323,7 +322,6 @@ submitButton.addEventListener('click', function (e) {
     // Post info from character creation to preview area
     currentLevel.textContent = '1';
     experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
-    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
     genderPreview.textContent = gender.value;
@@ -357,10 +355,8 @@ levelUpButton.addEventListener('click', function (e) {
     constitution = rolledConstitition.textContent;
     selectedCls = cls.options[cls.selectedIndex];
     charCls = selectedCls.textContent.toLowerCase();
-    proficiencyBonus = Levels[currentLevel.textContent].bonus;
     charLevelUp();
     addHitPoints();
-    updateProficiencyBonus();
     highlightSkills();
 });
 addNewExperienceButton.addEventListener('click', function (e) {
