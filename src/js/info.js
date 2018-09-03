@@ -193,6 +193,9 @@ export var Classes = {
     }
 };
 export var Races = {
+    dragonborn: {
+        speed: 30
+    },
     dwarf: {
         speed: 25
     },
@@ -212,6 +215,9 @@ export var Races = {
         speed: 30
     },
     human: {
+        speed: 30
+    },
+    Tiefling: {
         speed: 30
     }
 };

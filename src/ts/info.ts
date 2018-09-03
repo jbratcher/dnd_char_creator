@@ -199,6 +199,9 @@ export var Classes = {
 
 export var Races = {
 
+    dragonborn: {
+        speed: 30
+    },
     dwarf: {
         speed: 25
     },
@@ -219,13 +222,16 @@ export var Races = {
     },
     human: {
         speed: 30
+    },
+    Tiefling: {
+        speed: 30
     }
 
 
 }
 
 export var Levels = [
-    
+
     {
         level: 1,
         experience: 300,
@@ -326,7 +332,5 @@ export var Levels = [
         experience: 335000,
         bonus: 6
     },
-  
+
 ]
-
-
