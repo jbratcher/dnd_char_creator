@@ -249,6 +249,7 @@ var highlightSkills = function () {
         }
     }
 };
+// TODO: refactor this monstrosity from 3 loops to 1
 var highlightAvailableSkills = function () {
     availableSkills = Classes[charCls].availableSkills;
     for (var i = 0; i < skill1list.length; i++) {
@@ -294,6 +295,15 @@ var highlightAvailableSkills = function () {
         _loop_3(i);
     }
 };
+// dynamically change available skills based on characger class
+cls.addEventListener('change', function () {
+    selectedCls = cls.options[cls.selectedIndex];
+    charCls = selectedCls.text.toLowerCase();
+    // loop through skills lists highlighting skills that are available for this class
+    highlightAvailableSkills();
+});
+// Initialize state for selected class on document load
+highlightAvailableSkills();
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////
@@ -389,11 +399,4 @@ addNewExperienceButton.addEventListener('click', function (e) {
     e.preventDefault();
     addExp();
     addNewExperienceInput.value = null;
-});
-// dynamically change available skills based on characger class
-cls.addEventListener('change', function () {
-    selectedCls = cls.options[cls.selectedIndex];
-    charCls = selectedCls.text.toLowerCase();
-    // loop through skills lists highlighting skills that are available for this class
-    highlightAvailableSkills();
 });

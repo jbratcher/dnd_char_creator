@@ -1,4 +1,6 @@
-// Classes object for data
+////////////////////////////////////////
+// Classes object
+////////////////////////////////////////
 export var Classes = {
     barbarian: {
         hitdie: 12,
@@ -192,6 +194,9 @@ export var Classes = {
         ]
     }
 };
+////////////////////////////////////////
+// Races Object
+////////////////////////////////////////
 export var Races = {
     dragonborn: {
         speed: 30
@@ -221,6 +226,9 @@ export var Races = {
         speed: 30
     }
 };
+////////////////////////////////////////
+// Levels Object
+////////////////////////////////////////
 export var Levels = [
     {
         level: 1,

@@ -78,11 +78,11 @@ gulp clean:dist
 
 ## Features:
 
-* Random rolls between for stats, selectable races, and classes
-* Randomly selects image from array based on race, class, and gender inputs
+* Random rolls for stats, selectable races, and classes
+* Randomly selects image from array based on race, class, and gender inputs (placeholders for now)
 * Generates character preview based on user inputs
 * Calculates hit points, armor class, initiative and speed
-* Calculates hit point gain on level up
+* Calculates hit point gain, experience for next level, and proficiency bonus on level up
 * Add experience and keeps a running tottal
 * Highlights chosen skills and displays calculated bonus from proficiency and ability score modifiers
 * Dynamically highlights available skills on class selection
@@ -91,7 +91,7 @@ gulp clean:dist
 
 * Display abilities, racial, and class specific skills
 * Add attack roll functionality
-* 
+* better sourcing of images (replace placeholders)
 
 ## Known "bugs"
 

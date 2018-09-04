@@ -381,6 +381,8 @@ const highlightSkills = () => {
   }
 }
 
+// TODO: refactor this monstrosity from 3 loops to 1
+
 const highlightAvailableSkills = () => {
     
   availableSkills = Classes[charCls].availableSkills;
@@ -437,6 +439,24 @@ const highlightAvailableSkills = () => {
     }
   
 }
+
+// dynamically change available skills based on characger class
+
+cls.addEventListener('change', () => {
+  
+  selectedCls = cls.options[cls.selectedIndex];
+  
+  charCls = selectedCls.text.toLowerCase();
+
+  // loop through skills lists highlighting skills that are available for this class
+  
+  highlightAvailableSkills();
+    
+});
+
+// Initialize state for selected class on document load
+
+highlightAvailableSkills();
 
 ////////////////////////////////////////////////////////////
 // Combat
@@ -604,19 +624,5 @@ addNewExperienceButton.addEventListener('click', e => {
 
   addNewExperienceInput.value = null;
 
-});
-
-// dynamically change available skills based on characger class
-
-cls.addEventListener('change', () => {
-  
-  selectedCls = cls.options[cls.selectedIndex];
-  
-  charCls = selectedCls.text.toLowerCase();
-
-  // loop through skills lists highlighting skills that are available for this class
-  
-  highlightAvailableSkills();
-    
 });
   
