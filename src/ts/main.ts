@@ -213,8 +213,10 @@ const charImageSet = () => {
 }
 
 const charLevelUp = () => {
+  console.log(currentLevel.textContent, experienceNextLevel);
   currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-  experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+  console.log(currentLevel.textContent, experienceNextLevel);
+  experienceNextLevel.textContent = String(Levels[Number(currentLevel.textContent)-1].experience);
   updateProficiencyBonus();
 }
 
@@ -538,7 +540,7 @@ submitButton.addEventListener('click', e => {
   
   currentLevel.textContent = String(Levels[0].level);
   
-  experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+  experienceNextLevel.textContent = String(Levels[0].experience);
 
   namePreview.textContent = name.value;
 

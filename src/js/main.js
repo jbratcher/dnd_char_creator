@@ -134,8 +134,10 @@ var charImageSet = function () {
     characterImg.src = getCharacterImage(characterAttributes);
 };
 var charLevelUp = function () {
+    console.log(currentLevel.textContent, experienceNextLevel);
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-    experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+    console.log(currentLevel.textContent, experienceNextLevel);
+    experienceNextLevel.textContent = String(Levels[Number(currentLevel.textContent) - 1].experience);
     updateProficiencyBonus();
 };
 var addHitPoints = function () {
@@ -354,7 +356,7 @@ submitButton.addEventListener('click', function (e) {
     charGender = gender.value.toLowerCase();
     // Post info from character creation to preview area
     currentLevel.textContent = String(Levels[0].level);
-    experienceNextLevel.textContent = String(Levels[currentLevel.textContent].experience);
+    experienceNextLevel.textContent = String(Levels[0].experience);
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
     genderPreview.textContent = gender.value;
