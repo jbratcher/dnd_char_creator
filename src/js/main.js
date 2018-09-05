@@ -134,9 +134,7 @@ var charImageSet = function () {
     characterImg.src = getCharacterImage(characterAttributes);
 };
 var charLevelUp = function () {
-    console.log(currentLevel.textContent, experienceNextLevel);
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-    console.log(currentLevel.textContent, experienceNextLevel);
     experienceNextLevel.textContent = String(Levels[Number(currentLevel.textContent) - 1].experience);
     updateProficiencyBonus();
 };
@@ -314,6 +312,7 @@ var hitPointPreview = document.querySelector('#hitPoints');
 var armorClassPreview = document.querySelector('#armorClass');
 var initiativeModPreview = document.querySelector('#initiative');
 var speedPreview = document.querySelector('#speed');
+var passivePerceptionPreview = document.querySelector('#passivePerception');
 // Combat functions
 var hitPoints = function () {
     // 1st level is max hit points + constiution modifier
@@ -332,8 +331,9 @@ var initiativeMod = function () {
     var dexMod = getAbilityScoreModifier(Number(dexerity));
     initiativeModPreview.textContent = String(dexMod);
 };
-var baseSpeed = function () {
-    speedPreview.textContent = Races[charRace].speed;
+var baseSpeed = function () { return speedPreview.textContent = Races[charRace].speed; };
+var passivePerception = function () {
+    passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
 };
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
@@ -382,6 +382,8 @@ submitButton.addEventListener('click', function (e) {
     initiativeMod();
     // Get base speed based on chosen race
     baseSpeed();
+    // Get wisdom modifier and set passive perception
+    passivePerception();
 });
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {

@@ -6,33 +6,33 @@
 
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 	      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	      
+
         <title>OpenSRD Charcter Creator</title>
-        
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-        
+
         <link rel="stylesheet" href="css/styles.min.css">
 
     </head>
 
     <body>
-      
+
       <!-- Main Container -->
 
       <section class="container-fluid" id="main-nav">
-        
+
         <!-- Main Navigatinon -->
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          
+
           <a class="navbar-brand" href="#"><h1>D&amp;D CC</h1></a>
-          
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
+
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
@@ -46,7 +46,7 @@
               </li>
             </ul>
           </div>
-          
+
         </nav>
 
       </section>
@@ -68,9 +68,9 @@
               </section>
 
               <p class="lead p-3">Enter you character information</p>
-              
+
               <!-- Character Builder Navigation -->
-              
+
               <ul class="nav nav-tabs" id="buildTabs" role="tablist">
 
                   <li class="nav-item active">
@@ -86,21 +86,21 @@
                   </li>
 
                 </ul>
-                
+
               <!-- Character Builder form -->
 
               <form class="px-3">
-                
+
                 <div class="tab-content" id="CharTabsContent">
-                
+
                   <!-- General Tab -->
-                  
+
                   <div class="tab-pane active fade show" id="generalBuild" role="tabpanel" aria-labelledby="generalBuildTab">
-  
+
                     <div class="input-group-prepend my-3">
-    
+
                       <label class="input-group-text" for="cls">Choose a Class: </label>
-    
+
                       <select class="custom-select" id="cls">
                         <option selected>Barbarian</option>
                         <option>Bard</option>
@@ -115,63 +115,65 @@
                         <option>Warlock</option>
                         <option>Wizard</option>
                       </select>
-    
+
                     </div>
-    
+
                     <div class="input-group-prepend my-3">
-    
+
                       <label class="input-group-text" for="race">Choose a Race: </label>
-    
+
                       <select class="custom-select" id="race">
-                        <option selected>Dwarf</option>
+                        <option selected>Dragonborn</option>
+                        <option>Dwarf</option>
                         <option>Elf</option>
                         <option>Gnome</option>
                         <option>Half-Elf</option>
                         <option>Halfling</option>
                         <option>Half-Orc</option>
                         <option>Human</option>
+                        <option>Tiefling</option>
                       </select>
-    
+
                     </div>
-    
+
                     <p>Roll your ability scores<p>
-    
+
                     <div class="input-group my-3 d-flex justify-content-between">
                       <label class="h6">Strength: </label>
                       <span id="rolledStrength">-</span>
                       <button type="button" id="rollStrength" class="btn btn-dark btn-sm">Roll</button>
                     </div>
-    
+
                     <div class="input-group my-3 d-flex justify-content-between">
                       <label class="h6">Dexerity: </label>
                       <span id="rolledDexerity">-</span>
                       <button type="button" id="rollDexerity" class="btn btn-dark btn-sm">Roll</button>
                     </div>
-    
+
                     <div class="input-group my-3 d-flex justify-content-between">
                       <label class="h6">Constitution: </label>
                       <span id="rolledConstitition">-</span>
                       <button type="button" id="rollConstitution" class="btn btn-dark btn-sm">Roll</button>
                     </div>
-    
+
                     <div class="input-group my-3 d-flex justify-content-between">
                       <label class="h6">Intelligence: </label>
                       <span id="rolledIntelligence">-</span>
                       <button type="button" id="rollIntelligence" class="btn btn-dark btn-sm">Roll</button>
                     </div>
-    
+
                     <div class="input-group my-3 d-flex justify-content-between">
                       <label class="h6">Wisdom: </label>
                       <span id="rolledWisdom">-</span>
                       <button type="button" id="rollWisdom" class="btn btn-dark btn-sm">Roll</button>
                     </div>
-    
+
                     <div class="input-group my-3 d-flex justify-content-between">
                       <label class="h6">Charisma: </label>
                       <span id="rolledCharisma">-</span>
                       <button type="button" id="rollCharisma" class="btn btn-dark btn-sm">Roll</button>
                     </div>
-    
+
                     <div class="input-group my-3">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="alignment">Alignment: </label>
@@ -188,37 +190,37 @@
                         <option>Chaotic Evil</option>
                       </select>
                     </div>
-    
+
                     <div class="input-group-prepend my-3">
-    
+
                       <label class="input-group-text" for="name">Name: </label>
-    
+
                       <input class="form-control" type="text" id="name">
-    
+
                     </div>
-    
+
                     <div class="input-group-prepend my-3">
-    
+
                       <label class="input-group-text" for="gender">Gender: </label>
-    
+
                       <input class="form-control" type="text" id="gender">
-    
+
                     </div>
-    
+
                     <div class="input-group-prepend my-3">
-    
+
                       <label class="input-group-text" for="age">Age: </label>
-    
+
                       <input class="form-control" type="text" id="age">
-    
+
                     </div>
-                  
+
                   </div>
-                  
+
                   <!-- Skills Tab -->
-                  
+
                   <div class="tab-pane fade" id="skillsBuild" role="tabpanel" aria-labelledby="skillsBuildTab">
-                    
+
                     <div class="input-group my-3">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="skillSelect1">Skills: </label>
@@ -244,7 +246,7 @@
                         <option>Survival</option>
                       </select>
                     </div>
-                    
+
                     <div class="input-group my-3">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="skillSelect2">Skills: </label>
@@ -270,7 +272,7 @@
                         <option>Survival</option>
                       </select>
                     </div>
-                    
+
                     <div class="input-group my-3">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="skillSelect3">Skills: </label>
@@ -296,11 +298,11 @@
                         <option>Survival</option>
                       </select>
                     </div>
-                    
+
                   </div>
-  
+
                   <button class="btn btn-dark mb-3" id="submitButton" type="button">Create Character</button>
-                
+
                 </div>
 
               </form>
@@ -322,7 +324,7 @@
               </section>
 
                 <img id="characterImg" class="img-fluid rounded-circle img-top d-block w-25 mx-auto py-3" src="https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg" alt="character preview" />
-                
+
                 <!-- Level Info -->
 
                 <section class="card w-75 d-flex align-self-center mb-3">
@@ -356,7 +358,7 @@
                   <button class="btn btn-dark mb-3" id="levelUpButton" type="button">Level Up</button>
 
                 </section>
-                
+
                 <!-- Main Nav for Preview -->
 
                 <ul class="nav nav-tabs" id="charTabs" role="tablist">
@@ -380,7 +382,7 @@
                   </li>
 
                 </ul>
-                
+
                 <!-- General Info Preview -->
 
                 <div class="tab-content" id="CharTabsContent">
@@ -448,7 +450,7 @@
                         <b>Class: </b>
                         <span id="clsPreview"></span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Proficiency Bonus: </b>
                         <!--<span id="sign"></span>-->
@@ -458,7 +460,7 @@
                     </ul>
 
                   </div>
-                  
+
                   <!-- Skills Preview -->
 
                   <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
@@ -576,7 +578,7 @@
                     </ul>
 
                   </div>
-                  
+
                   <!-- Combat Preview -->
 
                   <div class="tab-pane fade" id="combat" role="tabpanel" aria-labelledby="combat-tab">
@@ -602,6 +604,11 @@
                         <b>Speed: </b>
                         <span id="speed">-</span>
                       </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Passive Perception: </b>
+                        <span id="passivePerception">-</span>
+                      </li>
 
                     </ul>
 
@@ -616,7 +623,7 @@
       <main>
 
     </div>
-    
+
     <!-- Footer -->
 
     <footer class="container-fluid bg-dark py-3">

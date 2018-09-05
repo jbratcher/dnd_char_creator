@@ -213,9 +213,7 @@ const charImageSet = () => {
 }
 
 const charLevelUp = () => {
-  console.log(currentLevel.textContent, experienceNextLevel);
   currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-  console.log(currentLevel.textContent, experienceNextLevel);
   experienceNextLevel.textContent = String(Levels[Number(currentLevel.textContent)-1].experience);
   updateProficiencyBonus();
 }
@@ -474,6 +472,8 @@ const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
 
 const speedPreview = <HTMLElement>document.querySelector('#speed');
 
+const passivePerceptionPreview = <HTMLElement>document.querySelector('#passivePerception');
+
 // Combat functions
 
 const hitPoints = () => {
@@ -496,8 +496,11 @@ const initiativeMod = () => {
   initiativeModPreview.textContent = String(dexMod);
 }
 
-const baseSpeed = () => {
-  speedPreview.textContent = Races[charRace].speed;
+const baseSpeed = () => speedPreview.textContent = Races[charRace].speed;
+
+
+const passivePerception = () => {
+  passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
 }
 
 ////////////////////////////////////////////////////////////
@@ -591,6 +594,10 @@ submitButton.addEventListener('click', e => {
   // Get base speed based on chosen race
 
   baseSpeed();
+  
+  // Get wisdom modifier and set passive perception
+  
+  passivePerception();
   
 });
 
