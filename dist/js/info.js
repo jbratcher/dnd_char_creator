@@ -97,30 +97,146 @@ var Classes = exports.Classes = {
 ////////////////////////////////////////
 var Races = exports.Races = {
     dragonborn: {
+        abilityModifier: {
+            ability: 'strength',
+            modifier: 2
+        },
+        age: {
+            min: 15,
+            max: 80
+        },
+        alignments: ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Evil", "Neutral Evil", "Chaotic Evil"],
+        darkvision: false,
+        languages: ['Common', 'Draconic'],
+        size: 'Medium',
         speed: 30
     },
     dwarf: {
+        abilityModifier: {
+            ability: 'constitution',
+            modifier: 2
+        },
+        age: {
+            min: 50,
+            max: 350
+        },
+        alignments: ["Lawful Good", "Lawful Neutral", "Lawful Evil"],
+        darkvision: true,
+        languages: ['Common', 'Dwarfish'],
+        size: 'Medium',
         speed: 25
     },
     elf: {
+        abilityModifier: {
+            ability: 'dexerity',
+            modifier: 2
+        },
+        age: {
+            min: 100,
+            max: 750
+        },
+        alignments: ["Chaotic Good", "Chaotic Neutral", "Chaotic Evil"],
+        darkvision: true,
+        languages: ['Common', 'Elfish'],
+        size: 'Medium',
         speed: 30
     },
     gnome: {
+        abilityModifier: {
+            ability: 'intelligence',
+            modifier: 2
+        },
+        age: {
+            min: 40,
+            max: 500
+        },
+        alignments: ["Lawful Good", "Neutral Good", "Chaotic Good"],
+        darkvision: true,
+        languages: ["Common", "Gnomish"],
+        size: 'Small',
         speed: 25
     },
     halfelf: {
+        abilityModifier: {
+            ability: 'charisma',
+            modifier: 2,
+            extra: 2,
+            extraMofiier: 1
+        },
+        age: {
+            min: 20,
+            max: 180
+        },
+        alignments: ["Chaotic Good", "Chaotic Neutral", "Chaotic Evil"],
+        darkvision: true,
+        languages: ["Common", "Elfish"],
+        extraLanguage: 1,
+        size: 'Medium',
         speed: 30
     },
     halfling: {
+        abilityModifier: {
+            ability: 'dexerity',
+            modifier: 2
+        },
+        age: {
+            min: 20,
+            max: 150
+        },
+        alignments: ["Lawful Good"],
+        darkvision: false,
+        languages: ["Common", "Halfling"],
+        size: 'Small',
         speed: 25
     },
     halforc: {
+        abilityModifier: {
+            ability: 'strength',
+            modifier: 2,
+            extraAbility: 'constitution',
+            extraModifier: 1
+        },
+        age: {
+            min: 14,
+            max: 75
+        },
+        alignments: ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Evil", "Neutral Evil", "Chaotic Evil"],
+        darkvision: true,
+        languages: ["Common", "Orc"],
+        size: 'Medium',
         speed: 30
     },
     human: {
+        abilityModifier: {
+            ability: 'all',
+            modifier: 1
+        },
+        age: {
+            min: 15,
+            max: 80
+        },
+        alignments: ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Evil", "Neutral Evil", "Chaotic Evil"],
+        darkvision: false,
+        languages: ["Common"],
+        extraLanguage: 1,
+        size: 'Medium',
         speed: 30
     },
-    Tiefling: {
+    tiefling: {
+        abilityModifier: {
+            ability: 'intelligence',
+            modifier: 1,
+            extraAbility: 'charisma',
+            extraModifier: 2
+        },
+        age: {
+            min: 15,
+            max: 100
+        },
+        alignments: ["Chaotic Neutral", "Chaotic Evil"],
+        darkvision: true,
+        languages: ["Common", "Infernal"],
+        size: 'Medium',
         speed: 30
     }
 };
