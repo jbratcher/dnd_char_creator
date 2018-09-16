@@ -213,23 +213,6 @@ var selectedSkill2 = skill1.options[skill2.selectedIndex];
 var selectedSkill3 = skill1.options[skill3.selectedIndex];
 var skillsPreviewList = document.querySelector('#skillsPreviewList');
 var skillsPreviewListItems = skillsPreviewList.children;
-var acrobaticsSkill = document.querySelector('#acrobaticsSkill');
-var animalHandlingsSkill = document.querySelector('#animalHandlingsSkill');
-var arcanaSkill = document.querySelector('#arcanaSkill');
-var athleticsSkill = document.querySelector('#athleticsSkill');
-var deceptionSkill = document.querySelector('#deceptionSkill');
-var historySkill = document.querySelector('#historySkill');
-var intimidationSkill = document.querySelector('#intimidationSkill');
-var investigationSkill = document.querySelector('#investigationSkill');
-var medicineSkill = document.querySelector('#medicineSkill');
-var natureSkill = document.querySelector('#natureSkill');
-var perceptionSkill = document.querySelector('#perceptionSkill');
-var performanceSkill = document.querySelector('#performanceSkill');
-var persuasionSkill = document.querySelector('#persuasionSkill');
-var religionSkill = document.querySelector('#religionSkill');
-var slieghtOfHandSkill = document.querySelector('#slieghtOfHandSkill');
-var stealthSkill = document.querySelector('#stealthSkill');
-var survivalSkill = document.querySelector('#survivalSkill');
 // Skill functions
 var getSkillModifier = function (skillText) {
     var skillAbility = (singleWord.exec(skillText));
@@ -244,7 +227,7 @@ var highlightSkills = function () {
     selectedSkill2 = skill1.options[skill2.selectedIndex];
     selectedSkill3 = skill1.options[skill3.selectedIndex];
     updateProficiencyBonus();
-    // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present  
+    // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < skillsPreviewListItems.length; i++) {
         // reset modifier node to '-'
         skillsPreviewListItems[i].childNodes[5].textContent = "-";
