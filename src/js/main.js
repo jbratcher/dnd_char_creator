@@ -313,6 +313,7 @@ var armorClassPreview = document.querySelector('#armorClass');
 var initiativeModPreview = document.querySelector('#initiative');
 var speedPreview = document.querySelector('#speed');
 var passivePerceptionPreview = document.querySelector('#passivePerception');
+var darkvisionPreview = document.querySelector('#darkvisionPreview');
 // Combat functions
 var hitPoints = function () {
     // 1st level is max hit points + constiution modifier
@@ -334,6 +335,12 @@ var initiativeMod = function () {
 var baseSpeed = function () { return speedPreview.textContent = Races[charRace].speed; };
 var passivePerception = function () {
     passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
+};
+var darkvision = function () {
+    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    if (Races[charRace].darkvision) {
+        darkvisionPreview.textContent = '60 ft.';
+    }
 };
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
@@ -384,6 +391,7 @@ submitButton.addEventListener('click', function (e) {
     baseSpeed();
     // Get wisdom modifier and set passive perception
     passivePerception();
+    darkvision();
 });
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {

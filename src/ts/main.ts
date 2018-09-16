@@ -474,6 +474,8 @@ const speedPreview = <HTMLElement>document.querySelector('#speed');
 
 const passivePerceptionPreview = <HTMLElement>document.querySelector('#passivePerception');
 
+const darkvisionPreview = <HTMLElement>document.querySelector('#darkvisionPreview');
+
 // Combat functions
 
 const hitPoints = () => {
@@ -501,6 +503,13 @@ const baseSpeed = () => speedPreview.textContent = Races[charRace].speed;
 
 const passivePerception = () => {
   passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
+}
+
+const darkvision = () => {
+  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  if(Races[charRace].darkvision) {
+    darkvisionPreview.textContent = '60 ft.'
+  }
 }
 
 ////////////////////////////////////////////////////////////
@@ -598,6 +607,8 @@ submitButton.addEventListener('click', e => {
   // Get wisdom modifier and set passive perception
   
   passivePerception();
+  
+  darkvision();
   
 });
 
