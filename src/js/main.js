@@ -63,24 +63,12 @@ var rolledWisdom = document.querySelector('#rolledWisdom');
 var rollCharisma = document.querySelector('#rollCharisma');
 var rolledCharisma = document.querySelector('#rolledCharisma');
 // Event listeners for rolling each attribute
-rollStrength.addEventListener('click', function () {
-    setScore(rolledStrength);
-});
-rollDexerity.addEventListener('click', function () {
-    setScore(rolledDexerity);
-});
-rollConstitution.addEventListener('click', function () {
-    setScore(rolledConstitition);
-});
-rollWisdom.addEventListener('click', function () {
-    setScore(rolledWisdom);
-});
-rollIntelligence.addEventListener('click', function () {
-    setScore(rolledIntelligence);
-});
-rollCharisma.addEventListener('click', function () {
-    setScore(rolledCharisma);
-});
+rollStrength.addEventListener('click', function () { return setScore(rolledStrength); });
+rollDexerity.addEventListener('click', function () { return setScore(rolledDexerity); });
+rollConstitution.addEventListener('click', function () { return setScore(rolledConstitition); });
+rollWisdom.addEventListener('click', function () { return setScore(rolledWisdom); });
+rollIntelligence.addEventListener('click', function () { return setScore(rolledIntelligence); });
+rollCharisma.addEventListener('click', function () { return setScore(rolledCharisma); });
 ////////////////////////////////////////////////////////////
 // Get character info input elements
 ////////////////////////////////////////////////////////////
@@ -203,6 +191,17 @@ var racialAbilityModifier = function () {
             abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
         }
     }
+    // if race has extra ability to modify
+    if (Races[charRace].abilityModifier.extraAbility) {
+        for (var i = 0; i < abilityScoreListItems.length; i++) {
+            var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+            if (string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
+                var abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+                abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(Races[charRace].abilityModifier.extraModifier));
+            }
+        }
+    }
+    // TODO: handle halfelf free choice of 2 extra abilities to modify
 };
 ////////////////////////////////////////////////////////////
 // Skills
@@ -327,6 +326,7 @@ var initiativeModPreview = document.querySelector('#initiative');
 var speedPreview = document.querySelector('#speed');
 var passivePerceptionPreview = document.querySelector('#passivePerception');
 var darkvisionPreview = document.querySelector('#darkvisionPreview');
+var sizePreview = document.querySelector('#size');
 // Combat functions
 var hitPoints = function () {
     // 1st level is max hit points + constiution modifier
@@ -355,6 +355,7 @@ var darkvision = function () {
         darkvisionPreview.textContent = '60 ft.';
     }
 };
+var charSize = function () { return sizePreview.textContent = Races[charRace].size; };
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
@@ -406,6 +407,7 @@ submitButton.addEventListener('click', function (e) {
     passivePerception();
     darkvision();
     racialAbilityModifier();
+    charSize();
 });
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {

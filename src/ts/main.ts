@@ -93,29 +93,17 @@ const rolledCharisma = document.querySelector('#rolledCharisma');
 
 // Event listeners for rolling each attribute
 
-rollStrength.addEventListener('click', () => {
-  setScore(rolledStrength);
-});
+rollStrength.addEventListener('click', () => setScore(rolledStrength));
 
-rollDexerity.addEventListener('click', () => {
-  setScore(rolledDexerity);
-});
+rollDexerity.addEventListener('click', () => setScore(rolledDexerity));
 
-rollConstitution.addEventListener('click', () => {
-  setScore(rolledConstitition);
-});
+rollConstitution.addEventListener('click', () => setScore(rolledConstitition));
 
-rollWisdom.addEventListener('click', () => {
-  setScore(rolledWisdom);
-});
+rollWisdom.addEventListener('click', () => setScore(rolledWisdom));
 
-rollIntelligence.addEventListener('click', () => {
-  setScore(rolledIntelligence);
-});
+rollIntelligence.addEventListener('click', () => setScore(rolledIntelligence));
 
-rollCharisma.addEventListener('click', () => {
-  setScore(rolledCharisma);
-});
+rollCharisma.addEventListener('click', () => setScore(rolledCharisma));
 
 ////////////////////////////////////////////////////////////
 // Get character info input elements
@@ -304,6 +292,20 @@ const racialAbilityModifier = () => {
       abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
     }
   }
+  // if race has extra ability to modify
+  if(Races[charRace].abilityModifier.extraAbility) {
+    
+    for(let i = 0; i < abilityScoreListItems.length; i++) {
+      let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      if(string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
+        let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+        abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(Races[charRace].abilityModifier.extraModifier));
+      }
+    }
+    
+  }
+  
+  // TODO: handle halfelf free choice of 2 extra abilities to modify
   
   
 }
@@ -492,6 +494,8 @@ const passivePerceptionPreview = <HTMLElement>document.querySelector('#passivePe
 
 const darkvisionPreview = <HTMLElement>document.querySelector('#darkvisionPreview');
 
+const sizePreview = <HTMLElement>document.querySelector('#size');
+
 // Combat functions
 
 const hitPoints = () => {
@@ -516,7 +520,6 @@ const initiativeMod = () => {
 
 const baseSpeed = () => speedPreview.textContent = Races[charRace].speed;
 
-
 const passivePerception = () => {
   passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
 }
@@ -527,6 +530,8 @@ const darkvision = () => {
     darkvisionPreview.textContent = '60 ft.'
   }
 }
+
+const charSize = () => sizePreview.textContent = Races[charRace].size;
 
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
@@ -627,6 +632,8 @@ submitButton.addEventListener('click', e => {
   darkvision();
   
   racialAbilityModifier();
+  
+  charSize();
   
 });
 
