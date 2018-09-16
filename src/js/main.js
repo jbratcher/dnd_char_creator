@@ -177,6 +177,33 @@ var intelligence = rolledIntelligence.textContent;
 var wisdom = rolledWisdom.textContent;
 var charisma = rolledCharisma.textContent;
 // Ability Score functions
+var lookupAbilityScore = function (ability) {
+    // Get current values of required info
+    abilityScoreList = document.querySelector('#abilityScoreList');
+    abilityScoreListItems = abilityScoreList.children;
+    var abilityScore;
+    // if ability matches abilityScore in list return number value of abilityScore
+    for (var i = 0; i < abilityScoreListItems.length; i++) {
+        var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+        if (string.toLowerCase() === ability) {
+            var abilityScore_1 = abilityScoreListItems[i].childNodes[3].textContent;
+            return abilityScore_1;
+        }
+    }
+};
+var racialAbilityModifier = function () {
+    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    var racialAbility = Races[charRace].abilityModifier.ability;
+    var racialAbilityMod = Races[charRace].abilityModifier.modifier;
+    // if ability matches abilityPreview node text, add modifier to score
+    for (var i = 0; i < abilityScoreListItems.length; i++) {
+        var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+        if (string.toLowerCase() === racialAbility) {
+            var abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+            abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
+        }
+    }
+};
 ////////////////////////////////////////////////////////////
 // Skills
 ////////////////////////////////////////////////////////////
@@ -205,20 +232,6 @@ var slieghtOfHandSkill = document.querySelector('#slieghtOfHandSkill');
 var stealthSkill = document.querySelector('#stealthSkill');
 var survivalSkill = document.querySelector('#survivalSkill');
 // Skill functions
-var lookupAbilityScore = function (ability) {
-    // Get current values of required info
-    abilityScoreList = document.querySelector('#abilityScoreList');
-    abilityScoreListItems = abilityScoreList.children;
-    var abilityScore;
-    // if abilityScore matches abilityScore in list return number value of abilityScore
-    for (var i = 0; i < abilityScoreListItems.length; i++) {
-        var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
-        if (string.toLowerCase() === ability) {
-            var abilityScore_1 = abilityScoreListItems[i].childNodes[3].textContent;
-            return abilityScore_1;
-        }
-    }
-};
 var getSkillModifier = function (skillText) {
     var skillAbility = (singleWord.exec(skillText));
     // get ability score for that skill
@@ -295,7 +308,7 @@ var highlightAvailableSkills = function () {
         _loop_3(i);
     }
 };
-// dynamically change available skills based on characger class
+// dynamically change available skills based on character class
 cls.addEventListener('change', function () {
     selectedCls = cls.options[cls.selectedIndex];
     charCls = selectedCls.text.toLowerCase();
@@ -392,6 +405,7 @@ submitButton.addEventListener('click', function (e) {
     // Get wisdom modifier and set passive perception
     passivePerception();
     darkvision();
+    racialAbilityModifier();
 });
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {

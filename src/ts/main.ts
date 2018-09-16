@@ -277,6 +277,37 @@ let charisma = rolledCharisma.textContent;
 
 // Ability Score functions
 
+const lookupAbilityScore = (ability) => {
+  // Get current values of required info
+  abilityScoreList = document.querySelector('#abilityScoreList');
+  abilityScoreListItems = abilityScoreList.children;
+  let abilityScore;
+  // if ability matches abilityScore in list return number value of abilityScore
+  for(let i = 0; i < abilityScoreListItems.length; i++) {
+    let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+    if(string.toLowerCase() === ability) {
+      let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+      return abilityScore;
+    }
+  }
+}
+
+const racialAbilityModifier = () => {
+  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  let racialAbility = Races[charRace].abilityModifier.ability;
+  let racialAbilityMod = Races[charRace].abilityModifier.modifier;
+  // if ability matches abilityPreview node text, add modifier to score
+  for(let i = 0; i < abilityScoreListItems.length; i++) {
+    let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+    if(string.toLowerCase() === racialAbility) {
+      let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+      abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
+    }
+  }
+  
+  
+}
+
 ////////////////////////////////////////////////////////////
 // Skills
 ////////////////////////////////////////////////////////////
@@ -330,21 +361,6 @@ const stealthSkill = <HTMLElement>document.querySelector('#stealthSkill');
 const survivalSkill = <HTMLElement>document.querySelector('#survivalSkill');
 
 // Skill functions
-
-const lookupAbilityScore = (ability) => {
-  // Get current values of required info
-  abilityScoreList = document.querySelector('#abilityScoreList');
-  abilityScoreListItems = abilityScoreList.children;
-  let abilityScore;
-    // if abilityScore matches abilityScore in list return number value of abilityScore
-    for(let i = 0; i < abilityScoreListItems.length; i++) {
-      let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
-      if(string.toLowerCase() === ability) {
-        let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
-        return abilityScore;
-      }
-    }
-}
 
 const getSkillModifier = skillText => {
   
@@ -440,7 +456,7 @@ const highlightAvailableSkills = () => {
   
 }
 
-// dynamically change available skills based on characger class
+// dynamically change available skills based on character class
 
 cls.addEventListener('change', () => {
   
@@ -609,6 +625,8 @@ submitButton.addEventListener('click', e => {
   passivePerception();
   
   darkvision();
+  
+  racialAbilityModifier();
   
 });
 
