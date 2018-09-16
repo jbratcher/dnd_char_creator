@@ -7,7 +7,7 @@ import { Classes, Races, Levels } from './info.js';
 // Utility functions
 ////////////////////////////////////////
 var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
-var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a true or false value
+var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a random true or false value
 var rollAbilityScore = function () { return Math.floor(Math.random() * ((18 - 3) + 1)) + 3; };
 var setToMinMax = function (score) { return score > 18 ? 18 : score < 3 ? 3 : score; };
 var singleWord = /(\w+)/;
@@ -18,10 +18,10 @@ var abilityScoreMod;
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
-var setScore = function (scoreDisplay) {
+var setScore = function (abilityScorePreview) {
     var score = rollAbilityScore();
     setToMinMax(score);
-    scoreDisplay.textContent = String(score);
+    abilityScorePreview.textContent = String(score);
 };
 var getCharacterImage = function (genderedImages) {
     var randomIndex = randomIntFromRange(0, (genderedImages.length - 1));
@@ -43,10 +43,10 @@ var appendSigntoValue = function (value, node) {
     node.textContent = sign + " " + value;
 };
 // set ability modifier to element helper
-var setAbilityModifierToElement = function (ability, modFunction, elementAndMethod) {
-    var modifier = modFunction;
-    elementAndMethod = modifier;
-};
+// const setAbilityModifierToElement = (ability, modFunction, elementAndMethod) => {
+//   let modifier = modFunction;
+//   elementAndMethod = modifier;
+// }
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
@@ -174,8 +174,8 @@ var lookupAbilityScore = function (ability) {
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         if (string.toLowerCase() === ability) {
-            var abilityScore_1 = abilityScoreListItems[i].childNodes[3].textContent;
-            return abilityScore_1;
+            abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+            return abilityScore;
         }
     }
 };
@@ -216,7 +216,6 @@ var skillsPreviewListItems = skillsPreviewList.children;
 // Skill functions
 var getSkillModifier = function (skillText) {
     var skillAbility = (singleWord.exec(skillText));
-    // get ability score for that skill
     var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
     abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
     return totalMod = abilityScoreMod + proficiencyBonus;
@@ -329,23 +328,47 @@ var initiativeMod = function () {
     initiativeModPreview.textContent = String(dexMod);
 };
 var baseSpeed = function () { return speedPreview.textContent = Races[charRace].speed; };
-var passivePerception = function () {
-    passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
-};
+var passivePerception = function () { return passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom)); };
 var darkvision = function () {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
     if (Races[charRace].darkvision) {
         darkvisionPreview.textContent = '60 ft.';
     }
+    else {
+        darkvisionPreview.textContent = 'None';
+    }
 };
 var charSize = function () { return sizePreview.textContent = Races[charRace].size; };
+var combatCreation = function () {
+    updateProficiencyBonus();
+    // Highlight selected skills and append skill modifier
+    highlightSkills();
+    // Get character preview image based on class, race, and gender
+    charImageSet();
+    // Set initial hit point value for 1st level
+    hitPoints();
+    // Get dexerity and armor modifier and set armor class
+    armorClass();
+    // Get dexerity modifier and set initiative bonus
+    initiativeMod();
+    // Get base speed based on chosen race
+    baseSpeed();
+    // Get wisdom modifier and set passive perception
+    passivePerception();
+    // Get darkvision boolean and set value
+    darkvision();
+    // Set any racial ability modifiers to ability scores
+    racialAbilityModifier();
+    // Set the character size
+    charSize();
+};
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
 var submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', function (e) {
     e.preventDefault();
-    // Get current state of require info
+    // Get current state of required info
     selectedRace = race.options[race.selectedIndex];
     strength = rolledStrength.textContent;
     dexerity = rolledDexerity.textContent;
@@ -373,24 +396,7 @@ submitButton.addEventListener('click', function (e) {
     charismaPreview.textContent = charisma;
     clsPreview.textContent = selectedCls.textContent;
     alignmentPreview.textContent = selectedAlignment.textContent;
-    updateProficiencyBonus();
-    // Highlight selected skills and append skill modifier
-    highlightSkills();
-    // Get character preview image based on class, race, and gender
-    charImageSet();
-    // Set initial hit point value for 1st level
-    hitPoints();
-    // Get dexerity and armor modifier and set armor class
-    armorClass();
-    // Get dexerity modifier and set initiative bonus
-    initiativeMod();
-    // Get base speed based on chosen race
-    baseSpeed();
-    // Get wisdom modifier and set passive perception
-    passivePerception();
-    darkvision();
-    racialAbilityModifier();
-    charSize();
+    combatCreation();
 });
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {
