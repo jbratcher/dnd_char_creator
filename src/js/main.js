@@ -113,6 +113,7 @@ var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
 var charGender = gender.value.toLowerCase();
 var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
 var proficiencyBonus;
+var languagesPreview = document.querySelector('#languagesPreview');
 // General buttons
 var levelUpButton = document.querySelector('#levelUpButton');
 var addNewExperienceButton = document.querySelector('#addExp');
@@ -375,6 +376,7 @@ submitButton.addEventListener('click', function (e) {
     charCls = selectedCls.textContent.toLowerCase();
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
     charGender = gender.value.toLowerCase();
+    languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ");
     // Post info from character creation to preview area
     currentLevel.textContent = String(Levels[0].level);
     experienceNextLevel.textContent = String(Levels[0].experience);

@@ -187,6 +187,8 @@ const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficienc
 
 let proficiencyBonus: number;
 
+const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview')
+
 // General buttons
 
 const levelUpButton = document.querySelector('#levelUpButton');
@@ -568,6 +570,8 @@ submitButton.addEventListener('click', e => {
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
   
   charGender = gender.value.toLowerCase();
+  
+  languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ");
 
   // Post info from character creation to preview area
   
