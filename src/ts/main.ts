@@ -123,6 +123,23 @@ const gender = <HTMLInputElement>document.querySelector('#gender');
 
 const age = <HTMLInputElement>document.querySelector('#age');
 
+const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
+
+const ageHelpText = () => {
+  
+  ageHelp.textContent = `Please enter an age between ${Races[charRace].age.min} and  ${Races[charRace].age.max}`
+  
+}
+
+race.addEventListener('change', () => {
+  
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  console.log(charRace);
+  ageHelpText();
+
+  
+});
+
 // Skill select
 
 const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
