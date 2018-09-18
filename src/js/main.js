@@ -81,13 +81,12 @@ var gender = document.querySelector('#gender');
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
 var ageHelpText = function () {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     ageHelp.textContent = "Please enter an age between " + Races[charRace].age.min + " and  " + Races[charRace].age.max;
 };
-race.addEventListener('change', function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    console.log(charRace);
-    ageHelpText();
-});
+race.addEventListener('change', ageHelpText);
+// Iniialize help text on page load
+ageHelpText();
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 var skill1list = skill1.children;

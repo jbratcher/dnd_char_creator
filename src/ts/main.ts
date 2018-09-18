@@ -127,18 +127,16 @@ const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 
 const ageHelpText = () => {
   
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
   ageHelp.textContent = `Please enter an age between ${Races[charRace].age.min} and  ${Races[charRace].age.max}`
   
 }
 
-race.addEventListener('change', () => {
-  
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  console.log(charRace);
-  ageHelpText();
+race.addEventListener('change', ageHelpText);
 
-  
-});
+// Iniialize help text on page load
+
+ageHelpText();
 
 // Skill select
 
