@@ -11,7 +11,7 @@ import { Classes, Races, Levels } from './info.js';
 
 const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-const randomBoolean = () => Math.random() >= 0.5;  // Get a true or false value
+const randomBoolean = () => Math.random() >= 0.5;  // Get a random true or false value
 
 const rollAbilityScore = () => Math.floor(Math.random() * ((18 - 3) + 1)) + 3;
 
@@ -31,10 +31,10 @@ let abilityScoreMod: number;
 // Set/Get functions
 ////////////////////////////////////////
 
-const setScore = (scoreDisplay) => {
+const setScore = (abilityScorePreview) => {
   let score: number = rollAbilityScore();
   setToMinMax(score);
-  scoreDisplay.textContent = String(score);
+  abilityScorePreview.textContent = String(score);
 }
 
 const getCharacterImage = (genderedImages) => {
@@ -53,7 +53,7 @@ const getCharacterAttributes = (charCls, charRace, charGender) => {
 }
 
 const getAbilityScoreModifier = abilityScore => modifier = Math.floor((abilityScore / 2) - 5);
-  
+
 // Append sign to value
 
 const appendSigntoValue = (value, node) => {
@@ -64,10 +64,10 @@ const appendSigntoValue = (value, node) => {
 
 // set ability modifier to element helper
 
-const setAbilityModifierToElement = (ability, modFunction, elementAndMethod) => {
-  let modifier = modFunction;
-  elementAndMethod = modifier;
-}
+// const setAbilityModifierToElement = (ability, modFunction, elementAndMethod) => {
+//   let modifier = modFunction;
+//   elementAndMethod = modifier;
+// }
 
 ////////////////////////////////////////
 // Declare big 6 attributes
@@ -237,7 +237,7 @@ const addHitPoints = () => {
 const updateProficiencyBonus = () => {
   proficiencyBonus = Levels[currentLevel.textContent].bonus;
   proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
-  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview); 
+  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 }
 
 const addExp = () => {
@@ -291,7 +291,7 @@ const lookupAbilityScore = (ability) => {
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
     if(string.toLowerCase() === ability) {
-      let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+      abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
       return abilityScore;
     }
   }
@@ -311,7 +311,6 @@ const racialAbilityModifier = () => {
   }
   // if race has extra ability to modify
   if(Races[charRace].abilityModifier.extraAbility) {
-    
     for(let i = 0; i < abilityScoreListItems.length; i++) {
       let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       if(string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
@@ -319,12 +318,12 @@ const racialAbilityModifier = () => {
         abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(Races[charRace].abilityModifier.extraModifier));
       }
     }
-    
+
   }
-  
+
   // TODO: handle halfelf free choice of 2 extra abilities to modify
-  
-  
+
+
 }
 
 ////////////////////////////////////////////////////////////
@@ -338,57 +337,22 @@ let availableSkills = Classes[charCls].availableSkills;
 let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
 let selectedSkill2 = skill1.options[skill2.selectedIndex];
-  
+
 let selectedSkill3 = skill1.options[skill3.selectedIndex];
 
 const skillsPreviewList = document.querySelector('#skillsPreviewList');
 
 const skillsPreviewListItems = skillsPreviewList.children;
 
-const acrobaticsSkill = <HTMLElement>document.querySelector('#acrobaticsSkill');
-
-const animalHandlingsSkill = <HTMLElement>document.querySelector('#animalHandlingsSkill');
-
-const arcanaSkill = <HTMLElement>document.querySelector('#arcanaSkill');
-
-const athleticsSkill = <HTMLElement>document.querySelector('#athleticsSkill');
-
-const deceptionSkill = <HTMLElement>document.querySelector('#deceptionSkill');
-
-const historySkill = <HTMLElement>document.querySelector('#historySkill');
-
-const intimidationSkill = <HTMLElement>document.querySelector('#intimidationSkill');
-
-const investigationSkill = <HTMLElement>document.querySelector('#investigationSkill');
-
-const medicineSkill = <HTMLElement>document.querySelector('#medicineSkill');
-
-const natureSkill = <HTMLElement>document.querySelector('#natureSkill');
-
-const perceptionSkill = <HTMLElement>document.querySelector('#perceptionSkill');
-
-const performanceSkill = <HTMLElement>document.querySelector('#performanceSkill');
-
-const persuasionSkill = <HTMLElement>document.querySelector('#persuasionSkill');
-
-const religionSkill = <HTMLElement>document.querySelector('#religionSkill');
-
-const slieghtOfHandSkill = <HTMLElement>document.querySelector('#slieghtOfHandSkill');
-
-const stealthSkill = <HTMLElement>document.querySelector('#stealthSkill');
-
-const survivalSkill = <HTMLElement>document.querySelector('#survivalSkill');
-
 // Skill functions
 
 const getSkillModifier = skillText => {
-  
+
   let skillAbility = (singleWord.exec(skillText));
-  // get ability score for that skill
   let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
   abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
-  return totalMod = abilityScoreMod + proficiencyBonus; 
-  
+  return totalMod = abilityScoreMod + proficiencyBonus;
+
 };
 
 const highlightSkills = () => {
@@ -397,7 +361,7 @@ const highlightSkills = () => {
   selectedSkill2 = skill1.options[skill2.selectedIndex];
   selectedSkill3 = skill1.options[skill3.selectedIndex];
   updateProficiencyBonus();
-  // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present  
+  // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
   for(let i = 0; i < skillsPreviewListItems.length; i++) {
     // reset modifier node to '-'
     skillsPreviewListItems[i].childNodes[5].textContent = "-";
@@ -419,74 +383,74 @@ const highlightSkills = () => {
 // TODO: refactor this monstrosity from 3 loops to 1
 
 const highlightAvailableSkills = () => {
-    
+
   availableSkills = Classes[charCls].availableSkills;
-  
+
   for(let i = 0; i < skill1list.length; i++) {
     (<HTMLSelectElement>skill1list[i]).style.display = 'none';
   }
-  
+
   for(let i = 0; i < skill2list.length; i++) {
     (<HTMLSelectElement>skill2list[i]).style.display = 'none';
   }
-  
+
   for(let i = 0; i < skill3list.length; i++) {
     (<HTMLSelectElement>skill3list[i]).style.display = 'none';
   }
-    
+
     for(let i = 0; i < skill1list.length; i++) {
-      
+
       availableSkills.forEach(skill => {
-    
+
         if(String(skill1list[i].textContent) === skill) {
             (<HTMLSelectElement>skill1list[i]).style.display = 'block';
             (<HTMLSelectElement>skill1list[i]).style.color = 'black';
-        } 
-    
+        }
+
       })
-    
+
     }
-    
+
     for(let i = 0; i < skill2list.length; i++) {
-      
+
       availableSkills.forEach(skill => {
-    
+
         if(String(skill2list[i].textContent) === skill) {
             (<HTMLSelectElement>skill2list[i]).style.display = 'block';
             (<HTMLSelectElement>skill2list[i]).style.color = 'black';
-        } 
-    
+        }
+
       })
-    
+
     }
-    
+
     for(let i = 0; i < skill3list.length; i++) {
-      
+
       availableSkills.forEach(skill => {
-    
+
         if(String(skill3list[i].textContent) === skill) {
             (<HTMLSelectElement>skill3list[i]).style.display = 'block';
             (<HTMLSelectElement>skill3list[i]).style.color = 'black';
-        } 
-    
+        }
+
       })
-    
+
     }
-  
+
 }
 
 // dynamically change available skills based on character class
 
 cls.addEventListener('change', () => {
-  
+
   selectedCls = cls.options[cls.selectedIndex];
-  
+
   charCls = selectedCls.text.toLowerCase();
 
   // loop through skills lists highlighting skills that are available for this class
-  
+
   highlightAvailableSkills();
-    
+
 });
 
 // Initialize state for selected class on document load
@@ -537,18 +501,64 @@ const initiativeMod = () => {
 
 const baseSpeed = () => speedPreview.textContent = Races[charRace].speed;
 
-const passivePerception = () => {
-  passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
-}
+const passivePerception = () => passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
 
 const darkvision = () => {
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-  if(Races[charRace].darkvision) {
+  if (Races[charRace].darkvision) {
     darkvisionPreview.textContent = '60 ft.'
+  } else {
+    darkvisionPreview.textContent = 'None'
   }
 }
 
 const charSize = () => sizePreview.textContent = Races[charRace].size;
+
+const combatCreation = () => {
+
+  updateProficiencyBonus();
+
+  // Highlight selected skills and append skill modifier
+
+  highlightSkills();
+
+  // Get character preview image based on class, race, and gender
+
+  charImageSet();
+
+  // Set initial hit point value for 1st level
+
+  hitPoints();
+
+  // Get dexerity and armor modifier and set armor class
+
+  armorClass();
+
+  // Get dexerity modifier and set initiative bonus
+
+  initiativeMod();
+
+  // Get base speed based on chosen race
+
+  baseSpeed();
+
+  // Get wisdom modifier and set passive perception
+
+  passivePerception();
+
+  // Get darkvision boolean and set value
+
+  darkvision();
+
+  // Set any racial ability modifiers to ability scores
+
+  racialAbilityModifier();
+
+  // Set the character size
+
+  charSize();
+
+}
 
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
@@ -560,7 +570,7 @@ submitButton.addEventListener('click', e => {
 
   e.preventDefault();
 
-  // Get current state of require info
+  // Get current state of required info
 
   selectedRace = race.options[race.selectedIndex];
 
@@ -579,19 +589,19 @@ submitButton.addEventListener('click', e => {
   selectedAlignment = alignment.options[alignment.selectedIndex];
 
   selectedCls = cls.options[cls.selectedIndex];
-  
+
   charCls = selectedCls.textContent.toLowerCase();
-  
+
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-  
+
   charGender = gender.value.toLowerCase();
   
   languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ");
 
   // Post info from character creation to preview area
-  
+
   currentLevel.textContent = String(Levels[0].level);
-  
+
   experienceNextLevel.textContent = String(Levels[0].experience);
 
   namePreview.textContent = name.value;
@@ -617,57 +627,23 @@ submitButton.addEventListener('click', e => {
   clsPreview.textContent = selectedCls.textContent;
 
   alignmentPreview.textContent = selectedAlignment.textContent;
-  
-  updateProficiencyBonus();
-  
-  // Highlight selected skills and append skill modifier
-  
-  highlightSkills();
 
-  // Get character preview image based on class, race, and gender
+  combatCreation();
 
-  charImageSet();
-
-  // Set initial hit point value for 1st level
-
-  hitPoints();
-
-  // Get dexerity and armor modifier and set armor class
-
-  armorClass();
-
-  // Get dexerity modifier and set initiative bonus
-
-  initiativeMod();
-
-  // Get base speed based on chosen race
-
-  baseSpeed();
-  
-  // Get wisdom modifier and set passive perception
-  
-  passivePerception();
-  
-  darkvision();
-  
-  racialAbilityModifier();
-  
-  charSize();
-  
 });
 
 // Level advancement button submit
 
 levelUpButton.addEventListener('click', e => {
-  
+
   e.preventDefault();
-  
+
   // Get current state of required variables
 
   constitution = rolledConstitition.textContent;
   selectedCls = cls.options[cls.selectedIndex];
   charCls = selectedCls.textContent.toLowerCase();
-  
+
   if(currentLevel.textContent === "20") {
     return;
   }
@@ -675,9 +651,9 @@ levelUpButton.addEventListener('click', e => {
   charLevelUp();
 
   addHitPoints();
-  
+
   highlightSkills();
-  
+
 });
 
 addNewExperienceButton.addEventListener('click', e => {
@@ -689,4 +665,3 @@ addNewExperienceButton.addEventListener('click', e => {
   addNewExperienceInput.value = null;
 
 });
-  
