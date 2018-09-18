@@ -564,9 +564,9 @@ const combatCreation = () => {
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
 
-const submitButton = document.querySelector('#submitButton');
+const createCharacterButton = document.querySelector('#createCharacterButton');
 
-submitButton.addEventListener('click', e => {
+createCharacterButton.addEventListener('click', e => {
 
   e.preventDefault();
 

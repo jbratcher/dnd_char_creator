@@ -374,8 +374,8 @@ var combatCreation = function () {
 ////////////////////////////////////////////////////////////
 // The big submit button for character creation
 ////////////////////////////////////////////////////////////
-var submitButton = document.querySelector('#submitButton');
-submitButton.addEventListener('click', function (e) {
+var createCharacterButton = document.querySelector('#createCharacterButton');
+createCharacterButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Get current state of required info
     selectedRace = race.options[race.selectedIndex];
