@@ -324,3 +324,10 @@ var Levels = exports.Levels = [{
     experience: 335000,
     bonus: 6
 }];
+////////////////////////////////////////
+// Languages object
+////////////////////////////////////////
+var Languages = exports.Languages = {
+    standard: ['common', 'dwarvish', 'elvish', 'giant', 'gnomish', 'goblin', 'halfling', 'orc'],
+    exotic: ['abyssal', 'celestial', 'draconic', 'deep speech', 'infernal', 'primordial', 'sylvan', 'undercommon']
+};

@@ -125,6 +125,12 @@ const age = <HTMLInputElement>document.querySelector('#age');
 
 const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 
+const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
+
+const extraLanguage = <HTMLInputElement>document.querySelector('#extraLanguage');
+
+const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
+
 const ageHelpText = () => {
   
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
@@ -137,6 +143,32 @@ race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 
 ageHelpText();
+
+// Display extra language field if human race is chosen
+
+const showExtraLanguageInput = () => {
+  
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  
+  charRace === 'human' ? extraLanguageField.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
+  
+  charRace === 'human' ? extraLanguageHelp.textContent = 'Human get to choose 1 extra language' : extraLanguageHelp.textContent = '';
+  
+  
+}
+
+race.addEventListener('change', showExtraLanguageInput);
+
+showExtraLanguageInput();
+
+
+// extraLanguageHelpText = () => {
+  
+// }
+
+// extraLanguageHelpText();
+
+
 
 // Skill select
 
@@ -596,7 +628,7 @@ submitButton.addEventListener('click', e => {
 
   charGender = gender.value.toLowerCase();
   
-  languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ");
+  languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ") + `, ${String(extraLanguage.value)}`;
 
   // Post info from character creation to preview area
 

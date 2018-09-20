@@ -80,6 +80,9 @@ var cls = document.querySelector('#cls');
 var gender = document.querySelector('#gender');
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
+var extraLanguageField = document.querySelector('#extraLanguageField');
+var extraLanguage = document.querySelector('#extraLanguage');
+var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 var ageHelpText = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     ageHelp.textContent = "Please enter an age between " + Races[charRace].age.min + " and  " + Races[charRace].age.max;
@@ -87,6 +90,17 @@ var ageHelpText = function () {
 race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 ageHelpText();
+// Display extra language field if human race is chosen
+var showExtraLanguageInput = function () {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    charRace === 'human' ? extraLanguageField.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
+    charRace === 'human' ? extraLanguageHelp.textContent = 'Human get to choose 1 extra language' : extraLanguageHelp.textContent = '';
+};
+race.addEventListener('change', showExtraLanguageInput);
+showExtraLanguageInput();
+// extraLanguageHelpText = () => {
+// }
+// extraLanguageHelpText();
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 var skill1list = skill1.children;
@@ -390,7 +404,7 @@ submitButton.addEventListener('click', function (e) {
     charCls = selectedCls.textContent.toLowerCase();
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
     charGender = gender.value.toLowerCase();
-    languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ");
+    languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ") + (", " + String(extraLanguage.value));
     // Post info from character creation to preview area
     currentLevel.textContent = String(Levels[0].level);
     experienceNextLevel.textContent = String(Levels[0].experience);

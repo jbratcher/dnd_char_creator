@@ -515,3 +515,28 @@ export var Levels = [
         bonus: 6
     },
 ];
+////////////////////////////////////////
+// Languages object
+////////////////////////////////////////
+export var Languages = {
+    standard: [
+        'common',
+        'dwarvish',
+        'elvish',
+        'giant',
+        'gnomish',
+        'goblin',
+        'halfling',
+        'orc'
+    ],
+    exotic: [
+        'abyssal',
+        'celestial',
+        'draconic',
+        'deep speech',
+        'infernal',
+        'primordial',
+        'sylvan',
+        'undercommon'
+    ]
+};
