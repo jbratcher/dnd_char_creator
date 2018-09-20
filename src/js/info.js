@@ -520,23 +520,23 @@ export var Levels = [
 ////////////////////////////////////////
 export var Languages = {
     standard: [
-        'common',
-        'dwarvish',
-        'elvish',
-        'giant',
-        'gnomish',
-        'goblin',
-        'halfling',
-        'orc'
+        'Common',
+        'Dwarvish',
+        'Elvish',
+        'Giant',
+        'Gnomish',
+        'Goblin',
+        'Halfling',
+        'Orc'
     ],
     exotic: [
-        'abyssal',
-        'celestial',
-        'draconic',
-        'deep speech',
-        'infernal',
-        'primordial',
-        'sylvan',
-        'undercommon'
+        'Abyssal',
+        'Celestial',
+        'Draconic',
+        'Deep speech',
+        'Infernal',
+        'Primordial',
+        'Sylvan',
+        'Undercommon'
     ]
 };

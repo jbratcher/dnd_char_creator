@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
-import { Classes, Races, Levels } from './info.js';
+import { Classes, Races, Levels, Languages } from './info.js';
 
 ////////////////////////////////////////
 // Utility functions
@@ -127,7 +127,21 @@ const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 
 const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
 
-const extraLanguage = <HTMLInputElement>document.querySelector('#extraLanguage');
+const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage');
+
+const addLanguages = () => {
+  
+  Languages.standard.map(lang => {
+    
+    let languageElement = document.createElement("option");
+    languageElement.textContent = lang;
+    extraLanguage.appendChild(languageElement);
+    
+  })
+  
+}
+
+addLanguages();
 
 const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
 
@@ -160,15 +174,6 @@ const showExtraLanguageInput = () => {
 race.addEventListener('change', showExtraLanguageInput);
 
 showExtraLanguageInput();
-
-
-// extraLanguageHelpText = () => {
-  
-// }
-
-// extraLanguageHelpText();
-
-
 
 // Skill select
 

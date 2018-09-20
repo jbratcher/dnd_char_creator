@@ -328,6 +328,6 @@ var Levels = exports.Levels = [{
 // Languages object
 ////////////////////////////////////////
 var Languages = exports.Languages = {
-    standard: ['common', 'dwarvish', 'elvish', 'giant', 'gnomish', 'goblin', 'halfling', 'orc'],
-    exotic: ['abyssal', 'celestial', 'draconic', 'deep speech', 'infernal', 'primordial', 'sylvan', 'undercommon']
+    standard: ['Common', 'Dwarvish', 'Elvish', 'Giant', 'Gnomish', 'Goblin', 'Halfling', 'Orc'],
+    exotic: ['Abyssal', 'Celestial', 'Draconic', 'Deep speech', 'Infernal', 'Primordial', 'Sylvan', 'Undercommon']
 };

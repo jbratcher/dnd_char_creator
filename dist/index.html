@@ -221,7 +221,9 @@
 
                       <label class="input-group-text" for="extraLanguage">Extra Language: </label>
 
-                      <input class="form-control" id="extraLanguage" type="string">
+                      <select class="custom-select text-muted" id="extraLanguage">
+                        <option></option>
+                      </select>
 
                     </div>
                     
@@ -313,7 +315,7 @@
 
                   </div>
 
-                  <button class="btn btn-dark mb-3" id="submitButton" type="button">Create Character</button>
+                  <button class="btn btn-dark mb-3" id="createCharacterButton" type="button">Create Character</button>
 
                 </div>
 
@@ -620,17 +622,17 @@
                         <b>Speed: </b>
                         <span id="speed">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Passive Perception: </b>
                         <span id="passivePerception">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Darkvision: </b>
                         <span id="darkvisionPreview">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Size: </b>
                         <span id="size">-</span>

@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
-import { Classes, Races, Levels } from './info.js';
+import { Classes, Races, Levels, Languages } from './info.js';
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -82,6 +82,14 @@ var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
+var addLanguages = function () {
+    Languages.standard.map(function (lang) {
+        var languageElement = document.createElement("option");
+        languageElement.textContent = lang;
+        extraLanguage.appendChild(languageElement);
+    });
+};
+addLanguages();
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 var ageHelpText = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
@@ -98,9 +106,6 @@ var showExtraLanguageInput = function () {
 };
 race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
-// extraLanguageHelpText = () => {
-// }
-// extraLanguageHelpText();
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 var skill1list = skill1.children;
