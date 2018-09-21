@@ -618,3 +618,17 @@ export var Languages = {
     ]
         
 }
+
+////////////////////////////////////////
+// Abilities Array
+////////////////////////////////////////
+
+export var Abilities = [
+    'Strength',
+    'Dexerity',
+    'Constitution',
+    'Intelligence',
+    'Wisdom',
+    'Charisma'
+]
+

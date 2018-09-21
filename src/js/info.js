@@ -540,3 +540,14 @@ export var Languages = {
         'Undercommon'
     ]
 };
+////////////////////////////////////////
+// Abilities Array
+////////////////////////////////////////
+export var Abilities = [
+    'Strength',
+    'Dexerity',
+    'Constitution',
+    'Intelligence',
+    'Wisdom',
+    'Charisma'
+];

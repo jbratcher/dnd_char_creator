@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
-import { Classes, Races, Levels, Languages } from './info.js';
+import { Classes, Races, Levels, Languages, Abilities } from './info.js';
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -102,7 +102,7 @@ ageHelpText();
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     charRace === 'human' ? extraLanguageField.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
-    charRace === 'human' ? extraLanguageHelp.textContent = 'Human get to choose 1 extra language' : extraLanguageHelp.textContent = '';
+    charRace === 'human' ? extraLanguageHelp.textContent = 'Humans get to choose 1 extra language' : extraLanguageHelp.textContent = '';
 };
 race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
@@ -192,6 +192,10 @@ var constitution = rolledConstitition.textContent;
 var intelligence = rolledIntelligence.textContent;
 var wisdom = rolledWisdom.textContent;
 var charisma = rolledCharisma.textContent;
+var extraAbilityModifier = document.querySelector('#extraAbilityModifier');
+var extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
+var extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
+var extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');
 // Ability Score functions
 var lookupAbilityScore = function (ability) {
     // Get current values of required info
@@ -229,8 +233,26 @@ var racialAbilityModifier = function () {
             }
         }
     }
-    // TODO: handle halfelf free choice of 2 extra abilities to modify
 };
+var extraAbiliyMods = function () {
+    Abilities.map(function (ability) {
+        console.log(ability);
+        var abilityElement1 = document.createElement("option");
+        var abilityElement2 = document.createElement("option");
+        abilityElement1.textContent = ability;
+        abilityElement2.textContent = ability;
+        extraAbilityModifier1.appendChild(abilityElement1);
+        extraAbilityModifier2.appendChild(abilityElement2);
+    });
+};
+extraAbiliyMods();
+// Display extra ability modifier field if race is Half-Elf
+var showExtraModifiersInput = function () {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    charRace === 'halfelf' ? extraAbilityModifier.classList.remove('d-none') : extraAbilityModifier.classList.add('d-none');
+    charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
+};
+race.addEventListener('change', showExtraModifiersInput);
 ////////////////////////////////////////////////////////////
 // Skills
 ////////////////////////////////////////////////////////////
