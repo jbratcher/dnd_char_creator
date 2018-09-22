@@ -398,11 +398,39 @@ const showExtraModifiersInput = () => {
 
 race.addEventListener('change', showExtraModifiersInput);
 
+const hideMod1Selection = () => {
+  
+  // reset 2nd selection child nodes
+  
+  extraAbilityModifier2.innerHTML = "";
+  
+  let firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent
+  
+  console.log(firstSelection);
+  
+  // if ability is chosen in 1st selection hide in 2nd selection
+  
+  Abilities.map(ability => {
+    
+    if(ability !== firstSelection) {
+    
+      let abilityElement2 = document.createElement("option");
+      abilityElement2.textContent = ability;
+      extraAbilityModifier2.appendChild(abilityElement2);
+      
+    }
+      
+    
+  })
+  
+}
+
+extraAbilityModifier1.addEventListener('change', hideMod1Selection)
+
 // if extra ability score is selected add +1 to ability score preview
 
 const addExtraAbilityMofifiers = () => {
   
-  // if charRace === halfelf
   if(charRace === 'halfelf') {
     
     // get selected abilities

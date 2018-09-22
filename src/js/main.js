@@ -252,9 +252,23 @@ var showExtraModifiersInput = function () {
     charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
+var hideMod1Selection = function () {
+    // reset 2nd selection child nodes
+    extraAbilityModifier2.innerHTML = "";
+    var firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
+    console.log(firstSelection);
+    // if ability is chosen in 1st selection hide in 2nd selection
+    Abilities.map(function (ability) {
+        if (ability !== firstSelection) {
+            var abilityElement2 = document.createElement("option");
+            abilityElement2.textContent = ability;
+            extraAbilityModifier2.appendChild(abilityElement2);
+        }
+    });
+};
+extraAbilityModifier1.addEventListener('change', hideMod1Selection);
 // if extra ability score is selected add +1 to ability score preview
 var addExtraAbilityMofifiers = function () {
-    // if charRace === halfelf
     if (charRace === 'halfelf') {
         // get selected abilities
         var mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
