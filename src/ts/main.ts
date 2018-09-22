@@ -371,8 +371,6 @@ const extraAbiliyMods = () => {
   
   Abilities.map(ability => {
     
-    console.log(ability);
-    
     let abilityElement1 = document.createElement("option");
     let abilityElement2 = document.createElement("option");
     abilityElement1.textContent = ability;
@@ -399,6 +397,30 @@ const showExtraModifiersInput = () => {
 }
 
 race.addEventListener('change', showExtraModifiersInput);
+
+// if extra ability score is selected add +1 to ability score preview
+
+const addExtraAbilityMofifiers = () => {
+  
+  // if charRace === halfelf
+  if(charRace === 'halfelf') {
+    
+    // get selected abilities
+    let mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
+    let mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
+    // get selected abilities preview element
+    for(let i = 0; i < abilityScoreListItems.length; i++) {
+      let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      if(string === mod1 || string === mod2) {
+        let abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
+        abilityScore += 1;
+        abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore);
+      }
+    }
+    
+  }
+
+}
 
 ////////////////////////////////////////////////////////////
 // Skills
@@ -701,6 +723,8 @@ createCharacterButton.addEventListener('click', e => {
   clsPreview.textContent = selectedCls.textContent;
 
   alignmentPreview.textContent = selectedAlignment.textContent;
+  
+  addExtraAbilityMofifiers();
 
   combatCreation();
 

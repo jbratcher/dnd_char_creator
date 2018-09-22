@@ -236,7 +236,6 @@ var racialAbilityModifier = function () {
 };
 var extraAbiliyMods = function () {
     Abilities.map(function (ability) {
-        console.log(ability);
         var abilityElement1 = document.createElement("option");
         var abilityElement2 = document.createElement("option");
         abilityElement1.textContent = ability;
@@ -253,6 +252,24 @@ var showExtraModifiersInput = function () {
     charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
+// if extra ability score is selected add +1 to ability score preview
+var addExtraAbilityMofifiers = function () {
+    // if charRace === halfelf
+    if (charRace === 'halfelf') {
+        // get selected abilities
+        var mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
+        var mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
+        // get selected abilities preview element
+        for (var i = 0; i < abilityScoreListItems.length; i++) {
+            var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+            if (string === mod1 || string === mod2) {
+                var abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
+                abilityScore += 1;
+                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore);
+            }
+        }
+    }
+};
 ////////////////////////////////////////////////////////////
 // Skills
 ////////////////////////////////////////////////////////////
@@ -447,6 +464,7 @@ createCharacterButton.addEventListener('click', function (e) {
     charismaPreview.textContent = charisma;
     clsPreview.textContent = selectedCls.textContent;
     alignmentPreview.textContent = selectedAlignment.textContent;
+    addExtraAbilityMofifiers();
     combatCreation();
 });
 // Level advancement button submit

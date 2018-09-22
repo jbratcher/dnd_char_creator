@@ -331,3 +331,7 @@ var Languages = exports.Languages = {
     standard: ['Common', 'Dwarvish', 'Elvish', 'Giant', 'Gnomish', 'Goblin', 'Halfling', 'Orc'],
     exotic: ['Abyssal', 'Celestial', 'Draconic', 'Deep speech', 'Infernal', 'Primordial', 'Sylvan', 'Undercommon']
 };
+////////////////////////////////////////
+// Abilities Array
+////////////////////////////////////////
+var Abilities = exports.Abilities = ['Strength', 'Dexerity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
