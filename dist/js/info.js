@@ -335,3 +335,4 @@ var Languages = exports.Languages = {
 // Abilities Array
 ////////////////////////////////////////
 var Abilities = exports.Abilities = ['Strength', 'Dexerity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
+var CharacterClassesList = exports.CharacterClassesList = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"];

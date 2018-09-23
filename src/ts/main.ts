@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
-import { Classes, Races, Levels, Languages, Abilities } from './info.js';
+import { Classes, Races, Levels, Languages, Abilities, CharacterClassesList } from './info.js';
 
 ////////////////////////////////////////
 // Utility functions
@@ -32,6 +32,8 @@ let abilityScore: number;
 let abilityScoreMod: number;
 
 let proficiencyBonus: number;
+
+let option = document.createElement("option");
 
 ////////////////////////////////////////
 // Set/Get functions
@@ -140,6 +142,20 @@ const race = <HTMLSelectElement>document.querySelector('#race');
 const alignment = <HTMLSelectElement>document.querySelector('#alignment');
 
 const cls = <HTMLSelectElement>document.querySelector('#cls');
+
+const addClasses = () => {
+  
+  CharacterClassesList.map(characterCls => {
+    
+    let option = document.createElement("option");
+    option.textContent = characterCls;
+    cls.appendChild(option);
+    
+  })
+  
+}
+
+addClasses();
 
 const gender = <HTMLInputElement>document.querySelector('#gender');
 

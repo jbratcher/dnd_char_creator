@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
-import { Classes, Races, Levels, Languages, Abilities } from './info.js';
+import { Classes, Races, Levels, Languages, Abilities, CharacterClassesList } from './info.js';
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -18,6 +18,7 @@ var totalMod;
 var abilityScore;
 var abilityScoreMod;
 var proficiencyBonus;
+var option = document.createElement("option");
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
@@ -88,6 +89,14 @@ var name = document.querySelector('#name');
 var race = document.querySelector('#race');
 var alignment = document.querySelector('#alignment');
 var cls = document.querySelector('#cls');
+var addClasses = function () {
+    CharacterClassesList.map(function (characterCls) {
+        var option = document.createElement("option");
+        option.textContent = characterCls;
+        cls.appendChild(option);
+    });
+};
+addClasses();
 var gender = document.querySelector('#gender');
 var selectedAlignment = alignment.options[alignment.selectedIndex];
 var selectedCls = cls.options[cls.selectedIndex];

@@ -632,3 +632,19 @@ export const Abilities = [
     'Charisma'
 ]
 
+export const CharacterClassesList = [
+    
+    "Barbarian",
+    "Bard",
+    "Cleric",
+    "Druid",
+    "Fighter",
+    "Monk",
+    "Paladin",
+    "Ranger",
+    "Rogue",
+    "Sorcerer",
+    "Warlock",
+    "Wizard",
+                        
+]
