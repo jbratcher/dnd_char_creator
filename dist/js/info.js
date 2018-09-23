@@ -335,4 +335,19 @@ var Languages = exports.Languages = {
 // Abilities Array
 ////////////////////////////////////////
 var Abilities = exports.Abilities = ['Strength', 'Dexerity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
+////////////////////////////////////////
+// Classes Array
+////////////////////////////////////////
 var CharacterClassesList = exports.CharacterClassesList = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"];
+////////////////////////////////////////
+// Races Array
+////////////////////////////////////////
+var CharacterRacesList = exports.CharacterRacesList = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling"];
+////////////////////////////////////////
+// Alignments Array
+////////////////////////////////////////
+var Alignments = exports.Alignments = ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"];
+////////////////////////////////////////
+// Skills Array
+////////////////////////////////////////
+var Skills = exports.Skills = ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Slieght of Hand", "Stealth", "Survival"];

@@ -3,7 +3,17 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
-import { Classes, Races, Levels, Languages, Abilities, CharacterClassesList } from './info.js';
+import { 
+  Abilities,
+  Alignments,
+  CharacterClassesList,
+  CharacterRacesList,
+  Classes,
+  Levels, 
+  Languages, 
+  Races,
+  Skills
+} from './info.js';
 
 ////////////////////////////////////////
 // Utility functions
@@ -33,11 +43,17 @@ let abilityScoreMod: number;
 
 let proficiencyBonus: number;
 
-let option = document.createElement("option");
-
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
+
+const addOptionstoSelect = (selectElement, dataArray) => {
+  dataArray.map(optionText => {
+    let optionElement = document.createElement("option");
+    optionElement.textContent = optionText;
+    selectElement.appendChild(optionElement);
+  })
+} 
 
 const setScore = (abilityScorePreview) => {
   let score: number = rollAbilityScore();
@@ -139,23 +155,15 @@ const name = <HTMLInputElement>document.querySelector('#name');
 
 const race = <HTMLSelectElement>document.querySelector('#race');
 
-const alignment = <HTMLSelectElement>document.querySelector('#alignment');
+addOptionstoSelect(race, CharacterRacesList);
 
 const cls = <HTMLSelectElement>document.querySelector('#cls');
 
-const addClasses = () => {
-  
-  CharacterClassesList.map(characterCls => {
-    
-    let option = document.createElement("option");
-    option.textContent = characterCls;
-    cls.appendChild(option);
-    
-  })
-  
-}
+addOptionstoSelect(cls, CharacterClassesList);
 
-addClasses();
+const alignment = <HTMLSelectElement>document.querySelector('#alignment');
+
+addOptionstoSelect(alignment, Alignments)
 
 const gender = <HTMLInputElement>document.querySelector('#gender');
 
@@ -198,19 +206,7 @@ const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage'
 
 const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
 
-const addLanguages = () => {
-  
-  Languages.standard.map(lang => {
-    
-    let languageElement = document.createElement("option");
-    languageElement.textContent = lang;
-    extraLanguage.appendChild(languageElement);
-    
-  })
-  
-}
-
-addLanguages();
+addOptionstoSelect(extraLanguage, Languages.standard);
 
 const showExtraLanguageInput = () => {
   
@@ -230,13 +226,19 @@ showExtraLanguageInput();
 
 const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
 
+addOptionstoSelect(skill1, Skills);
+
 let skill1list = skill1.children;
 
 const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
 
+addOptionstoSelect(skill2, Skills);
+
 let skill2list = skill2.children;
 
 const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
+
+addOptionstoSelect(skill3, Skills);
 
 let skill3list = skill3.children;
 
@@ -459,22 +461,10 @@ const racialAbilityModifier = () => {
 
 }
 
-const extraAbiliyMods = () => {
-  
-  Abilities.map(ability => {
-    
-    let abilityElement1 = document.createElement("option");
-    let abilityElement2 = document.createElement("option");
-    abilityElement1.textContent = ability;
-    abilityElement2.textContent = ability;
-    extraAbilityModifier1.appendChild(abilityElement1);
-    extraAbilityModifier2.appendChild(abilityElement2);
-    
-  })
-  
-}
+// Add ability options to extra ability select element
 
-extraAbiliyMods();
+addOptionstoSelect(extraAbilityModifier1, Abilities);
+addOptionstoSelect(extraAbilityModifier2, Abilities);
 
 // Display extra ability modifier field if race is Half-Elf
 
@@ -784,6 +774,10 @@ createCharacterButton.addEventListener('click', e => {
   combatCreation();  // Combat tab functions
 
 });
+
+////////////////////////////////////////////////////////////
+// Preview Functions
+////////////////////////////////////////////////////////////
 
 // Level advancement button submit
 

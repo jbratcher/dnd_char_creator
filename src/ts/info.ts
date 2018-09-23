@@ -632,6 +632,10 @@ export const Abilities = [
     'Charisma'
 ]
 
+////////////////////////////////////////
+// Classes Array
+////////////////////////////////////////
+
 export const CharacterClassesList = [
     
     "Barbarian",
@@ -647,4 +651,67 @@ export const CharacterClassesList = [
     "Warlock",
     "Wizard",
                         
+]
+
+////////////////////////////////////////
+// Races Array
+////////////////////////////////////////
+
+export const CharacterRacesList = [
+
+    "Dragonborn",
+    "Dwarf",
+    "Elf",
+    "Gnome",
+    "Half-Elf",
+    "Halfling",
+    "Half-Orc",
+    "Human",
+    "Tiefling"
+    
+]
+
+////////////////////////////////////////
+// Alignments Array
+////////////////////////////////////////
+
+export const Alignments = [
+    
+    "Lawful Good",
+    "Neutral Good",
+    "Chaotic Good",
+    "Lawful Neutral",
+    "True Neutral",
+    "Chaotic Neutral",
+    "Lawful Evil",
+    "Neutral Evil",
+    "Chaotic Evil"
+    
+]
+
+////////////////////////////////////////
+// Skills Array
+////////////////////////////////////////
+
+export const Skills = [
+    
+    "Acrobatics",
+    "Animal Handling",
+    "Arcana",
+    "Athletics",
+    "Deception",
+    "History",
+    "Insight",
+    "Intimidation",
+    "Investigation",
+    "Medicine",
+    "Nature",
+    "Perception",
+    "Performance",
+    "Persuasion",
+    "Religion",
+    "Slieght of Hand",
+    "Stealth",
+    "Survival"
+    
 ]

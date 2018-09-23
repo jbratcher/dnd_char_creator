@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
-import { Classes, Races, Levels, Languages, Abilities, CharacterClassesList } from './info.js';
+import { Abilities, Alignments, CharacterClassesList, CharacterRacesList, Classes, Levels, Languages, Races, Skills } from './info.js';
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -18,10 +18,16 @@ var totalMod;
 var abilityScore;
 var abilityScoreMod;
 var proficiencyBonus;
-var option = document.createElement("option");
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
+var addOptionstoSelect = function (selectElement, dataArray) {
+    dataArray.map(function (optionText) {
+        var optionElement = document.createElement("option");
+        optionElement.textContent = optionText;
+        selectElement.appendChild(optionElement);
+    });
+};
 var setScore = function (abilityScorePreview) {
     var score = rollAbilityScore();
     setToMinMax(score);
@@ -87,16 +93,11 @@ var charisma = rolledCharisma.textContent;
 // General Info
 var name = document.querySelector('#name');
 var race = document.querySelector('#race');
-var alignment = document.querySelector('#alignment');
+addOptionstoSelect(race, CharacterRacesList);
 var cls = document.querySelector('#cls');
-var addClasses = function () {
-    CharacterClassesList.map(function (characterCls) {
-        var option = document.createElement("option");
-        option.textContent = characterCls;
-        cls.appendChild(option);
-    });
-};
-addClasses();
+addOptionstoSelect(cls, CharacterClassesList);
+var alignment = document.querySelector('#alignment');
+addOptionstoSelect(alignment, Alignments);
 var gender = document.querySelector('#gender');
 var selectedAlignment = alignment.options[alignment.selectedIndex];
 var selectedCls = cls.options[cls.selectedIndex];
@@ -118,14 +119,7 @@ ageHelpText();
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
-var addLanguages = function () {
-    Languages.standard.map(function (lang) {
-        var languageElement = document.createElement("option");
-        languageElement.textContent = lang;
-        extraLanguage.appendChild(languageElement);
-    });
-};
-addLanguages();
+addOptionstoSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     charRace === 'human' ? extraLanguageField.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
@@ -135,10 +129,13 @@ race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
+addOptionstoSelect(skill1, Skills);
 var skill1list = skill1.children;
 var skill2 = document.querySelector('#skillsSelect2');
+addOptionstoSelect(skill2, Skills);
 var skill2list = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
+addOptionstoSelect(skill3, Skills);
 var skill3list = skill3.children;
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
@@ -277,17 +274,9 @@ var racialAbilityModifier = function () {
         }
     }
 };
-var extraAbiliyMods = function () {
-    Abilities.map(function (ability) {
-        var abilityElement1 = document.createElement("option");
-        var abilityElement2 = document.createElement("option");
-        abilityElement1.textContent = ability;
-        abilityElement2.textContent = ability;
-        extraAbilityModifier1.appendChild(abilityElement1);
-        extraAbilityModifier2.appendChild(abilityElement2);
-    });
-};
-extraAbiliyMods();
+// Add ability options to extra ability select element
+addOptionstoSelect(extraAbilityModifier1, Abilities);
+addOptionstoSelect(extraAbilityModifier2, Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
@@ -494,6 +483,9 @@ createCharacterButton.addEventListener('click', function (e) {
     addExtraAbilityMofifiers(); // Half-Elf racial bonus
     combatCreation(); // Combat tab functions
 });
+////////////////////////////////////////////////////////////
+// Preview Functions
+////////////////////////////////////////////////////////////
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();

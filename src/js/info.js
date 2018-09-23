@@ -551,6 +551,9 @@ export var Abilities = [
     'Wisdom',
     'Charisma'
 ];
+////////////////////////////////////////
+// Classes Array
+////////////////////////////////////////
 export var CharacterClassesList = [
     "Barbarian",
     "Bard",
@@ -564,4 +567,55 @@ export var CharacterClassesList = [
     "Sorcerer",
     "Warlock",
     "Wizard",
+];
+////////////////////////////////////////
+// Races Array
+////////////////////////////////////////
+export var CharacterRacesList = [
+    "Dragonborn",
+    "Dwarf",
+    "Elf",
+    "Gnome",
+    "Half-Elf",
+    "Halfling",
+    "Half-Orc",
+    "Human",
+    "Tiefling"
+];
+////////////////////////////////////////
+// Alignments Array
+////////////////////////////////////////
+export var Alignments = [
+    "Lawful Good",
+    "Neutral Good",
+    "Chaotic Good",
+    "Lawful Neutral",
+    "True Neutral",
+    "Chaotic Neutral",
+    "Lawful Evil",
+    "Neutral Evil",
+    "Chaotic Evil"
+];
+////////////////////////////////////////
+// Skills Array
+////////////////////////////////////////
+export var Skills = [
+    "Acrobatics",
+    "Animal Handling",
+    "Arcana",
+    "Athletics",
+    "Deception",
+    "History",
+    "Insight",
+    "Intimidation",
+    "Investigation",
+    "Medicine",
+    "Nature",
+    "Perception",
+    "Performance",
+    "Persuasion",
+    "Religion",
+    "Slieght of Hand",
+    "Stealth",
+    "Survival"
 ];
