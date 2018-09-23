@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 ////////////////////////////////////////
 // Classes object
 ////////////////////////////////////////
-var Classes = exports.Classes = {
+var ClassProps = exports.ClassProps = {
     barbarian: {
         hitdie: 12,
         skills: {
@@ -336,13 +336,13 @@ var Languages = exports.Languages = {
 ////////////////////////////////////////
 var Abilities = exports.Abilities = ['Strength', 'Dexerity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'];
 ////////////////////////////////////////
-// Classes Array
+// Class List Array
 ////////////////////////////////////////
-var CharacterClassesList = exports.CharacterClassesList = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"];
+var ClassList = exports.ClassList = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"];
 ////////////////////////////////////////
-// Races Array
+// Race List Array
 ////////////////////////////////////////
-var CharacterRacesList = exports.CharacterRacesList = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling"];
+var RaceList = exports.RaceList = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling"];
 ////////////////////////////////////////
 // Alignments Array
 ////////////////////////////////////////

@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 // Classes object
 ////////////////////////////////////////
-export var Classes = {
+export var ClassProps = {
     barbarian: {
         hitdie: 12,
         skills: {
@@ -552,9 +552,9 @@ export var Abilities = [
     'Charisma'
 ];
 ////////////////////////////////////////
-// Classes Array
+// Class List Array
 ////////////////////////////////////////
-export var CharacterClassesList = [
+export var ClassList = [
     "Barbarian",
     "Bard",
     "Cleric",
@@ -569,9 +569,9 @@ export var CharacterClassesList = [
     "Wizard",
 ];
 ////////////////////////////////////////
-// Races Array
+// Race List Array
 ////////////////////////////////////////
-export var CharacterRacesList = [
+export var RaceList = [
     "Dragonborn",
     "Dwarf",
     "Elf",

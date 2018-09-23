@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////////////////////
 import { characterImages } from './characterImages.js';
-import { Abilities, Alignments, CharacterClassesList, CharacterRacesList, Classes, Levels, Languages, Races, Skills } from './info.js';
+import { Abilities, Alignments, ClassList, ClassProps, Levels, Languages, Races, RaceList, Skills } from './info.js';
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -93,9 +93,9 @@ var charisma = rolledCharisma.textContent;
 // General Info
 var name = document.querySelector('#name');
 var race = document.querySelector('#race');
-addOptionstoSelect(race, CharacterRacesList);
+addOptionstoSelect(race, RaceList);
 var cls = document.querySelector('#cls');
-addOptionstoSelect(cls, CharacterClassesList);
+addOptionstoSelect(cls, ClassList);
 var alignment = document.querySelector('#alignment');
 addOptionstoSelect(alignment, Alignments);
 var gender = document.querySelector('#gender');
@@ -174,7 +174,7 @@ var charLevelUp = function () {
 };
 var addHitPoints = function () {
     var currentHitPoints = Number(hitPointPreview.textContent);
-    var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
+    var rolledHitPoints = randomIntFromRange(1, ClassProps[charCls].hitdie);
     modifier = getAbilityScoreModifier(constitution);
     var hitPointsToAdd = (rolledHitPoints + modifier);
     // Prevent negative or zero hit points on level up
@@ -318,7 +318,7 @@ var addExtraAbilityMofifiers = function () {
 // Skills
 ////////////////////////////////////////////////////////////
 // Skill variables
-var availableSkills = Classes[charCls].availableSkills;
+var availableSkills = ClassProps[charCls].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
 var selectedSkill2 = skill1.options[skill2.selectedIndex];
 var selectedSkill3 = skill1.options[skill3.selectedIndex];
@@ -356,7 +356,7 @@ var highlightSkills = function () {
 };
 // TODO: refactor this monstrosity from 3 loops to 1
 var highlightAvailableSkills = function () {
-    availableSkills = Classes[charCls].availableSkills;
+    availableSkills = ClassProps[charCls].availableSkills;
     for (var i = 0; i < skill1list.length; i++) {
         skill1list[i].style.display = 'none';
     }
@@ -424,7 +424,7 @@ var sizePreview = document.querySelector('#size');
 var hitPoints = function () {
     // 1st level is max hit points + constiution modifier
     var modifier = getAbilityScoreModifier(Number(constitution));
-    var hitpoints = (Classes[charCls].hitdie + modifier);
+    var hitpoints = (ClassProps[charCls].hitdie + modifier);
     hitPointPreview.textContent = String(hitpoints);
 };
 var armorClass = function () {

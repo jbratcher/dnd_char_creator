@@ -6,12 +6,12 @@ import { characterImages } from './characterImages.js';
 import { 
   Abilities,
   Alignments,
-  CharacterClassesList,
-  CharacterRacesList,
-  Classes,
+  ClassList,
+  ClassProps,
   Levels, 
   Languages, 
   Races,
+  RaceList,
   Skills
 } from './info.js';
 
@@ -155,11 +155,11 @@ const name = <HTMLInputElement>document.querySelector('#name');
 
 const race = <HTMLSelectElement>document.querySelector('#race');
 
-addOptionstoSelect(race, CharacterRacesList);
+addOptionstoSelect(race, RaceList);
 
 const cls = <HTMLSelectElement>document.querySelector('#cls');
 
-addOptionstoSelect(cls, CharacterClassesList);
+addOptionstoSelect(cls, ClassList);
 
 const alignment = <HTMLSelectElement>document.querySelector('#alignment');
 
@@ -303,7 +303,7 @@ const charLevelUp = () => {
 
 const addHitPoints = () => {
   let currentHitPoints = Number(hitPointPreview.textContent);
-  let rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie)
+  let rolledHitPoints = randomIntFromRange(1, ClassProps[charCls].hitdie)
   modifier = getAbilityScoreModifier(constitution)
   let hitPointsToAdd = (rolledHitPoints + modifier);
   // Prevent negative or zero hit points on level up
@@ -529,7 +529,7 @@ const addExtraAbilityMofifiers = () => {
 
 // Skill variables
 
-let availableSkills = Classes[charCls].availableSkills;
+let availableSkills = ClassProps[charCls].availableSkills;
 
 let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
@@ -581,7 +581,7 @@ const highlightSkills = () => {
 
 const highlightAvailableSkills = () => {
 
-  availableSkills = Classes[charCls].availableSkills;
+  availableSkills = ClassProps[charCls].availableSkills;
 
   for(let i = 0; i < skill1list.length; i++) {
     (<HTMLSelectElement>skill1list[i]).style.display = 'none';
@@ -679,7 +679,7 @@ const sizePreview = <HTMLElement>document.querySelector('#size');
 const hitPoints = () => {
   // 1st level is max hit points + constiution modifier
   let modifier: number = getAbilityScoreModifier(Number(constitution))
-  let hitpoints: number = (Classes[charCls].hitdie + modifier);
+  let hitpoints: number = (ClassProps[charCls].hitdie + modifier);
   hitPointPreview.textContent = String(hitpoints);
 }
 

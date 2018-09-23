@@ -2,7 +2,7 @@
 // Classes object
 ////////////////////////////////////////
 
-export const Classes = {
+export const ClassProps = {
 
     barbarian: {
         hitdie: 12,
@@ -633,10 +633,10 @@ export const Abilities = [
 ]
 
 ////////////////////////////////////////
-// Classes Array
+// Class List Array
 ////////////////////////////////////////
 
-export const CharacterClassesList = [
+export const ClassList = [
     
     "Barbarian",
     "Bard",
@@ -654,10 +654,10 @@ export const CharacterClassesList = [
 ]
 
 ////////////////////////////////////////
-// Races Array
+// Race List Array
 ////////////////////////////////////////
 
-export const CharacterRacesList = [
+export const RaceList = [
 
     "Dragonborn",
     "Dwarf",
