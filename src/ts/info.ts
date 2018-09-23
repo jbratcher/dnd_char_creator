@@ -2,7 +2,7 @@
 // Classes object
 ////////////////////////////////////////
 
-export var Classes = {
+export const Classes = {
 
     barbarian: {
         hitdie: 12,
@@ -214,7 +214,7 @@ export var Classes = {
 // Races Object
 ////////////////////////////////////////
 
-export var Races = {
+export const Races = {
 
     dragonborn: {
         
@@ -461,7 +461,7 @@ export var Races = {
 // Levels Object
 ////////////////////////////////////////
 
-export var Levels = [
+export const Levels = [
 
     {
         level: 1,
@@ -589,7 +589,7 @@ export var Levels = [
 // Languages object
 ////////////////////////////////////////
 
-export var Languages = {
+export const Languages = {
     
     standard: [
         
@@ -623,7 +623,7 @@ export var Languages = {
 // Abilities Array
 ////////////////////////////////////////
 
-export var Abilities = [
+export const Abilities = [
     'Strength',
     'Dexerity',
     'Constitution',

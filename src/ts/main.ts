@@ -13,19 +13,25 @@ const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min +
 
 const randomBoolean = () => Math.random() >= 0.5;  // Get a random true or false value
 
-const rollAbilityScore = () => Math.floor(Math.random() * ((18 - 3) + 1)) + 3;
+const rollAbilityScore = () => randomIntFromRange(3,18);
 
 const setToMinMax = score => score > 18 ? 18 : score < 3 ? 3 : score;
 
-const singleWord = /(\w+)/;
+const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
 
-let modifier: number;
+// Initialize variables
 
 let sign: string;
 
+let modifier: number;
+
 let totalMod: number;
 
+let abilityScore: number;
+
 let abilityScoreMod: number;
+
+let proficiencyBonus: number;
 
 ////////////////////////////////////////
 // Set/Get functions
@@ -51,6 +57,8 @@ const getCharacterAttributes = (charCls, charRace, charGender) => {
   }
   return characterImages[charRace][charCls][charGender];
 }
+
+// Set modifier to ability score modifier value
 
 const getAbilityScoreModifier = abilityScore => modifier = Math.floor((abilityScore / 2) - 5);
 
@@ -105,6 +113,20 @@ rollIntelligence.addEventListener('click', () => setScore(rolledIntelligence));
 
 rollCharisma.addEventListener('click', () => setScore(rolledCharisma));
 
+// Setters for ability scores
+
+let strength = rolledStrength.textContent;
+
+let dexerity = rolledDexerity.textContent;
+
+let constitution = rolledConstitition.textContent;
+
+let intelligence = rolledIntelligence.textContent;
+
+let wisdom = rolledWisdom.textContent;
+
+let charisma = rolledCharisma.textContent;
+
 ////////////////////////////////////////////////////////////
 // Get character info input elements
 ////////////////////////////////////////////////////////////
@@ -121,29 +143,23 @@ const cls = <HTMLSelectElement>document.querySelector('#cls');
 
 const gender = <HTMLInputElement>document.querySelector('#gender');
 
+let selectedAlignment = alignment.options[alignment.selectedIndex];
+
+let selectedCls = cls.options[cls.selectedIndex];
+
+let charCls = selectedCls.textContent.toLowerCase();
+
+let selectedRace = race.options[race.selectedIndex];
+
+let charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+
+let charGender = gender.value.toLowerCase();
+
 const age = <HTMLInputElement>document.querySelector('#age');
 
 const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 
-const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
-
-const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage');
-
-const addLanguages = () => {
-  
-  Languages.standard.map(lang => {
-    
-    let languageElement = document.createElement("option");
-    languageElement.textContent = lang;
-    extraLanguage.appendChild(languageElement);
-    
-  })
-  
-}
-
-addLanguages();
-
-const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
+// Displays race specific age help text on race selection
 
 const ageHelpText = () => {
   
@@ -158,7 +174,27 @@ race.addEventListener('change', ageHelpText);
 
 ageHelpText();
 
-// Display extra language field if human race is chosen
+// Display extra language field if race selection is human and add language options
+
+const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
+
+const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage');
+
+const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
+
+const addLanguages = () => {
+  
+  Languages.standard.map(lang => {
+    
+    let languageElement = document.createElement("option");
+    languageElement.textContent = lang;
+    extraLanguage.appendChild(languageElement);
+    
+  })
+  
+}
+
+addLanguages();
 
 const showExtraLanguageInput = () => {
   
@@ -192,7 +228,7 @@ let skill3list = skill3.children;
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
 
-// Level and experience Section
+// Level and experience section
 
 const currentLevel = <HTMLElement>document.querySelector('#currentLevel')
 
@@ -203,10 +239,10 @@ const experienceNextLevel = <HTMLElement>document.querySelector('#experienceNext
 const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewExperience');
 
 ////////////////////////////////////////////////////////////
-// General information
+// General Preview information
 ////////////////////////////////////////////////////////////
 
-// General variables
+// General Preview variables
 
 const namePreview = document.querySelector('#namePreview');
 
@@ -222,25 +258,13 @@ const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview'
 
 const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
-let selectedAlignment = alignment.options[alignment.selectedIndex];
-
-let selectedCls = cls.options[cls.selectedIndex];
-
-let charCls = selectedCls.textContent.toLowerCase();
-
-let selectedRace = race.options[race.selectedIndex];
-
-let charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-
-let charGender = gender.value.toLowerCase();
-
 const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
-
-let proficiencyBonus: number;
 
 const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview')
 
 // General buttons
+
+const createCharacterButton = document.querySelector('#createCharacterButton');
 
 const levelUpButton = document.querySelector('#levelUpButton');
 
@@ -264,6 +288,7 @@ const addHitPoints = () => {
   let rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie)
   modifier = getAbilityScoreModifier(constitution)
   let hitPointsToAdd = (rolledHitPoints + modifier);
+  // Prevent negative or zero hit points on level up
   if(rolledHitPoints + modifier <= 0) {
     hitPointsToAdd = 1;
   }
@@ -280,6 +305,68 @@ const addExp = () => {
     let currentExpNum = Number(currentExperience.textContent);
     let newExpNum = Number(addNewExperienceInput.value)
     currentExperience.textContent = String(currentExpNum + newExpNum);
+}
+
+const generalInfo = () => {
+  
+  // Get current state of info required to create character
+  
+  selectedCls = cls.options[cls.selectedIndex];
+
+  charCls = selectedCls.textContent.toLowerCase();
+
+  selectedRace = race.options[race.selectedIndex];
+  
+  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+
+  strength = rolledStrength.textContent;
+
+  dexerity = rolledDexerity.textContent;
+
+  constitution = rolledConstitition.textContent;
+
+  intelligence = rolledIntelligence.textContent;
+
+  wisdom = rolledWisdom.textContent;
+
+  charisma = rolledCharisma.textContent;
+
+  selectedAlignment = alignment.options[alignment.selectedIndex];
+
+  charGender = gender.value.toLowerCase();
+  
+  languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ") + `, ${String(extraLanguage.value)}`;
+
+  // Post info from character creation to preview area
+
+  currentLevel.textContent = String(Levels[0].level);
+
+  experienceNextLevel.textContent = String(Levels[0].experience);
+
+  namePreview.textContent = name.value;
+
+  racePreview.textContent = selectedRace.textContent;
+
+  genderPreview.textContent = gender.value;
+
+  agePreview.textContent = age.value;
+
+  strengthPreview.textContent = strength;
+
+  dexerityPreview.textContent = dexerity;
+
+  constitutionPreview.textContent = constitution;
+
+  wisdomPreview.textContent = wisdom;
+
+  intelligencePreview.textContent = intelligence;
+
+  charismaPreview.textContent = charisma;
+
+  clsPreview.textContent = selectedCls.textContent;
+
+  alignmentPreview.textContent = selectedAlignment.textContent;
+  
 }
 
 ////////////////////////////////////////////////////////////
@@ -304,18 +391,6 @@ const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePr
 
 const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
 
-let strength = rolledStrength.textContent;
-
-let dexerity = rolledDexerity.textContent;
-
-let constitution = rolledConstitition.textContent;
-
-let intelligence = rolledIntelligence.textContent;
-
-let wisdom = rolledWisdom.textContent;
-
-let charisma = rolledCharisma.textContent;
-
 const extraAbilityModifier = <HTMLElement>document.querySelector('#extraAbilityModifier');
 
 const extraAbilityModifier1 = <HTMLSelectElement>document.querySelector('#extraAbilityModifier1');
@@ -327,24 +402,24 @@ const extraAbilityModifierHelp = <HTMLElement>document.querySelector('#extraAbil
 // Ability Score functions
 
 const lookupAbilityScore = (ability) => {
-  // Get current values of required info
-  abilityScoreList = document.querySelector('#abilityScoreList');
-  abilityScoreListItems = abilityScoreList.children;
-  let abilityScore;
+
   // if ability matches abilityScore in list return number value of abilityScore
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
     if(string.toLowerCase() === ability) {
-      abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+      abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
       return abilityScore;
     }
   }
+  
 }
 
 const racialAbilityModifier = () => {
+  
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
   let racialAbility = Races[charRace].abilityModifier.ability;
   let racialAbilityMod = Races[charRace].abilityModifier.modifier;
+  
   // if ability matches abilityPreview node text, add modifier to score
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
@@ -353,6 +428,7 @@ const racialAbilityModifier = () => {
       abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
     }
   }
+  
   // if race has extra ability to modify
   if(Races[charRace].abilityModifier.extraAbility) {
     for(let i = 0; i < abilityScoreListItems.length; i++) {
@@ -398,29 +474,20 @@ const showExtraModifiersInput = () => {
 
 race.addEventListener('change', showExtraModifiersInput);
 
+// Hide first selection in 2nd select list
+
 const hideMod1Selection = () => {
   
-  // reset 2nd selection child nodes
+  let firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
   
   extraAbilityModifier2.innerHTML = "";
   
-  let firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent
-  
-  console.log(firstSelection);
-  
-  // if ability is chosen in 1st selection hide in 2nd selection
-  
   Abilities.map(ability => {
-    
     if(ability !== firstSelection) {
-    
       let abilityElement2 = document.createElement("option");
       abilityElement2.textContent = ability;
       extraAbilityModifier2.appendChild(abilityElement2);
-      
     }
-      
-    
   })
   
 }
@@ -685,76 +752,20 @@ const combatCreation = () => {
 }
 
 ////////////////////////////////////////////////////////////
-// The big submit button for character creation
+// Character Creation
 ////////////////////////////////////////////////////////////
-
-const createCharacterButton = document.querySelector('#createCharacterButton');
 
 createCharacterButton.addEventListener('click', e => {
 
   e.preventDefault();
 
-  // Get current state of required info
-
-  selectedRace = race.options[race.selectedIndex];
-
-  strength = rolledStrength.textContent;
-
-  dexerity = rolledDexerity.textContent;
-
-  constitution = rolledConstitition.textContent;
-
-  intelligence = rolledIntelligence.textContent;
-
-  wisdom = rolledWisdom.textContent;
-
-  charisma = rolledCharisma.textContent;
-
-  selectedAlignment = alignment.options[alignment.selectedIndex];
-
-  selectedCls = cls.options[cls.selectedIndex];
-
-  charCls = selectedCls.textContent.toLowerCase();
-
-  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-
-  charGender = gender.value.toLowerCase();
+  // Character Creation functions
   
-  languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ") + `, ${String(extraLanguage.value)}`;
-
-  // Post info from character creation to preview area
-
-  currentLevel.textContent = String(Levels[0].level);
-
-  experienceNextLevel.textContent = String(Levels[0].experience);
-
-  namePreview.textContent = name.value;
-
-  racePreview.textContent = selectedRace.textContent;
-
-  genderPreview.textContent = gender.value;
-
-  agePreview.textContent = age.value;
-
-  strengthPreview.textContent = strength;
-
-  dexerityPreview.textContent = dexerity;
-
-  constitutionPreview.textContent = constitution;
-
-  wisdomPreview.textContent = wisdom;
-
-  intelligencePreview.textContent = intelligence;
-
-  charismaPreview.textContent = charisma;
-
-  clsPreview.textContent = selectedCls.textContent;
-
-  alignmentPreview.textContent = selectedAlignment.textContent;
+  generalInfo();  // General tab functions
   
-  addExtraAbilityMofifiers();
+  addExtraAbilityMofifiers();  // Half-Elf racial bonus
 
-  combatCreation();
+  combatCreation();  // Combat tab functions
 
 });
 
@@ -764,7 +775,7 @@ levelUpButton.addEventListener('click', e => {
 
   e.preventDefault();
 
-  // Get current state of required variables
+  // Get level up variables
 
   constitution = rolledConstitition.textContent;
   selectedCls = cls.options[cls.selectedIndex];

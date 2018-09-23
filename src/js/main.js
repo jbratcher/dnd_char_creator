@@ -8,13 +8,16 @@ import { Classes, Races, Levels, Languages, Abilities } from './info.js';
 ////////////////////////////////////////
 var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
 var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a random true or false value
-var rollAbilityScore = function () { return Math.floor(Math.random() * ((18 - 3) + 1)) + 3; };
+var rollAbilityScore = function () { return randomIntFromRange(3, 18); };
 var setToMinMax = function (score) { return score > 18 ? 18 : score < 3 ? 3 : score; };
-var singleWord = /(\w+)/;
-var modifier;
+var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
+// Initialize variables
 var sign;
+var modifier;
 var totalMod;
+var abilityScore;
 var abilityScoreMod;
+var proficiencyBonus;
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
@@ -35,6 +38,7 @@ var getCharacterAttributes = function (charCls, charRace, charGender) {
     }
     return characterImages[charRace][charCls][charGender];
 };
+// Set modifier to ability score modifier value
 var getAbilityScoreModifier = function (abilityScore) { return modifier = Math.floor((abilityScore / 2) - 5); };
 // Append sign to value
 var appendSigntoValue = function (value, node) {
@@ -69,6 +73,13 @@ rollConstitution.addEventListener('click', function () { return setScore(rolledC
 rollWisdom.addEventListener('click', function () { return setScore(rolledWisdom); });
 rollIntelligence.addEventListener('click', function () { return setScore(rolledIntelligence); });
 rollCharisma.addEventListener('click', function () { return setScore(rolledCharisma); });
+// Setters for ability scores
+var strength = rolledStrength.textContent;
+var dexerity = rolledDexerity.textContent;
+var constitution = rolledConstitition.textContent;
+var intelligence = rolledIntelligence.textContent;
+var wisdom = rolledWisdom.textContent;
+var charisma = rolledCharisma.textContent;
 ////////////////////////////////////////////////////////////
 // Get character info input elements
 ////////////////////////////////////////////////////////////
@@ -78,10 +89,26 @@ var race = document.querySelector('#race');
 var alignment = document.querySelector('#alignment');
 var cls = document.querySelector('#cls');
 var gender = document.querySelector('#gender');
+var selectedAlignment = alignment.options[alignment.selectedIndex];
+var selectedCls = cls.options[cls.selectedIndex];
+var charCls = selectedCls.textContent.toLowerCase();
+var selectedRace = race.options[race.selectedIndex];
+var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+var charGender = gender.value.toLowerCase();
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
+// Displays race specific age help text on race selection
+var ageHelpText = function () {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    ageHelp.textContent = "Please enter an age between " + Races[charRace].age.min + " and  " + Races[charRace].age.max;
+};
+race.addEventListener('change', ageHelpText);
+// Iniialize help text on page load
+ageHelpText();
+// Display extra language field if race selection is human and add language options
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
+var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 var addLanguages = function () {
     Languages.standard.map(function (lang) {
         var languageElement = document.createElement("option");
@@ -90,15 +117,6 @@ var addLanguages = function () {
     });
 };
 addLanguages();
-var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
-var ageHelpText = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    ageHelp.textContent = "Please enter an age between " + Races[charRace].age.min + " and  " + Races[charRace].age.max;
-};
-race.addEventListener('change', ageHelpText);
-// Iniialize help text on page load
-ageHelpText();
-// Display extra language field if human race is chosen
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     charRace === 'human' ? extraLanguageField.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
@@ -116,15 +134,15 @@ var skill3list = skill3.children;
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
-// Level and experience Section
+// Level and experience section
 var currentLevel = document.querySelector('#currentLevel');
 var currentExperience = document.querySelector('#currentExperience');
 var experienceNextLevel = document.querySelector('#experienceNextLevel');
 var addNewExperienceInput = document.querySelector('#addNewExperience');
 ////////////////////////////////////////////////////////////
-// General information
+// General Preview information
 ////////////////////////////////////////////////////////////
-// General variables
+// General Preview variables
 var namePreview = document.querySelector('#namePreview');
 var racePreview = document.querySelector('#racePreview');
 var genderPreview = document.querySelector('#genderPreview');
@@ -132,16 +150,10 @@ var agePreview = document.querySelector('#agePreview');
 var clsPreview = document.querySelector('#clsPreview');
 var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
-var selectedAlignment = alignment.options[alignment.selectedIndex];
-var selectedCls = cls.options[cls.selectedIndex];
-var charCls = selectedCls.textContent.toLowerCase();
-var selectedRace = race.options[race.selectedIndex];
-var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-var charGender = gender.value.toLowerCase();
 var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
-var proficiencyBonus;
 var languagesPreview = document.querySelector('#languagesPreview');
 // General buttons
+var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
 var addNewExperienceButton = document.querySelector('#addExp');
 // General functions
@@ -159,6 +171,7 @@ var addHitPoints = function () {
     var rolledHitPoints = randomIntFromRange(1, Classes[charCls].hitdie);
     modifier = getAbilityScoreModifier(constitution);
     var hitPointsToAdd = (rolledHitPoints + modifier);
+    // Prevent negative or zero hit points on level up
     if (rolledHitPoints + modifier <= 0) {
         hitPointsToAdd = 1;
     }
@@ -174,6 +187,37 @@ var addExp = function () {
     var newExpNum = Number(addNewExperienceInput.value);
     currentExperience.textContent = String(currentExpNum + newExpNum);
 };
+var generalInfo = function () {
+    // Get current state of info required to create character
+    selectedCls = cls.options[cls.selectedIndex];
+    charCls = selectedCls.textContent.toLowerCase();
+    selectedRace = race.options[race.selectedIndex];
+    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    strength = rolledStrength.textContent;
+    dexerity = rolledDexerity.textContent;
+    constitution = rolledConstitition.textContent;
+    intelligence = rolledIntelligence.textContent;
+    wisdom = rolledWisdom.textContent;
+    charisma = rolledCharisma.textContent;
+    selectedAlignment = alignment.options[alignment.selectedIndex];
+    charGender = gender.value.toLowerCase();
+    languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ") + (", " + String(extraLanguage.value));
+    // Post info from character creation to preview area
+    currentLevel.textContent = String(Levels[0].level);
+    experienceNextLevel.textContent = String(Levels[0].experience);
+    namePreview.textContent = name.value;
+    racePreview.textContent = selectedRace.textContent;
+    genderPreview.textContent = gender.value;
+    agePreview.textContent = age.value;
+    strengthPreview.textContent = strength;
+    dexerityPreview.textContent = dexerity;
+    constitutionPreview.textContent = constitution;
+    wisdomPreview.textContent = wisdom;
+    intelligencePreview.textContent = intelligence;
+    charismaPreview.textContent = charisma;
+    clsPreview.textContent = selectedCls.textContent;
+    alignmentPreview.textContent = selectedAlignment.textContent;
+};
 ////////////////////////////////////////////////////////////
 // Ability Scores
 ////////////////////////////////////////////////////////////
@@ -186,27 +230,17 @@ var constitutionPreview = document.querySelector('#constitutionPreview');
 var wisdomPreview = document.querySelector('#wisdomPreview');
 var intelligencePreview = document.querySelector('#intelligencePreview');
 var charismaPreview = document.querySelector('#charismaPreview');
-var strength = rolledStrength.textContent;
-var dexerity = rolledDexerity.textContent;
-var constitution = rolledConstitition.textContent;
-var intelligence = rolledIntelligence.textContent;
-var wisdom = rolledWisdom.textContent;
-var charisma = rolledCharisma.textContent;
 var extraAbilityModifier = document.querySelector('#extraAbilityModifier');
 var extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
 var extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
 var extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');
 // Ability Score functions
 var lookupAbilityScore = function (ability) {
-    // Get current values of required info
-    abilityScoreList = document.querySelector('#abilityScoreList');
-    abilityScoreListItems = abilityScoreList.children;
-    var abilityScore;
     // if ability matches abilityScore in list return number value of abilityScore
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         if (string.toLowerCase() === ability) {
-            abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
+            abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
             return abilityScore;
         }
     }
@@ -219,8 +253,8 @@ var racialAbilityModifier = function () {
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         if (string.toLowerCase() === racialAbility) {
-            var abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
-            abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
+            var abilityScore_1 = abilityScoreListItems[i].childNodes[3].textContent;
+            abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore_1) + Number(racialAbilityMod));
         }
     }
     // if race has extra ability to modify
@@ -228,8 +262,8 @@ var racialAbilityModifier = function () {
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             if (string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
-                var abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
-                abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(Races[charRace].abilityModifier.extraModifier));
+                var abilityScore_2 = abilityScoreListItems[i].childNodes[3].textContent;
+                abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore_2) + Number(Races[charRace].abilityModifier.extraModifier));
             }
         }
     }
@@ -252,12 +286,10 @@ var showExtraModifiersInput = function () {
     charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
+// Hide first selection in 2nd select list
 var hideMod1Selection = function () {
-    // reset 2nd selection child nodes
-    extraAbilityModifier2.innerHTML = "";
     var firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
-    console.log(firstSelection);
-    // if ability is chosen in 1st selection hide in 2nd selection
+    extraAbilityModifier2.innerHTML = "";
     Abilities.map(function (ability) {
         if (ability !== firstSelection) {
             var abilityElement2 = document.createElement("option");
@@ -277,9 +309,9 @@ var addExtraAbilityMofifiers = function () {
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             if (string === mod1 || string === mod2) {
-                var abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
-                abilityScore += 1;
-                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore);
+                var abilityScore_3 = Number(abilityScoreListItems[i].childNodes[3].textContent);
+                abilityScore_3 += 1;
+                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_3);
             }
         }
     }
@@ -444,47 +476,19 @@ var combatCreation = function () {
     charSize();
 };
 ////////////////////////////////////////////////////////////
-// The big submit button for character creation
+// Character Creation
 ////////////////////////////////////////////////////////////
-var createCharacterButton = document.querySelector('#createCharacterButton');
 createCharacterButton.addEventListener('click', function (e) {
     e.preventDefault();
-    // Get current state of required info
-    selectedRace = race.options[race.selectedIndex];
-    strength = rolledStrength.textContent;
-    dexerity = rolledDexerity.textContent;
-    constitution = rolledConstitition.textContent;
-    intelligence = rolledIntelligence.textContent;
-    wisdom = rolledWisdom.textContent;
-    charisma = rolledCharisma.textContent;
-    selectedAlignment = alignment.options[alignment.selectedIndex];
-    selectedCls = cls.options[cls.selectedIndex];
-    charCls = selectedCls.textContent.toLowerCase();
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    charGender = gender.value.toLowerCase();
-    languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ") + (", " + String(extraLanguage.value));
-    // Post info from character creation to preview area
-    currentLevel.textContent = String(Levels[0].level);
-    experienceNextLevel.textContent = String(Levels[0].experience);
-    namePreview.textContent = name.value;
-    racePreview.textContent = selectedRace.textContent;
-    genderPreview.textContent = gender.value;
-    agePreview.textContent = age.value;
-    strengthPreview.textContent = strength;
-    dexerityPreview.textContent = dexerity;
-    constitutionPreview.textContent = constitution;
-    wisdomPreview.textContent = wisdom;
-    intelligencePreview.textContent = intelligence;
-    charismaPreview.textContent = charisma;
-    clsPreview.textContent = selectedCls.textContent;
-    alignmentPreview.textContent = selectedAlignment.textContent;
-    addExtraAbilityMofifiers();
-    combatCreation();
+    // Character Creation functions
+    generalInfo(); // General tab functions
+    addExtraAbilityMofifiers(); // Half-Elf racial bonus
+    combatCreation(); // Combat tab functions
 });
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
-    // Get current state of required variables
+    // Get level up variables
     constitution = rolledConstitition.textContent;
     selectedCls = cls.options[cls.selectedIndex];
     charCls = selectedCls.textContent.toLowerCase();
