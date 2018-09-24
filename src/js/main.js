@@ -98,8 +98,14 @@ var cls = document.querySelector('#cls');
 addOptionstoSelect(cls, ClassList);
 var alignment = document.querySelector('#alignment');
 addOptionstoSelect(alignment, Alignments);
-var gender = document.querySelector('#gender');
 var selectedAlignment = alignment.options[alignment.selectedIndex];
+var availableAlignments = function () {
+    alignment.innerHTML = '';
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    addOptionstoSelect(alignment, Races[charRace].alignments);
+};
+race.addEventListener('change', availableAlignments);
+var gender = document.querySelector('#gender');
 var selectedCls = cls.options[cls.selectedIndex];
 var charCls = selectedCls.textContent.toLowerCase();
 var selectedRace = race.options[race.selectedIndex];

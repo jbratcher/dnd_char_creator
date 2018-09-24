@@ -165,9 +165,19 @@ const alignment = <HTMLSelectElement>document.querySelector('#alignment');
 
 addOptionstoSelect(alignment, Alignments)
 
-const gender = <HTMLInputElement>document.querySelector('#gender');
-
 let selectedAlignment = alignment.options[alignment.selectedIndex];
+
+const availableAlignments = () => {
+  
+  alignment.innerHTML = '';
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  addOptionstoSelect(alignment, Races[charRace].alignments);
+  
+}
+
+race.addEventListener('change', availableAlignments);
+
+const gender = <HTMLInputElement>document.querySelector('#gender');
 
 let selectedCls = cls.options[cls.selectedIndex];
 
