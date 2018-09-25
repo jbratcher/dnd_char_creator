@@ -305,6 +305,7 @@ export var Races = {
             "Chaotic Neutral",
             "Chaotic Evil"
         ],
+        bonusSkills: 2,
         darkvision: true,
         languages: [
             "Common",
@@ -331,6 +332,7 @@ export var Races = {
             "Common",
             "Halfling"
         ],
+        extraLanguage: 1,
         size: 'Small',
         speed: 25
     },
@@ -374,6 +376,9 @@ export var Races = {
             "Lawful Good",
             "Neutral Good",
             "Chaotic Good",
+            "Lawful Neutral",
+            "True Neutral",
+            "Chaotic Neutral",
             "Lawful Evil",
             "Neutral Evil",
             "Chaotic Evil"

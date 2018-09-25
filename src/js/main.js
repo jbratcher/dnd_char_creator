@@ -128,8 +128,21 @@ var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 addOptionstoSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    charRace === 'human' ? extraLanguageField.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
-    charRace === 'human' ? extraLanguageHelp.textContent = 'Humans get to choose 1 extra language' : extraLanguageHelp.textContent = '';
+    if (charRace === 'human' || charRace === 'halfelf') {
+        extraLanguageField.classList.remove('d-none');
+    }
+    else {
+        extraLanguageField.classList.add('d-none');
+    }
+    if (charRace === 'human') {
+        extraLanguageHelp.textContent = 'Humans get to choose 1 extra language';
+    }
+    else if (charRace === 'halfelf') {
+        extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language';
+    }
+    else {
+        extraLanguageHelp.textContent = '';
+    }
 };
 race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
@@ -286,8 +299,12 @@ addOptionstoSelect(extraAbilityModifier2, Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    charRace === 'halfelf' ? extraAbilityModifier.classList.remove('d-none') : extraAbilityModifier.classList.add('d-none');
-    charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
+    charRace === 'halfelf'
+        ? extraAbilityModifier.classList.remove('d-none')
+        : extraAbilityModifier.classList.add('d-none');
+    charRace === 'halfelf'
+        ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1'
+        : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
 // Hide first selection in 2nd select list

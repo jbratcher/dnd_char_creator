@@ -3,13 +3,13 @@
 ////////////////////////////////////////
 
 import { characterImages } from './characterImages.js';
-import { 
+import {
   Abilities,
   Alignments,
   ClassList,
   ClassProps,
-  Levels, 
-  Languages, 
+  Levels,
+  Languages,
   Races,
   RaceList,
   Skills
@@ -53,7 +53,7 @@ const addOptionstoSelect = (selectElement, dataArray) => {
     optionElement.textContent = optionText;
     selectElement.appendChild(optionElement);
   })
-} 
+}
 
 const setScore = (abilityScorePreview) => {
   let score: number = rollAbilityScore();
@@ -168,11 +168,11 @@ addOptionstoSelect(alignment, Alignments)
 let selectedAlignment = alignment.options[alignment.selectedIndex];
 
 const availableAlignments = () => {
-  
+
   alignment.innerHTML = '';
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
   addOptionstoSelect(alignment, Races[charRace].alignments);
-  
+
 }
 
 race.addEventListener('change', availableAlignments);
@@ -196,10 +196,10 @@ const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 // Displays race specific age help text on race selection
 
 const ageHelpText = () => {
-  
+
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
   ageHelp.textContent = `Please enter an age between ${Races[charRace].age.min} and  ${Races[charRace].age.max}`
-  
+
 }
 
 race.addEventListener('change', ageHelpText);
@@ -219,13 +219,23 @@ const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHel
 addOptionstoSelect(extraLanguage, Languages.standard);
 
 const showExtraLanguageInput = () => {
-  
+
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  
-  charRace === 'human' ? extraLanguageField.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
-  
-  charRace === 'human' ? extraLanguageHelp.textContent = 'Humans get to choose 1 extra language' : extraLanguageHelp.textContent = '';
-  
+
+  if(charRace === 'human' || charRace === 'halfelf') {
+    extraLanguageField.classList.remove('d-none')
+  } else {
+    extraLanguageField.classList.add('d-none');
+  }
+
+  if(charRace === 'human') {
+    extraLanguageHelp.textContent = 'Humans get to choose 1 extra language';
+  } else if(charRace === 'halfelf') {
+    extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language';
+  } else {
+    extraLanguageHelp.textContent = '';
+  }
+
 }
 
 race.addEventListener('change', showExtraLanguageInput);
@@ -336,15 +346,15 @@ const addExp = () => {
 }
 
 const generalInfo = () => {
-  
+
   // Get current state of info required to create character
-  
+
   selectedCls = cls.options[cls.selectedIndex];
 
   charCls = selectedCls.textContent.toLowerCase();
 
   selectedRace = race.options[race.selectedIndex];
-  
+
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
 
   strength = rolledStrength.textContent;
@@ -362,7 +372,7 @@ const generalInfo = () => {
   selectedAlignment = alignment.options[alignment.selectedIndex];
 
   charGender = gender.value.toLowerCase();
-  
+
   languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ") + `, ${String(extraLanguage.value)}`;
 
   // Post info from character creation to preview area
@@ -394,7 +404,7 @@ const generalInfo = () => {
   clsPreview.textContent = selectedCls.textContent;
 
   alignmentPreview.textContent = selectedAlignment.textContent;
-  
+
 }
 
 ////////////////////////////////////////////////////////////
@@ -439,15 +449,15 @@ const lookupAbilityScore = (ability) => {
       return abilityScore;
     }
   }
-  
+
 }
 
 const racialAbilityModifier = () => {
-  
+
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
   let racialAbility = Races[charRace].abilityModifier.ability;
   let racialAbilityMod = Races[charRace].abilityModifier.modifier;
-  
+
   // if ability matches abilityPreview node text, add modifier to score
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
@@ -456,7 +466,7 @@ const racialAbilityModifier = () => {
       abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
     }
   }
-  
+
   // if race has extra ability to modify
   if(Races[charRace].abilityModifier.extraAbility) {
     for(let i = 0; i < abilityScoreListItems.length; i++) {
@@ -479,13 +489,17 @@ addOptionstoSelect(extraAbilityModifier2, Abilities);
 // Display extra ability modifier field if race is Half-Elf
 
 const showExtraModifiersInput = () => {
-  
+
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  
-  charRace === 'halfelf' ? extraAbilityModifier.classList.remove('d-none') : extraAbilityModifier.classList.add('d-none');
-  
-  charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
-  
+
+  charRace === 'halfelf'
+    ? extraAbilityModifier.classList.remove('d-none')
+    : extraAbilityModifier.classList.add('d-none');
+
+  charRace === 'halfelf'
+    ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1'
+    : extraAbilityModifierHelp.textContent = '';
+
 }
 
 race.addEventListener('change', showExtraModifiersInput);
@@ -493,11 +507,11 @@ race.addEventListener('change', showExtraModifiersInput);
 // Hide first selection in 2nd select list
 
 const hideMod1Selection = () => {
-  
+
   let firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
-  
+
   extraAbilityModifier2.innerHTML = "";
-  
+
   Abilities.map(ability => {
     if(ability !== firstSelection) {
       let abilityElement2 = document.createElement("option");
@@ -505,7 +519,7 @@ const hideMod1Selection = () => {
       extraAbilityModifier2.appendChild(abilityElement2);
     }
   })
-  
+
 }
 
 extraAbilityModifier1.addEventListener('change', hideMod1Selection)
@@ -513,9 +527,8 @@ extraAbilityModifier1.addEventListener('change', hideMod1Selection)
 // if extra ability score is selected add +1 to ability score preview
 
 const addExtraAbilityMofifiers = () => {
-  
+
   if(charRace === 'halfelf') {
-    
     // get selected abilities
     let mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
     let mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
@@ -528,7 +541,6 @@ const addExtraAbilityMofifiers = () => {
         abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore);
       }
     }
-    
   }
 
 }
@@ -776,9 +788,9 @@ createCharacterButton.addEventListener('click', e => {
   e.preventDefault();
 
   // Character Creation functions
-  
+
   generalInfo();  // General tab functions
-  
+
   addExtraAbilityMofifiers();  // Half-Elf racial bonus
 
   combatCreation();  // Combat tab functions

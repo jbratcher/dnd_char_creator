@@ -18,7 +18,7 @@ export const ClassProps = {
             "Survival"
         ]
     },
-    
+
     bard: {
         hitdie: 8,
         skills: {
@@ -45,7 +45,7 @@ export const ClassProps = {
             "Survival"
         ]
     },
-    
+
     cleric: {
         hitdie: 8,
         skills: {
@@ -59,7 +59,7 @@ export const ClassProps = {
             "Religion"
         ]
     },
-    
+
     druid: {
         hitdie: 8,
         skills: {
@@ -76,7 +76,7 @@ export const ClassProps = {
             "Survival"
         ]
     },
-    
+
     fighter: {
         hitdie: 10,
         skills: {
@@ -93,7 +93,7 @@ export const ClassProps = {
             "Survival"
         ]
     },
-    
+
     monk: {
         hitdie: 8,
         skills: {
@@ -108,7 +108,7 @@ export const ClassProps = {
             "Stealth"
         ]
     },
-    
+
     paladin: {
         hitdie: 10,
         skills: {
@@ -123,7 +123,7 @@ export const ClassProps = {
             "Religion"
         ]
     },
-    
+
     ranger: {
         hitdie: 10,
         skills: {
@@ -140,7 +140,7 @@ export const ClassProps = {
             "Survival"
         ]
     },
-    
+
     rogue: {
         hitdie: 8,
         skills: {
@@ -160,7 +160,7 @@ export const ClassProps = {
             "Stealth"
         ]
     },
-    
+
     sorcerer: {
         hitdie: 6,
         skills: {
@@ -175,7 +175,7 @@ export const ClassProps = {
             "Religion"
         ]
     },
-    
+
     warlock: {
         hitdie: 8,
         skills: {
@@ -191,7 +191,7 @@ export const ClassProps = {
             "Religion"
         ]
     },
-    
+
     wizard: {
         hitdie: 6,
         skills: {
@@ -217,7 +217,7 @@ export const ClassProps = {
 export const Races = {
 
     dragonborn: {
-        
+
         abilityModifier: {
             ability: 'strength',
             modifier: 2
@@ -241,11 +241,11 @@ export const Races = {
         ],
         size: 'Medium',
         speed: 30
-        
+
     },
-    
+
     dwarf: {
-        
+
         abilityModifier: {
             ability: 'constitution',
             modifier: 2
@@ -266,11 +266,11 @@ export const Races = {
         ],
         size: 'Medium',
         speed: 25
-        
+
     },
-    
+
     elf: {
-        
+
         abilityModifier: {
             ability: 'dexerity',
             modifier: 2
@@ -291,11 +291,11 @@ export const Races = {
         ],
         size: 'Medium',
         speed: 30
-        
+
     },
-    
+
     gnome: {
-        
+
         abilityModifier: {
             ability: 'intelligence',
             modifier: 2
@@ -316,11 +316,11 @@ export const Races = {
         ],
         size: 'Small',
         speed: 25
-        
+
     },
-    
+
     halfelf: {
-        
+
         abilityModifier: {
             ability: 'charisma',
             modifier: 2,
@@ -336,6 +336,7 @@ export const Races = {
             "Chaotic Neutral",
             "Chaotic Evil"
         ],
+        bonusSkills: 2,
         darkvision: true,
         languages: [
             "Common",
@@ -344,11 +345,11 @@ export const Races = {
         extraLanguage: 1,
         size: 'Medium',
         speed: 30
-        
+
     },
-    
+
     halfling: {
-        
+
         abilityModifier: {
             ability: 'dexerity',
             modifier: 2
@@ -365,13 +366,14 @@ export const Races = {
             "Common",
             "Halfling"
         ],
+        extraLanguage: 1,
         size: 'Small',
         speed: 25
-        
+
     },
-    
+
     halforc: {
-        
+
         abilityModifier: {
             ability: 'strength',
             modifier: 2,
@@ -397,11 +399,11 @@ export const Races = {
         ],
         size: 'Medium',
         speed: 30
-        
+
     },
-    
+
     human: {
-        
+
         abilityModifier: {
             ability: 'all',
             modifier: 1
@@ -414,6 +416,9 @@ export const Races = {
             "Lawful Good",
             "Neutral Good",
             "Chaotic Good",
+            "Lawful Neutral",
+            "True Neutral",
+            "Chaotic Neutral",
             "Lawful Evil",
             "Neutral Evil",
             "Chaotic Evil"
@@ -425,11 +430,11 @@ export const Races = {
         extraLanguage: 1,
         size: 'Medium',
         speed: 30
-        
+
     },
-    
+
     tiefling: {
-        
+
         abilityModifier: {
             ability: 'intelligence',
             modifier: 1,
@@ -451,7 +456,7 @@ export const Races = {
         ],
         size: 'Medium',
         speed: 30
-        
+
     }
 
 
@@ -468,115 +473,115 @@ export const Levels = [
         experience: 300,
         bonus: 2
     },
-    
+
     {
         level: 2,
         experience: 900,
         bonus: 2
     },
-    
+
     {
         level: 3,
         experience: 2700,
         bonus: 2
     },
-    
+
     {
         level: 4,
         experience: 6500,
         bonus: 2
     },
-    
+
     {
         level: 5,
         experience: 14000,
         bonus: 3
     },
-    
+
     {
         level: 6,
         experience: 23000,
         bonus: 3
     },
-    
+
     {
         level: 7,
         experience: 34000,
         bonus: 3
     },
-    
+
     {
         level: 8,
         experience: 48000,
         bonus: 3
     },
-    
+
     {
         level: 9,
         experience: 64000,
         bonus: 4
     },
-    
+
     {
         level: 10,
         experience: 85000,
         bonus: 4
     },
-    
+
     {
         level: 11,
         experience: 100000,
         bonus: 4
     },
-    
+
     {
         level: 12,
         experience: 120000,
         bonus: 4
     },
-    
+
     {
         level: 13,
         experience: 140000,
         bonus: 5
     },
-    
+
     {
         level: 14,
         experience: 165000,
         bonus: 5
     },
-    
+
     {
         level: 15,
         experience: 195000,
         bonus: 5
     },
-    
+
     {
         level: 16,
         experience: 225000,
         bonus: 5
     },
-    
+
     {
         level: 17,
         experience: 265000,
         bonus: 6
     },
-    
+
     {
         level: 18,
         experience: 265000,
         bonus: 6
     },
-    
+
     {
         level: 19,
         experience: 305000,
         bonus: 6
     },
-    
+
     {
         level: 20,
         experience: 335000,
@@ -590,9 +595,9 @@ export const Levels = [
 ////////////////////////////////////////
 
 export const Languages = {
-    
+
     standard: [
-        
+
         'Common',
         'Dwarvish',
         'Elvish',
@@ -601,11 +606,11 @@ export const Languages = {
         'Goblin',
         'Halfling',
         'Orc'
-            
+
     ],
-    
+
     exotic: [
-        
+
         'Abyssal',
         'Celestial',
         'Draconic',
@@ -614,9 +619,9 @@ export const Languages = {
         'Primordial',
         'Sylvan',
         'Undercommon'
-            
+
     ]
-        
+
 }
 
 ////////////////////////////////////////
@@ -637,7 +642,7 @@ export const Abilities = [
 ////////////////////////////////////////
 
 export const ClassList = [
-    
+
     "Barbarian",
     "Bard",
     "Cleric",
@@ -650,7 +655,7 @@ export const ClassList = [
     "Sorcerer",
     "Warlock",
     "Wizard",
-                        
+
 ]
 
 ////////////////////////////////////////
@@ -668,7 +673,7 @@ export const RaceList = [
     "Half-Orc",
     "Human",
     "Tiefling"
-    
+
 ]
 
 ////////////////////////////////////////
@@ -676,7 +681,7 @@ export const RaceList = [
 ////////////////////////////////////////
 
 export const Alignments = [
-    
+
     "Lawful Good",
     "Neutral Good",
     "Chaotic Good",
@@ -686,7 +691,7 @@ export const Alignments = [
     "Lawful Evil",
     "Neutral Evil",
     "Chaotic Evil"
-    
+
 ]
 
 ////////////////////////////////////////
@@ -694,7 +699,7 @@ export const Alignments = [
 ////////////////////////////////////////
 
 export const Skills = [
-    
+
     "Acrobatics",
     "Animal Handling",
     "Arcana",
@@ -713,5 +718,5 @@ export const Skills = [
     "Slieght of Hand",
     "Stealth",
     "Survival"
-    
+
 ]
