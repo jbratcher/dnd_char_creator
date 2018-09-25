@@ -168,6 +168,7 @@ var Races = exports.Races = {
             max: 180
         },
         alignments: ["Chaotic Good", "Chaotic Neutral", "Chaotic Evil"],
+        bonusSkills: 2,
         darkvision: true,
         languages: ["Common", "Elfish"],
         extraLanguage: 1,
@@ -186,6 +187,7 @@ var Races = exports.Races = {
         alignments: ["Lawful Good"],
         darkvision: false,
         languages: ["Common", "Halfling"],
+        extraLanguage: 1,
         size: 'Small',
         speed: 25
     },
@@ -215,7 +217,7 @@ var Races = exports.Races = {
             min: 15,
             max: 80
         },
-        alignments: ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Evil", "Neutral Evil", "Chaotic Evil"],
+        alignments: ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"],
         darkvision: false,
         languages: ["Common"],
         extraLanguage: 1,

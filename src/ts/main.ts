@@ -146,7 +146,8 @@ let wisdom = rolledWisdom.textContent;
 let charisma = rolledCharisma.textContent;
 
 ////////////////////////////////////////////////////////////
-// Get character info input elements
+// Get character info input elements, populate with data
+// and add dynamic updating
 ////////////////////////////////////////////////////////////
 
 // General Info
@@ -208,7 +209,7 @@ race.addEventListener('change', ageHelpText);
 
 ageHelpText();
 
-// Display extra language field if race selection is human and add language options
+// Display extra language field if race selection is human or halfelf and add language options
 
 const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
 
@@ -221,20 +222,18 @@ addOptionstoSelect(extraLanguage, Languages.standard);
 const showExtraLanguageInput = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-
-  if(charRace === 'human' || charRace === 'halfelf') {
-    extraLanguageField.classList.remove('d-none')
-  } else {
-    extraLanguageField.classList.add('d-none');
-  }
-
-  if(charRace === 'human') {
-    extraLanguageHelp.textContent = 'Humans get to choose 1 extra language';
-  } else if(charRace === 'halfelf') {
-    extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language';
-  } else {
-    extraLanguageHelp.textContent = '';
-  }
+  
+  charRace === 'human'
+    ? extraLanguageField.classList.remove('d-none')
+    : charRace === 'halfelf'
+      ? extraLanguageField.classList.remove('d-none')
+      : extraLanguageField.classList.add('d-none')
+  
+  charRace === 'human' 
+    ? extraLanguageHelp.textContent = 'Humans get to choose 1 extra language'
+    : charRace === 'halfelf'
+      ? extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language'
+      : extraLanguageHelp.textContent = ''
 
 }
 
@@ -261,6 +260,43 @@ const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
 addOptionstoSelect(skill3, Skills);
 
 let skill3list = skill3.children;
+
+let availableSkills = ClassProps[charCls].availableSkills;
+
+let selectedSkill1 = skill1.options[skill1.selectedIndex];
+
+let selectedSkill2 = skill1.options[skill2.selectedIndex];
+
+let selectedSkill3 = skill1.options[skill3.selectedIndex];
+
+// Skill functions
+
+const highlightAvailableSkills = () => {
+
+  availableSkills = ClassProps[charCls].availableSkills;
+  
+  skill1.innerHTML = "";
+  skill2.innerHTML = "";
+  skill3.innerHTML = "";
+  
+  addOptionstoSelect(skill1, availableSkills);
+  addOptionstoSelect(skill2, availableSkills);
+  addOptionstoSelect(skill3, availableSkills);
+
+}
+
+// dynamically change available skills based on character class
+
+cls.addEventListener('change', () => {
+
+  charCls = cls.options[cls.selectedIndex].text.toLowerCase();
+  highlightAvailableSkills();
+
+});
+
+// Initialize state for selected class on document load
+
+highlightAvailableSkills();
 
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
@@ -546,18 +582,10 @@ const addExtraAbilityMofifiers = () => {
 }
 
 ////////////////////////////////////////////////////////////
-// Skills
+// Skills Preview
 ////////////////////////////////////////////////////////////
 
 // Skill variables
-
-let availableSkills = ClassProps[charCls].availableSkills;
-
-let selectedSkill1 = skill1.options[skill1.selectedIndex];
-
-let selectedSkill2 = skill1.options[skill2.selectedIndex];
-
-let selectedSkill3 = skill1.options[skill3.selectedIndex];
 
 const skillsPreviewList = document.querySelector('#skillsPreviewList');
 
@@ -598,83 +626,6 @@ const highlightSkills = () => {
     }
   }
 }
-
-// TODO: refactor this monstrosity from 3 loops to 1
-
-const highlightAvailableSkills = () => {
-
-  availableSkills = ClassProps[charCls].availableSkills;
-
-  for(let i = 0; i < skill1list.length; i++) {
-    (<HTMLSelectElement>skill1list[i]).style.display = 'none';
-  }
-
-  for(let i = 0; i < skill2list.length; i++) {
-    (<HTMLSelectElement>skill2list[i]).style.display = 'none';
-  }
-
-  for(let i = 0; i < skill3list.length; i++) {
-    (<HTMLSelectElement>skill3list[i]).style.display = 'none';
-  }
-
-    for(let i = 0; i < skill1list.length; i++) {
-
-      availableSkills.forEach(skill => {
-
-        if(String(skill1list[i].textContent) === skill) {
-            (<HTMLSelectElement>skill1list[i]).style.display = 'block';
-            (<HTMLSelectElement>skill1list[i]).style.color = 'black';
-        }
-
-      })
-
-    }
-
-    for(let i = 0; i < skill2list.length; i++) {
-
-      availableSkills.forEach(skill => {
-
-        if(String(skill2list[i].textContent) === skill) {
-            (<HTMLSelectElement>skill2list[i]).style.display = 'block';
-            (<HTMLSelectElement>skill2list[i]).style.color = 'black';
-        }
-
-      })
-
-    }
-
-    for(let i = 0; i < skill3list.length; i++) {
-
-      availableSkills.forEach(skill => {
-
-        if(String(skill3list[i].textContent) === skill) {
-            (<HTMLSelectElement>skill3list[i]).style.display = 'block';
-            (<HTMLSelectElement>skill3list[i]).style.color = 'black';
-        }
-
-      })
-
-    }
-
-}
-
-// dynamically change available skills based on character class
-
-cls.addEventListener('change', () => {
-
-  selectedCls = cls.options[cls.selectedIndex];
-
-  charCls = selectedCls.text.toLowerCase();
-
-  // loop through skills lists highlighting skills that are available for this class
-
-  highlightAvailableSkills();
-
-});
-
-// Initialize state for selected class on document load
-
-highlightAvailableSkills();
 
 ////////////////////////////////////////////////////////////
 // Combat

@@ -88,7 +88,8 @@ var intelligence = rolledIntelligence.textContent;
 var wisdom = rolledWisdom.textContent;
 var charisma = rolledCharisma.textContent;
 ////////////////////////////////////////////////////////////
-// Get character info input elements
+// Get character info input elements, populate with data
+// and add dynamic updating
 ////////////////////////////////////////////////////////////
 // General Info
 var name = document.querySelector('#name');
@@ -121,28 +122,23 @@ var ageHelpText = function () {
 race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 ageHelpText();
-// Display extra language field if race selection is human and add language options
+// Display extra language field if race selection is human or halfelf and add language options
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 addOptionstoSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    if (charRace === 'human' || charRace === 'halfelf') {
-        extraLanguageField.classList.remove('d-none');
-    }
-    else {
-        extraLanguageField.classList.add('d-none');
-    }
-    if (charRace === 'human') {
-        extraLanguageHelp.textContent = 'Humans get to choose 1 extra language';
-    }
-    else if (charRace === 'halfelf') {
-        extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language';
-    }
-    else {
-        extraLanguageHelp.textContent = '';
-    }
+    charRace === 'human'
+        ? extraLanguageField.classList.remove('d-none')
+        : charRace === 'halfelf'
+            ? extraLanguageField.classList.remove('d-none')
+            : extraLanguageField.classList.add('d-none');
+    charRace === 'human'
+        ? extraLanguageHelp.textContent = 'Humans get to choose 1 extra language'
+        : charRace === 'halfelf'
+            ? extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language'
+            : extraLanguageHelp.textContent = '';
 };
 race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
@@ -156,6 +152,27 @@ var skill2list = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
 addOptionstoSelect(skill3, Skills);
 var skill3list = skill3.children;
+var availableSkills = ClassProps[charCls].availableSkills;
+var selectedSkill1 = skill1.options[skill1.selectedIndex];
+var selectedSkill2 = skill1.options[skill2.selectedIndex];
+var selectedSkill3 = skill1.options[skill3.selectedIndex];
+// Skill functions
+var highlightAvailableSkills = function () {
+    availableSkills = ClassProps[charCls].availableSkills;
+    skill1.innerHTML = "";
+    skill2.innerHTML = "";
+    skill3.innerHTML = "";
+    addOptionstoSelect(skill1, availableSkills);
+    addOptionstoSelect(skill2, availableSkills);
+    addOptionstoSelect(skill3, availableSkills);
+};
+// dynamically change available skills based on character class
+cls.addEventListener('change', function () {
+    charCls = cls.options[cls.selectedIndex].text.toLowerCase();
+    highlightAvailableSkills();
+});
+// Initialize state for selected class on document load
+highlightAvailableSkills();
 ////////////////////////////////////////////////////////////
 // Get character info preview elements
 ////////////////////////////////////////////////////////////
@@ -338,13 +355,9 @@ var addExtraAbilityMofifiers = function () {
     }
 };
 ////////////////////////////////////////////////////////////
-// Skills
+// Skills Preview
 ////////////////////////////////////////////////////////////
 // Skill variables
-var availableSkills = ClassProps[charCls].availableSkills;
-var selectedSkill1 = skill1.options[skill1.selectedIndex];
-var selectedSkill2 = skill1.options[skill2.selectedIndex];
-var selectedSkill3 = skill1.options[skill3.selectedIndex];
 var skillsPreviewList = document.querySelector('#skillsPreviewList');
 var skillsPreviewListItems = skillsPreviewList.children;
 // Skill functions
@@ -377,61 +390,6 @@ var highlightSkills = function () {
         }
     }
 };
-// TODO: refactor this monstrosity from 3 loops to 1
-var highlightAvailableSkills = function () {
-    availableSkills = ClassProps[charCls].availableSkills;
-    for (var i = 0; i < skill1list.length; i++) {
-        skill1list[i].style.display = 'none';
-    }
-    for (var i = 0; i < skill2list.length; i++) {
-        skill2list[i].style.display = 'none';
-    }
-    for (var i = 0; i < skill3list.length; i++) {
-        skill3list[i].style.display = 'none';
-    }
-    var _loop_1 = function (i) {
-        availableSkills.forEach(function (skill) {
-            if (String(skill1list[i].textContent) === skill) {
-                skill1list[i].style.display = 'block';
-                skill1list[i].style.color = 'black';
-            }
-        });
-    };
-    for (var i = 0; i < skill1list.length; i++) {
-        _loop_1(i);
-    }
-    var _loop_2 = function (i) {
-        availableSkills.forEach(function (skill) {
-            if (String(skill2list[i].textContent) === skill) {
-                skill2list[i].style.display = 'block';
-                skill2list[i].style.color = 'black';
-            }
-        });
-    };
-    for (var i = 0; i < skill2list.length; i++) {
-        _loop_2(i);
-    }
-    var _loop_3 = function (i) {
-        availableSkills.forEach(function (skill) {
-            if (String(skill3list[i].textContent) === skill) {
-                skill3list[i].style.display = 'block';
-                skill3list[i].style.color = 'black';
-            }
-        });
-    };
-    for (var i = 0; i < skill3list.length; i++) {
-        _loop_3(i);
-    }
-};
-// dynamically change available skills based on character class
-cls.addEventListener('change', function () {
-    selectedCls = cls.options[cls.selectedIndex];
-    charCls = selectedCls.text.toLowerCase();
-    // loop through skills lists highlighting skills that are available for this class
-    highlightAvailableSkills();
-});
-// Initialize state for selected class on document load
-highlightAvailableSkills();
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////
