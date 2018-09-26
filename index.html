@@ -159,12 +159,18 @@
                     
                     <!-- Extra Ability Modifier select for Half-Elves -->
                     
-                    <div class="input-group-prepend mt-3 d-none" id="extraAbilityModifier">
+                    <section class="d-none" id="extraAbilityModifier">
+                      
+                      <div class="input-group-prepend mt-3">
 
                       <label class="input-group-text" for="extraAbilityModifier1">Extra Ability 1: </label>
 
                       <select class="custom-select text-muted" id="extraAbilityModifier1">
                       </select>
+
+                    </div>
+                    
+                    <div class="input-group-prepend mt-3">
                       
                       <label class="input-group-text" for="extraAbilityModifier2">Extra Ability 2: </label>
 
@@ -172,6 +178,8 @@
                       </select>
 
                     </div>
+                      
+                    </section>
                     
                     <small id="extraAbilityModifierHelp" class="form-text text-muted mb-3"></small>
 
@@ -539,7 +547,7 @@
 
                   <div class="tab-pane fade" id="combat" role="tabpanel" aria-labelledby="combat-tab">
 
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush mb-3">
 
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Armor Class: </b>
@@ -574,6 +582,17 @@
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Size: </b>
                         <span id="size">-</span>
+                      </li>
+
+                    </ul>
+                    
+                    <ul class="list-group list-group-flush">
+                      
+                      <h4 class="text-center">Saving Throws</h4>
+
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Strength: </b>
+                        <span id="strengthSavingThrow">-</span>
                       </li>
 
                     </ul>
