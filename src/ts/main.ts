@@ -684,6 +684,27 @@ const darkvision = () => {
 
 const charSize = () => sizePreview.textContent = Races[charRace].size;
 
+// Saving throws
+
+const savingThrowList = <HTMLElement>document.querySelector('#savingThrowPreviewList');
+const savingThrowListItems = savingThrowList.children;
+
+// saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
+
+const calculateSavingThrowMods = () => {
+  
+  // get class
+  charCls = selectedCls.textContent.toLowerCase();
+  // get class ability mods (i.e. strength)
+  
+  // get class specific saving throw mods (i.e. dexerity)
+  let abilitiesArray = ClassProps[charCls].savingThrows
+  // total modifier
+  // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+  
+}
+
+
 const combatCreation = () => {
 
   updateProficiencyBonus();

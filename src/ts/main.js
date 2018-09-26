@@ -1,8 +1,10 @@
+"use strict";
 ////////////////////////////////////////
 // Imports
 ////////////////////////////////////////
-import { characterImages } from './characterImages.js';
-import { Abilities, Alignments, ClassList, ClassProps, Levels, Languages, Races, RaceList, Skills } from './info.js';
+exports.__esModule = true;
+var characterImages_js_1 = require("./characterImages.js");
+var info_js_1 = require("./info.js");
 ////////////////////////////////////////
 // Utility functions
 ////////////////////////////////////////
@@ -43,7 +45,7 @@ var getCharacterAttributes = function (charCls, charRace, charGender) {
         var gender_1 = randomBoolean();
         gender_1 ? charGender = "male" : charGender = "female";
     }
-    return characterImages[charRace][charCls][charGender];
+    return characterImages_js_1.characterImages[charRace][charCls][charGender];
 };
 // Set modifier to ability score modifier value
 var getAbilityScoreModifier = function (abilityScore) { return modifier = Math.floor((abilityScore / 2) - 5); };
@@ -94,16 +96,16 @@ var charisma = rolledCharisma.textContent;
 // General Info
 var name = document.querySelector('#name');
 var race = document.querySelector('#race');
-addOptionstoSelect(race, RaceList);
+addOptionstoSelect(race, info_js_1.RaceList);
 var cls = document.querySelector('#cls');
-addOptionstoSelect(cls, ClassList);
+addOptionstoSelect(cls, info_js_1.ClassList);
 var alignment = document.querySelector('#alignment');
-addOptionstoSelect(alignment, Alignments);
+addOptionstoSelect(alignment, info_js_1.Alignments);
 var selectedAlignment = alignment.options[alignment.selectedIndex];
 var availableAlignments = function () {
     alignment.innerHTML = '';
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    addOptionstoSelect(alignment, Races[charRace].alignments);
+    addOptionstoSelect(alignment, info_js_1.Races[charRace].alignments);
 };
 race.addEventListener('change', availableAlignments);
 var gender = document.querySelector('#gender');
@@ -117,7 +119,7 @@ var ageHelp = document.querySelector('#ageHelp');
 // Displays race specific age help text on race selection
 var ageHelpText = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    ageHelp.textContent = "Please enter an age between " + Races[charRace].age.min + " and  " + Races[charRace].age.max;
+    ageHelp.textContent = "Please enter an age between " + info_js_1.Races[charRace].age.min + " and  " + info_js_1.Races[charRace].age.max;
 };
 race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
@@ -126,7 +128,7 @@ ageHelpText();
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
-addOptionstoSelect(extraLanguage, Languages.standard);
+addOptionstoSelect(extraLanguage, info_js_1.Languages.standard);
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     charRace === 'human'
@@ -144,21 +146,21 @@ race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
-addOptionstoSelect(skill1, Skills);
+addOptionstoSelect(skill1, info_js_1.Skills);
 var skill1list = skill1.children;
 var skill2 = document.querySelector('#skillsSelect2');
-addOptionstoSelect(skill2, Skills);
+addOptionstoSelect(skill2, info_js_1.Skills);
 var skill2list = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
-addOptionstoSelect(skill3, Skills);
+addOptionstoSelect(skill3, info_js_1.Skills);
 var skill3list = skill3.children;
-var availableSkills = ClassProps[charCls].availableSkills;
+var availableSkills = info_js_1.ClassProps[charCls].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
 var selectedSkill2 = skill1.options[skill2.selectedIndex];
 var selectedSkill3 = skill1.options[skill3.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function () {
-    availableSkills = ClassProps[charCls].availableSkills;
+    availableSkills = info_js_1.ClassProps[charCls].availableSkills;
     skill1.innerHTML = "";
     skill2.innerHTML = "";
     skill3.innerHTML = "";
@@ -205,12 +207,12 @@ var charImageSet = function () {
 };
 var charLevelUp = function () {
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-    experienceNextLevel.textContent = String(Levels[Number(currentLevel.textContent) - 1].experience);
+    experienceNextLevel.textContent = String(info_js_1.Levels[Number(currentLevel.textContent) - 1].experience);
     updateProficiencyBonus();
 };
 var addHitPoints = function () {
     var currentHitPoints = Number(hitPointPreview.textContent);
-    var rolledHitPoints = randomIntFromRange(1, ClassProps[charCls].hitdie);
+    var rolledHitPoints = randomIntFromRange(1, info_js_1.ClassProps[charCls].hitdie);
     modifier = getAbilityScoreModifier(constitution);
     var hitPointsToAdd = (rolledHitPoints + modifier);
     // Prevent negative or zero hit points on level up
@@ -220,8 +222,8 @@ var addHitPoints = function () {
     hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
 };
 var updateProficiencyBonus = function () {
-    proficiencyBonus = Levels[currentLevel.textContent].bonus;
-    proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
+    proficiencyBonus = info_js_1.Levels[currentLevel.textContent].bonus;
+    proficiencyBonusPreview.textContent = String(info_js_1.Levels[currentLevel.textContent].bonus);
     appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 };
 var addExp = function () {
@@ -243,10 +245,10 @@ var generalInfo = function () {
     charisma = rolledCharisma.textContent;
     selectedAlignment = alignment.options[alignment.selectedIndex];
     charGender = gender.value.toLowerCase();
-    languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ") + (", " + String(extraLanguage.value));
+    languagesPreview.textContent = info_js_1.Races[charRace].languages.map(function (lang) { return lang; }).join(", ") + (", " + String(extraLanguage.value));
     // Post info from character creation to preview area
-    currentLevel.textContent = String(Levels[0].level);
-    experienceNextLevel.textContent = String(Levels[0].experience);
+    currentLevel.textContent = String(info_js_1.Levels[0].level);
+    experienceNextLevel.textContent = String(info_js_1.Levels[0].experience);
     namePreview.textContent = name.value;
     racePreview.textContent = selectedRace.textContent;
     genderPreview.textContent = gender.value;
@@ -289,8 +291,8 @@ var lookupAbilityScore = function (ability) {
 };
 var racialAbilityModifier = function () {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    var racialAbility = Races[charRace].abilityModifier.ability;
-    var racialAbilityMod = Races[charRace].abilityModifier.modifier;
+    var racialAbility = info_js_1.Races[charRace].abilityModifier.ability;
+    var racialAbilityMod = info_js_1.Races[charRace].abilityModifier.modifier;
     // if ability matches abilityPreview node text, add modifier to score
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
@@ -300,19 +302,19 @@ var racialAbilityModifier = function () {
         }
     }
     // if race has extra ability to modify
-    if (Races[charRace].abilityModifier.extraAbility) {
+    if (info_js_1.Races[charRace].abilityModifier.extraAbility) {
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
-            if (string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
+            if (string.toLowerCase() === info_js_1.Races[charRace].abilityModifier.extraAbility) {
                 var abilityScore_2 = abilityScoreListItems[i].childNodes[3].textContent;
-                abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore_2) + Number(Races[charRace].abilityModifier.extraModifier));
+                abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore_2) + Number(info_js_1.Races[charRace].abilityModifier.extraModifier));
             }
         }
     }
 };
 // Add ability options to extra ability select element
-addOptionstoSelect(extraAbilityModifier1, Abilities);
-addOptionstoSelect(extraAbilityModifier2, Abilities);
+addOptionstoSelect(extraAbilityModifier1, info_js_1.Abilities);
+addOptionstoSelect(extraAbilityModifier2, info_js_1.Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
@@ -328,7 +330,7 @@ race.addEventListener('change', showExtraModifiersInput);
 var hideMod1Selection = function () {
     var firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
     extraAbilityModifier2.innerHTML = "";
-    Abilities.map(function (ability) {
+    info_js_1.Abilities.map(function (ability) {
         if (ability !== firstSelection) {
             var abilityElement2 = document.createElement("option");
             abilityElement2.textContent = ability;
@@ -405,7 +407,7 @@ var sizePreview = document.querySelector('#size');
 var hitPoints = function () {
     // 1st level is max hit points + constiution modifier
     var modifier = getAbilityScoreModifier(Number(constitution));
-    var hitpoints = (ClassProps[charCls].hitdie + modifier);
+    var hitpoints = (info_js_1.ClassProps[charCls].hitdie + modifier);
     hitPointPreview.textContent = String(hitpoints);
 };
 var armorClass = function () {
@@ -419,28 +421,26 @@ var initiativeMod = function () {
     var dexMod = getAbilityScoreModifier(Number(dexerity));
     initiativeModPreview.textContent = String(dexMod);
 };
-var baseSpeed = function () { return speedPreview.textContent = Races[charRace].speed; };
+var baseSpeed = function () { return speedPreview.textContent = info_js_1.Races[charRace].speed; };
 var passivePerception = function () { return passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom)); };
 var darkvision = function () {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    if (Races[charRace].darkvision) {
+    if (info_js_1.Races[charRace].darkvision) {
         darkvisionPreview.textContent = '60 ft.';
     }
     else {
         darkvisionPreview.textContent = 'None';
     }
 };
-var charSize = function () { return sizePreview.textContent = Races[charRace].size; };
+var charSize = function () { return sizePreview.textContent = info_js_1.Races[charRace].size; };
 // Saving throws
 var savingThrowList = document.querySelector('#savingThrowPreviewList');
 var savingThrowListItems = savingThrowList.children;
 // saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
 var calculateSavingThrowMods = function () {
     // get class
-    charCls = selectedCls.textContent.toLowerCase();
     // get class ability mods (i.e. strength)
     // get class specific saving throw mods (i.e. dexerity)
-    var abilitiesArray = ClassProps[charCls].savingThrows;
     // total modifier
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
 };

@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", {
 var ClassProps = exports.ClassProps = {
     barbarian: {
         hitdie: 12,
+        savingThrows: ["strength", "constitution"],
         skills: {
             number: 2
         },
@@ -16,6 +17,7 @@ var ClassProps = exports.ClassProps = {
     },
     bard: {
         hitdie: 8,
+        savingThrows: ["dexerity", "charisma"],
         skills: {
             number: 3
         },
@@ -23,6 +25,7 @@ var ClassProps = exports.ClassProps = {
     },
     cleric: {
         hitdie: 8,
+        savingThrows: ["wisdom", "charisma"],
         skills: {
             number: 2
         },
@@ -30,6 +33,7 @@ var ClassProps = exports.ClassProps = {
     },
     druid: {
         hitdie: 8,
+        savingThrows: ["intelligence", "wisdom"],
         skills: {
             number: 2
         },
@@ -37,6 +41,7 @@ var ClassProps = exports.ClassProps = {
     },
     fighter: {
         hitdie: 10,
+        savingThrows: ["strength", "constitution"],
         skills: {
             number: 2
         },
@@ -44,6 +49,7 @@ var ClassProps = exports.ClassProps = {
     },
     monk: {
         hitdie: 8,
+        savingThrows: ["strength", "dexerity"],
         skills: {
             number: 2
         },
@@ -51,6 +57,7 @@ var ClassProps = exports.ClassProps = {
     },
     paladin: {
         hitdie: 10,
+        savingThrows: ["wisdom", "charisma"],
         skills: {
             number: 2
         },
@@ -58,6 +65,7 @@ var ClassProps = exports.ClassProps = {
     },
     ranger: {
         hitdie: 10,
+        savingThrows: ["strength", "dexerity"],
         skills: {
             number: 3
         },
@@ -65,6 +73,7 @@ var ClassProps = exports.ClassProps = {
     },
     rogue: {
         hitdie: 8,
+        savingThrows: ["dexerity", "intelligence"],
         skills: {
             number: 4
         },
@@ -72,6 +81,7 @@ var ClassProps = exports.ClassProps = {
     },
     sorcerer: {
         hitdie: 6,
+        savingThrows: ["constitution", "charisma"],
         skills: {
             number: 2
         },
@@ -79,6 +89,7 @@ var ClassProps = exports.ClassProps = {
     },
     warlock: {
         hitdie: 8,
+        savingThrows: ["wisdom", "charisma"],
         skills: {
             number: 2
         },
@@ -86,6 +97,7 @@ var ClassProps = exports.ClassProps = {
     },
     wizard: {
         hitdie: 6,
+        savingThrows: ["intelligence", "wisdom"],
         skills: {
             number: 2
         },

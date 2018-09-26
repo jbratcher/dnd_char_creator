@@ -6,6 +6,10 @@ export const ClassProps = {
 
     barbarian: {
         hitdie: 12,
+        savingThrows: [
+            "strength",
+            "constitution"
+        ],
         skills: {
             number: 2,
         },
@@ -21,6 +25,10 @@ export const ClassProps = {
 
     bard: {
         hitdie: 8,
+        savingThrows: [
+            "dexerity",
+            "charisma"
+        ],
         skills: {
             number: 3,
         },
@@ -48,6 +56,10 @@ export const ClassProps = {
 
     cleric: {
         hitdie: 8,
+        savingThrows: [
+            "wisdom",
+            "charisma"
+        ],
         skills: {
             number: 2,
         },
@@ -62,6 +74,10 @@ export const ClassProps = {
 
     druid: {
         hitdie: 8,
+        savingThrows: [
+            "intelligence",
+            "wisdom"
+        ],
         skills: {
             number: 2,
         },
@@ -79,6 +95,10 @@ export const ClassProps = {
 
     fighter: {
         hitdie: 10,
+        savingThrows: [
+            "strength",
+            "constitution"
+        ],
         skills: {
             number: 2,
         },
@@ -96,6 +116,10 @@ export const ClassProps = {
 
     monk: {
         hitdie: 8,
+        savingThrows: [
+            "strength",
+            "dexerity"
+        ],
         skills: {
             number: 2,
         },
@@ -111,6 +135,10 @@ export const ClassProps = {
 
     paladin: {
         hitdie: 10,
+        savingThrows: [
+            "wisdom",
+            "charisma"
+        ],
         skills: {
             number: 2,
         },
@@ -126,6 +154,10 @@ export const ClassProps = {
 
     ranger: {
         hitdie: 10,
+        savingThrows: [
+            "strength",
+            "dexerity"
+        ],
         skills: {
             number: 3,
         },
@@ -143,6 +175,10 @@ export const ClassProps = {
 
     rogue: {
         hitdie: 8,
+        savingThrows: [
+            "dexerity",
+            "intelligence"
+        ],
         skills: {
             number: 4,
         },
@@ -163,6 +199,10 @@ export const ClassProps = {
 
     sorcerer: {
         hitdie: 6,
+        savingThrows: [
+            "constitution",
+            "charisma"
+        ],
         skills: {
             number: 2,
         },
@@ -178,6 +218,10 @@ export const ClassProps = {
 
     warlock: {
         hitdie: 8,
+        savingThrows: [
+            "wisdom",
+            "charisma"
+        ],
         skills: {
             number: 2,
         },
@@ -194,6 +238,10 @@ export const ClassProps = {
 
     wizard: {
         hitdie: 6,
+        savingThrows: [
+            "intelligence",
+            "wisdom"
+        ],
         skills: {
             number: 2,
         },

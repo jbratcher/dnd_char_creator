@@ -1,7 +1,9 @@
+"use strict";
 ////////////////////////////////////////
 // Classes object
 ////////////////////////////////////////
-export var ClassProps = {
+exports.__esModule = true;
+exports.ClassProps = {
     barbarian: {
         hitdie: 12,
         savingThrows: [
@@ -245,7 +247,7 @@ export var ClassProps = {
 ////////////////////////////////////////
 // Races Object
 ////////////////////////////////////////
-export var Races = {
+exports.Races = {
     dragonborn: {
         abilityModifier: {
             ability: 'strength',
@@ -466,7 +468,7 @@ export var Races = {
 ////////////////////////////////////////
 // Levels Object
 ////////////////////////////////////////
-export var Levels = [
+exports.Levels = [
     {
         level: 1,
         experience: 300,
@@ -571,7 +573,7 @@ export var Levels = [
 ////////////////////////////////////////
 // Languages object
 ////////////////////////////////////////
-export var Languages = {
+exports.Languages = {
     standard: [
         'Common',
         'Dwarvish',
@@ -596,7 +598,7 @@ export var Languages = {
 ////////////////////////////////////////
 // Abilities Array
 ////////////////////////////////////////
-export var Abilities = [
+exports.Abilities = [
     'Strength',
     'Dexerity',
     'Constitution',
@@ -607,7 +609,7 @@ export var Abilities = [
 ////////////////////////////////////////
 // Class List Array
 ////////////////////////////////////////
-export var ClassList = [
+exports.ClassList = [
     "Barbarian",
     "Bard",
     "Cleric",
@@ -624,7 +626,7 @@ export var ClassList = [
 ////////////////////////////////////////
 // Race List Array
 ////////////////////////////////////////
-export var RaceList = [
+exports.RaceList = [
     "Dragonborn",
     "Dwarf",
     "Elf",
@@ -638,7 +640,7 @@ export var RaceList = [
 ////////////////////////////////////////
 // Alignments Array
 ////////////////////////////////////////
-export var Alignments = [
+exports.Alignments = [
     "Lawful Good",
     "Neutral Good",
     "Chaotic Good",
@@ -652,7 +654,7 @@ export var Alignments = [
 ////////////////////////////////////////
 // Skills Array
 ////////////////////////////////////////
-export var Skills = [
+exports.Skills = [
     "Acrobatics",
     "Animal Handling",
     "Arcana",
