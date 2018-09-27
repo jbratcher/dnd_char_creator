@@ -693,14 +693,20 @@ const savingThrowListItems = savingThrowList.children;
 
 const calculateSavingThrowMods = () => {
   
-  // get class
   charCls = selectedCls.textContent.toLowerCase();
-  // get class ability mods (i.e. strength)
-  
-  // get class specific saving throw mods (i.e. dexerity)
   let abilitiesArray = ClassProps[charCls].savingThrows
-  // total modifier
-  // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+  
+  abilitiesArray.map(ability => {
+    // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+    for(let i = 0; i < savingThrowListItems.length; i++) {
+      let string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+      if(string === ability) {
+        let abilityMod = getAbilityScoreModifier(lookupAbilityScore(ability));
+        let totalMod = abilityMod + proficiencyBonus;
+        appendSigntoValue(totalMod, savingThrowListItems[i].childNodes[3]);
+      }
+    }
+  });
   
 }
 
@@ -748,6 +754,8 @@ const combatCreation = () => {
   // Set the character size
 
   charSize();
+  
+  calculateSavingThrowMods();
 
 }
 

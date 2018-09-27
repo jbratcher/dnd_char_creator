@@ -436,13 +436,19 @@ var savingThrowList = document.querySelector('#savingThrowPreviewList');
 var savingThrowListItems = savingThrowList.children;
 // saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
 var calculateSavingThrowMods = function () {
-    // get class
     charCls = selectedCls.textContent.toLowerCase();
-    // get class ability mods (i.e. strength)
-    // get class specific saving throw mods (i.e. dexerity)
     var abilitiesArray = ClassProps[charCls].savingThrows;
-    // total modifier
-    // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+    abilitiesArray.map(function (ability) {
+        // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+        for (var i = 0; i < savingThrowListItems.length; i++) {
+            var string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+            if (string === ability) {
+                var abilityMod = getAbilityScoreModifier(lookupAbilityScore(ability));
+                var totalMod_1 = abilityMod + proficiencyBonus;
+                appendSigntoValue(totalMod_1, savingThrowListItems[i].childNodes[3]);
+            }
+        }
+    });
 };
 var combatCreation = function () {
     updateProficiencyBonus();
@@ -466,6 +472,7 @@ var combatCreation = function () {
     racialAbilityModifier();
     // Set the character size
     charSize();
+    calculateSavingThrowMods();
 };
 ////////////////////////////////////////////////////////////
 // Character Creation
