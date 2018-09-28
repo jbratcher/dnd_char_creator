@@ -6,7 +6,7 @@ Character creator for an openSRD-based roleplaying game.  Puts together all the 
 
 ### Version
 
-0.0.7
+0.0.8
 
 ## Install Dependencies
 
@@ -81,24 +81,31 @@ gulp clean:dist
 * Random rolls for stats, selectable races, and classes
 * Randomly selects image from array based on race, class, and gender inputs (placeholders for now)
 * Generates character preview based on user inputs
-* Calculates hit points, armor class, initiative and speed
+* Calculates hit points, armor class, initiative, speed, and saving Throws
 * Calculates hit point gain, experience for next level, and proficiency bonus on level up
 * Add experience and keeps a running tottal
 * Highlights chosen skills and displays calculated bonus from proficiency and ability score modifiers
 * Dynamically highlights available skills on class selection
+* Dynamically highlights racial bonus inputs
+*
 
 ## Future Features:
 
-* Display abilities, racial, and class specific skills
+* Display tooltips for info
 * Add attack roll functionality
 * better sourcing of images (replace placeholders)
 
 ## Known "bugs"
 
 * active class on general tab not working unless clicked
-* default class selection not recognized
 
 #### Change Log
+
+###### 0.0.8
+
+* Racial ability score, and language bonuses
+* Calculates saving throws on character creation
+
 
 ###### 0.0.7
 
