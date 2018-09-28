@@ -141,6 +141,9 @@ var showExtraLanguageInput = function () {
             : extraLanguageHelp.textContent = '';
 };
 race.addEventListener('change', showExtraLanguageInput);
+var racialBonuses = function () {
+    addExtraAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
+};
 showExtraLanguageInput();
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
@@ -430,21 +433,21 @@ var darkvision = function () {
         darkvisionPreview.textContent = 'None';
     }
 };
-var charSize = function () { return sizePreview.textContent = Races[charRace].size; };
+var setCharacterSize = function () { return sizePreview.textContent = Races[charRace].size; };
 // Saving throws
 var savingThrowList = document.querySelector('#savingThrowPreviewList');
 var savingThrowListItems = savingThrowList.children;
 // saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
 var calculateSavingThrowMods = function () {
     charCls = selectedCls.textContent.toLowerCase();
-    var abilitiesArray = ClassProps[charCls].savingThrows;
-    abilitiesArray.map(function (ability) {
+    var abilities = ClassProps[charCls].savingThrows;
+    abilities.map(function (ability) {
         // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
         for (var i = 0; i < savingThrowListItems.length; i++) {
             var string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
             if (string === ability) {
                 var abilityMod = getAbilityScoreModifier(lookupAbilityScore(ability));
-                var totalMod_1 = abilityMod + proficiencyBonus;
+                var totalMod_1 = Number(abilityMod + proficiencyBonus);
                 appendSigntoValue(totalMod_1, savingThrowListItems[i].childNodes[3]);
             }
         }
@@ -471,7 +474,7 @@ var combatCreation = function () {
     // Set any racial ability modifiers to ability scores
     racialAbilityModifier();
     // Set the character size
-    charSize();
+    setCharacterSize();
     calculateSavingThrowMods();
 };
 ////////////////////////////////////////////////////////////
@@ -481,7 +484,7 @@ createCharacterButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Character Creation functions
     generalInfo(); // General tab functions
-    addExtraAbilityMofifiers(); // Half-Elf racial bonus
+    racialBonuses(); // Race bonus functions
     combatCreation(); // Combat tab functions
 });
 ////////////////////////////////////////////////////////////

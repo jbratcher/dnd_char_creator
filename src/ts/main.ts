@@ -239,6 +239,12 @@ const showExtraLanguageInput = () => {
 
 race.addEventListener('change', showExtraLanguageInput);
 
+const racialBonuses = () => {
+  
+    addExtraAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
+  
+}
+
 showExtraLanguageInput();
 
 // Skill select
@@ -682,7 +688,7 @@ const darkvision = () => {
   }
 }
 
-const charSize = () => sizePreview.textContent = Races[charRace].size;
+const setCharacterSize = () => sizePreview.textContent = Races[charRace].size;
 
 // Saving throws
 
@@ -694,15 +700,15 @@ const savingThrowListItems = savingThrowList.children;
 const calculateSavingThrowMods = () => {
   
   charCls = selectedCls.textContent.toLowerCase();
-  let abilitiesArray = ClassProps[charCls].savingThrows
+  let abilities = ClassProps[charCls].savingThrows;
   
-  abilitiesArray.map(ability => {
+  abilities.map(ability => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
     for(let i = 0; i < savingThrowListItems.length; i++) {
       let string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
       if(string === ability) {
         let abilityMod = getAbilityScoreModifier(lookupAbilityScore(ability));
-        let totalMod = abilityMod + proficiencyBonus;
+        let totalMod = Number(abilityMod + proficiencyBonus);
         appendSigntoValue(totalMod, savingThrowListItems[i].childNodes[3]);
       }
     }
@@ -753,7 +759,7 @@ const combatCreation = () => {
 
   // Set the character size
 
-  charSize();
+  setCharacterSize();
   
   calculateSavingThrowMods();
 
@@ -770,8 +776,8 @@ createCharacterButton.addEventListener('click', e => {
   // Character Creation functions
 
   generalInfo();  // General tab functions
-
-  addExtraAbilityMofifiers();  // Half-Elf racial bonus
+  
+  racialBonuses();  // Race bonus functions
 
   combatCreation();  // Combat tab functions
 
