@@ -105,7 +105,7 @@ gulp.task('clean:dist', () => del('dist'));
 
 // Remove unminified files
 
-gulp.task('clean:files', () => del(['dist/css/styles.css', 'dist/css/vendor/', 'dist/js/main.js', 'dist/js/characters.js']));
+gulp.task('clean:files', () => del(['dist/css/styles.css', 'dist/css/vendor/', 'dist/js/characters.js']));
 
 // Gulp default tasks
 

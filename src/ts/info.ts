@@ -313,6 +313,15 @@ export const Races = {
             'Dwarfish'
         ],
         size: 'Medium',
+        special: {
+            resilience: {
+                type: 'poison',
+                advantage: true,
+                resistence: true,
+                info: `Roll 2x on poison saves, take 1/2 poison damage`,
+                tooltip: `Dwarven Resilience. You have advantage on	saving throws against poison,and you have	resistance against poison damage.`
+            }
+        },
         speed: 25
 
     },

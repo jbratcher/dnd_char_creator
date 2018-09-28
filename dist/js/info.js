@@ -136,6 +136,15 @@ var Races = exports.Races = {
         darkvision: true,
         languages: ['Common', 'Dwarfish'],
         size: 'Medium',
+        special: {
+            resilience: {
+                type: 'poison',
+                advantage: true,
+                resistence: true,
+                info: "Roll 2x on poison saves, take 1/2 poison damage",
+                tooltip: "Dwarven Resilience. You have advantage on\tsaving throws against poison,and you have\tresistance against poison damage."
+            }
+        },
         speed: 25
     },
     elf: {

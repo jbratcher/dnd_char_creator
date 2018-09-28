@@ -716,6 +716,26 @@ const calculateSavingThrowMods = () => {
   
 }
 
+// Special Resistances
+
+const specialResistances = <HTMLElement>document.querySelector('#specialResistances');
+
+const poisonResistance = <HTMLElement>document.querySelector('#poisonResistance');
+
+const calculateSpecialResistances = () => {
+  
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  console.log(charRace);
+
+  if(charRace === 'dwarf') {
+    
+    poisonResistance.textContent = `Advantage, Resistance`;
+    poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
+    
+  }
+  
+}
+
 
 const combatCreation = () => {
 
@@ -762,6 +782,8 @@ const combatCreation = () => {
   setCharacterSize();
   
   calculateSavingThrowMods();
+  
+  calculateSpecialResistances();
 
 }
 
