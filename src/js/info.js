@@ -322,6 +322,13 @@ export var Races = {
             'Elfish'
         ],
         size: 'Medium',
+        special: {
+            type: 'charm',
+            advantage: true,
+            resistence: null,
+            info: "Roll 2x on charm saves",
+            tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
+        },
         speed: 30
     },
     gnome: {

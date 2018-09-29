@@ -722,6 +722,8 @@ const specialResistances = <HTMLElement>document.querySelector('#specialResistan
 
 const poisonResistance = <HTMLElement>document.querySelector('#poisonResistance');
 
+const charmResistance = <HTMLElement>document.querySelector('#charmResistance');
+
 const calculateSpecialResistances = () => {
   
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
@@ -731,6 +733,13 @@ const calculateSpecialResistances = () => {
     
     poisonResistance.textContent = `Advantage, Resistance`;
     poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
+    
+  }
+  
+  if(charRace === 'elf') {
+    
+    charmResistance.textContent = 'Advantage';
+    charmResistance.setAttribute('title', Races[charRace].special.info);
     
   }
   

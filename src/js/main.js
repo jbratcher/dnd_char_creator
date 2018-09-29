@@ -456,12 +456,17 @@ var calculateSavingThrowMods = function () {
 // Special Resistances
 var specialResistances = document.querySelector('#specialResistances');
 var poisonResistance = document.querySelector('#poisonResistance');
+var charmResistance = document.querySelector('#charmResistance');
 var calculateSpecialResistances = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     console.log(charRace);
     if (charRace === 'dwarf') {
         poisonResistance.textContent = "Advantage, Resistance";
         poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
+    }
+    if (charRace === 'elf') {
+        charmResistance.textContent = 'Advantage';
+        charmResistance.setAttribute('title', Races[charRace].special.info);
     }
 };
 var combatCreation = function () {
