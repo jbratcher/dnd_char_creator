@@ -457,16 +457,32 @@ var calculateSavingThrowMods = function () {
 var specialResistances = document.querySelector('#specialResistances');
 var poisonResistance = document.querySelector('#poisonResistance');
 var charmResistance = document.querySelector('#charmResistance');
+var fearResistance = document.querySelector('#fearResistance');
 var calculateSpecialResistances = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    console.log(charRace);
     if (charRace === 'dwarf') {
         poisonResistance.textContent = "Advantage, Resistance";
         poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
     }
-    if (charRace === 'elf') {
+    if (charRace === 'elf' || charRace === 'halfelf') {
         charmResistance.textContent = 'Advantage';
         charmResistance.setAttribute('title', Races[charRace].special.info);
+    }
+    if (charRace === 'gnome') {
+        var types = Races[charRace].special.type;
+        types.map(function (type) {
+            // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+            for (var i = 0; i < savingThrowListItems.length; i++) {
+                var string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+                if (string === type) {
+                    savingThrowListItems[i].childNodes[1].textContent += " (Advantage)";
+                }
+            }
+        });
+    }
+    if (charRace === 'halfling') {
+        fearResistance.textContent = 'Advantage';
+        fearResistance.setAttribute('title', Races[charRace].special.info);
     }
 };
 var combatCreation = function () {

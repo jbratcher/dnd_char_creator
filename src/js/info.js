@@ -351,6 +351,17 @@ export var Races = {
             "Gnomish"
         ],
         size: 'Small',
+        special: {
+            type: [
+                'charisma',
+                'wisdom',
+                'intelligence'
+            ],
+            advantage: true,
+            resistence: null,
+            info: "Roll 2x on fear saves",
+            tooltip: "Brave. You have advantage on saving throws against being frightened."
+        },
         speed: 25
     },
     halfelf: {
@@ -377,6 +388,13 @@ export var Races = {
         ],
         extraLanguage: 1,
         size: 'Medium',
+        special: {
+            type: 'charm',
+            advantage: true,
+            resistence: null,
+            info: "Roll 2x on charm saves",
+            tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
+        },
         speed: 30
     },
     halfling: {
@@ -398,6 +416,13 @@ export var Races = {
         ],
         extraLanguage: 1,
         size: 'Small',
+        special: {
+            type: 'fear',
+            advantage: true,
+            resistence: null,
+            info: "Roll 2x on fear saves",
+            tooltip: "Brave. You have advantage on saving throws against being frightened."
+        },
         speed: 25
     },
     halforc: {

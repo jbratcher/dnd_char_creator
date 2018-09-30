@@ -348,11 +348,11 @@ export const Races = {
         ],
         size: 'Medium',
         special: {
-                type: 'charm',
-                advantage: true,
-                resistence: null,
-                info: `Roll 2x on charm saves`,
-                tooltip: `Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep.`
+            type: 'charm',
+            advantage: true,
+            resistence: null,
+            info: `Roll 2x on charm saves`,
+            tooltip: `Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep.`
         },
         speed: 30
 
@@ -379,6 +379,17 @@ export const Races = {
             "Gnomish"
         ],
         size: 'Small',
+        special: {
+            type: [
+                'charisma',
+                'wisdom',
+                'intelligence'
+            ],
+            advantage: true,
+            resistence: null,
+            info: `Roll 2x on fear saves`,
+            tooltip: `Brave. You have advantage on saving throws against being frightened.`
+        },
         speed: 25
 
     },
@@ -408,6 +419,13 @@ export const Races = {
         ],
         extraLanguage: 1,
         size: 'Medium',
+        special: {
+            type: 'charm',
+            advantage: true,
+            resistence: null,
+            info: `Roll 2x on charm saves`,
+            tooltip: `Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep.`
+        },
         speed: 30
 
     },
@@ -432,6 +450,13 @@ export const Races = {
         ],
         extraLanguage: 1,
         size: 'Small',
+        special: {
+            type: 'fear',
+            advantage: true,
+            resistence: null,
+            info: `Roll 2x on fear saves`,
+            tooltip: `Brave. You have advantage on saving throws against being frightened.`
+        },
         speed: 25
 
     },

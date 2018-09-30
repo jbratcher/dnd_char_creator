@@ -724,10 +724,11 @@ const poisonResistance = <HTMLElement>document.querySelector('#poisonResistance'
 
 const charmResistance = <HTMLElement>document.querySelector('#charmResistance');
 
+const fearResistance = <HTMLElement>document.querySelector('#fearResistance');
+
 const calculateSpecialResistances = () => {
   
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  console.log(charRace);
 
   if(charRace === 'dwarf') {
     
@@ -736,10 +737,33 @@ const calculateSpecialResistances = () => {
     
   }
   
-  if(charRace === 'elf') {
+  if(charRace === 'elf' || charRace === 'halfelf') {
     
     charmResistance.textContent = 'Advantage';
     charmResistance.setAttribute('title', Races[charRace].special.info);
+    
+  }
+  
+  if(charRace === 'gnome') {
+    
+    let types = Races[charRace].special.type
+    
+    types.map(type => {
+    // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+    for(let i = 0; i < savingThrowListItems.length; i++) {
+      let string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+      if(string === type) {
+        savingThrowListItems[i].childNodes[1].textContent += ` (Advantage)`;
+      }
+    }
+  });
+    
+  }
+  
+  if(charRace === 'halfling') {
+    
+    fearResistance.textContent = 'Advantage';
+    fearResistance.setAttribute('title', Races[charRace].special.info);
     
   }
   
