@@ -653,6 +653,8 @@ const darkvisionPreview = <HTMLElement>document.querySelector('#darkvisionPrevie
 
 const sizePreview = <HTMLElement>document.querySelector('#size');
 
+const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponProficiences');
+
 // Combat functions
 
 const hitPoints = () => {
@@ -689,6 +691,18 @@ const darkvision = () => {
 }
 
 const setCharacterSize = () => sizePreview.textContent = Races[charRace].size;
+
+const calculateWeaponProficiencies = () => {
+  
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  
+  Races[charRace].weaponProficiences.map(weapon => {
+    
+    weaponProficiencesPreview.textContent += weapon + ", ";
+    
+  })
+  
+}
 
 // Saving throws
 
@@ -817,6 +831,8 @@ const combatCreation = () => {
   calculateSavingThrowMods();
   
   calculateSpecialResistances();
+  
+  calculateWeaponProficiencies();
 
 }
 

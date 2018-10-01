@@ -300,7 +300,13 @@ export var Races = {
                 tooltip: "Dwarven Resilience. You have advantage on\tsaving throws against poison,and you have\tresistance against poison damage."
             }
         },
-        speed: 25
+        speed: 25,
+        weaponProficiences: [
+            "battleaxe",
+            "handaxe",
+            "light hammer",
+            "warhammer"
+        ]
     },
     elf: {
         abilityModifier: {

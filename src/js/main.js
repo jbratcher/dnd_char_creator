@@ -404,6 +404,7 @@ var speedPreview = document.querySelector('#speed');
 var passivePerceptionPreview = document.querySelector('#passivePerception');
 var darkvisionPreview = document.querySelector('#darkvisionPreview');
 var sizePreview = document.querySelector('#size');
+var weaponProficiencesPreview = document.querySelector('#weaponProficiences');
 // Combat functions
 var hitPoints = function () {
     // 1st level is max hit points + constiution modifier
@@ -434,6 +435,12 @@ var darkvision = function () {
     }
 };
 var setCharacterSize = function () { return sizePreview.textContent = Races[charRace].size; };
+var calculateWeaponProficiencies = function () {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    Races[charRace].weaponProficiences.map(function (weapon) {
+        weaponProficiencesPreview.textContent += weapon + ", ";
+    });
+};
 // Saving throws
 var savingThrowList = document.querySelector('#savingThrowPreviewList');
 var savingThrowListItems = savingThrowList.children;
@@ -509,6 +516,7 @@ var combatCreation = function () {
     setCharacterSize();
     calculateSavingThrowMods();
     calculateSpecialResistances();
+    calculateWeaponProficiencies();
 };
 ////////////////////////////////////////////////////////////
 // Character Creation

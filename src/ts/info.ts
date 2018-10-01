@@ -322,7 +322,13 @@ export const Races = {
                 tooltip: `Dwarven Resilience. You have advantage on	saving throws against poison,and you have	resistance against poison damage.`
             }
         },
-        speed: 25
+        speed: 25,
+        weaponProficiences: [
+            "battleaxe",
+            "handaxe",
+            "light hammer",	
+            "warhammer"    
+        ]
 
     },
 
