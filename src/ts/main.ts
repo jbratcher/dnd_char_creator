@@ -49,7 +49,7 @@ let proficiencyBonus: number;
 
 const addOptionstoSelect = (selectElement, dataArray) => {
   dataArray.map(optionText => {
-    let optionElement = document.createElement("option");
+    let optionElement: HTMLOptionElement = document.createElement("option");
     optionElement.textContent = optionText;
     selectElement.appendChild(optionElement);
   })
@@ -70,7 +70,7 @@ const getCharacterImage = (genderedImages) => {
 
 const getCharacterAttributes = (charCls, charRace, charGender) => {
   if(charGender !== 'male' && charGender !== "female") {
-    let gender = randomBoolean();
+    let gender: boolean = randomBoolean();
     gender ? charGender = "male" : charGender = "female";
   }
   return characterImages[charRace][charCls][charGender];
@@ -88,34 +88,27 @@ const appendSigntoValue = (value, node) => {
   node.textContent = `${sign} ${value}`;
 }
 
-// set ability modifier to element helper
-
-// const setAbilityModifierToElement = (ability, modFunction, elementAndMethod) => {
-//   let modifier = modFunction;
-//   elementAndMethod = modifier;
-// }
-
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
 
-const rollStrength = document.querySelector('#rollStrength');
-const rolledStrength = document.querySelector('#rolledStrength');
+const rollStrength: HTMLElement = document.querySelector('#rollStrength');
+const rolledStrength: HTMLElement = document.querySelector('#rolledStrength');
 
-const rollDexerity = document.querySelector('#rollDexerity');
-const rolledDexerity = document.querySelector('#rolledDexerity');
+const rollDexerity: HTMLElement = document.querySelector('#rollDexerity');
+const rolledDexerity: HTMLElement = document.querySelector('#rolledDexerity');
 
-const rollConstitution = document.querySelector('#rollConstitution');
-const rolledConstitition = document.querySelector('#rolledConstitition');
+const rollConstitution: HTMLElement = document.querySelector('#rollConstitution');
+const rolledConstitition: HTMLElement = document.querySelector('#rolledConstitition');
 
-const rollIntelligence = document.querySelector('#rollIntelligence');
-const rolledIntelligence = document.querySelector('#rolledIntelligence');
+const rollIntelligence: HTMLElement = document.querySelector('#rollIntelligence');
+const rolledIntelligence: HTMLElement = document.querySelector('#rolledIntelligence');
 
-const rollWisdom = document.querySelector('#rollWisdom');
-const rolledWisdom = document.querySelector('#rolledWisdom');
+const rollWisdom: HTMLElement = document.querySelector('#rollWisdom');
+const rolledWisdom: HTMLElement = document.querySelector('#rolledWisdom');
 
-const rollCharisma = document.querySelector('#rollCharisma');
-const rolledCharisma = document.querySelector('#rolledCharisma');
+const rollCharisma: HTMLElement = document.querySelector('#rollCharisma');
+const rolledCharisma: HTMLElement = document.querySelector('#rolledCharisma');
 
 // Event listeners for rolling each attribute
 
@@ -133,17 +126,17 @@ rollCharisma.addEventListener('click', () => setScore(rolledCharisma));
 
 // Setters for ability scores
 
-let strength = rolledStrength.textContent;
+let strength: string = rolledStrength.textContent;
 
-let dexerity = rolledDexerity.textContent;
+let dexerity: string = rolledDexerity.textContent;
 
-let constitution = rolledConstitition.textContent;
+let constitution: string = rolledConstitition.textContent;
 
-let intelligence = rolledIntelligence.textContent;
+let intelligence: string = rolledIntelligence.textContent;
 
-let wisdom = rolledWisdom.textContent;
+let wisdom: string = rolledWisdom.textContent;
 
-let charisma = rolledCharisma.textContent;
+let charisma: string = rolledCharisma.textContent;
 
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
@@ -166,7 +159,7 @@ const alignment = <HTMLSelectElement>document.querySelector('#alignment');
 
 addOptionstoSelect(alignment, Alignments)
 
-let selectedAlignment = alignment.options[alignment.selectedIndex];
+let selectedAlignment = <HTMLOptionElement>alignment.options[alignment.selectedIndex];
 
 const availableAlignments = () => {
 
@@ -180,15 +173,15 @@ race.addEventListener('change', availableAlignments);
 
 const gender = <HTMLInputElement>document.querySelector('#gender');
 
-let selectedCls = cls.options[cls.selectedIndex];
+let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
 
-let charCls = selectedCls.textContent.toLowerCase();
+let charCls: string = selectedCls.textContent.toLowerCase();
 
-let selectedRace = race.options[race.selectedIndex];
+let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
 
-let charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,"");
 
-let charGender = gender.value.toLowerCase();
+let charGender: string = gender.value.toLowerCase();
 
 const age = <HTMLInputElement>document.querySelector('#age');
 
@@ -324,7 +317,7 @@ const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewE
 
 // General Preview variables
 
-const namePreview = document.querySelector('#namePreview');
+const namePreview = <HTMLElement>document.querySelector('#namePreview');
 
 const racePreview = <HTMLElement>document.querySelector('#racePreview');
 
@@ -344,11 +337,11 @@ const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview'
 
 // General buttons
 
-const createCharacterButton = document.querySelector('#createCharacterButton');
+const createCharacterButton = <HTMLElement>document.querySelector('#createCharacterButton');
 
-const levelUpButton = document.querySelector('#levelUpButton');
+const levelUpButton = <HTMLElement>document.querySelector('#levelUpButton');
 
-const addNewExperienceButton = document.querySelector('#addExp');
+const addNewExperienceButton = <HTMLElement>document.querySelector('#addExp');
 
 // General functions
 
@@ -364,10 +357,10 @@ const charLevelUp = () => {
 }
 
 const addHitPoints = () => {
-  let currentHitPoints = Number(hitPointPreview.textContent);
-  let rolledHitPoints = randomIntFromRange(1, ClassProps[charCls].hitdie)
+  let currentHitPoints: number = Number(hitPointPreview.textContent);
+  let rolledHitPoints: number = randomIntFromRange(1, ClassProps[charCls].hitdie)
   modifier = getAbilityScoreModifier(constitution)
-  let hitPointsToAdd = (rolledHitPoints + modifier);
+  let hitPointsToAdd: number = (rolledHitPoints + modifier);
   // Prevent negative or zero hit points on level up
   if(rolledHitPoints + modifier <= 0) {
     hitPointsToAdd = 1;
@@ -382,8 +375,8 @@ const updateProficiencyBonus = () => {
 }
 
 const addExp = () => {
-    let currentExpNum = Number(currentExperience.textContent);
-    let newExpNum = Number(addNewExperienceInput.value)
+    let currentExpNum: number = Number(currentExperience.textContent);
+    let newExpNum: number = Number(addNewExperienceInput.value)
     currentExperience.textContent = String(currentExpNum + newExpNum);
 }
 
@@ -455,7 +448,7 @@ const generalInfo = () => {
 
 // Ability score variables
 
-let abilityScoreList = document.querySelector('#abilityScoreList');
+let abilityScoreList = <HTMLElement>document.querySelector('#abilityScoreList');
 
 let abilityScoreListItems = abilityScoreList.children;
 
@@ -485,7 +478,7 @@ const lookupAbilityScore = (ability) => {
 
   // if ability matches abilityScore in list return number value of abilityScore
   for(let i = 0; i < abilityScoreListItems.length; i++) {
-    let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+    let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
     if(string.toLowerCase() === ability) {
       abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
       return abilityScore;
@@ -497,25 +490,25 @@ const lookupAbilityScore = (ability) => {
 const racialAbilityModifier = () => {
 
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-  let racialAbility = Races[charRace].abilityModifier.ability;
-  let racialAbilityMod = Races[charRace].abilityModifier.modifier;
+  let racialAbility: string = Races[charRace].abilityModifier.ability;
+  let racialAbilityMod: number = Races[charRace].abilityModifier.modifier;
 
   // if ability matches abilityPreview node text, add modifier to score
   for(let i = 0; i < abilityScoreListItems.length; i++) {
-    let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+    let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
     if(string.toLowerCase() === racialAbility) {
-      let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
-      abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(racialAbilityMod));
+      let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
+      abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore + racialAbilityMod);
     }
   }
 
   // if race has extra ability to modify
   if(Races[charRace].abilityModifier.extraAbility) {
     for(let i = 0; i < abilityScoreListItems.length; i++) {
-      let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       if(string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
-        let abilityScore = abilityScoreListItems[i].childNodes[3].textContent;
-        abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore) + Number(Races[charRace].abilityModifier.extraModifier));
+        let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
+        abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
       }
     }
 
@@ -550,13 +543,13 @@ race.addEventListener('change', showExtraModifiersInput);
 
 const hideMod1Selection = () => {
 
-  let firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
+  let firstSelection: string = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
 
   extraAbilityModifier2.innerHTML = "";
 
   Abilities.map(ability => {
     if(ability !== firstSelection) {
-      let abilityElement2 = document.createElement("option");
+      let abilityElement2 = <HTMLOptionElement>document.createElement("option");
       abilityElement2.textContent = ability;
       extraAbilityModifier2.appendChild(abilityElement2);
     }
@@ -572,13 +565,13 @@ const addExtraAbilityMofifiers = () => {
 
   if(charRace === 'halfelf') {
     // get selected abilities
-    let mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
-    let mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
+    let mod1: string = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
+    let mod2: string = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
     // get selected abilities preview element
     for(let i = 0; i < abilityScoreListItems.length; i++) {
-      let string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       if(string === mod1 || string === mod2) {
-        let abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
+        let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
         abilityScore += 1;
         abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore);
       }
@@ -593,7 +586,7 @@ const addExtraAbilityMofifiers = () => {
 
 // Skill variables
 
-const skillsPreviewList = document.querySelector('#skillsPreviewList');
+const skillsPreviewList = <HTMLElement>document.querySelector('#skillsPreviewList');
 
 const skillsPreviewListItems = skillsPreviewList.children;
 
@@ -602,7 +595,7 @@ const skillsPreviewListItems = skillsPreviewList.children;
 const getSkillModifier = skillText => {
 
   let skillAbility = (singleWord.exec(skillText));
-  let skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
+  let skillAbilityScore: number = lookupAbilityScore(skillAbility[0].toLowerCase());
   abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
   return totalMod = abilityScoreMod + proficiencyBonus;
 
@@ -696,11 +689,15 @@ const calculateWeaponProficiencies = () => {
   
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
   
-  Races[charRace].weaponProficiences.map(weapon => {
+  if(charRace === 'dwarf') {
     
-    weaponProficiencesPreview.textContent += weapon + ", ";
+    Races[charRace].weaponProficiences.map(weapon => {
     
-  })
+      weaponProficiencesPreview.textContent += weapon + ", ";
+    
+    }) 
+    
+  }
   
 }
 
@@ -719,10 +716,10 @@ const calculateSavingThrowMods = () => {
   abilities.map(ability => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
     for(let i = 0; i < savingThrowListItems.length; i++) {
-      let string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+      let string: string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
       if(string === ability) {
-        let abilityMod = getAbilityScoreModifier(lookupAbilityScore(ability));
-        let totalMod = Number(abilityMod + proficiencyBonus);
+        let abilityMod: number = getAbilityScoreModifier(lookupAbilityScore(ability));
+        let totalMod: number = Number(abilityMod + proficiencyBonus);
         appendSigntoValue(totalMod, savingThrowListItems[i].childNodes[3]);
       }
     }
@@ -765,7 +762,7 @@ const calculateSpecialResistances = () => {
     types.map(type => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
     for(let i = 0; i < savingThrowListItems.length; i++) {
-      let string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+      let string: string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
       if(string === type) {
         savingThrowListItems[i].childNodes[1].textContent += ` (Advantage)`;
       }

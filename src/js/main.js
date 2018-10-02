@@ -53,11 +53,6 @@ var appendSigntoValue = function (value, node) {
     value = Math.abs(value);
     node.textContent = sign + " " + value;
 };
-// set ability modifier to element helper
-// const setAbilityModifierToElement = (ability, modFunction, elementAndMethod) => {
-//   let modifier = modFunction;
-//   elementAndMethod = modifier;
-// }
 ////////////////////////////////////////
 // Declare big 6 attributes
 ////////////////////////////////////////
@@ -298,8 +293,8 @@ var racialAbilityModifier = function () {
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         if (string.toLowerCase() === racialAbility) {
-            var abilityScore_1 = abilityScoreListItems[i].childNodes[3].textContent;
-            abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore_1) + Number(racialAbilityMod));
+            var abilityScore_1 = Number(abilityScoreListItems[i].childNodes[3].textContent);
+            abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_1 + racialAbilityMod);
         }
     }
     // if race has extra ability to modify
@@ -307,8 +302,8 @@ var racialAbilityModifier = function () {
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             if (string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
-                var abilityScore_2 = abilityScoreListItems[i].childNodes[3].textContent;
-                abilityScoreListItems[i].childNodes[3].textContent = String(Number(abilityScore_2) + Number(Races[charRace].abilityModifier.extraModifier));
+                var abilityScore_2 = Number(abilityScoreListItems[i].childNodes[3].textContent);
+                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_2 + Races[charRace].abilityModifier.extraModifier);
             }
         }
     }
@@ -437,9 +432,11 @@ var darkvision = function () {
 var setCharacterSize = function () { return sizePreview.textContent = Races[charRace].size; };
 var calculateWeaponProficiencies = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    Races[charRace].weaponProficiences.map(function (weapon) {
-        weaponProficiencesPreview.textContent += weapon + ", ";
-    });
+    if (charRace === 'dwarf') {
+        Races[charRace].weaponProficiences.map(function (weapon) {
+            weaponProficiencesPreview.textContent += weapon + ", ";
+        });
+    }
 };
 // Saving throws
 var savingThrowList = document.querySelector('#savingThrowPreviewList');
