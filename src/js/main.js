@@ -373,18 +373,21 @@ var highlightSkills = function () {
     updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < skillsPreviewListItems.length; i++) {
+        var skill = skillsPreviewListItems[i];
+        var skillName = skillsPreviewListItems[i].childNodes[1];
+        var skillText = skillsPreviewListItems[i].childNodes[1].textContent;
         // reset modifier node to '-'
         skillsPreviewListItems[i].childNodes[5].textContent = "-";
-        if (skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill1.textContent.trim()
-            || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill2.textContent.trim()
-            || skillsPreviewListItems[i].childNodes[1].textContent === selectedSkill3.textContent.trim()) {
-            skillsPreviewListItems[i].style.color = 'green';
+        if (skillText === selectedSkill1.textContent.trim()
+            || skillText === selectedSkill2.textContent.trim()
+            || skillText === selectedSkill3.textContent.trim()) {
+            skill.style.color = 'green';
             getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
             appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
         }
         else {
             // if no match dim selection
-            skillsPreviewListItems[i].style.color = '#ccc';
+            skill.style.color = '#ccc';
         }
     }
 };

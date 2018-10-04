@@ -609,19 +609,22 @@ const highlightSkills = () => {
   updateProficiencyBonus();
   // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
   for(let i = 0; i < skillsPreviewListItems.length; i++) {
+    let skill = <HTMLElement>skillsPreviewListItems[i];
+    let skillName = <HTMLElement>skillsPreviewListItems[i].childNodes[1];
+    let skillText = skillsPreviewListItems[i].childNodes[1].textContent;
     // reset modifier node to '-'
     skillsPreviewListItems[i].childNodes[5].textContent = "-";
     if(
-      (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill1.textContent.trim()
-      || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill2.textContent.trim()
-      || (<HTMLElement>skillsPreviewListItems[i]).childNodes[1].textContent === selectedSkill3.textContent.trim()
-      ) {
-        (<HTMLElement>skillsPreviewListItems[i]).style.color = 'green';
-        getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-        appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
+      skillText === selectedSkill1.textContent.trim()
+      || skillText === selectedSkill2.textContent.trim()
+      || skillText === selectedSkill3.textContent.trim()
+    ) {
+      skill.style.color = 'green';
+      getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
+      appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
     } else {
       // if no match dim selection
-      (<HTMLElement>skillsPreviewListItems[i]).style.color = '#ccc';
+      skill.style.color = '#ccc';
     }
   }
 }
