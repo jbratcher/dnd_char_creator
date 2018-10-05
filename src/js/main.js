@@ -106,6 +106,18 @@ var selectedCls = cls.options[cls.selectedIndex];
 var charCls = selectedCls.textContent.toLowerCase();
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+// Subrace
+var subraceSelectSection = document.querySelector('#optionalSubrace');
+var subraceSelect = document.querySelector('#subrace');
+var subraceHelp = document.querySelector('#subraceHelp');
+var showOptionalSubraceSelect = function () {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    addOptionstoSelect(subraceSelect, Races[charRace].subrace);
+    charRace === 'dwarf'
+        ? subraceSelectSection.classList.remove('d-none')
+        : extraLanguageField.classList.add('d-none');
+};
+race.addEventListener('change', showOptionalSubraceSelect);
 var charGender = gender.value.toLowerCase();
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');

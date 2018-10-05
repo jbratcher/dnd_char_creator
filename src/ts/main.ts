@@ -181,6 +181,28 @@ let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
 
 let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,"");
 
+// Subrace
+
+const subraceSelectSection = <HTMLElement>document.querySelector('#optionalSubrace');
+
+const subraceSelect = <HTMLSelectElement>document.querySelector('#subrace');
+
+const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
+
+const showOptionalSubraceSelect = () => {
+
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  
+  addOptionstoSelect(subraceSelect, Races[charRace].subrace);
+  
+  charRace === 'dwarf'
+    ? subraceSelectSection.classList.remove('d-none')
+    : extraLanguageField.classList.add('d-none')
+
+}
+
+race.addEventListener('change', showOptionalSubraceSelect);
+
 let charGender: string = gender.value.toLowerCase();
 
 const age = <HTMLInputElement>document.querySelector('#age');

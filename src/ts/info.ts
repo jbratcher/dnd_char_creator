@@ -323,6 +323,9 @@ export const Races = {
             }
         },
         speed: 25,
+        subrace: [
+            "Hill Dwarf"
+        ],
         weaponProficiences: [
             "battleaxe",
             "handaxe",
@@ -360,7 +363,10 @@ export const Races = {
             info: `Roll 2x on charm saves`,
             tooltip: `Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep.`
         },
-        speed: 30
+        speed: 30,
+        subrace: [
+            "High Elf"
+        ]
 
     },
 
@@ -396,7 +402,10 @@ export const Races = {
             info: `Roll 2x on fear saves`,
             tooltip: `Brave. You have advantage on saving throws against being frightened.`
         },
-        speed: 25
+        speed: 25,
+        subrace: [
+            "Rock Gnome"
+        ]
 
     },
 
@@ -463,7 +472,10 @@ export const Races = {
             info: `Roll 2x on fear saves`,
             tooltip: `Brave. You have advantage on saving throws against being frightened.`
         },
-        speed: 25
+        speed: 25,
+        subrace: [
+            "Lightfoot"
+        ]
 
     },
 
