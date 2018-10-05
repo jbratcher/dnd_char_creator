@@ -497,8 +497,9 @@ const racialAbilityModifier = () => {
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
     if(string.toLowerCase() === racialAbility) {
+      let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
       let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
-      abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore + racialAbilityMod);
+      abilityScorePreview = String(abilityScore + racialAbilityMod);
     }
   }
 
@@ -506,9 +507,10 @@ const racialAbilityModifier = () => {
   if(Races[charRace].abilityModifier.extraAbility) {
     for(let i = 0; i < abilityScoreListItems.length; i++) {
       let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
       if(string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
-        let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
-        abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
+        let abilityScore: number = Number(abilityScorePreview);
+        abilityScorePreview = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
       }
     }
 
@@ -569,11 +571,12 @@ const addExtraAbilityMofifiers = () => {
     let mod2: string = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
     // get selected abilities preview element
     for(let i = 0; i < abilityScoreListItems.length; i++) {
+      let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
       let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       if(string === mod1 || string === mod2) {
-        let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
+        let abilityScore: number = Number(abilityScorePreview);
         abilityScore += 1;
-        abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore);
+        abilityScorePreview = String(abilityScore);
       }
     }
   }

@@ -293,17 +293,19 @@ var racialAbilityModifier = function () {
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         if (string.toLowerCase() === racialAbility) {
+            var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
             var abilityScore_1 = Number(abilityScoreListItems[i].childNodes[3].textContent);
-            abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_1 + racialAbilityMod);
+            abilityScorePreview = String(abilityScore_1 + racialAbilityMod);
         }
     }
     // if race has extra ability to modify
     if (Races[charRace].abilityModifier.extraAbility) {
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+            var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
             if (string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
-                var abilityScore_2 = Number(abilityScoreListItems[i].childNodes[3].textContent);
-                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_2 + Races[charRace].abilityModifier.extraModifier);
+                var abilityScore_2 = Number(abilityScorePreview);
+                abilityScorePreview = String(abilityScore_2 + Races[charRace].abilityModifier.extraModifier);
             }
         }
     }
@@ -343,11 +345,12 @@ var addExtraAbilityMofifiers = function () {
         var mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
         // get selected abilities preview element
         for (var i = 0; i < abilityScoreListItems.length; i++) {
+            var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             if (string === mod1 || string === mod2) {
-                var abilityScore_3 = Number(abilityScoreListItems[i].childNodes[3].textContent);
+                var abilityScore_3 = Number(abilityScorePreview);
                 abilityScore_3 += 1;
-                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_3);
+                abilityScorePreview = String(abilityScore_3);
             }
         }
     }
