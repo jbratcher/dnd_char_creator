@@ -21,11 +21,6 @@ gulp
 ```bash
 gulp
 ```
-OR
-
-```bash
-npm start
-```
 
 ## Folder and File Structure
 
@@ -44,13 +39,13 @@ npm start
         -font-awesome.min.css
     /js
         -characterImages.js
-        info.js
+        -info.js
         -main.js
     /scss
     -styles.scss
     /ts
-      -characterImages.ts
-      info.ts
+      -characterImages.ts
+      -info.ts
       -main.ts
 -gulpfile.js
 -index.html
@@ -59,21 +54,10 @@ npm start
 -readme.md
 ```
 
-## Bundle and minify compiled CSS and JS
-
-```bash
-gulp useref
-```
-
 ## Bulid to dist from src
 
 ```bash
 gulp build
-```
-## Clean (delete) dist
-
-```bash
-gulp clean:dist
 ```
 
 ## Features:
@@ -104,6 +88,7 @@ gulp clean:dist
 ###### 0.0.8
 
 * Racial ability score, and language bonuses
+* Optional subraces selection
 * Calculates saving throws on character creation
 
 

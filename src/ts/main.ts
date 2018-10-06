@@ -193,9 +193,11 @@ const showOptionalSubraceSelect = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
   
+  subraceSelect.innerHTML = "-"  // Reset any subrace from previous selection
+  
   addOptionstoSelect(subraceSelect, Races[charRace].subrace);
   
-  charRace === 'dwarf'
+  Races[charRace].subrace
     ? subraceSelectSection.classList.remove('d-none')
     : extraLanguageField.classList.add('d-none')
 

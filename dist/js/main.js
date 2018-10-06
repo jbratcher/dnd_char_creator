@@ -132,6 +132,17 @@ var selectedCls = cls.options[cls.selectedIndex];
 var charCls = selectedCls.textContent.toLowerCase();
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+// Subrace
+var subraceSelectSection = document.querySelector('#optionalSubrace');
+var subraceSelect = document.querySelector('#subrace');
+var subraceHelp = document.querySelector('#subraceHelp');
+var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    subraceSelect.innerHTML = "-"; // Reset any subrace from previous selection
+    addOptionstoSelect(subraceSelect, _info.Races[charRace].subrace);
+    _info.Races[charRace].subrace ? subraceSelectSection.classList.remove('d-none') : extraLanguageField.classList.add('d-none');
+};
+race.addEventListener('change', showOptionalSubraceSelect);
 var charGender = gender.value.toLowerCase();
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
@@ -313,17 +324,19 @@ var racialAbilityModifier = function racialAbilityModifier() {
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         if (string.toLowerCase() === racialAbility) {
+            var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
             var abilityScore_1 = Number(abilityScoreListItems[i].childNodes[3].textContent);
-            abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_1 + racialAbilityMod);
+            abilityScorePreview = String(abilityScore_1 + racialAbilityMod);
         }
     }
     // if race has extra ability to modify
     if (_info.Races[charRace].abilityModifier.extraAbility) {
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+            var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
             if (string.toLowerCase() === _info.Races[charRace].abilityModifier.extraAbility) {
-                var abilityScore_2 = Number(abilityScoreListItems[i].childNodes[3].textContent);
-                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_2 + _info.Races[charRace].abilityModifier.extraModifier);
+                var abilityScore_2 = Number(abilityScorePreview);
+                abilityScorePreview = String(abilityScore_2 + _info.Races[charRace].abilityModifier.extraModifier);
             }
         }
     }
@@ -359,11 +372,12 @@ var addExtraAbilityMofifiers = function addExtraAbilityMofifiers() {
         var mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
         // get selected abilities preview element
         for (var i = 0; i < abilityScoreListItems.length; i++) {
+            var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             if (string === mod1 || string === mod2) {
-                var abilityScore_3 = Number(abilityScoreListItems[i].childNodes[3].textContent);
+                var abilityScore_3 = Number(abilityScorePreview);
                 abilityScore_3 += 1;
-                abilityScoreListItems[i].childNodes[3].textContent = String(abilityScore_3);
+                abilityScorePreview = String(abilityScore_3);
             }
         }
     }
