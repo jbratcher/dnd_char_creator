@@ -113,10 +113,12 @@ var subraceHelp = document.querySelector('#subraceHelp');
 var showOptionalSubraceSelect = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     subraceSelect.innerHTML = "-"; // Reset any subrace from previous selection
-    addOptionstoSelect(subraceSelect, Races[charRace].subrace);
+    Races[charRace].subrace
+        ? addOptionstoSelect(subraceSelect, Races[charRace].subrace.name)
+        : subraceSelectSection.classList.add('d-none');
     Races[charRace].subrace
         ? subraceSelectSection.classList.remove('d-none')
-        : extraLanguageField.classList.add('d-none');
+        : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect);
 var charGender = gender.value.toLowerCase();

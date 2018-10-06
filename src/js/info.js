@@ -301,14 +301,21 @@ export var Races = {
             }
         },
         speed: 25,
-        subrace: [
-            "Hill Dwarf"
-        ],
+        subrace: {
+            name: [
+                "Hill Dwarf"
+            ],
+            ability: "wisdom",
+            modifier: 1,
+            dwarvernToughness: {
+                hitpointModifier: 1
+            }
+        },
         weaponProficiences: [
-            "battleaxe",
-            "handaxe",
-            "light hammer",
-            "warhammer"
+            "Battleaxe",
+            "Handaxe",
+            "Light Hammer",
+            "Warhammer"
         ]
     },
     elf: {
@@ -339,9 +346,21 @@ export var Races = {
             tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
         },
         speed: 30,
-        subrace: [
-            "High Elf"
-        ]
+        subrace: {
+            name: [
+                "High Elf"
+            ],
+            ability: "intelligence",
+            modifier: 1,
+            extraLanguage: 1,
+            cantrip: 1,
+            weaponProficiences: [
+                "Long Sword",
+                "Short Sword",
+                "Long Bow",
+                "Short Bow"
+            ]
+        }
     },
     gnome: {
         abilityModifier: {
@@ -375,9 +394,21 @@ export var Races = {
             tooltip: "Brave. You have advantage on saving throws against being frightened."
         },
         speed: 25,
-        subrace: [
-            "Rock Gnome"
-        ]
+        subrace: {
+            name: [
+                "Rock Gnome"
+            ],
+            ability: "constitution",
+            modifier: 1,
+            artificersLore: {
+                ability: "intelligence",
+                skill: "history",
+                modifier: 2,
+                info: "Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply."
+            },
+            tinker: true,
+            proficiencyModifier: 2
+        }
     },
     halfelf: {
         abilityModifier: {
@@ -439,9 +470,16 @@ export var Races = {
             tooltip: "Brave. You have advantage on saving throws against being frightened."
         },
         speed: 25,
-        subrace: [
-            "Lightfoot"
-        ]
+        subrace: {
+            name: [
+                "Lightfoot"
+            ],
+            ability: "charisma",
+            modifier: 1,
+            naturallyStealthy: {
+                info: "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you"
+            }
+        }
     },
     halforc: {
         abilityModifier: {
