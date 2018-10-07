@@ -25,7 +25,11 @@ const randomBoolean = () => Math.random() >= 0.5;  // Get a random true or false
 
 const rollAbilityScore = () => randomIntFromRange(3,18);
 
-const setToMinMax = score => score > 18 ? 18 : score < 3 ? 3 : score;
+const setToMinMax = score => score > 18 
+                              ? 18 
+                              : score < 3 
+                                ? 3 
+                                : score;
 
 const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
 
@@ -783,13 +787,13 @@ const calculateSpecialResistances = () => {
   if(charRace === 'elf' || charRace === 'halfelf') {
     
     charmResistance.textContent = 'Advantage';
-    charmResistance.setAttribute('title', Races[charRace].special.info);
+    charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
     
   }
   
   if(charRace === 'gnome') {
     
-    let types = Races[charRace].special.type
+    let types = Races[charRace].special.gnomeCunning.type
     
     types.map(type => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
@@ -806,7 +810,7 @@ const calculateSpecialResistances = () => {
   if(charRace === 'halfling') {
     
     fearResistance.textContent = 'Advantage';
-    fearResistance.setAttribute('title', Races[charRace].special.info);
+    fearResistance.setAttribute('title', Races[charRace].special.brave.info);
     
   }
   

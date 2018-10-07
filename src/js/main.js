@@ -9,7 +9,11 @@ import { Abilities, Alignments, ClassList, ClassProps, Levels, Languages, Races,
 var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
 var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a random true or false value
 var rollAbilityScore = function () { return randomIntFromRange(3, 18); };
-var setToMinMax = function (score) { return score > 18 ? 18 : score < 3 ? 3 : score; };
+var setToMinMax = function (score) { return score > 18
+    ? 18
+    : score < 3
+        ? 3
+        : score; };
 var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
 // Initialize variables
 var sign;
@@ -491,10 +495,10 @@ var calculateSpecialResistances = function () {
     }
     if (charRace === 'elf' || charRace === 'halfelf') {
         charmResistance.textContent = 'Advantage';
-        charmResistance.setAttribute('title', Races[charRace].special.info);
+        charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
     }
     if (charRace === 'gnome') {
-        var types = Races[charRace].special.type;
+        var types = Races[charRace].special.gnomeCunning.type;
         types.map(function (type) {
             // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
             for (var i = 0; i < savingThrowListItems.length; i++) {
@@ -507,7 +511,7 @@ var calculateSpecialResistances = function () {
     }
     if (charRace === 'halfling') {
         fearResistance.textContent = 'Advantage';
-        fearResistance.setAttribute('title', Races[charRace].special.info);
+        fearResistance.setAttribute('title', Races[charRace].special.brave.info);
     }
 };
 var combatCreation = function () {

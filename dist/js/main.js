@@ -505,10 +505,10 @@ var calculateSpecialResistances = function calculateSpecialResistances() {
     }
     if (charRace === 'elf' || charRace === 'halfelf') {
         charmResistance.textContent = 'Advantage';
-        charmResistance.setAttribute('title', _info.Races[charRace].special.info);
+        charmResistance.setAttribute('title', _info.Races[charRace].special.feyAncestry.info);
     }
     if (charRace === 'gnome') {
-        var types = _info.Races[charRace].special.type;
+        var types = _info.Races[charRace].special.gnomeCunning.type;
         types.map(function (type) {
             // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
             for (var i = 0; i < savingThrowListItems.length; i++) {
@@ -521,7 +521,7 @@ var calculateSpecialResistances = function calculateSpecialResistances() {
     }
     if (charRace === 'halfling') {
         fearResistance.textContent = 'Advantage';
-        fearResistance.setAttribute('title', _info.Races[charRace].special.info);
+        fearResistance.setAttribute('title', _info.Races[charRace].special.brave.info);
     }
 };
 var combatCreation = function combatCreation() {

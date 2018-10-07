@@ -121,7 +121,18 @@ var Races = exports.Races = {
         darkvision: false,
         languages: ['Common', 'Draconic'],
         size: 'Medium',
-        speed: 30
+        speed: 30,
+        special: {
+            breathWeapon: {
+                info: "You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation."
+            },
+            damageResistance: {
+                info: "You have resistance to the damage type associated with your draconic ancestry."
+            },
+            draconicAncestry: {
+                info: "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table."
+            }
+        }
     },
     dwarf: {
         abilityModifier: {
@@ -142,7 +153,16 @@ var Races = exports.Races = {
                 advantage: true,
                 resistence: true,
                 info: "Roll 2x on poison saves, take 1/2 poison damage",
-                tooltip: "Dwarven Resilience. You have advantage on\tsaving throws against poison,and you have\tresistance against poison damage."
+                tooltip: "Dwarven Resilience. You have advantage on saving throws against poison, and you have resistance against poison damage."
+            },
+            stonecunning: {
+                type: "stonework",
+                ability: "intelligence",
+                skill: "history",
+                info: "Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus."
+            },
+            toolProficiency: {
+                info: "You gain proficiency with the artisan\u2019s tools of your choice: smith\u2019s tools, brewer\u2019s supplies, or mason\u2019s tools."
             }
         },
         speed: 25,
@@ -170,11 +190,19 @@ var Races = exports.Races = {
         languages: ['Common', 'Elfish'],
         size: 'Medium',
         special: {
-            type: 'charm',
-            advantage: true,
-            resistence: null,
-            info: "Roll 2x on charm saves",
-            tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
+            keenSenses: {
+                skill: 'perception'
+            },
+            feyAncestry: {
+                type: 'charm',
+                advantage: true,
+                resistence: null,
+                info: "Roll 2x on charm saves",
+                tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
+            },
+            trance: {
+                info: "Elves don\u2019t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \u201Ctrance.\u201D) While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep."
+            }
         },
         speed: 30,
         subrace: {
@@ -200,11 +228,13 @@ var Races = exports.Races = {
         languages: ["Common", "Gnomish"],
         size: 'Small',
         special: {
-            type: ['charisma', 'wisdom', 'intelligence'],
-            advantage: true,
-            resistence: null,
-            info: "Roll 2x on fear saves",
-            tooltip: "Brave. You have advantage on saving throws against being frightened."
+            gnomeCunning: {
+                type: ['charisma', 'wisdom', 'intelligence'],
+                advantage: true,
+                resistence: null,
+                info: "Roll 2x on fear saves",
+                tooltip: "Brave. You have advantage on saving throws against being frightened."
+            }
         },
         speed: 25,
         subrace: {
@@ -239,11 +269,16 @@ var Races = exports.Races = {
         extraLanguage: 1,
         size: 'Medium',
         special: {
-            type: 'charm',
-            advantage: true,
-            resistence: null,
-            info: "Roll 2x on charm saves",
-            tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
+            feyAncestry: {
+                type: 'charm',
+                advantage: true,
+                resistence: null,
+                info: "Roll 2x on charm saves",
+                tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
+            },
+            skillVersatility: {
+                info: "You gain proficiency in two skills of your choice."
+            }
         },
         speed: 30
     },
@@ -262,11 +297,19 @@ var Races = exports.Races = {
         extraLanguage: 1,
         size: 'Small',
         special: {
-            type: 'fear',
-            advantage: true,
-            resistence: null,
-            info: "Roll 2x on fear saves",
-            tooltip: "Brave. You have advantage on saving throws against being frightened."
+            brave: {
+                type: 'fear',
+                advantage: true,
+                resistence: null,
+                info: "Roll 2x on fear saves",
+                tooltip: "Brave. You have advantage on saving throws against being frightened."
+            },
+            halflingNimbleness: {
+                info: "You can move through the space of any creature that is of a size larger than yours."
+            },
+            lucky: {
+                info: "When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll."
+            }
         },
         speed: 25,
         subrace: {
@@ -293,7 +336,12 @@ var Races = exports.Races = {
         darkvision: true,
         languages: ["Common", "Orc"],
         size: 'Medium',
-        speed: 30
+        speed: 30,
+        special: {
+            menacing: "You gain proficiency in the Intimidation skill.",
+            relentlessEndurance: "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can\u2019t use this feature again until you finish a long rest.",
+            savageAttacks: "When you score a critical hit with a melee weapon attack, you can roll one of the weapon\u2019s damage dice one additional time and add it to the extra damage of the critical hit."
+        }
     },
     human: {
         abilityModifier: {
@@ -326,7 +374,11 @@ var Races = exports.Races = {
         darkvision: true,
         languages: ["Common", "Infernal"],
         size: 'Medium',
-        speed: 30
+        speed: 30,
+        special: {
+            hellishResistance: "You have resistance to fire damage.",
+            infernalLegacy: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells."
+        }
     }
 };
 ////////////////////////////////////////
