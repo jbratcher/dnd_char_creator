@@ -675,6 +675,7 @@ const highlightRacialSKills = () => {
   Races[charRace].special.stonecunning
     ? (stonecunningPreview.parentElement.classList.remove('d-none'),
       stonecunningPreview.parentElement.classList.add('d-flex'),
+      stonecunningPreview.setAttribute('title', Races[charRace].special.stonecunning.info),
       stonecunningPreview.textContent = "Stonework (Int, Hist)")
     : stonecunningPreview.parentElement.classList.add('d-none')
   
