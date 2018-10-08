@@ -380,6 +380,9 @@ var addExtraAbilityMofifiers = function () {
 // Skill variables
 var skillsPreviewList = document.querySelector('#skillsPreviewList');
 var skillsPreviewListItems = skillsPreviewList.children;
+var additionalSKillsPreviewList = document.querySelector('#additionalSKillsPreviewList');
+var additionalSkillsPreviewListItems = additionalSKillsPreviewList.children;
+var stonecunningPreview = document.querySelector('#stonecunningPreview');
 // Skill functions
 var getSkillModifier = function (skillText) {
     var skillAbility = (singleWord.exec(skillText));
@@ -412,6 +415,22 @@ var highlightSkills = function () {
             skill.style.color = '#ccc';
         }
     }
+};
+var highlightRacialSKills = function () {
+    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    Races[charRace].special.stonecunning
+        ? (stonecunningPreview.parentElement.classList.remove('d-none'),
+            stonecunningPreview.parentElement.classList.add('d-flex'),
+            stonecunningPreview.textContent = "Stonework (Int, Hist)")
+        : stonecunningPreview.parentElement.classList.add('d-none');
+};
+// Skills combined function call
+var skillCreation = function () {
+    updateProficiencyBonus();
+    // Highlight selected skills and append skill modifier
+    highlightSkills();
+    highlightAvailableSkills();
+    highlightRacialSKills();
 };
 ////////////////////////////////////////////////////////////
 // Combat
@@ -515,9 +534,6 @@ var calculateSpecialResistances = function () {
     }
 };
 var combatCreation = function () {
-    updateProficiencyBonus();
-    // Highlight selected skills and append skill modifier
-    highlightSkills();
     // Get character preview image based on class, race, and gender
     charImageSet();
     // Set initial hit point value for 1st level
@@ -548,6 +564,7 @@ createCharacterButton.addEventListener('click', function (e) {
     // Character Creation functions
     generalInfo(); // General tab functions
     racialBonuses(); // Race bonus functions
+    skillCreation(); // SKill tab functions
     combatCreation(); // Combat tab functions
 });
 ////////////////////////////////////////////////////////////

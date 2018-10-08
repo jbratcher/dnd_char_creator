@@ -623,6 +623,12 @@ const skillsPreviewList = <HTMLElement>document.querySelector('#skillsPreviewLis
 
 const skillsPreviewListItems = skillsPreviewList.children;
 
+const additionalSKillsPreviewList = <HTMLElement>document.querySelector('#additionalSKillsPreviewList');
+
+const additionalSkillsPreviewListItems = additionalSKillsPreviewList.children;
+
+const stonecunningPreview = <HTMLElement>document.querySelector('#stonecunningPreview');
+
 // Skill functions
 
 const getSkillModifier = skillText => {
@@ -660,6 +666,34 @@ const highlightSkills = () => {
       skill.style.color = '#ccc';
     }
   }
+}
+
+const highlightRacialSKills = () => {
+  
+  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  
+  Races[charRace].special.stonecunning
+    ? (stonecunningPreview.parentElement.classList.remove('d-none'),
+      stonecunningPreview.parentElement.classList.add('d-flex'),
+      stonecunningPreview.textContent = "Stonework (Int, Hist)")
+    : stonecunningPreview.parentElement.classList.add('d-none')
+  
+}
+
+// Skills combined function call
+
+const skillCreation = () => {
+  
+  updateProficiencyBonus();
+
+  // Highlight selected skills and append skill modifier
+
+  highlightSkills();
+  
+  highlightAvailableSkills();
+  
+  highlightRacialSKills();
+  
 }
 
 ////////////////////////////////////////////////////////////
@@ -819,12 +853,6 @@ const calculateSpecialResistances = () => {
 
 const combatCreation = () => {
 
-  updateProficiencyBonus();
-
-  // Highlight selected skills and append skill modifier
-
-  highlightSkills();
-
   // Get character preview image based on class, race, and gender
 
   charImageSet();
@@ -882,6 +910,8 @@ createCharacterButton.addEventListener('click', e => {
   generalInfo();  // General tab functions
   
   racialBonuses();  // Race bonus functions
+  
+  skillCreation(); // SKill tab functions
 
   combatCreation();  // Combat tab functions
 
