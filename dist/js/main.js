@@ -139,7 +139,7 @@ var subraceHelp = document.querySelector('#subraceHelp');
 var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     subraceSelect.innerHTML = "-"; // Reset any subrace from previous selection
-    _info.Races[charRace].subrace ? addOptionstoSelect(subraceSelect, _info.Races[charRace].subrace.name) : subraceSelectSection.classList.add('d-none');
+    _info.Races[charRace].subrace ? (addOptionstoSelect(subraceSelect, ["-"]), addOptionstoSelect(subraceSelect, _info.Races[charRace].subrace.name)) : subraceSelectSection.classList.add('d-none');
     _info.Races[charRace].subrace ? subraceSelectSection.classList.remove('d-none') : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect);

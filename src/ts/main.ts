@@ -52,6 +52,7 @@ let proficiencyBonus: number;
 ////////////////////////////////////////
 
 const addOptionstoSelect = (selectElement, dataArray) => {
+  
   dataArray.map(optionText => {
     let optionElement: HTMLOptionElement = document.createElement("option");
     optionElement.textContent = optionText;
@@ -200,7 +201,10 @@ const showOptionalSubraceSelect = () => {
   subraceSelect.innerHTML = "-"  // Reset any subrace from previous selection
   
   Races[charRace].subrace
-    ? addOptionstoSelect(subraceSelect, Races[charRace].subrace.name) 
+    ? (
+      addOptionstoSelect(subraceSelect, ["-"]),
+      addOptionstoSelect(subraceSelect, Races[charRace].subrace.name) 
+      )
     : subraceSelectSection.classList.add('d-none')
 
   Races[charRace].subrace
@@ -673,10 +677,12 @@ const highlightRacialSKills = () => {
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
   
   Races[charRace].special.stonecunning
-    ? (stonecunningPreview.parentElement.classList.remove('d-none'),
+    ? (
+      stonecunningPreview.parentElement.classList.remove('d-none'),
       stonecunningPreview.parentElement.classList.add('d-flex'),
       stonecunningPreview.setAttribute('title', Races[charRace].special.stonecunning.info),
-      stonecunningPreview.textContent = "Stonework (Int, Hist)")
+      stonecunningPreview.textContent = "Stonework (Int, Hist)"
+      )
     : stonecunningPreview.parentElement.classList.add('d-none')
   
 }

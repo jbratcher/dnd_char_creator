@@ -118,7 +118,8 @@ var showOptionalSubraceSelect = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     subraceSelect.innerHTML = "-"; // Reset any subrace from previous selection
     Races[charRace].subrace
-        ? addOptionstoSelect(subraceSelect, Races[charRace].subrace.name)
+        ? (addOptionstoSelect(subraceSelect, ["-"]),
+            addOptionstoSelect(subraceSelect, Races[charRace].subrace.name))
         : subraceSelectSection.classList.add('d-none');
     Races[charRace].subrace
         ? subraceSelectSection.classList.remove('d-none')
