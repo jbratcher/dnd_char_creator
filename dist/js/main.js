@@ -168,7 +168,7 @@ var showExtraLanguageInput = function showExtraLanguageInput() {
 };
 race.addEventListener('change', showExtraLanguageInput);
 var racialBonuses = function racialBonuses() {
-    addExtraAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
+    addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
 showExtraLanguageInput();
 // Skill select
@@ -329,10 +329,6 @@ var subraceAbilityModifier = function subraceAbilityModifier() {
             var abilityScore_1 = Number(abilityScoreListItems[i].childNodes[3].textContent);
             if (abilityText.toLowerCase() === subraceAbility) {
                 abilityScorePreview.textContent = String(abilityScore_1 + subraceAbilityMod);
-                console.log(subraceAbilityMod);
-                console.log(abilityScore_1);
-                console.log(abilityScorePreview);
-                console.log(abilityScorePreview.textContent);
             }
         }
     }
@@ -344,10 +340,10 @@ var racialAbilityModifier = function racialAbilityModifier() {
     // if ability matches abilityPreview node text, add modifier to score
     for (var i = 0; i < abilityScoreListItems.length; i++) {
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
-        var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
+        var abilityScorePreview = abilityScoreListItems[i].childNodes[3];
         var abilityScore_2 = Number(abilityScoreListItems[i].childNodes[3].textContent);
         if (string.toLowerCase() === racialAbility) {
-            abilityScorePreview = String(abilityScore_2 + racialAbilityMod);
+            abilityScorePreview.textContent = String(abilityScore_2 + racialAbilityMod);
         }
     }
     // if race has extra ability to modify
@@ -386,7 +382,7 @@ var hideMod1Selection = function hideMod1Selection() {
 };
 extraAbilityModifier1.addEventListener('change', hideMod1Selection);
 // if extra ability score is selected add +1 to ability score preview
-var addExtraAbilityMofifiers = function addExtraAbilityMofifiers() {
+var addHalfElfAbilityMofifiers = function addHalfElfAbilityMofifiers() {
     if (charRace === 'halfelf') {
         // get selected abilities
         var mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;

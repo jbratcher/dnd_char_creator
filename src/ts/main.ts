@@ -25,10 +25,10 @@ const randomBoolean = () => Math.random() >= 0.5;  // Get a random true or false
 
 const rollAbilityScore = () => randomIntFromRange(3,18);
 
-const setToMinMax = score => score > 18 
-                              ? 18 
-                              : score < 3 
-                                ? 3 
+const setToMinMax = score => score > 18
+                              ? 18
+                              : score < 3
+                                ? 3
                                 : score;
 
 const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
@@ -52,7 +52,7 @@ let proficiencyBonus: number;
 ////////////////////////////////////////
 
 const addOptionstoSelect = (selectElement, dataArray) => {
-  
+
   dataArray.map(optionText => {
     let optionElement: HTMLOptionElement = document.createElement("option");
     optionElement.textContent = optionText;
@@ -199,13 +199,13 @@ let charSubrace: string = subrace.textContent.toLowerCase().replace(/s/g,"");
 const showOptionalSubraceSelect = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  
+
   subrace.innerHTML = "-"  // Reset any subrace from previous selection
-  
+
   Races[charRace].subrace
     ? (
       addOptionstoSelect(subrace, ["-"]),  // Make first option "null"
-      addOptionstoSelect(subrace, Races[charRace].subrace.name) 
+      addOptionstoSelect(subrace, Races[charRace].subrace.name)
       )
     : subraceSelectSection.classList.add('d-none')
 
@@ -251,14 +251,14 @@ addOptionstoSelect(extraLanguage, Languages.standard);
 const showExtraLanguageInput = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  
+
   charRace === 'human'
     ? extraLanguageField.classList.remove('d-none')
     : charRace === 'halfelf'
       ? extraLanguageField.classList.remove('d-none')
       : extraLanguageField.classList.add('d-none')
-  
-  charRace === 'human' 
+
+  charRace === 'human'
     ? extraLanguageHelp.textContent = 'Humans get to choose 1 extra language'
     : charRace === 'halfelf'
       ? extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language'
@@ -269,9 +269,9 @@ const showExtraLanguageInput = () => {
 race.addEventListener('change', showExtraLanguageInput);
 
 const racialBonuses = () => {
-  
-    addExtraAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
-  
+
+    addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
+
 }
 
 showExtraLanguageInput();
@@ -309,11 +309,11 @@ let selectedSkill3 = skill1.options[skill3.selectedIndex];
 const highlightAvailableSkills = () => {
 
   availableSkills = ClassProps[charCls].availableSkills;
-  
+
   skill1.innerHTML = "";
   skill2.innerHTML = "";
   skill3.innerHTML = "";
-  
+
   addOptionstoSelect(skill1, availableSkills);
   addOptionstoSelect(skill2, availableSkills);
   addOptionstoSelect(skill3, availableSkills);
@@ -524,29 +524,26 @@ const lookupAbilityScore = (ability) => {
 }
 
 const subraceAbilityModifier = () => {
-  
+
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-  
+
   if(Races[charRace].subrace) {
-    
+
     let subraceAbility: string = Races[charRace].subrace.ability;
     let subraceAbilityMod: number = Races[charRace].subrace.modifier;
-    
+
     for(let i = 0; i < abilityScoreListItems.length; i++) {
       let abilityText: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       let abilityScorePreview = abilityScoreListItems[i].childNodes[3]
       let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
-      
+
       if(abilityText.toLowerCase() === subraceAbility) {
          abilityScorePreview.textContent = String(abilityScore + subraceAbilityMod);
-         console.log(subraceAbilityMod)
-         console.log(abilityScore)
-         console.log(abilityScorePreview)
-         console.log(abilityScorePreview.textContent)
+
       }
-      
+
     }
-    
+
   }
 
 }
@@ -556,18 +553,18 @@ const racialAbilityModifier = () => {
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
   let racialAbility: string = Races[charRace].abilityModifier.ability;
   let racialAbilityMod: number = Races[charRace].abilityModifier.modifier;
-  
+
 
   // if ability matches abilityPreview node text, add modifier to score
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
-    let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
+    let abilityScorePreview = abilityScoreListItems[i].childNodes[3]
     let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
-    
+
     if(string.toLowerCase() === racialAbility) {
-       abilityScorePreview = String(abilityScore + racialAbilityMod);
+       abilityScorePreview.textContent = String(abilityScore + racialAbilityMod);
     }
-    
+
   }
 
   // if race has extra ability to modify
@@ -630,7 +627,7 @@ extraAbilityModifier1.addEventListener('change', hideMod1Selection)
 
 // if extra ability score is selected add +1 to ability score preview
 
-const addExtraAbilityMofifiers = () => {
+const addHalfElfAbilityMofifiers = () => {
 
   if(charRace === 'halfelf') {
     // get selected abilities
@@ -707,9 +704,9 @@ const highlightSkills = () => {
 }
 
 const highlightRacialSKills = () => {
-  
+
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-  
+
   Races[charRace].special.stonecunning
     ? (
       stonecunningPreview.parentElement.classList.remove('d-none'),
@@ -718,23 +715,23 @@ const highlightRacialSKills = () => {
       stonecunningPreview.textContent = "Stonework (Int, Hist)"
       )
     : stonecunningPreview.parentElement.classList.add('d-none')
-  
+
 }
 
 // Skills combined function call
 
 const skillCreation = () => {
-  
+
   updateProficiencyBonus();
 
   // Highlight selected skills and append skill modifier
 
   highlightSkills();
-  
+
   highlightAvailableSkills();
-  
+
   highlightRacialSKills();
-  
+
 }
 
 ////////////////////////////////////////////////////////////
@@ -797,19 +794,19 @@ const darkvision = () => {
 const setCharacterSize = () => sizePreview.textContent = Races[charRace].size;
 
 const calculateWeaponProficiencies = () => {
-  
+
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  
+
   if(charRace === 'dwarf') {
-    
+
     Races[charRace].weaponProficiences.map(weapon => {
-    
+
       weaponProficiencesPreview.textContent += weapon + ", ";
-    
-    }) 
-    
+
+    })
+
   }
-  
+
 }
 
 // Saving throws
@@ -820,10 +817,10 @@ const savingThrowListItems = savingThrowList.children;
 // saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
 
 const calculateSavingThrowMods = () => {
-  
+
   charCls = selectedCls.textContent.toLowerCase();
   let abilities = ClassProps[charCls].savingThrows;
-  
+
   abilities.map(ability => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
     for(let i = 0; i < savingThrowListItems.length; i++) {
@@ -835,7 +832,7 @@ const calculateSavingThrowMods = () => {
       }
     }
   });
-  
+
 }
 
 // Special Resistances
@@ -849,27 +846,27 @@ const charmResistance = <HTMLElement>document.querySelector('#charmResistance');
 const fearResistance = <HTMLElement>document.querySelector('#fearResistance');
 
 const calculateSpecialResistances = () => {
-  
+
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
 
   if(charRace === 'dwarf') {
-    
+
     poisonResistance.textContent = `Advantage, Resistance`;
     poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
-    
+
   }
-  
+
   if(charRace === 'elf' || charRace === 'halfelf') {
-    
+
     charmResistance.textContent = 'Advantage';
     charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
-    
+
   }
-  
+
   if(charRace === 'gnome') {
-    
+
     let types = Races[charRace].special.gnomeCunning.type
-    
+
     types.map(type => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
     for(let i = 0; i < savingThrowListItems.length; i++) {
@@ -879,16 +876,16 @@ const calculateSpecialResistances = () => {
       }
     }
   });
-    
+
   }
-  
+
   if(charRace === 'halfling') {
-    
+
     fearResistance.textContent = 'Advantage';
     fearResistance.setAttribute('title', Races[charRace].special.brave.info);
-    
+
   }
-  
+
 }
 
 
@@ -925,17 +922,17 @@ const combatCreation = () => {
   // Set any racial ability modifiers to ability scores
 
   racialAbilityModifier();
-  
+
   subraceAbilityModifier();
 
   // Set the character size
 
   setCharacterSize();
-  
+
   calculateSavingThrowMods();
-  
+
   calculateSpecialResistances();
-  
+
   calculateWeaponProficiencies();
 
 }
@@ -951,9 +948,9 @@ createCharacterButton.addEventListener('click', e => {
   // Character Creation functions
 
   generalInfo();  // General tab functions
-  
+
   racialBonuses();  // Race bonus functions
-  
+
   skillCreation(); // SKill tab functions
 
   combatCreation();  // Combat tab functions
