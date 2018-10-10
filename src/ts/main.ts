@@ -186,24 +186,26 @@ let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
 
 let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,"");
 
-// Subrace
-
 const subraceSelectSection = <HTMLElement>document.querySelector('#optionalSubrace');
 
-const subraceSelect = <HTMLSelectElement>document.querySelector('#subrace');
+const subrace = <HTMLSelectElement>document.querySelector('#subrace');
 
 const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
+
+let charSubrace: string = subrace.textContent.toLowerCase().replace(/s/g,"");
+
+// Subrace select
 
 const showOptionalSubraceSelect = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
   
-  subraceSelect.innerHTML = "-"  // Reset any subrace from previous selection
+  subrace.innerHTML = "-"  // Reset any subrace from previous selection
   
   Races[charRace].subrace
     ? (
-      addOptionstoSelect(subraceSelect, ["-"]),
-      addOptionstoSelect(subraceSelect, Races[charRace].subrace.name) 
+      addOptionstoSelect(subrace, ["-"]),  // Make first option "null"
+      addOptionstoSelect(subrace, Races[charRace].subrace.name) 
       )
     : subraceSelectSection.classList.add('d-none')
 
@@ -521,20 +523,51 @@ const lookupAbilityScore = (ability) => {
 
 }
 
+const subraceAbilityModifier = () => {
+  
+  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  
+  if(Races[charRace].subrace) {
+    
+    let subraceAbility: string = Races[charRace].subrace.ability;
+    let subraceAbilityMod: number = Races[charRace].subrace.modifier;
+    
+    for(let i = 0; i < abilityScoreListItems.length; i++) {
+      let abilityText: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      let abilityScorePreview = abilityScoreListItems[i].childNodes[3]
+      let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
+      
+      if(abilityText.toLowerCase() === subraceAbility) {
+         abilityScorePreview.textContent = String(abilityScore + subraceAbilityMod);
+         console.log(subraceAbilityMod)
+         console.log(abilityScore)
+         console.log(abilityScorePreview)
+         console.log(abilityScorePreview.textContent)
+      }
+      
+    }
+    
+  }
+
+}
+
 const racialAbilityModifier = () => {
 
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
   let racialAbility: string = Races[charRace].abilityModifier.ability;
   let racialAbilityMod: number = Races[charRace].abilityModifier.modifier;
+  
 
   // if ability matches abilityPreview node text, add modifier to score
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+    let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
+    let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
+    
     if(string.toLowerCase() === racialAbility) {
-      let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
-      let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
-      abilityScorePreview = String(abilityScore + racialAbilityMod);
+       abilityScorePreview = String(abilityScore + racialAbilityMod);
     }
+    
   }
 
   // if race has extra ability to modify
@@ -544,7 +577,7 @@ const racialAbilityModifier = () => {
       let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
       if(string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
         let abilityScore: number = Number(abilityScorePreview);
-        abilityScorePreview = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
+         abilityScorePreview = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
       }
     }
 
@@ -611,6 +644,7 @@ const addExtraAbilityMofifiers = () => {
         let abilityScore: number = Number(abilityScorePreview);
         abilityScore += 1;
         abilityScorePreview = String(abilityScore);
+        console.log(abilityScorePreview);
       }
     }
   }
@@ -891,6 +925,8 @@ const combatCreation = () => {
   // Set any racial ability modifiers to ability scores
 
   racialAbilityModifier();
+  
+  subraceAbilityModifier();
 
   // Set the character size
 
