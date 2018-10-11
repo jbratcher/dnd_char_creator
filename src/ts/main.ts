@@ -728,8 +728,6 @@ const skillCreation = () => {
 
   highlightSkills();
 
-  highlightAvailableSkills();
-
   highlightRacialSKills();
 
 }
@@ -982,7 +980,7 @@ levelUpButton.addEventListener('click', e => {
   addHitPoints();
 
   highlightSkills();
-
+  
 });
 
 addNewExperienceButton.addEventListener('click', e => {

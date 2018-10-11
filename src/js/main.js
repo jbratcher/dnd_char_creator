@@ -448,7 +448,6 @@ var skillCreation = function () {
     updateProficiencyBonus();
     // Highlight selected skills and append skill modifier
     highlightSkills();
-    highlightAvailableSkills();
     highlightRacialSKills();
 };
 ////////////////////////////////////////////////////////////
