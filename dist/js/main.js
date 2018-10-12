@@ -441,7 +441,7 @@ var highlightSkills = function highlightSkills() {
 };
 var highlightRacialSKills = function highlightRacialSKills() {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    _info.Races[charRace].special.stonecunning ? (stonecunningPreview.parentElement.classList.remove('d-none'), stonecunningPreview.parentElement.classList.add('d-flex'), stonecunningPreview.setAttribute('title', _info.Races[charRace].special.stonecunning.info), stonecunningPreview.textContent = "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none');
+    _info.Races[charRace].special ? _info.Races[charRace].special.stonecunning ? (stonecunningPreview.parentElement.classList.remove('d-none'), stonecunningPreview.parentElement.classList.add('d-flex'), stonecunningPreview.setAttribute('title', _info.Races[charRace].special.stonecunning.info), stonecunningPreview.textContent = "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none') : stonecunningPreview.parentElement.classList.add('d-none');
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {
