@@ -259,6 +259,12 @@ var addExp = function addExp() {
     currentExperience.textContent = String(currentExpNum + newExpNum);
 };
 var generalInfo = function generalInfo() {
+    strength = null;
+    dexerity = null;
+    constitution = null;
+    intelligence = null;
+    wisdom = null;
+    charisma = null;
     // Get current state of info required to create character
     selectedCls = cls.options[cls.selectedIndex];
     charCls = selectedCls.textContent.toLowerCase();

@@ -418,6 +418,18 @@ const addExp = () => {
 
 const generalInfo = () => {
 
+  strength = null;
+
+  dexerity = null;
+
+  constitution = null;
+
+  intelligence = null;
+
+  wisdom = null;
+
+  charisma = null;
+
   // Get current state of info required to create character
 
   selectedCls = cls.options[cls.selectedIndex];
@@ -980,7 +992,7 @@ levelUpButton.addEventListener('click', e => {
   addHitPoints();
 
   highlightSkills();
-  
+
 });
 
 addNewExperienceButton.addEventListener('click', e => {
