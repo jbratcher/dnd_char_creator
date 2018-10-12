@@ -415,6 +415,7 @@ var skillsPreviewListItems = skillsPreviewList.children;
 var additionalSKillsPreviewList = document.querySelector('#additionalSKillsPreviewList');
 var additionalSkillsPreviewListItems = additionalSKillsPreviewList.children;
 var stonecunningPreview = document.querySelector('#stonecunningPreview');
+var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
 // Skill functions
 var getSkillModifier = function getSkillModifier(skillText) {
     var skillAbility = singleWord.exec(skillText);
@@ -448,6 +449,7 @@ var highlightSkills = function highlightSkills() {
 var highlightRacialSKills = function highlightRacialSKills() {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
     _info.Races[charRace].special ? _info.Races[charRace].special.stonecunning ? (stonecunningPreview.parentElement.classList.remove('d-none'), stonecunningPreview.parentElement.classList.add('d-flex'), stonecunningPreview.setAttribute('title', _info.Races[charRace].special.stonecunning.info), stonecunningPreview.textContent = "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none') : stonecunningPreview.parentElement.classList.add('d-none');
+    _info.Races[charRace].special ? _info.Races[charRace].special.toolProficiency ? (toolProficiencyPreview.parentElement.classList.remove('d-none'), toolProficiencyPreview.parentElement.classList.add('d-flex'), toolProficiencyPreview.setAttribute('title', _info.Races[charRace].special.stonecunning.info), toolProficiencyPreview.textContent = 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : toolProficiencyPreview.parentElement.classList.add('d-none') : toolProficiencyPreview.parentElement.classList.add('d-none');
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {

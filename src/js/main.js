@@ -407,6 +407,7 @@ var skillsPreviewListItems = skillsPreviewList.children;
 var additionalSKillsPreviewList = document.querySelector('#additionalSKillsPreviewList');
 var additionalSkillsPreviewListItems = additionalSKillsPreviewList.children;
 var stonecunningPreview = document.querySelector('#stonecunningPreview');
+var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
 // Skill functions
 var getSkillModifier = function (skillText) {
     var skillAbility = (singleWord.exec(skillText));
@@ -450,6 +451,14 @@ var highlightRacialSKills = function () {
                 stonecunningPreview.textContent = "Stonework (Int, Hist)")
             : stonecunningPreview.parentElement.classList.add('d-none')
         : stonecunningPreview.parentElement.classList.add('d-none');
+    Races[charRace].special
+        ? Races[charRace].special.toolProficiency
+            ? (toolProficiencyPreview.parentElement.classList.remove('d-none'),
+                toolProficiencyPreview.parentElement.classList.add('d-flex'),
+                toolProficiencyPreview.setAttribute('title', Races[charRace].special.stonecunning.info),
+                toolProficiencyPreview.textContent = "Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)")
+            : toolProficiencyPreview.parentElement.classList.add('d-none')
+        : toolProficiencyPreview.parentElement.classList.add('d-none');
 };
 // Skills combined function call
 var skillCreation = function () {
