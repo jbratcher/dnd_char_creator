@@ -297,7 +297,59 @@ export const Races = {
                 info: `You have resistance to the damage type associated with your draconic ancestry.`
             },
             draconicAncestry: {
-                info: `You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.`
+                info: `You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.`,
+                types: [
+                    'Black',
+                    'Blue',
+                    'Brass',
+                    'Bronze',
+                    'Copper',
+                    'Gold',
+                    'Green',
+                    'Red',
+                    'Silver',
+                    'White'
+                ],
+                black: {
+                    type: 'acid',
+                    breath: '5 by 30 ft. line (Dex. save)'
+                },
+                blue: {
+                    type: 'lightning',
+                    breath: '5 by 30 ft. line (Dex. save)'
+                },
+                brass: {
+                    type: 'fire',
+                    breath: '5 by 30 ft. line (Dex. save)'
+                },
+                bronze: {
+                    type: 'lightning',
+                    breath: '5 by 30 ft. line (Dex. save)'
+                },
+                copper: {
+                    type: 'acid',
+                    breath: '5 by 30 ft. line (Dex. save)'
+                },
+                gold: {
+                    type: 'fire',
+                    breath: '15	ft. cone (Dex .save)'
+                },
+                green: {
+                    type: 'poison',
+                    breath: '15	ft. cone (Dex .save)'
+                },
+                red: {
+                    type: 'fire',
+                    breath: '15	ft. cone (Dex .save)'
+                },
+                silver: {
+                    type: 'cold',
+                    breath: '15	ft. cone (Dex .save)'
+                },
+                white: {
+                    type: 'cold',
+                    breath: '15	ft. cone (Dex .save)'
+                },
             }
         }
 

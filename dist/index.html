@@ -67,7 +67,7 @@
 
               </section>
 
-              <p class="lead p-3">Enter you character information</p>
+              <p class="lead p-3">Enter your character information</p>
 
               <!-- Character Builder Navigation -->
 
@@ -128,8 +128,20 @@
                     </div>
                     
                     <small id="subraceHelp" class="form-text text-muted mb-3"></small>
+                    
+                    <div class="input-group-prepend my-3 d-none" id="draconicAncestrySelection">
 
-                    <p>Roll your ability scores<p>
+                      <label class="input-group-text" for="draconicAncestry">Draconic Ancestry: </label>
+
+                      <select class="custom-select" id="draconicAncestry">
+                        <!-- main.ts will insert race options here  -->
+                      </select>
+
+                    </div>
+                    
+                    <small id="draconicAncestryHelp" class="form-text text-muted mb-3"></small>
+
+                    <p class="lead mt-3">Roll your ability scores</p>
 
                     <div class="input-group my-3 d-flex justify-content-between">
                       <label class="h6">Strength: </label>

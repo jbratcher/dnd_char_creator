@@ -194,6 +194,12 @@ const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
 
 let charSubrace: string = subrace.textContent.toLowerCase().replace(/s/g,"");
 
+const draconicAncestrySelection = <HTMLElement>document.querySelector('#draconicAncestrySelection');
+
+const draconicAncestry = <HTMLSelectElement>document.querySelector('#draconicAncestry');
+
+const draconicAncestryHelp = <HTMLElement>document.querySelector('#draconicAncestryHelp');
+
 // Subrace select
 
 const showOptionalSubraceSelect = () => {
@@ -216,6 +222,27 @@ const showOptionalSubraceSelect = () => {
 }
 
 race.addEventListener('change', showOptionalSubraceSelect);
+
+const showDraconicAncestrySelect = () => {
+
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+
+  Races[charRace].special.draconicAncestry
+    ? (
+      addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
+      draconicAncestryHelp.textContent = 'Choose a dragon lineage.'
+      )
+    : draconicAncestrySelection.classList.add('d-none')
+
+  Races[charRace].special.draconicAncestry
+    ? draconicAncestrySelection.classList.remove('d-none')
+    : draconicAncestrySelection.classList.add('d-none')
+
+}
+
+race.addEventListener('change', showDraconicAncestrySelect);
+
+showDraconicAncestrySelect();
 
 let charGender: string = gender.value.toLowerCase();
 

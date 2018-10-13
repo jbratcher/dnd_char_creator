@@ -114,6 +114,9 @@ var subraceSelectSection = document.querySelector('#optionalSubrace');
 var subrace = document.querySelector('#subrace');
 var subraceHelp = document.querySelector('#subraceHelp');
 var charSubrace = subrace.textContent.toLowerCase().replace(/s/g, "");
+var draconicAncestrySelection = document.querySelector('#draconicAncestrySelection');
+var draconicAncestry = document.querySelector('#draconicAncestry');
+var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 // Subrace select
 var showOptionalSubraceSelect = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
@@ -127,6 +130,18 @@ var showOptionalSubraceSelect = function () {
         : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect);
+var showDraconicAncestrySelect = function () {
+    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    Races[charRace].special.draconicAncestry
+        ? (addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
+            draconicAncestryHelp.textContent = 'Choose a dragon lineage.')
+        : draconicAncestrySelection.classList.add('d-none');
+    Races[charRace].special.draconicAncestry
+        ? draconicAncestrySelection.classList.remove('d-none')
+        : draconicAncestrySelection.classList.add('d-none');
+};
+race.addEventListener('change', showDraconicAncestrySelect);
+showDraconicAncestrySelect();
 var charGender = gender.value.toLowerCase();
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
