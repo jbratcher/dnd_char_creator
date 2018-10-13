@@ -123,10 +123,8 @@ var showOptionalSubraceSelect = function () {
     subrace.innerHTML = "-"; // Reset any subrace from previous selection
     Races[charRace].subrace
         ? (addOptionstoSelect(subrace, ["-"]), // Make first option "null"
-            addOptionstoSelect(subrace, Races[charRace].subrace.name))
-        : subraceSelectSection.classList.add('d-none');
-    Races[charRace].subrace
-        ? subraceSelectSection.classList.remove('d-none')
+            addOptionstoSelect(subrace, Races[charRace].subrace.name),
+            subraceSelectSection.classList.remove('d-none'))
         : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect);
@@ -134,10 +132,8 @@ var showDraconicAncestrySelect = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     Races[charRace].special.draconicAncestry
         ? (addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
-            draconicAncestryHelp.textContent = 'Choose a dragon lineage.')
-        : draconicAncestrySelection.classList.add('d-none');
-    Races[charRace].special.draconicAncestry
-        ? draconicAncestrySelection.classList.remove('d-none')
+            draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
+            draconicAncestrySelection.classList.remove('d-none'))
         : draconicAncestrySelection.classList.add('d-none');
 };
 race.addEventListener('change', showDraconicAncestrySelect);
