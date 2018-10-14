@@ -133,6 +133,7 @@ var Races = exports.Races = {
                 info: "You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.",
                 types: ['Black', 'Blue', 'Brass', 'Bronze', 'Copper', 'Gold', 'Green', 'Red', 'Silver', 'White'],
                 black: {
+                    color: 'Black',
                     type: 'acid',
                     breath: '5 by 30 ft. line (Dex. save)'
                 },

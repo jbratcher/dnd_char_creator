@@ -292,6 +292,7 @@ export var Races = {
                     'White'
                 ],
                 black: {
+                    color: 'Black',
                     type: 'acid',
                     breath: '5 by 30 ft. line (Dex. save)'
                 },

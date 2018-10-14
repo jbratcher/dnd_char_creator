@@ -136,7 +136,7 @@ var subraceSelectSection = document.querySelector('#optionalSubrace');
 var subrace = document.querySelector('#subrace');
 var subraceHelp = document.querySelector('#subraceHelp');
 var charSubrace = subrace.textContent.toLowerCase().replace(/s/g, "");
-var draconicAncestrySelection = document.querySelector('#draconicAncestrySelection');
+var draconicAncestrySection = document.querySelector('#draconicAncestrySection');
 var draconicAncestry = document.querySelector('#draconicAncestry');
 var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 // Subrace select
@@ -149,7 +149,7 @@ var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
 race.addEventListener('change', showOptionalSubraceSelect);
 var showDraconicAncestrySelect = function showDraconicAncestrySelect() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    _info.Races[charRace].special.draconicAncestry ? (addOptionstoSelect(draconicAncestry, _info.Races[charRace].special.draconicAncestry.types), draconicAncestryHelp.textContent = 'Choose a dragon lineage.', draconicAncestrySelection.classList.remove('d-none')) : draconicAncestrySelection.classList.add('d-none');
+    _info.Races[charRace].special.draconicAncestry ? (addOptionstoSelect(draconicAncestry, _info.Races[charRace].special.draconicAncestry.types), draconicAncestryHelp.textContent = 'Choose a dragon lineage.', draconicAncestrySection.classList.remove('d-none')) : draconicAncestrySection.classList.add('d-none');
 };
 race.addEventListener('change', showDraconicAncestrySelect);
 showDraconicAncestrySelect();
@@ -424,6 +424,7 @@ var additionalSKillsPreviewList = document.querySelector('#additionalSKillsPrevi
 var additionalSkillsPreviewListItems = additionalSKillsPreviewList.children;
 var stonecunningPreview = document.querySelector('#stonecunningPreview');
 var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
+var draconicAncestryPreview = document.querySelector('#draconicAncestryPreview');
 // Skill functions
 var getSkillModifier = function getSkillModifier(skillText) {
     var skillAbility = singleWord.exec(skillText);
@@ -456,8 +457,12 @@ var highlightSkills = function highlightSkills() {
 };
 var highlightRacialSKills = function highlightRacialSKills() {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
+    var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
+    console.log(charDraconicAncestry);
     _info.Races[charRace].special ? _info.Races[charRace].special.stonecunning ? (stonecunningPreview.parentElement.classList.remove('d-none'), stonecunningPreview.parentElement.classList.add('d-flex'), stonecunningPreview.setAttribute('title', _info.Races[charRace].special.stonecunning.info), stonecunningPreview.textContent = "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none') : stonecunningPreview.parentElement.classList.add('d-none');
     _info.Races[charRace].special ? _info.Races[charRace].special.toolProficiency ? (toolProficiencyPreview.parentElement.classList.remove('d-none'), toolProficiencyPreview.parentElement.classList.add('d-flex'), toolProficiencyPreview.setAttribute('title', _info.Races[charRace].special.stonecunning.info), toolProficiencyPreview.textContent = 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : toolProficiencyPreview.parentElement.classList.add('d-none') : toolProficiencyPreview.parentElement.classList.add('d-none');
+    _info.Races[charRace].special ? _info.Races[charRace].special.draconicAncestry ? (draconicAncestryPreview.parentElement.classList.remove('d-none'), draconicAncestryPreview.parentElement.classList.add('d-flex'), draconicAncestryPreview.setAttribute('title', _info.Races.dragonborn.special.draconicAncestry.info), draconicAncestryPreview.textContent = _info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color + ", " + _info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type + ", " + _info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath) : draconicAncestryPreview.parentElement.classList.add('d-none') : draconicAncestryPreview.parentElement.classList.add('d-none');
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {

@@ -194,7 +194,7 @@ const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
 
 let charSubrace: string = subrace.textContent.toLowerCase().replace(/s/g,"");
 
-const draconicAncestrySelection = <HTMLElement>document.querySelector('#draconicAncestrySelection');
+const draconicAncestrySection = <HTMLElement>document.querySelector('#draconicAncestrySection');
 
 const draconicAncestry = <HTMLSelectElement>document.querySelector('#draconicAncestry');
 
@@ -228,9 +228,9 @@ const showDraconicAncestrySelect = () => {
     ? (
       addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
       draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
-      draconicAncestrySelection.classList.remove('d-none')
+      draconicAncestrySection.classList.remove('d-none')
       )
-    : draconicAncestrySelection.classList.add('d-none')
+    : draconicAncestrySection.classList.add('d-none')
 
 }
 
@@ -699,6 +699,10 @@ const stonecunningPreview = <HTMLElement>document.querySelector('#stonecunningPr
 
 const toolProficiencyPreview = <HTMLElement>document.querySelector('#toolProficiencyPreview');
 
+const draconicAncestryPreview = <HTMLElement>document.querySelector('#draconicAncestryPreview');
+
+
+
 // Skill functions
 
 const getSkillModifier = skillText => {
@@ -741,7 +745,13 @@ const highlightSkills = () => {
 const highlightRacialSKills = () => {
 
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  
+  let selectedDraconicAncestry = <HTMLOptionElement>draconicAncestry.options[draconicAncestry.selectedIndex];
 
+  let charDraconicAncestry: string = selectedDraconicAncestry.textContent.toLowerCase();
+
+  console.log(charDraconicAncestry);
+  
   Races[charRace].special 
     ? Races[charRace].special.stonecunning
       ? (
@@ -763,6 +773,17 @@ const highlightRacialSKills = () => {
         )
       : toolProficiencyPreview.parentElement.classList.add('d-none')
     : toolProficiencyPreview.parentElement.classList.add('d-none') 
+    
+  Races[charRace].special  
+    ? Races[charRace].special.draconicAncestry
+      ? (
+        draconicAncestryPreview.parentElement.classList.remove('d-none'),
+        draconicAncestryPreview.parentElement.classList.add('d-flex'),
+        draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
+        draconicAncestryPreview.textContent = `${Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color}, ${Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type}, ${Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath}` 
+        )
+      : draconicAncestryPreview.parentElement.classList.add('d-none')
+    : draconicAncestryPreview.parentElement.classList.add('d-none') 
 
 }
 
