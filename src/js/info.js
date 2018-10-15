@@ -293,43 +293,52 @@ export var Races = {
                 ],
                 black: {
                     color: 'Black',
-                    type: 'acid',
+                    type: 'Acid',
                     breath: '5 by 30 ft. line (Dex. save)'
                 },
                 blue: {
-                    type: 'lightning',
+                    color: 'Blue',
+                    type: 'Lightning',
                     breath: '5 by 30 ft. line (Dex. save)'
                 },
                 brass: {
-                    type: 'fire',
+                    color: 'Brass',
+                    type: 'Fire',
                     breath: '5 by 30 ft. line (Dex. save)'
                 },
                 bronze: {
-                    type: 'lightning',
+                    color: 'Bronze',
+                    type: 'Lightning',
                     breath: '5 by 30 ft. line (Dex. save)'
                 },
                 copper: {
-                    type: 'acid',
+                    color: 'Copper',
+                    type: 'Acid',
                     breath: '5 by 30 ft. line (Dex. save)'
                 },
                 gold: {
-                    type: 'fire',
+                    color: 'Gold',
+                    type: 'Fire',
                     breath: '15	ft. cone (Dex .save)'
                 },
                 green: {
-                    type: 'poison',
+                    color: 'Green',
+                    type: 'Poison',
                     breath: '15	ft. cone (Dex .save)'
                 },
                 red: {
-                    type: 'fire',
+                    color: 'Red',
+                    type: 'Fire',
                     breath: '15	ft. cone (Dex .save)'
                 },
                 silver: {
-                    type: 'cold',
+                    color: 'Silver',
+                    type: 'Cold',
                     breath: '15	ft. cone (Dex .save)'
                 },
                 white: {
-                    type: 'cold',
+                    color: 'White',
+                    type: 'Cold',
                     breath: '15	ft. cone (Dex .save)'
                 }
             }

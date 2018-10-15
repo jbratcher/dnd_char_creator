@@ -52,12 +52,18 @@ let proficiencyBonus: number;
 ////////////////////////////////////////
 
 const addOptionstoSelect = (selectElement, dataArray) => {
-
   dataArray.map(optionText => {
     let optionElement: HTMLOptionElement = document.createElement("option");
     optionElement.textContent = optionText;
     selectElement.appendChild(optionElement);
   })
+}
+
+const showElementWithProps = (element, titleText, contentText) => {
+  element.parentElement.classList.remove('d-none');
+  element.parentElement.classList.add('d-flex');
+  element.setAttribute('title', titleText);
+  element.textContent = contentText;
 }
 
 const setScore = (abilityScorePreview) => {
@@ -131,17 +137,17 @@ rollCharisma.addEventListener('click', () => setScore(rolledCharisma));
 
 // Setters for ability scores
 
-let strength: string = rolledStrength.textContent;
+let strength: string = null;
 
-let dexerity: string = rolledDexerity.textContent;
+let dexerity: string = null;
 
-let constitution: string = rolledConstitition.textContent;
+let constitution: string = null;
 
-let intelligence: string = rolledIntelligence.textContent;
+let intelligence: string = null;
 
-let wisdom: string = rolledWisdom.textContent;
+let wisdom: string = null;
 
-let charisma: string = rolledCharisma.textContent;
+let charisma: string = null;
 
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
@@ -150,15 +156,31 @@ let charisma: string = rolledCharisma.textContent;
 
 // General Info
 
+// Name
+
 const name = <HTMLInputElement>document.querySelector('#name');
+
+// Race
 
 const race = <HTMLSelectElement>document.querySelector('#race');
 
 addOptionstoSelect(race, RaceList);
 
+let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
+
+let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+
+// Class
+
 const cls = <HTMLSelectElement>document.querySelector('#cls');
 
 addOptionstoSelect(cls, ClassList);
+
+let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
+
+let charCls: string = selectedCls.textContent.toLowerCase();
+
+// Alignment
 
 const alignment = <HTMLSelectElement>document.querySelector('#alignment');
 
@@ -176,15 +198,13 @@ const availableAlignments = () => {
 
 race.addEventListener('change', availableAlignments);
 
+// Gender
+
 const gender = <HTMLInputElement>document.querySelector('#gender');
 
-let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
+let charGender: string = gender.value.toLowerCase();
 
-let charCls: string = selectedCls.textContent.toLowerCase();
-
-let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
-
-let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+// Subrace
 
 const subraceSelectSection = <HTMLElement>document.querySelector('#optionalSubrace');
 
@@ -193,12 +213,6 @@ const subrace = <HTMLSelectElement>document.querySelector('#subrace');
 const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
 
 let charSubrace: string = subrace.textContent.toLowerCase().replace(/s/g,"");
-
-const draconicAncestrySection = <HTMLElement>document.querySelector('#draconicAncestrySection');
-
-const draconicAncestry = <HTMLSelectElement>document.querySelector('#draconicAncestry');
-
-const draconicAncestryHelp = <HTMLElement>document.querySelector('#draconicAncestryHelp');
 
 // Subrace select
 
@@ -220,25 +234,7 @@ const showOptionalSubraceSelect = () => {
 
 race.addEventListener('change', showOptionalSubraceSelect);
 
-const showDraconicAncestrySelect = () => {
-
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-
-  Races[charRace].special.draconicAncestry
-    ? (
-      addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
-      draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
-      draconicAncestrySection.classList.remove('d-none')
-      )
-    : draconicAncestrySection.classList.add('d-none')
-
-}
-
-race.addEventListener('change', showDraconicAncestrySelect);
-
-showDraconicAncestrySelect();
-
-let charGender: string = gender.value.toLowerCase();
+// Age
 
 const age = <HTMLInputElement>document.querySelector('#age');
 
@@ -258,6 +254,34 @@ race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 
 ageHelpText();
+
+// Dragonborn: Draconic Ancestry
+
+const draconicAncestrySection = <HTMLElement>document.querySelector('#draconicAncestrySection');
+
+const draconicAncestry = <HTMLSelectElement>document.querySelector('#draconicAncestry');
+
+const draconicAncestryHelp = <HTMLElement>document.querySelector('#draconicAncestryHelp');
+
+const showDraconicAncestrySelect = () => {
+
+  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+
+  Races[charRace].special.draconicAncestry
+    ? (
+      addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
+      draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
+      draconicAncestrySection.classList.remove('d-none')
+      )
+    : draconicAncestrySection.classList.add('d-none')
+
+}
+
+race.addEventListener('change', showDraconicAncestrySelect);
+
+showDraconicAncestrySelect();
+
+// Extra Language Selection: Human and Half-elf 
 
 // Display extra language field if race selection is human or halfelf and add language options
 
@@ -289,13 +313,13 @@ const showExtraLanguageInput = () => {
 
 race.addEventListener('change', showExtraLanguageInput);
 
+showExtraLanguageInput();
+
 const racialBonuses = () => {
 
     addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 
 }
-
-showExtraLanguageInput();
 
 // Skill select
 
@@ -701,6 +725,11 @@ const toolProficiencyPreview = <HTMLElement>document.querySelector('#toolProfici
 
 const draconicAncestryPreview = <HTMLElement>document.querySelector('#draconicAncestryPreview');
 
+const dragonType = <HTMLElement>document.querySelector('#dragonType');
+
+const damageType = <HTMLElement>document.querySelector('#damageType');
+
+const breathWeapon = <HTMLElement>document.querySelector('#breathWeapon');
 
 
 // Skill functions
@@ -755,10 +784,7 @@ const highlightRacialSKills = () => {
   Races[charRace].special 
     ? Races[charRace].special.stonecunning
       ? (
-        stonecunningPreview.parentElement.classList.remove('d-none'),
-        stonecunningPreview.parentElement.classList.add('d-flex'),
-        stonecunningPreview.setAttribute('title', Races[charRace].special.stonecunning.info),
-        stonecunningPreview.textContent = `Stonework (Int, Hist)`
+        showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
         )
       : stonecunningPreview.parentElement.classList.add('d-none')
     : stonecunningPreview.parentElement.classList.add('d-none')
@@ -766,10 +792,7 @@ const highlightRacialSKills = () => {
   Races[charRace].special  
     ? Races[charRace].special.toolProficiency
       ? (
-        toolProficiencyPreview.parentElement.classList.remove('d-none'),
-        toolProficiencyPreview.parentElement.classList.add('d-flex'),
-        toolProficiencyPreview.setAttribute('title', Races[charRace].special.stonecunning.info),
-        toolProficiencyPreview.textContent = `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`
+        showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
         )
       : toolProficiencyPreview.parentElement.classList.add('d-none')
     : toolProficiencyPreview.parentElement.classList.add('d-none') 
@@ -780,7 +803,9 @@ const highlightRacialSKills = () => {
         draconicAncestryPreview.parentElement.classList.remove('d-none'),
         draconicAncestryPreview.parentElement.classList.add('d-flex'),
         draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
-        draconicAncestryPreview.textContent = `${Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color}, ${Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type}, ${Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath}` 
+        dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
+        damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
+        breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath)
         )
       : draconicAncestryPreview.parentElement.classList.add('d-none')
     : draconicAncestryPreview.parentElement.classList.add('d-none') 
@@ -796,6 +821,8 @@ const skillCreation = () => {
   // Highlight selected skills and append skill modifier
 
   highlightSkills();
+  
+  // Preview racial abilities
 
   highlightRacialSKills();
 
