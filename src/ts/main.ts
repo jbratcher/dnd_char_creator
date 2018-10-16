@@ -316,6 +316,8 @@ race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
 
 const racialBonuses = () => {
+  
+    addDwarvenToughness();
 
     addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 
@@ -437,18 +439,6 @@ const charLevelUp = () => {
   updateProficiencyBonus();
 }
 
-const addHitPoints = () => {
-  let currentHitPoints: number = Number(hitPointPreview.textContent);
-  let rolledHitPoints: number = randomIntFromRange(1, ClassProps[charCls].hitdie)
-  modifier = getAbilityScoreModifier(constitution)
-  let hitPointsToAdd: number = (rolledHitPoints + modifier);
-  // Prevent negative or zero hit points on level up
-  if(rolledHitPoints + modifier <= 0) {
-    hitPointsToAdd = 1;
-  }
-  hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
-}
-
 const updateProficiencyBonus = () => {
   proficiencyBonus = Levels[currentLevel.textContent].bonus;
   proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
@@ -564,6 +554,8 @@ const extraAbilityModifier1 = <HTMLSelectElement>document.querySelector('#extraA
 const extraAbilityModifier2 = <HTMLSelectElement>document.querySelector('#extraAbilityModifier2');
 
 const extraAbilityModifierHelp = <HTMLElement>document.querySelector('#extraAbilityModifierHelp');
+
+let dwarvenToughnessMod = 0;
 
 // Ability Score functions
 
@@ -682,6 +674,16 @@ const hideMod1Selection = () => {
 
 extraAbilityModifier1.addEventListener('change', hideMod1Selection)
 
+// Set value of Dwarven Toughtness hit point modifier based on race selection
+
+const addDwarvenToughness = () => {
+  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  charRace === "dwarf"
+    ? dwarvenToughnessMod = 1
+    : dwarvenToughnessMod = 0
+  return dwarvenToughnessMod
+}
+
 // if extra ability score is selected add +1 to ability score preview
 
 const addHalfElfAbilityMofifiers = () => {
@@ -743,11 +745,15 @@ const getSkillModifier = skillText => {
 
 };
 
-const highlightSkills = () => {
-  // Get current values of required info
+const getSelectedSkills = () => {
   selectedSkill1 = skill1.options[skill1.selectedIndex];
   selectedSkill2 = skill1.options[skill2.selectedIndex];
   selectedSkill3 = skill1.options[skill3.selectedIndex];
+}
+
+const highlightSkills = () => {
+  // Get current values of required info
+  getSelectedSkills();
   updateProficiencyBonus();
   // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
   for(let i = 0; i < skillsPreviewListItems.length; i++) {
@@ -852,11 +858,23 @@ const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponPr
 
 // Combat functions
 
-const hitPoints = () => {
-  // 1st level is max hit points + constiution modifier
-  let modifier: number = getAbilityScoreModifier(Number(constitution))
+const initialHitPoints = () => {
+  // 1st level is max hit points + constiution modifier + racial modifier
+  let modifier: number = getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
   let hitpoints: number = (ClassProps[charCls].hitdie + modifier);
   hitPointPreview.textContent = String(hitpoints);
+}
+
+const addHitPoints = () => {
+  let currentHitPoints: number = Number(hitPointPreview.textContent);
+  let rolledHitPoints: number = randomIntFromRange(1, ClassProps[charCls].hitdie)
+  modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod
+  let hitPointsToAdd: number = (rolledHitPoints + modifier);
+  // Prevent negative or zero hit points on level up
+  if(rolledHitPoints + modifier <= 0) {
+    hitPointsToAdd = 1;
+  }
+  hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
 }
 
 const armorClass = () => {
@@ -991,7 +1009,7 @@ const combatCreation = () => {
 
   // Set initial hit point value for 1st level
 
-  hitPoints();
+  initialHitPoints();
 
   // Get dexerity and armor modifier and set armor class
 

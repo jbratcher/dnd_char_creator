@@ -192,6 +192,7 @@ var showExtraLanguageInput = function showExtraLanguageInput() {
 race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
 var racialBonuses = function racialBonuses() {
+    addDwarvenToughness();
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
 // Skill select
@@ -260,17 +261,6 @@ var charLevelUp = function charLevelUp() {
     experienceNextLevel.textContent = String(_info.Levels[Number(currentLevel.textContent) - 1].experience);
     updateProficiencyBonus();
 };
-var addHitPoints = function addHitPoints() {
-    var currentHitPoints = Number(hitPointPreview.textContent);
-    var rolledHitPoints = randomIntFromRange(1, _info.ClassProps[charCls].hitdie);
-    modifier = getAbilityScoreModifier(constitution);
-    var hitPointsToAdd = rolledHitPoints + modifier;
-    // Prevent negative or zero hit points on level up
-    if (rolledHitPoints + modifier <= 0) {
-        hitPointsToAdd = 1;
-    }
-    hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
-};
 var updateProficiencyBonus = function updateProficiencyBonus() {
     proficiencyBonus = _info.Levels[currentLevel.textContent].bonus;
     proficiencyBonusPreview.textContent = String(_info.Levels[currentLevel.textContent].bonus);
@@ -336,6 +326,7 @@ var extraAbilityModifier = document.querySelector('#extraAbilityModifier');
 var extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
 var extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
 var extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');
+var dwarvenToughnessMod = 0;
 // Ability Score functions
 var lookupAbilityScore = function lookupAbilityScore(ability) {
     // if ability matches abilityScore in list return number value of abilityScore
@@ -410,6 +401,12 @@ var hideMod1Selection = function hideMod1Selection() {
     });
 };
 extraAbilityModifier1.addEventListener('change', hideMod1Selection);
+// Set value of Dwarven Toughtness hit point modifier based on race selection
+var addDwarvenToughness = function addDwarvenToughness() {
+    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    charRace === "dwarf" ? dwarvenToughnessMod = 1 : dwarvenToughnessMod = 0;
+    return dwarvenToughnessMod;
+};
 // if extra ability score is selected add +1 to ability score preview
 var addHalfElfAbilityMofifiers = function addHalfElfAbilityMofifiers() {
     if (charRace === 'halfelf') {
@@ -450,11 +447,14 @@ var getSkillModifier = function getSkillModifier(skillText) {
     abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
     return totalMod = abilityScoreMod + proficiencyBonus;
 };
-var highlightSkills = function highlightSkills() {
-    // Get current values of required info
+var getSelectedSkills = function getSelectedSkills() {
     selectedSkill1 = skill1.options[skill1.selectedIndex];
     selectedSkill2 = skill1.options[skill2.selectedIndex];
     selectedSkill3 = skill1.options[skill3.selectedIndex];
+};
+var highlightSkills = function highlightSkills() {
+    // Get current values of required info
+    getSelectedSkills();
     updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < skillsPreviewListItems.length; i++) {
@@ -503,11 +503,22 @@ var darkvisionPreview = document.querySelector('#darkvisionPreview');
 var sizePreview = document.querySelector('#size');
 var weaponProficiencesPreview = document.querySelector('#weaponProficiences');
 // Combat functions
-var hitPoints = function hitPoints() {
-    // 1st level is max hit points + constiution modifier
-    var modifier = getAbilityScoreModifier(Number(constitution));
+var initialHitPoints = function initialHitPoints() {
+    // 1st level is max hit points + constiution modifier + racial modifier
+    var modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitpoints = _info.ClassProps[charCls].hitdie + modifier;
     hitPointPreview.textContent = String(hitpoints);
+};
+var addHitPoints = function addHitPoints() {
+    var currentHitPoints = Number(hitPointPreview.textContent);
+    var rolledHitPoints = randomIntFromRange(1, _info.ClassProps[charCls].hitdie);
+    modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
+    var hitPointsToAdd = rolledHitPoints + modifier;
+    // Prevent negative or zero hit points on level up
+    if (rolledHitPoints + modifier <= 0) {
+        hitPointsToAdd = 1;
+    }
+    hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
 };
 var armorClass = function armorClass() {
     var base = 10;
@@ -600,7 +611,7 @@ var combatCreation = function combatCreation() {
     // Get character preview image based on class, race, and gender
     charImageSet();
     // Set initial hit point value for 1st level
-    hitPoints();
+    initialHitPoints();
     // Get dexerity and armor modifier and set armor class
     armorClass();
     // Get dexerity modifier and set initiative bonus
