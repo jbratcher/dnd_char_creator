@@ -329,19 +329,19 @@ const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
 
 addOptionstoSelect(skill1, Skills);
 
-let skill1list = skill1.children;
+let skillList1 = skill1.children;
 
 const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
 
 addOptionstoSelect(skill2, Skills);
 
-let skill2list = skill2.children;
+let skillList2 = skill2.children;
 
 const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
 
 addOptionstoSelect(skill3, Skills);
 
-let skill3list = skill3.children;
+let skillList3 = skill3.children;
 
 let availableSkills = ClassProps[charCls].availableSkills;
 
@@ -736,6 +736,28 @@ const breathWeapon = <HTMLElement>document.querySelector('#breathWeapon');
 
 // Skill functions
 
+const showElement = (elementNode) => {
+  elementNode.classList.remove('d-none');
+  elementNode.classList.add('d-flex');
+}
+
+// const showNumberOfSkills = () => {
+  
+//   for(let i = 1; i < Races[charCls].skills; i++) {
+    
+//     console.log(i);
+//     console.log(skillList[i]);
+    
+//   }
+  
+// }
+
+const getSelectedSkills = () => {
+  selectedSkill1 = skill1.options[skill1.selectedIndex];
+  selectedSkill2 = skill1.options[skill2.selectedIndex];
+  selectedSkill3 = skill1.options[skill3.selectedIndex];
+}
+
 const getSkillModifier = skillText => {
 
   let skillAbility = (singleWord.exec(skillText));
@@ -745,11 +767,22 @@ const getSkillModifier = skillText => {
 
 };
 
-const getSelectedSkills = () => {
-  selectedSkill1 = skill1.options[skill1.selectedIndex];
-  selectedSkill2 = skill1.options[skill2.selectedIndex];
-  selectedSkill3 = skill1.options[skill3.selectedIndex];
-}
+// const highLightSkill = (skillName) => {
+
+//   for(let i = 0; i < skillsPreviewListItems.length; i++) {
+//     let skill = <HTMLElement>skillsPreviewListItems[i];
+//     let skillName = <HTMLElement>skillsPreviewListItems[i].childNodes[1];
+//     let skillText = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+//     if(skillName === skillText) {
+//         skill.style.color = 'green';
+//         getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
+//         appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
+//       } else {
+//         skill.style.color = '#ccc';
+//     }
+//   }
+
+// }
 
 const highlightSkills = () => {
   // Get current values of required info
@@ -815,7 +848,12 @@ const highlightRacialSKills = () => {
         )
       : draconicAncestryPreview.parentElement.classList.add('d-none')
     : draconicAncestryPreview.parentElement.classList.add('d-none') 
-
+    
+  // Races[charRace].special
+  //   ? Races[charRace].special.skill
+  //     ? highLightSkill('perception')
+  //     : console.log("No elf perception bonus skill")
+  //   : console.log("No elf perception bonus skill")
 }
 
 // Skills combined function call

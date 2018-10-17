@@ -10,9 +10,7 @@ export const ClassProps = {
             "strength",
             "constitution"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Animal Handling",
             "Athletics",
@@ -29,9 +27,7 @@ export const ClassProps = {
             "dexerity",
             "charisma"
         ],
-        skills: {
-            number: 3,
-        },
+        skills: 3,
         availableSkills: [
             "Acrobatics",
             "Animal Handling",
@@ -60,9 +56,7 @@ export const ClassProps = {
             "wisdom",
             "charisma"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "History",
             "Insight",
@@ -78,9 +72,7 @@ export const ClassProps = {
             "intelligence",
             "wisdom"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Animal Handling",
             "Arcana",
@@ -99,9 +91,7 @@ export const ClassProps = {
             "strength",
             "constitution"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Acrobatics",
             "Animal Handling",
@@ -120,9 +110,7 @@ export const ClassProps = {
             "strength",
             "dexerity"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Acrobatics",
             "Athletics",
@@ -139,9 +127,7 @@ export const ClassProps = {
             "wisdom",
             "charisma"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Athletics",
             "Insight",
@@ -158,9 +144,7 @@ export const ClassProps = {
             "strength",
             "dexerity"
         ],
-        skills: {
-            number: 3,
-        },
+        skills: 3,
         availableSkills: [
             "Animal Handling",
             "Athletics",
@@ -179,9 +163,7 @@ export const ClassProps = {
             "dexerity",
             "intelligence"
         ],
-        skills: {
-            number: 4,
-        },
+        skills: 4,
         availableSkills: [
             "Acrobatics",
             "Athletics",
@@ -203,9 +185,7 @@ export const ClassProps = {
             "constitution",
             "charisma"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Arcana",
             "Deception",
@@ -222,9 +202,7 @@ export const ClassProps = {
             "wisdom",
             "charisma"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Arcana",
             "Deception",
@@ -242,9 +220,7 @@ export const ClassProps = {
             "intelligence",
             "wisdom"
         ],
-        skills: {
-            number: 2,
-        },
+        skills: 2,
         availableSkills: [
             "Arcana",
             "History",

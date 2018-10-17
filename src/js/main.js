@@ -191,13 +191,13 @@ var racialBonuses = function () {
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 addOptionstoSelect(skill1, Skills);
-var skill1list = skill1.children;
+var skillList1 = skill1.children;
 var skill2 = document.querySelector('#skillsSelect2');
 addOptionstoSelect(skill2, Skills);
-var skill2list = skill2.children;
+var skillList2 = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
 addOptionstoSelect(skill3, Skills);
-var skill3list = skill3.children;
+var skillList3 = skill3.children;
 var availableSkills = ClassProps[charCls].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
 var selectedSkill2 = skill1.options[skill2.selectedIndex];
@@ -438,16 +438,26 @@ var dragonType = document.querySelector('#dragonType');
 var damageType = document.querySelector('#damageType');
 var breathWeapon = document.querySelector('#breathWeapon');
 // Skill functions
+var showElement = function (elementNode) {
+    elementNode.classList.remove('d-none');
+    elementNode.classList.add('d-flex');
+};
+// const showNumberOfSkills = () => {
+//   for(let i = 1; i < Races[charCls].skills; i++) {
+//     console.log(i);
+//     console.log(skillList[i]);
+//   }
+// }
+var getSelectedSkills = function () {
+    selectedSkill1 = skill1.options[skill1.selectedIndex];
+    selectedSkill2 = skill1.options[skill2.selectedIndex];
+    selectedSkill3 = skill1.options[skill3.selectedIndex];
+};
 var getSkillModifier = function (skillText) {
     var skillAbility = (singleWord.exec(skillText));
     var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
     abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
     return totalMod = abilityScoreMod + proficiencyBonus;
-};
-var getSelectedSkills = function () {
-    selectedSkill1 = skill1.options[skill1.selectedIndex];
-    selectedSkill2 = skill1.options[skill2.selectedIndex];
-    selectedSkill3 = skill1.options[skill3.selectedIndex];
 };
 var highlightSkills = function () {
     // Get current values of required info
