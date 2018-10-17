@@ -661,6 +661,9 @@ export const Races = {
         ],
         extraLanguage: 1,
         size: 'Medium',
+        special: {
+            info: "Your mom thinks that you are special."  
+        },
         speed: 30
 
     },
