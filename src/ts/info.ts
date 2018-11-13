@@ -374,7 +374,7 @@ export const Races = {
                 type: "stonework",
                 ability: "intelligence",
                 skill: "history",
-                info: `Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.` 
+                info: `Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.`
             },
             toolProficiency: {
                 info: `You gain proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.`
@@ -394,8 +394,8 @@ export const Races = {
         weaponProficiences: [
             "Battleaxe",
             "Handaxe",
-            "Light Hammer",	
-            "Warhammer"    
+            "Light Hammer",
+            "Warhammer"
         ]
 
     },
@@ -423,13 +423,13 @@ export const Races = {
         size: 'Medium',
         special: {
             keenSenses: {
-              skill: 'perception'  
+              skill: 'perception'
             },
             feyAncestry: {
                 type: 'charm',
                 advantage: true,
                 resistence: null,
-                info: `Roll 2x on charm saves`,
+                info: `Roll 2x on charm saves, magic sleep has no effect`,
                 tooltip: `Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep.`
             },
             trance: {
@@ -448,8 +448,8 @@ export const Races = {
             weaponProficiences: [
                 "Long Sword",
                 "Short Sword",
-                "Long Bow",	
-                "Short Bow"    
+                "Long Bow",
+                "Short Bow"
             ]
         }
 
@@ -504,7 +504,7 @@ export const Races = {
             },
             tinker: true,
             proficiencyModifier: 2
-            
+
         }
 
     },
@@ -662,7 +662,7 @@ export const Races = {
         extraLanguage: 1,
         size: 'Medium',
         special: {
-            info: "Your mom thinks that you are special."  
+            info: "Your mom thinks that you are special."
         },
         speed: 30
 

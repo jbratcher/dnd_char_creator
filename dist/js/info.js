@@ -10,97 +10,73 @@ var ClassProps = exports.ClassProps = {
     barbarian: {
         hitdie: 12,
         savingThrows: ["strength", "constitution"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
     },
     bard: {
         hitdie: 8,
         savingThrows: ["dexerity", "charisma"],
-        skills: {
-            number: 3
-        },
+        skills: 3,
         availableSkills: ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Slieght of Hand", "Stealth", "Survival"]
     },
     cleric: {
         hitdie: 8,
         savingThrows: ["wisdom", "charisma"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["History", "Insight", "Medicine", "Persuasion", "Religion"]
     },
     druid: {
         hitdie: 8,
         savingThrows: ["intelligence", "wisdom"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Animal Handling", "Arcana", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"]
     },
     fighter: {
         hitdie: 10,
         savingThrows: ["strength", "constitution"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"]
     },
     monk: {
         hitdie: 8,
         savingThrows: ["strength", "dexerity"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"]
     },
     paladin: {
         hitdie: 10,
         savingThrows: ["wisdom", "charisma"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"]
     },
     ranger: {
         hitdie: 10,
         savingThrows: ["strength", "dexerity"],
-        skills: {
-            number: 3
-        },
+        skills: 3,
         availableSkills: ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"]
     },
     rogue: {
         hitdie: 8,
         savingThrows: ["dexerity", "intelligence"],
-        skills: {
-            number: 4
-        },
+        skills: 4,
         availableSkills: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Slieght of Hand", "Stealth"]
     },
     sorcerer: {
         hitdie: 6,
         savingThrows: ["constitution", "charisma"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"]
     },
     warlock: {
         hitdie: 8,
         savingThrows: ["wisdom", "charisma"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"]
     },
     wizard: {
         hitdie: 6,
         savingThrows: ["intelligence", "wisdom"],
-        skills: {
-            number: 2
-        },
+        skills: 2,
         availableSkills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"]
     }
 };
@@ -248,7 +224,7 @@ var Races = exports.Races = {
                 type: 'charm',
                 advantage: true,
                 resistence: null,
-                info: "Roll 2x on charm saves",
+                info: "Roll 2x on charm saves, magic sleep has no effect",
                 tooltip: "Fey Ancestry. You have advantage on saving throws against being charmed,and magic can't put you to sleep."
             },
             trance: {
@@ -408,6 +384,9 @@ var Races = exports.Races = {
         languages: ["Common"],
         extraLanguage: 1,
         size: 'Medium',
+        special: {
+            info: "Your mom thinks that you are special."
+        },
         speed: 30
     },
     tiefling: {

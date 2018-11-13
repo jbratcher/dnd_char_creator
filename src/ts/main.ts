@@ -28,8 +28,8 @@ const rollAbilityScore = () => randomIntFromRange(3,18);
 const setToMinMax = score => score > 18
                               ? 18
                               : score < 3
-                                ? 3
-                                : score;
+                              ? 3
+                              : score;
 
 const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
 
@@ -59,7 +59,7 @@ const addOptionstoSelect = (selectElement, dataArray) => {
   })
 }
 
-const showElement = (element) => {
+const showElement = element => {
   element.classList.remove('d-none');
   element.classList.add('d-flex');
 }
@@ -77,7 +77,7 @@ const setScore = (abilityScorePreview) => {
   abilityScorePreview.textContent = String(score);
 }
 
-const getCharacterImage = (genderedImages) => {
+const getCharacterImage = genderedImages => {
   let randomIndex: number = randomIntFromRange(0, (genderedImages.length-1));
   return genderedImages[randomIndex];
 }
@@ -288,7 +288,7 @@ race.addEventListener('change', showDraconicAncestrySelect);
 
 showDraconicAncestrySelect();
 
-// Extra Language Selection: Human and Half-elf 
+// Extra Language Selection: Human and Half-elf
 
 // Display extra language field if race selection is human or halfelf and add language options
 
@@ -326,12 +326,27 @@ race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();
 
 const racialBonuses = () => {
-  
+
     addDwarvenToughness();
 
     addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 
 }
+
+const clearRacialSkils = () => {
+
+  // set text content and attr to null in preview, specialResistances
+
+  poisonResistance.textContent = "";
+  poisonResistance.setAttribute('title', "");
+  charmResistance.textContent = "";
+  charmResistance.setAttribute('title', "");
+  fearResistance.textContent = "";
+  fearResistance.setAttribute('title', "");
+
+}
+
+race.addEventListener('change', clearRacialSkils)
 
 // Skill select
 
@@ -769,13 +784,13 @@ const highightSkill = (skillDescription) => {
     let skill = <HTMLElement>skillsPreviewListItems[i];
     let skillName = <HTMLElement>skillsPreviewListItems[i].childNodes[1];
     let skillText = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
-    
-    skillText === skillDescription 
-      ? ( 
+
+    skillText === skillDescription
+      ? (
           skill.style.color = 'green',
           getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent),
           appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])
-        ) 
+        )
       : console.log('Highlight Skill: not a match');
   }
 
@@ -810,13 +825,13 @@ const highlightSkills = () => {
 const highlightRacialSKills = () => {
 
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-  
+
   let selectedDraconicAncestry = <HTMLOptionElement>draconicAncestry.options[draconicAncestry.selectedIndex];
 
   let charDraconicAncestry: string = selectedDraconicAncestry.textContent.toLowerCase();
 
   // Dwarf Stonecunning
-  
+
   Races[charRace].special.stonecunning
     ? (
         showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
@@ -824,7 +839,7 @@ const highlightRacialSKills = () => {
     : stonecunningPreview.parentElement.classList.add('d-none')
 
   // Dwarf tool proficiency
-  
+
   Races[charRace].special.toolProficiency
     ? (
         showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
@@ -832,7 +847,7 @@ const highlightRacialSKills = () => {
     : toolProficiencyPreview.parentElement.classList.add('d-none')
 
   // Dragonborn Draconic Ancestry
-    
+
   Races[charRace].special.draconicAncestry
     ? (
         draconicAncestryPreview.parentElement.classList.remove('d-none'),
@@ -846,7 +861,7 @@ const highlightRacialSKills = () => {
         draconicAncestryPreview.parentElement.classList.add('d-none'),
         draconicAncestryHelp.textContent = ""
       )
-      
+
   //  Elf Keen Senses Perception Bonus Skill
 
   Races[charRace].special.keenSenses
@@ -864,7 +879,7 @@ const skillCreation = () => {
   // Highlight selected skills and append skill modifier
 
   highlightSkills();
-  
+
   // Preview racial abilities
 
   highlightRacialSKills();

@@ -168,7 +168,7 @@ var showDraconicAncestrySelect = function () {
 };
 race.addEventListener('change', showDraconicAncestrySelect);
 showDraconicAncestrySelect();
-// Extra Language Selection: Human and Half-elf 
+// Extra Language Selection: Human and Half-elf
 // Display extra language field if race selection is human or halfelf and add language options
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
@@ -191,6 +191,16 @@ var racialBonuses = function () {
     addDwarvenToughness();
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
+var clearRacialSkils = function () {
+    // set text content and attr to null in preview, specialResistances
+    poisonResistance.textContent = "";
+    poisonResistance.setAttribute('title', "");
+    charmResistance.textContent = "";
+    charmResistance.setAttribute('title', "");
+    fearResistance.textContent = "";
+    fearResistance.setAttribute('title', "");
+};
+race.addEventListener('change', clearRacialSkils);
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 addOptionstoSelect(skill1, Skills);
