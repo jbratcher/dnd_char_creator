@@ -116,7 +116,7 @@
                       </select>
 
                     </div>
-                    
+
                     <div class="input-group-prepend my-3 d-none" id="optionalSubrace">
 
                       <label class="input-group-text" for="subrace">Optional Subrace: </label>
@@ -126,9 +126,9 @@
                       </select>
 
                     </div>
-                    
+
                     <small id="subraceHelp" class="form-text text-muted mb-3"></small>
-                    
+
                     <div class="input-group-prepend my-3 d-none" id="draconicAncestrySection">
 
                       <label class="input-group-text" for="draconicAncestry">Draconic Ancestry: </label>
@@ -138,7 +138,7 @@
                       </select>
 
                     </div>
-                    
+
                     <small id="draconicAncestryHelp" class="form-text text-muted mb-3"></small>
 
                     <p class="lead mt-3">Roll your ability scores</p>
@@ -178,11 +178,11 @@
                       <span id="rolledCharisma">-</span>
                       <button type="button" id="rollCharisma" class="btn btn-dark btn-sm">Roll</button>
                     </div>
-                    
+
                     <!-- Extra Ability Modifier select for Half-Elves -->
-                    
+
                     <section class="d-none" id="extraAbilityModifier">
-                      
+
                       <div class="input-group-prepend mt-3">
 
                       <label class="input-group-text" for="extraAbilityModifier1">Extra Ability 1: </label>
@@ -191,18 +191,18 @@
                       </select>
 
                     </div>
-                    
+
                     <div class="input-group-prepend mt-3">
-                      
+
                       <label class="input-group-text" for="extraAbilityModifier2">Extra Ability 2: </label>
 
                       <select class="custom-select text-muted" id="extraAbilityModifier2">
                       </select>
 
                     </div>
-                      
+
                     </section>
-                    
+
                     <small id="extraAbilityModifierHelp" class="form-text text-muted mb-3"></small>
 
                     <div class="input-group my-3">
@@ -236,9 +236,9 @@
                       <input class="form-control" id="age" type="number" required>
 
                     </div>
-                    
+
                     <small id="ageHelp" class="form-text text-muted mb-3"></small>
-                    
+
                     <div class="input-group-prepend mt-3 d-none" id="extraLanguageField">
 
                       <label class="input-group-text" for="extraLanguage">Extra Language: </label>
@@ -248,7 +248,7 @@
                       </select>
 
                     </div>
-                    
+
                     <small id="extraLanguageHelp" class="form-text text-muted mb-3"></small>
 
                   </div>
@@ -440,6 +440,17 @@
 
                     </ul>
 
+                    <h4 class="text-center my-3">Special Abilities</h4>
+
+                    <ul class="list-group list-group-flush" id="specialAbilities">
+
+                      <li class="list-group-item d-none justify-content-between">
+                        <b id="trancePreview">Trance</b>
+                      </li>
+
+                    </ul>
+
+
                   </div>
 
                   <!-- Skills Preview -->
@@ -555,28 +566,28 @@
                         <em class="mx-1">(Wisdom)</em>
                         <span class="ml-auto">-</span>
                       </li>
-                      
+
                     </ul>
-                      
-                    <h5 class="text-center my-3">Additional Skills</h5>  
+
+                    <h5 class="text-center my-3">Additional Skills</h5>
 
                     <ul class="list-group list-group-flush" id="additionalSKillsPreviewList">
-                    
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Languages Known: </b>
                         <span id="languagesPreview"></span>
                       </li>
-                      
+
                       <li class="list-group-item d-none justify-content-between">
                         <b>Stonecunning: </b>
                         <span id="stonecunningPreview"></span>
                       </li>
-                      
+
                       <li class="list-group-item d-none justify-content-between">
                         <b>Tool Proficiences: </b>
                         <span id="toolProficiencyPreview" class="w-50"></span>
                       </li>
-                      
+
                       <li class="list-group-item d-none justify-content-between">
                         <b>Draconic Ancestry: </b>
                         <div id="draconicAncestryPreview" class="w-50">
@@ -585,7 +596,7 @@
                           <p><b>Breath Weapon: </b><span id="breathWeapon"></span></p>
                         </div>
                       </li>
-                      
+
                     </ul>
 
                   </div>
@@ -630,64 +641,64 @@
                         <b>Size: </b>
                         <span id="size">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Weapon Proficiences: </b>
                         <span id="weaponProficiences">-</span>
                       </li>
 
                     </ul>
-                    
+
                     <h4 class="text-center my-3">Saving Throws</h4>
-                    
+
                     <ul class="list-group list-group-flush" id="savingThrowPreviewList">
 
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Strength: </b>
                         <span id="strengthSavingThrow">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Dexerity: </b>
                         <span id="dexeritySavingThrow">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Constitution: </b>
                         <span id="constitutionSavingThrow">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Intelligence: </b>
                         <span id="intelligenceSavingThrow">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Wisdom: </b>
                         <span id="wisdomSavingThrow">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Charisma: </b>
                         <span id="charismaSavingThrow">-</span>
                       </li>
 
                     </ul>
-                    
+
                     <h5 class="text-center my-3">Special Resistances</h5>
-                    
+
                     <ul class="list-group list-group-flush" id="specialResistances">
 
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Poison: </b>
                         <span id="poisonResistance">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Charm: </b>
                         <span id="charmResistance">-</span>
                       </li>
-                      
+
                       <li class="list-group-item d-flex justify-content-between">
                         <b>Fear: </b>
                         <span id="fearResistance">-</span>

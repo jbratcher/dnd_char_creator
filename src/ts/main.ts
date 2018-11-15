@@ -343,6 +343,9 @@ const clearRacialSkils = () => {
   charmResistance.setAttribute('title', "");
   fearResistance.textContent = "";
   fearResistance.setAttribute('title', "");
+  trancePreview.parentElement.classList.remove('d-flex');
+  trancePreview.parentElement.classList.add('d-none');
+  trancePreview.setAttribute('title', "");
 
 }
 
@@ -441,7 +444,11 @@ const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 
 const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
 
-const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview')
+const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview');
+
+// Special Abilities
+
+const trancePreview = <HTMLElement>document.querySelector('#trancePreview');
 
 // General buttons
 
@@ -867,6 +874,18 @@ const highlightRacialSKills = () => {
   Races[charRace].special.keenSenses
     ? highightSkill('perception')
     : null
+
+  // Elf Trance sleep skill
+
+  Races[charRace].special.trance
+    ? (
+        trancePreview.parentElement.classList.remove('d-none'),
+        trancePreview.parentElement.classList.add('d-flex'),
+        trancePreview.setAttribute('title', Races[charRace].special.trance.info)
+      )
+    : null
+
+
 
 }
 

@@ -206,6 +206,9 @@ var clearRacialSkils = function clearRacialSkils() {
     charmResistance.setAttribute('title', "");
     fearResistance.textContent = "";
     fearResistance.setAttribute('title', "");
+    trancePreview.parentElement.classList.remove('d-flex');
+    trancePreview.parentElement.classList.add('d-none');
+    trancePreview.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -260,6 +263,8 @@ var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
 var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
 var languagesPreview = document.querySelector('#languagesPreview');
+// Special Abilities
+var trancePreview = document.querySelector('#trancePreview');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -507,6 +512,8 @@ var highlightRacialSKills = function highlightRacialSKills() {
     _info.Races[charRace].special.draconicAncestry ? (draconicAncestryPreview.parentElement.classList.remove('d-none'), draconicAncestryPreview.parentElement.classList.add('d-flex'), draconicAncestryPreview.setAttribute('title', _info.Races.dragonborn.special.draconicAncestry.info), dragonType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color), damageType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type), breathWeapon.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath)) : (draconicAncestryPreview.parentElement.classList.add('d-none'), draconicAncestryHelp.textContent = "");
     //  Elf Keen Senses Perception Bonus Skill
     _info.Races[charRace].special.keenSenses ? highightSkill('perception') : null;
+    // Elf Trance sleep skill
+    _info.Races[charRace].special.trance ? (trancePreview.parentElement.classList.remove('d-none'), trancePreview.parentElement.classList.add('d-flex'), trancePreview.setAttribute('title', _info.Races[charRace].special.trance.info)) : null;
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {
