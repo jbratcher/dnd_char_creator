@@ -217,7 +217,7 @@ const subrace = <HTMLSelectElement>document.querySelector('#subrace');
 
 const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
 
-let charSubrace: string = subrace.textContent.toLowerCase().replace(/s/g,"");
+let charSubrace: string = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
 
 // Subrace select
 
@@ -238,6 +238,14 @@ const showOptionalSubraceSelect = () => {
 }
 
 race.addEventListener('change', showOptionalSubraceSelect);
+
+const setSubRace = () => {
+  
+  charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
+  
+}
+
+subrace.addEventListener('change', setSubRace);
 
 // Age
 
@@ -304,8 +312,6 @@ const showExtraLanguageInput = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
   
-  charSubrace = subrace.textContent.toLowerCase().replace(/s/g,"");
-  
   console.log(charRace);
   console.log(charSubrace);
 
@@ -316,26 +322,25 @@ const showExtraLanguageInput = () => {
         extraLanguageHelp.textContent = 'Humans get to choose 1 extra language'
       )
     : charRace === 'halfelf'
-      ? (
-          extraLanguageField.classList.remove('d-none'),
-          extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language'
-        )
-      
-      : charRace === 'elf' && charSubrace === '--high elf'
-        ? (
-            extraLanguageField.classList.remove('d-none'),
-            extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language'
-          )
-        : (
-          extraLanguageField.classList.add('d-none'),
-          extraLanguageHelp.textContent = ''
-        )
+    ? (
+      extraLanguageField.classList.remove('d-none'),
+      extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language'
+    )
+    : charSubrace === 'highelf'
+    ? (
+        extraLanguageField.classList.remove('d-none'),
+        extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language'
+      )
+    : (
+      extraLanguageField.classList.add('d-none'),
+      extraLanguageHelp.textContent = ''
+    )
       
 }
 
 race.addEventListener('change', showExtraLanguageInput);
 
-showExtraLanguageInput();
+subrace.addEventListener('change', showExtraLanguageInput);
 
 const racialBonuses = () => {
 

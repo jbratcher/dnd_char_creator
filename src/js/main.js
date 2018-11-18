@@ -130,7 +130,7 @@ var charGender = gender.value.toLowerCase();
 var subraceSelectSection = document.querySelector('#optionalSubrace');
 var subrace = document.querySelector('#subrace');
 var subraceHelp = document.querySelector('#subraceHelp');
-var charSubrace = subrace.textContent.toLowerCase().replace(/s/g, "");
+var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
 var showOptionalSubraceSelect = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
@@ -142,6 +142,10 @@ var showOptionalSubraceSelect = function () {
         : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect);
+var setSubRace = function () {
+    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+};
+subrace.addEventListener('change', setSubRace);
 // Age
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
@@ -176,7 +180,6 @@ var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 addOptionstoSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    charSubrace = subrace.textContent.toLowerCase().replace(/s/g, "");
     console.log(charRace);
     console.log(charSubrace);
     charRace === 'human'
@@ -185,14 +188,14 @@ var showExtraLanguageInput = function () {
         : charRace === 'halfelf'
             ? (extraLanguageField.classList.remove('d-none'),
                 extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language')
-            : charRace === 'elf' && charSubrace === '--high elf'
+            : charSubrace === 'highelf'
                 ? (extraLanguageField.classList.remove('d-none'),
                     extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language')
                 : (extraLanguageField.classList.add('d-none'),
                     extraLanguageHelp.textContent = '');
 };
 race.addEventListener('change', showExtraLanguageInput);
-showExtraLanguageInput();
+subrace.addEventListener('change', showExtraLanguageInput);
 var racialBonuses = function () {
     addDwarvenToughness();
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
