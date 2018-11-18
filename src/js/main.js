@@ -176,14 +176,20 @@ var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 addOptionstoSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    charSubrace = subrace.textContent.toLowerCase().replace(/s/g, "");
+    console.log(charRace);
+    console.log(charSubrace);
     charRace === 'human'
         ? (extraLanguageField.classList.remove('d-none'),
             extraLanguageHelp.textContent = 'Humans get to choose 1 extra language')
         : charRace === 'halfelf'
             ? (extraLanguageField.classList.remove('d-none'),
                 extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language')
-            : (extraLanguageField.classList.add('d-none'),
-                extraLanguageHelp.textContent = '');
+            : charRace === 'elf' && charSubrace === '--high elf'
+                ? (extraLanguageField.classList.remove('d-none'),
+                    extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language')
+                : (extraLanguageField.classList.add('d-none'),
+                    extraLanguageHelp.textContent = '');
 };
 race.addEventListener('change', showExtraLanguageInput);
 showExtraLanguageInput();

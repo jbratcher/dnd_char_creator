@@ -303,6 +303,12 @@ addOptionstoSelect(extraLanguage, Languages.standard);
 const showExtraLanguageInput = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  
+  charSubrace = subrace.textContent.toLowerCase().replace(/s/g,"");
+  
+  console.log(charRace);
+  console.log(charSubrace);
+
 
   charRace === 'human'
     ? (
@@ -314,11 +320,17 @@ const showExtraLanguageInput = () => {
           extraLanguageField.classList.remove('d-none'),
           extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language'
         )
-      : (
+      
+      : charRace === 'elf' && charSubrace === '--high elf'
+        ? (
+            extraLanguageField.classList.remove('d-none'),
+            extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language'
+          )
+        : (
           extraLanguageField.classList.add('d-none'),
           extraLanguageHelp.textContent = ''
         )
-
+      
 }
 
 race.addEventListener('change', showExtraLanguageInput);
