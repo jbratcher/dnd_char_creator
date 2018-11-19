@@ -215,6 +215,9 @@ var clearRacialSkils = function clearRacialSkils() {
     trancePreview.parentElement.classList.remove('d-flex');
     trancePreview.parentElement.classList.add('d-none');
     trancePreview.setAttribute('title', "");
+    stealthPreview.parentElement.classList.remove('d-flex');
+    stealthPreview.parentElement.classList.add('d-none');
+    stealthPreview.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -271,6 +274,7 @@ var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview')
 var languagesPreview = document.querySelector('#languagesPreview');
 // Special Abilities
 var trancePreview = document.querySelector('#trancePreview');
+var stealthPreview = document.querySelector('#stealthPreview');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -520,6 +524,7 @@ var highlightRacialSKills = function highlightRacialSKills() {
     _info.Races[charRace].special.keenSenses ? highightSkill('perception') : null;
     // Elf Trance sleep skill
     _info.Races[charRace].special.trance ? (trancePreview.parentElement.classList.remove('d-none'), trancePreview.parentElement.classList.add('d-flex'), trancePreview.setAttribute('title', _info.Races[charRace].special.trance.info)) : null;
+    _info.Races[charRace].subrace.naturallyStealthy ? (stealthPreview.parentElement.classList.remove('d-none'), stealthPreview.parentElement.classList.add('d-flex'), stealthPreview.setAttribute('title', _info.Races[charRace].subrace.naturallyStealthy.info)) : null;
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {

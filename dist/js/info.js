@@ -321,7 +321,6 @@ var Races = exports.Races = {
         alignments: ["Lawful Good"],
         darkvision: false,
         languages: ["Common", "Halfling"],
-        extraLanguage: 1,
         size: 'Small',
         special: {
             brave: {

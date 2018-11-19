@@ -533,7 +533,6 @@ export var Races = {
             "Common",
             "Halfling"
         ],
-        extraLanguage: 1,
         size: 'Small',
         special: {
             brave: {

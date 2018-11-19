@@ -335,6 +335,7 @@ const showExtraLanguageInput = () => {
       extraLanguageField.classList.add('d-none'),
       extraLanguageHelp.textContent = ''
     )
+    
       
 }
 
@@ -363,6 +364,9 @@ const clearRacialSkils = () => {
   trancePreview.parentElement.classList.remove('d-flex');
   trancePreview.parentElement.classList.add('d-none');
   trancePreview.setAttribute('title', "");
+  stealthPreview.parentElement.classList.remove('d-flex');
+  stealthPreview.parentElement.classList.add('d-none');
+  stealthPreview.setAttribute('title', "");
 
 }
 
@@ -466,6 +470,8 @@ const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview'
 // Special Abilities
 
 const trancePreview = <HTMLElement>document.querySelector('#trancePreview');
+
+const stealthPreview = <HTMLElement>document.querySelector('#stealthPreview');
 
 // General buttons
 
@@ -899,6 +905,14 @@ const highlightRacialSKills = () => {
         trancePreview.parentElement.classList.remove('d-none'),
         trancePreview.parentElement.classList.add('d-flex'),
         trancePreview.setAttribute('title', Races[charRace].special.trance.info)
+      )
+    : null
+    
+  Races[charRace].subrace.naturallyStealthy
+    ? (
+        stealthPreview.parentElement.classList.remove('d-none'),
+        stealthPreview.parentElement.classList.add('d-flex'),
+        stealthPreview.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info)
       )
     : null
 
