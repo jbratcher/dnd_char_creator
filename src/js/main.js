@@ -214,6 +214,10 @@ var clearRacialSkils = function () {
     stealthPreview.parentElement.classList.remove('d-flex');
     stealthPreview.parentElement.classList.add('d-none');
     stealthPreview.setAttribute('title', "");
+    artificersLorePreview.parentElement.classList.remove('d-flex');
+    artificersLorePreview.parentElement.classList.add('d-none');
+    artificersLorePreview.setAttribute('title', "");
+    artificersLoreInfo.textContent = "";
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -271,6 +275,8 @@ var languagesPreview = document.querySelector('#languagesPreview');
 // Special Abilities
 var trancePreview = document.querySelector('#trancePreview');
 var stealthPreview = document.querySelector('#stealthPreview');
+var artificersLorePreview = document.querySelector('#artificersLorePreview');
+var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -553,6 +559,12 @@ var highlightRacialSKills = function () {
         ? (stealthPreview.parentElement.classList.remove('d-none'),
             stealthPreview.parentElement.classList.add('d-flex'),
             stealthPreview.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info))
+        : null;
+    Races[charRace].subrace.artificersLore
+        ? (artificersLorePreview.parentElement.classList.remove('d-none'),
+            artificersLorePreview.parentElement.classList.add('d-flex'),
+            artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info),
+            artificersLoreInfo.textContent = Races[charRace].subrace.artificersLore.details)
         : null;
 };
 // Skills combined function call
