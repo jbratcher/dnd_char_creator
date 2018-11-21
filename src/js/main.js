@@ -217,7 +217,10 @@ var clearRacialSkils = function () {
     artificersLorePreview.parentElement.classList.remove('d-flex');
     artificersLorePreview.parentElement.classList.add('d-none');
     artificersLorePreview.setAttribute('title', "");
-    artificersLoreInfo.textContent = "";
+    tinkerPreview.parentElement.classList.remove('d-flex'),
+        tinkerPreview.parentElement.classList.add('d-done'),
+        tinkerPreview.setAttribute('title', ""),
+        tinkerInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -277,6 +280,8 @@ var trancePreview = document.querySelector('#trancePreview');
 var stealthPreview = document.querySelector('#stealthPreview');
 var artificersLorePreview = document.querySelector('#artificersLorePreview');
 var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
+var tinkerPreview = document.querySelector('#tinkerPreview');
+var tinkerInfo = document.querySelector('#tinkerInfo');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -563,8 +568,13 @@ var highlightRacialSKills = function () {
     Races[charRace].subrace.artificersLore
         ? (artificersLorePreview.parentElement.classList.remove('d-none'),
             artificersLorePreview.parentElement.classList.add('d-flex'),
-            artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info),
-            artificersLoreInfo.textContent = Races[charRace].subrace.artificersLore.details)
+            artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info))
+        : null;
+    Races[charRace].subrace.tinker
+        ? (tinkerPreview.parentElement.classList.remove('d-none'),
+            tinkerPreview.parentElement.classList.add('d-flex'),
+            tinkerPreview.setAttribute('title', Races[charRace].subrace.tinker.info),
+            tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details))
         : null;
 };
 // Skills combined function call

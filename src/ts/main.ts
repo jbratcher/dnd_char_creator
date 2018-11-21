@@ -370,7 +370,10 @@ const clearRacialSkils = () => {
   artificersLorePreview.parentElement.classList.remove('d-flex');
   artificersLorePreview.parentElement.classList.add('d-none');
   artificersLorePreview.setAttribute('title', "");
-  artificersLoreInfo.textContent = "";
+  tinkerPreview.parentElement.classList.remove('d-flex'),
+  tinkerPreview.parentElement.classList.add('d-done'),
+  tinkerPreview.setAttribute('title', ""),
+  tinkerInfo.setAttribute('title', "")
 
 }
 
@@ -480,6 +483,10 @@ const stealthPreview = <HTMLElement>document.querySelector('#stealthPreview');
 const artificersLorePreview = <HTMLElement>document.querySelector('#artificersLorePreview');
 
 const artificersLoreInfo = <HTMLElement>document.querySelector('#artificersLoreInfo');
+
+const tinkerPreview = <HTMLElement>document.querySelector('#tinkerPreview');
+
+const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
 
 // General buttons
 
@@ -928,8 +935,16 @@ const highlightRacialSKills = () => {
     ? (
         artificersLorePreview.parentElement.classList.remove('d-none'),
         artificersLorePreview.parentElement.classList.add('d-flex'),
-        artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info),
-        artificersLoreInfo.textContent = Races[charRace].subrace.artificersLore.details
+        artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info)
+      )
+    : null
+    
+  Races[charRace].subrace.tinker
+    ? (
+        tinkerPreview.parentElement.classList.remove('d-none'),
+        tinkerPreview.parentElement.classList.add('d-flex'),
+        tinkerPreview.setAttribute('title', Races[charRace].subrace.tinker.info),
+        tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details)
       )
     : null
 
