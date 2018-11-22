@@ -218,9 +218,12 @@ var clearRacialSkils = function () {
     artificersLorePreview.parentElement.classList.add('d-none');
     artificersLorePreview.setAttribute('title', "");
     tinkerPreview.parentElement.classList.remove('d-flex'),
-        tinkerPreview.parentElement.classList.add('d-done'),
-        tinkerPreview.setAttribute('title', ""),
-        tinkerInfo.setAttribute('title', "");
+        tinkerPreview.parentElement.classList.add('d-done');
+    tinkerPreview.setAttribute('title', "");
+    tinkerInfo.setAttribute('title', "");
+    damageResistancePreview.parentElement.classList.remove('d-flex');
+    damageResistancePreview.parentElement.classList.remove('d-none');
+    damageResistanceType.textContent = "";
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -282,6 +285,8 @@ var artificersLorePreview = document.querySelector('#artificersLorePreview');
 var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
 var tinkerPreview = document.querySelector('#tinkerPreview');
 var tinkerInfo = document.querySelector('#tinkerInfo');
+var damageResistancePreview = document.querySelector('#damageResistancePreview');
+var damageResistanceType = document.querySelector('#damageResistanceType');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -547,7 +552,10 @@ var highlightRacialSKills = function () {
             draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
             dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
             damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
-            breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath))
+            breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
+            damageResistancePreview.parentElement.classList.remove('d-none'),
+            damageResistancePreview.parentElement.classList.add('d-flex'),
+            damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type)
         : (draconicAncestryPreview.parentElement.classList.add('d-none'),
             draconicAncestryHelp.textContent = "");
     //  Elf Keen Senses Perception Bonus Skill

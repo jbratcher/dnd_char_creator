@@ -371,9 +371,13 @@ const clearRacialSkils = () => {
   artificersLorePreview.parentElement.classList.add('d-none');
   artificersLorePreview.setAttribute('title', "");
   tinkerPreview.parentElement.classList.remove('d-flex'),
-  tinkerPreview.parentElement.classList.add('d-done'),
-  tinkerPreview.setAttribute('title', ""),
-  tinkerInfo.setAttribute('title', "")
+  tinkerPreview.parentElement.classList.add('d-done');
+  tinkerPreview.setAttribute('title', "");
+  tinkerInfo.setAttribute('title', "");
+  damageResistancePreview.parentElement.classList.remove('d-flex');
+  damageResistancePreview.parentElement.classList.remove('d-none');
+  damageResistanceType.textContent = "";
+  
 
 }
 
@@ -487,6 +491,10 @@ const artificersLoreInfo = <HTMLElement>document.querySelector('#artificersLoreI
 const tinkerPreview = <HTMLElement>document.querySelector('#tinkerPreview');
 
 const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
+
+const damageResistancePreview = <HTMLElement>document.querySelector('#damageResistancePreview');
+
+const damageResistanceType = <HTMLElement>document.querySelector('#damageResistanceType');
 
 // General buttons
 
@@ -900,7 +908,10 @@ const highlightRacialSKills = () => {
         draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
         dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
         damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
-        breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath)
+        breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
+        damageResistancePreview.parentElement.classList.remove('d-none'),
+        damageResistancePreview.parentElement.classList.add('d-flex'),
+        damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type
       )
     : (
         draconicAncestryPreview.parentElement.classList.add('d-none'),
