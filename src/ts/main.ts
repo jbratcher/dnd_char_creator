@@ -2,7 +2,10 @@
 // Imports
 ////////////////////////////////////////
 
-import { characterImages } from './characterImages.js';
+import { Functions as func } from './functions.js';
+
+import { CharacterImages } from './characterImages.js';
+
 import {
   Abilities,
   Alignments,
@@ -14,24 +17,6 @@ import {
   RaceList,
   Skills
 } from './info.js';
-
-////////////////////////////////////////
-// Utility functions
-////////////////////////////////////////
-
-const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
-const randomBoolean = () => Math.random() >= 0.5;  // Get a random true or false value
-
-const rollAbilityScore = () => randomIntFromRange(3,18);
-
-const setToMinMax = score => score > 18
-                              ? 18
-                              : score < 3
-                              ? 3
-                              : score;
-
-const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
 
 // Initialize variables
 
@@ -46,6 +31,8 @@ let abilityScore: number;
 let abilityScoreMod: number;
 
 let proficiencyBonus: number;
+
+const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
 
 ////////////////////////////////////////
 // Set/Get functions
@@ -72,13 +59,13 @@ const showElementWithProps = (element, titleText, contentText) => {
 }
 
 const setScore = (abilityScorePreview) => {
-  let score: number = rollAbilityScore();
-  setToMinMax(score);
+  let score: number = func.rollAbilityScore();
+  func.setToMinMax(score);
   abilityScorePreview.textContent = String(score);
 }
 
 const getCharacterImage = genderedImages => {
-  let randomIndex: number = randomIntFromRange(0, (genderedImages.length-1));
+  let randomIndex: number = func.randomIntFromRange(0, (genderedImages.length-1));
   return genderedImages[randomIndex];
 }
 
@@ -86,10 +73,10 @@ const getCharacterImage = genderedImages => {
 
 const getCharacterAttributes = (charCls, charRace, charGender) => {
   if(charGender !== 'male' && charGender !== "female") {
-    let gender: boolean = randomBoolean();
+    let gender: boolean = func.randomBoolean();
     gender ? charGender = "male" : charGender = "female";
   }
-  return characterImages[charRace][charCls][charGender];
+  return CharacterImages[charRace][charCls][charGender];
 }
 
 // Set modifier to ability score modifier value
@@ -361,15 +348,23 @@ const clearRacialSkils = () => {
   charmResistance.setAttribute('title', "");
   fearResistance.textContent = "";
   fearResistance.setAttribute('title', "");
+  
+  draconicAncestryPreview.parentElement.classList.remove('d-flex');
+  draconicAncestryPreview.parentElement.classList.add('d-none');
+  draconicAncestryPreview.setAttribute('title', "");
+  dragonType.textContent = "";
+  damageType.textContent = "";
+  breathWeapon.textContent = "";
+  
   trancePreview.parentElement.classList.remove('d-flex');
   trancePreview.parentElement.classList.add('d-none');
-  trancePreview.setAttribute('title', "");
+  tranceInfo.setAttribute('title', "");
   stealthPreview.parentElement.classList.remove('d-flex');
   stealthPreview.parentElement.classList.add('d-none');
-  stealthPreview.setAttribute('title', "");
+  stealthInfo.setAttribute('title', "");
   artificersLorePreview.parentElement.classList.remove('d-flex');
   artificersLorePreview.parentElement.classList.add('d-none');
-  artificersLorePreview.setAttribute('title', "");
+  artificersLoreInfo.setAttribute('title', "");
   tinkerPreview.parentElement.classList.remove('d-flex'),
   tinkerPreview.parentElement.classList.add('d-done');
   tinkerPreview.setAttribute('title', "");
@@ -377,10 +372,15 @@ const clearRacialSkils = () => {
   damageResistancePreview.parentElement.classList.remove('d-flex');
   damageResistancePreview.parentElement.classList.add('d-none');
   damageResistanceType.textContent = "";
-  relentlessEndurancePreview.parentElement.classList.remove('d-flex'),
-  relentlessEndurancePreview.parentElement.classList.add('d-none'),
-  relentlessEnduranceInfo.setAttribute('title', "")
-  
+  menacingPreview.parentElement.classList.remove('d-flex');
+  menacingPreview.parentElement.classList.add('d-none');
+  menacingInfo.setAttribute('title', "");
+  relentlessEndurancePreview.parentElement.classList.remove('d-flex');
+  relentlessEndurancePreview.parentElement.classList.add('d-none');
+  relentlessEnduranceInfo.setAttribute('title', "");
+  savageAttacksPreview.parentElement.classList.remove('d-flex');
+  savageAttacksPreview.parentElement.classList.add('d-none');
+  savageAttacksInfo.setAttribute('title', "");
 
 }
 
@@ -484,27 +484,27 @@ const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview'
 // Special Abilities
 
 const trancePreview = <HTMLElement>document.querySelector('#trancePreview');
+const tranceInfo = <HTMLElement>document.querySelector('#tranceInfo');
 
 const stealthPreview = <HTMLElement>document.querySelector('#stealthPreview');
+const stealthInfo = <HTMLElement>document.querySelector('#stealthInfo');
 
 const artificersLorePreview = <HTMLElement>document.querySelector('#artificersLorePreview');
-
 const artificersLoreInfo = <HTMLElement>document.querySelector('#artificersLoreInfo');
 
 const tinkerPreview = <HTMLElement>document.querySelector('#tinkerPreview');
-
 const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
 
 const damageResistancePreview = <HTMLElement>document.querySelector('#damageResistancePreview');
-
 const damageResistanceType = <HTMLElement>document.querySelector('#damageResistanceType');
 
-const relentlessEndurancePreview = <HTMLElement>document.querySelector('#relentlessEndurancePreview');
+const menacingPreview = <HTMLElement>document.querySelector('#menacingPreview');
+const menacingInfo = <HTMLElement>document.querySelector('#menacingInfo');
 
-const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentlessEnduranceIfo');
+const relentlessEndurancePreview = <HTMLElement>document.querySelector('#relentlessEndurancePreview');
+const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentlessEnduranceInfo');
 
 const savageAttacksPreview = <HTMLElement>document.querySelector('#savageAttacksPreview');
-
 const savageAttacksInfo = <HTMLElement>document.querySelector('#savageAttacksInfo');
 
 // General buttons
@@ -806,9 +806,9 @@ const skillsPreviewList = <HTMLElement>document.querySelector('#skillsPreviewLis
 
 const skillsPreviewListItems = skillsPreviewList.children;
 
-const additionalSKillsPreviewList = <HTMLElement>document.querySelector('#additionalSKillsPreviewList');
+const additionalSkillsPreviewList = <HTMLElement>document.querySelector('#additionalSkillsPreviewList');
 
-const additionalSkillsPreviewListItems = additionalSKillsPreviewList.children;
+const additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
 
 const stonecunningPreview = <HTMLElement>document.querySelector('#stonecunningPreview');
 
@@ -941,7 +941,33 @@ const highlightRacialSKills = () => {
     ? (
         trancePreview.parentElement.classList.remove('d-none'),
         trancePreview.parentElement.classList.add('d-flex'),
-        trancePreview.setAttribute('title', Races[charRace].special.trance.info)
+        tranceInfo.setAttribute('title', Races[charRace].special.trance.info)
+      )
+    : null
+    
+  // Half-orc special
+  
+  Races[charRace].special.menacing
+    ? (
+        menacingPreview.parentElement.classList.remove('d-none'),
+        menacingPreview.parentElement.classList.add('d-flex'),
+        menacingInfo.setAttribute('title', Races[charRace].special.menacing.info)
+      )
+    : null
+    
+  Races[charRace].special.relentlessEndurance
+    ? (
+        relentlessEndurancePreview.parentElement.classList.remove('d-none'),
+        relentlessEndurancePreview.parentElement.classList.add('d-flex'),
+        relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance.info)
+      )
+    : null
+    
+  Races[charRace].special.savageAttacks
+    ? (
+        savageAttacksPreview.parentElement.classList.remove('d-none'),
+        savageAttacksPreview.parentElement.classList.add('d-flex'),
+        savageAttacksInfo.setAttribute('title', Races[charRace].special.savageAttacks.info)
       )
     : null
     
@@ -951,7 +977,7 @@ const highlightRacialSKills = () => {
     ? (
         stealthPreview.parentElement.classList.remove('d-none'),
         stealthPreview.parentElement.classList.add('d-flex'),
-        stealthPreview.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info)
+        stealthInfo.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info)
       )
     : null
     
@@ -961,7 +987,7 @@ const highlightRacialSKills = () => {
     ? (
         artificersLorePreview.parentElement.classList.remove('d-none'),
         artificersLorePreview.parentElement.classList.add('d-flex'),
-        artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info)
+        artificersLoreInfo.setAttribute('title', Races[charRace].subrace.artificersLore.info)
       )
     : null
     
@@ -975,18 +1001,6 @@ const highlightRacialSKills = () => {
         tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details)
       )
     : null
-    
-  // Half-orc special
-    
-  Races[charRace].special.relentlessEndurance
-    ? (
-        relentlessEndurancePreview.parentElement.classList.remove('d-none'),
-        relentlessEndurancePreview.parentElement.classList.add('d-flex'),
-        relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance)
-      )
-    : null
-
-
 
 }
 
@@ -1039,7 +1053,7 @@ const initialHitPoints = () => {
 
 const addHitPoints = () => {
   let currentHitPoints: number = Number(hitPointPreview.textContent);
-  let rolledHitPoints: number = randomIntFromRange(1, ClassProps[charCls].hitdie)
+  let rolledHitPoints: number = func.randomIntFromRange(1, ClassProps[charCls].hitdie)
   modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod
   let hitPointsToAdd: number = (rolledHitPoints + modifier);
   // Prevent negative or zero hit points on level up

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var characterImages = exports.characterImages = {
+var CharacterImages = exports.CharacterImages = {
     dragonborn: {
         barbarian: {
             male: ["https://i.pinimg.com/736x/86/84/32/868432784e4fd37beb893ecdb0830a74--old-friends-barbarian-fantasy.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWmOrOMDeUgAgx9IWjCZD9g5oBec8-fk8xZH9UuofS_VAOt3zb", "https://i.pinimg.com/736x/08/69/71/086971ec519d01df20ae9cb4bf5e411d--character-outfits-character-portraits.jpg", "https://i.pinimg.com/originals/4f/05/a5/4f05a5edaea62de6db92c7a2f8601876.jpg", "https://i.pinimg.com/736x/bd/4f/b9/bd4fb957e6046747533e6d62af90f6fe--fantasy-warrior-fantasy-art.jpg"],

@@ -1,20 +1,9 @@
 ////////////////////////////////////////
 // Imports
 ////////////////////////////////////////
-import { characterImages } from './characterImages.js';
+import { Functions as func } from './functions.js';
+import { CharacterImages } from './characterImages.js';
 import { Abilities, Alignments, ClassList, ClassProps, Levels, Languages, Races, RaceList, Skills } from './info.js';
-////////////////////////////////////////
-// Utility functions
-////////////////////////////////////////
-var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
-var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a random true or false value
-var rollAbilityScore = function () { return randomIntFromRange(3, 18); };
-var setToMinMax = function (score) { return score > 18
-    ? 18
-    : score < 3
-        ? 3
-        : score; };
-var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
 // Initialize variables
 var sign;
 var modifier;
@@ -22,6 +11,7 @@ var totalMod;
 var abilityScore;
 var abilityScoreMod;
 var proficiencyBonus;
+var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
 ////////////////////////////////////////
 // Set/Get functions
 ////////////////////////////////////////
@@ -43,21 +33,21 @@ var showElementWithProps = function (element, titleText, contentText) {
     element.textContent = contentText;
 };
 var setScore = function (abilityScorePreview) {
-    var score = rollAbilityScore();
-    setToMinMax(score);
+    var score = func.rollAbilityScore();
+    func.setToMinMax(score);
     abilityScorePreview.textContent = String(score);
 };
 var getCharacterImage = function (genderedImages) {
-    var randomIndex = randomIntFromRange(0, (genderedImages.length - 1));
+    var randomIndex = func.randomIntFromRange(0, (genderedImages.length - 1));
     return genderedImages[randomIndex];
 };
 // Get Character Attributes to set preview image
 var getCharacterAttributes = function (charCls, charRace, charGender) {
     if (charGender !== 'male' && charGender !== "female") {
-        var gender_1 = randomBoolean();
+        var gender_1 = func.randomBoolean();
         gender_1 ? charGender = "male" : charGender = "female";
     }
-    return characterImages[charRace][charCls][charGender];
+    return CharacterImages[charRace][charCls][charGender];
 };
 // Set modifier to ability score modifier value
 var getAbilityScoreModifier = function (abilityScore) { return modifier = Math.floor((abilityScore / 2) - 5); };
@@ -208,15 +198,21 @@ var clearRacialSkils = function () {
     charmResistance.setAttribute('title', "");
     fearResistance.textContent = "";
     fearResistance.setAttribute('title', "");
+    draconicAncestryPreview.parentElement.classList.remove('d-flex');
+    draconicAncestryPreview.parentElement.classList.add('d-none');
+    draconicAncestryPreview.setAttribute('title', "");
+    dragonType.textContent = "";
+    damageType.textContent = "";
+    breathWeapon.textContent = "";
     trancePreview.parentElement.classList.remove('d-flex');
     trancePreview.parentElement.classList.add('d-none');
-    trancePreview.setAttribute('title', "");
+    tranceInfo.setAttribute('title', "");
     stealthPreview.parentElement.classList.remove('d-flex');
     stealthPreview.parentElement.classList.add('d-none');
-    stealthPreview.setAttribute('title', "");
+    stealthInfo.setAttribute('title', "");
     artificersLorePreview.parentElement.classList.remove('d-flex');
     artificersLorePreview.parentElement.classList.add('d-none');
-    artificersLorePreview.setAttribute('title', "");
+    artificersLoreInfo.setAttribute('title', "");
     tinkerPreview.parentElement.classList.remove('d-flex'),
         tinkerPreview.parentElement.classList.add('d-done');
     tinkerPreview.setAttribute('title', "");
@@ -224,9 +220,15 @@ var clearRacialSkils = function () {
     damageResistancePreview.parentElement.classList.remove('d-flex');
     damageResistancePreview.parentElement.classList.add('d-none');
     damageResistanceType.textContent = "";
-    relentlessEndurancePreview.parentElement.classList.remove('d-flex'),
-        relentlessEndurancePreview.parentElement.classList.add('d-none'),
-        relentlessEnduranceInfo.setAttribute('title', "");
+    menacingPreview.parentElement.classList.remove('d-flex');
+    menacingPreview.parentElement.classList.add('d-none');
+    menacingInfo.setAttribute('title', "");
+    relentlessEndurancePreview.parentElement.classList.remove('d-flex');
+    relentlessEndurancePreview.parentElement.classList.add('d-none');
+    relentlessEnduranceInfo.setAttribute('title', "");
+    savageAttacksPreview.parentElement.classList.remove('d-flex');
+    savageAttacksPreview.parentElement.classList.add('d-none');
+    savageAttacksInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -283,15 +285,19 @@ var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview')
 var languagesPreview = document.querySelector('#languagesPreview');
 // Special Abilities
 var trancePreview = document.querySelector('#trancePreview');
+var tranceInfo = document.querySelector('#tranceInfo');
 var stealthPreview = document.querySelector('#stealthPreview');
+var stealthInfo = document.querySelector('#stealthInfo');
 var artificersLorePreview = document.querySelector('#artificersLorePreview');
 var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
 var tinkerPreview = document.querySelector('#tinkerPreview');
 var tinkerInfo = document.querySelector('#tinkerInfo');
 var damageResistancePreview = document.querySelector('#damageResistancePreview');
 var damageResistanceType = document.querySelector('#damageResistanceType');
+var menacingPreview = document.querySelector('#menacingPreview');
+var menacingInfo = document.querySelector('#menacingInfo');
 var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
-var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceIfo');
+var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
 var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
 var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
 // General buttons
@@ -483,8 +489,8 @@ var addHalfElfAbilityMofifiers = function () {
 // Skill variables
 var skillsPreviewList = document.querySelector('#skillsPreviewList');
 var skillsPreviewListItems = skillsPreviewList.children;
-var additionalSKillsPreviewList = document.querySelector('#additionalSKillsPreviewList');
-var additionalSkillsPreviewListItems = additionalSKillsPreviewList.children;
+var additionalSkillsPreviewList = document.querySelector('#additionalSkillsPreviewList');
+var additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
 var stonecunningPreview = document.querySelector('#stonecunningPreview');
 var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
 var draconicAncestryPreview = document.querySelector('#draconicAncestryPreview');
@@ -573,19 +579,35 @@ var highlightRacialSKills = function () {
     Races[charRace].special.trance
         ? (trancePreview.parentElement.classList.remove('d-none'),
             trancePreview.parentElement.classList.add('d-flex'),
-            trancePreview.setAttribute('title', Races[charRace].special.trance.info))
+            tranceInfo.setAttribute('title', Races[charRace].special.trance.info))
+        : null;
+    // Half-orc special
+    Races[charRace].special.menacing
+        ? (menacingPreview.parentElement.classList.remove('d-none'),
+            menacingPreview.parentElement.classList.add('d-flex'),
+            menacingInfo.setAttribute('title', Races[charRace].special.menacing.info))
+        : null;
+    Races[charRace].special.relentlessEndurance
+        ? (relentlessEndurancePreview.parentElement.classList.remove('d-none'),
+            relentlessEndurancePreview.parentElement.classList.add('d-flex'),
+            relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance.info))
+        : null;
+    Races[charRace].special.savageAttacks
+        ? (savageAttacksPreview.parentElement.classList.remove('d-none'),
+            savageAttacksPreview.parentElement.classList.add('d-flex'),
+            savageAttacksInfo.setAttribute('title', Races[charRace].special.savageAttacks.info))
         : null;
     // Halfling lightfoot stealth skill
     Races[charRace].subrace.naturallyStealthy
         ? (stealthPreview.parentElement.classList.remove('d-none'),
             stealthPreview.parentElement.classList.add('d-flex'),
-            stealthPreview.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info))
+            stealthInfo.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info))
         : null;
     // Rock gnome special
     Races[charRace].subrace.artificersLore
         ? (artificersLorePreview.parentElement.classList.remove('d-none'),
             artificersLorePreview.parentElement.classList.add('d-flex'),
-            artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info))
+            artificersLoreInfo.setAttribute('title', Races[charRace].subrace.artificersLore.info))
         : null;
     // Rock gnome special
     Races[charRace].subrace.tinker
@@ -593,12 +615,6 @@ var highlightRacialSKills = function () {
             tinkerPreview.parentElement.classList.add('d-flex'),
             tinkerPreview.setAttribute('title', Races[charRace].subrace.tinker.info),
             tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details))
-        : null;
-    // Half-orc special
-    Races[charRace].special.relentlessEndurance
-        ? (relentlessEndurancePreview.parentElement.classList.remove('d-none'),
-            relentlessEndurancePreview.parentElement.classList.add('d-flex'),
-            relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance))
         : null;
 };
 // Skills combined function call
@@ -630,7 +646,7 @@ var initialHitPoints = function () {
 };
 var addHitPoints = function () {
     var currentHitPoints = Number(hitPointPreview.textContent);
-    var rolledHitPoints = randomIntFromRange(1, ClassProps[charCls].hitdie);
+    var rolledHitPoints = func.randomIntFromRange(1, ClassProps[charCls].hitdie);
     modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitPointsToAdd = (rolledHitPoints + modifier);
     // Prevent negative or zero hit points on level up

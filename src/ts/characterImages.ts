@@ -1,4 +1,4 @@
-export var characterImages = {
+export const CharacterImages = {
 
   dragonborn: {
     barbarian: {

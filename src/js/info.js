@@ -591,9 +591,15 @@ export var Races = {
         size: 'Medium',
         speed: 30,
         special: {
-            menacing: "You gain proficiency in the Intimidation skill.",
-            relentlessEndurance: "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can\u2019t use this feature again until you finish a long rest.",
-            savageAttacks: "When you score a critical hit with a melee weapon attack, you can roll one of the weapon\u2019s damage dice one additional time and add it to the extra damage of the critical hit."
+            menacing: {
+                info: "You gain proficiency in the Intimidation skill."
+            },
+            relentlessEndurance: {
+                info: "When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can\u2019t use this feature again until you finish a long rest."
+            },
+            savageAttacks: {
+                info: "When you score a critical hit with a melee weapon attack, you can roll one of the weapon\u2019s damage dice one additional time and add it to the extra damage of the critical hit."
+            }
         }
     },
     human: {
