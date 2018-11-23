@@ -375,8 +375,11 @@ const clearRacialSkils = () => {
   tinkerPreview.setAttribute('title', "");
   tinkerInfo.setAttribute('title', "");
   damageResistancePreview.parentElement.classList.remove('d-flex');
-  damageResistancePreview.parentElement.classList.remove('d-none');
+  damageResistancePreview.parentElement.classList.add('d-none');
   damageResistanceType.textContent = "";
+  relentlessEndurancePreview.parentElement.classList.remove('d-flex'),
+  relentlessEndurancePreview.parentElement.classList.add('d-none'),
+  relentlessEnduranceInfo.setAttribute('title', "")
   
 
 }
@@ -495,6 +498,14 @@ const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
 const damageResistancePreview = <HTMLElement>document.querySelector('#damageResistancePreview');
 
 const damageResistanceType = <HTMLElement>document.querySelector('#damageResistanceType');
+
+const relentlessEndurancePreview = <HTMLElement>document.querySelector('#relentlessEndurancePreview');
+
+const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentlessEnduranceIfo');
+
+const savageAttacksPreview = <HTMLElement>document.querySelector('#savageAttacksPreview');
+
+const savageAttacksInfo = <HTMLElement>document.querySelector('#savageAttacksInfo');
 
 // General buttons
 
@@ -934,6 +945,8 @@ const highlightRacialSKills = () => {
       )
     : null
     
+  // Halfling lightfoot stealth skill
+    
   Races[charRace].subrace.naturallyStealthy
     ? (
         stealthPreview.parentElement.classList.remove('d-none'),
@@ -941,6 +954,8 @@ const highlightRacialSKills = () => {
         stealthPreview.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info)
       )
     : null
+    
+  // Rock gnome special
     
   Races[charRace].subrace.artificersLore
     ? (
@@ -950,12 +965,24 @@ const highlightRacialSKills = () => {
       )
     : null
     
+  // Rock gnome special
+    
   Races[charRace].subrace.tinker
     ? (
         tinkerPreview.parentElement.classList.remove('d-none'),
         tinkerPreview.parentElement.classList.add('d-flex'),
         tinkerPreview.setAttribute('title', Races[charRace].subrace.tinker.info),
         tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details)
+      )
+    : null
+    
+  // Half-orc special
+    
+  Races[charRace].special.relentlessEndurance
+    ? (
+        relentlessEndurancePreview.parentElement.classList.remove('d-none'),
+        relentlessEndurancePreview.parentElement.classList.add('d-flex'),
+        relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance)
       )
     : null
 

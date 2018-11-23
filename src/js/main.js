@@ -222,8 +222,11 @@ var clearRacialSkils = function () {
     tinkerPreview.setAttribute('title', "");
     tinkerInfo.setAttribute('title', "");
     damageResistancePreview.parentElement.classList.remove('d-flex');
-    damageResistancePreview.parentElement.classList.remove('d-none');
+    damageResistancePreview.parentElement.classList.add('d-none');
     damageResistanceType.textContent = "";
+    relentlessEndurancePreview.parentElement.classList.remove('d-flex'),
+        relentlessEndurancePreview.parentElement.classList.add('d-none'),
+        relentlessEnduranceInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -287,6 +290,10 @@ var tinkerPreview = document.querySelector('#tinkerPreview');
 var tinkerInfo = document.querySelector('#tinkerInfo');
 var damageResistancePreview = document.querySelector('#damageResistancePreview');
 var damageResistanceType = document.querySelector('#damageResistanceType');
+var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
+var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceIfo');
+var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
+var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -568,21 +575,30 @@ var highlightRacialSKills = function () {
             trancePreview.parentElement.classList.add('d-flex'),
             trancePreview.setAttribute('title', Races[charRace].special.trance.info))
         : null;
+    // Halfling lightfoot stealth skill
     Races[charRace].subrace.naturallyStealthy
         ? (stealthPreview.parentElement.classList.remove('d-none'),
             stealthPreview.parentElement.classList.add('d-flex'),
             stealthPreview.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info))
         : null;
+    // Rock gnome special
     Races[charRace].subrace.artificersLore
         ? (artificersLorePreview.parentElement.classList.remove('d-none'),
             artificersLorePreview.parentElement.classList.add('d-flex'),
             artificersLorePreview.setAttribute('title', Races[charRace].subrace.artificersLore.info))
         : null;
+    // Rock gnome special
     Races[charRace].subrace.tinker
         ? (tinkerPreview.parentElement.classList.remove('d-none'),
             tinkerPreview.parentElement.classList.add('d-flex'),
             tinkerPreview.setAttribute('title', Races[charRace].subrace.tinker.info),
             tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details))
+        : null;
+    // Half-orc special
+    Races[charRace].special.relentlessEndurance
+        ? (relentlessEndurancePreview.parentElement.classList.remove('d-none'),
+            relentlessEndurancePreview.parentElement.classList.add('d-flex'),
+            relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance))
         : null;
 };
 // Skills combined function call

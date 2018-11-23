@@ -218,6 +218,16 @@ var clearRacialSkils = function clearRacialSkils() {
     stealthPreview.parentElement.classList.remove('d-flex');
     stealthPreview.parentElement.classList.add('d-none');
     stealthPreview.setAttribute('title', "");
+    artificersLorePreview.parentElement.classList.remove('d-flex');
+    artificersLorePreview.parentElement.classList.add('d-none');
+    artificersLorePreview.setAttribute('title', "");
+    tinkerPreview.parentElement.classList.remove('d-flex'), tinkerPreview.parentElement.classList.add('d-done');
+    tinkerPreview.setAttribute('title', "");
+    tinkerInfo.setAttribute('title', "");
+    damageResistancePreview.parentElement.classList.remove('d-flex');
+    damageResistancePreview.parentElement.classList.add('d-none');
+    damageResistanceType.textContent = "";
+    relentlessEndurancePreview.parentElement.classList.remove('d-flex'), relentlessEndurancePreview.parentElement.classList.add('d-none'), relentlessEnduranceInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -275,6 +285,16 @@ var languagesPreview = document.querySelector('#languagesPreview');
 // Special Abilities
 var trancePreview = document.querySelector('#trancePreview');
 var stealthPreview = document.querySelector('#stealthPreview');
+var artificersLorePreview = document.querySelector('#artificersLorePreview');
+var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
+var tinkerPreview = document.querySelector('#tinkerPreview');
+var tinkerInfo = document.querySelector('#tinkerInfo');
+var damageResistancePreview = document.querySelector('#damageResistancePreview');
+var damageResistanceType = document.querySelector('#damageResistanceType');
+var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
+var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceIfo');
+var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
+var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -519,12 +539,19 @@ var highlightRacialSKills = function highlightRacialSKills() {
     // Dwarf tool proficiency
     _info.Races[charRace].special.toolProficiency ? showElementWithProps(toolProficiencyPreview, _info.Races[charRace].special.stonecunning.info, 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : toolProficiencyPreview.parentElement.classList.add('d-none');
     // Dragonborn Draconic Ancestry
-    _info.Races[charRace].special.draconicAncestry ? (draconicAncestryPreview.parentElement.classList.remove('d-none'), draconicAncestryPreview.parentElement.classList.add('d-flex'), draconicAncestryPreview.setAttribute('title', _info.Races.dragonborn.special.draconicAncestry.info), dragonType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color), damageType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type), breathWeapon.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath)) : (draconicAncestryPreview.parentElement.classList.add('d-none'), draconicAncestryHelp.textContent = "");
+    _info.Races[charRace].special.draconicAncestry ? (draconicAncestryPreview.parentElement.classList.remove('d-none'), draconicAncestryPreview.parentElement.classList.add('d-flex'), draconicAncestryPreview.setAttribute('title', _info.Races.dragonborn.special.draconicAncestry.info), dragonType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color), damageType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type), breathWeapon.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath), damageResistancePreview.parentElement.classList.remove('d-none'), damageResistancePreview.parentElement.classList.add('d-flex'), damageResistanceType.textContent = _info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type) : (draconicAncestryPreview.parentElement.classList.add('d-none'), draconicAncestryHelp.textContent = "");
     //  Elf Keen Senses Perception Bonus Skill
     _info.Races[charRace].special.keenSenses ? highightSkill('perception') : null;
     // Elf Trance sleep skill
     _info.Races[charRace].special.trance ? (trancePreview.parentElement.classList.remove('d-none'), trancePreview.parentElement.classList.add('d-flex'), trancePreview.setAttribute('title', _info.Races[charRace].special.trance.info)) : null;
+    // Halfling lightfoot stealth skill
     _info.Races[charRace].subrace.naturallyStealthy ? (stealthPreview.parentElement.classList.remove('d-none'), stealthPreview.parentElement.classList.add('d-flex'), stealthPreview.setAttribute('title', _info.Races[charRace].subrace.naturallyStealthy.info)) : null;
+    // Rock gnome special
+    _info.Races[charRace].subrace.artificersLore ? (artificersLorePreview.parentElement.classList.remove('d-none'), artificersLorePreview.parentElement.classList.add('d-flex'), artificersLorePreview.setAttribute('title', _info.Races[charRace].subrace.artificersLore.info)) : null;
+    // Rock gnome special
+    _info.Races[charRace].subrace.tinker ? (tinkerPreview.parentElement.classList.remove('d-none'), tinkerPreview.parentElement.classList.add('d-flex'), tinkerPreview.setAttribute('title', _info.Races[charRace].subrace.tinker.info), tinkerInfo.setAttribute('title', _info.Races[charRace].subrace.tinker.details)) : null;
+    // Half-orc special
+    _info.Races[charRace].special.relentlessEndurance ? (relentlessEndurancePreview.parentElement.classList.remove('d-none'), relentlessEndurancePreview.parentElement.classList.add('d-flex'), relentlessEnduranceInfo.setAttribute('title', _info.Races[charRace].special.relentlessEndurance)) : null;
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {
