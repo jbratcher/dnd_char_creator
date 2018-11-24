@@ -4,8 +4,6 @@
 
 import { Functions as func } from './functions.js';
 
-import { CharacterImages } from './characterImages.js';
-
 import {
   Abilities,
   Alignments,
@@ -20,8 +18,6 @@ import {
 
 // Initialize variables
 
-let sign: string;
-
 let modifier: number;
 
 let totalMod: number;
@@ -35,64 +31,7 @@ let proficiencyBonus: number;
 const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
 
 ////////////////////////////////////////
-// Set/Get functions
-////////////////////////////////////////
-
-const addOptionstoSelect = (selectElement, dataArray) => {
-  dataArray.map(optionText => {
-    let optionElement: HTMLOptionElement = document.createElement("option");
-    optionElement.textContent = optionText;
-    selectElement.appendChild(optionElement);
-  })
-}
-
-const showElement = element => {
-  element.classList.remove('d-none');
-  element.classList.add('d-flex');
-}
-
-const showElementWithProps = (element, titleText, contentText) => {
-  element.parentElement.classList.remove('d-none');
-  element.parentElement.classList.add('d-flex');
-  element.setAttribute('title', titleText);
-  element.textContent = contentText;
-}
-
-const setScore = (abilityScorePreview) => {
-  let score: number = func.rollAbilityScore();
-  func.setToMinMax(score);
-  abilityScorePreview.textContent = String(score);
-}
-
-const getCharacterImage = genderedImages => {
-  let randomIndex: number = func.randomIntFromRange(0, (genderedImages.length-1));
-  return genderedImages[randomIndex];
-}
-
-// Get Character Attributes to set preview image
-
-const getCharacterAttributes = (charCls, charRace, charGender) => {
-  if(charGender !== 'male' && charGender !== "female") {
-    let gender: boolean = func.randomBoolean();
-    gender ? charGender = "male" : charGender = "female";
-  }
-  return CharacterImages[charRace][charCls][charGender];
-}
-
-// Set modifier to ability score modifier value
-
-const getAbilityScoreModifier = abilityScore => modifier = Math.floor((abilityScore / 2) - 5);
-
-// Append sign to value
-
-const appendSigntoValue = (value, node) => {
-  value > 0 ? sign = "+" : sign = "-";
-  value = Math.abs(value);
-  node.textContent = `${sign} ${value}`;
-}
-
-////////////////////////////////////////
-// Declare big 6 attributes
+// Ability score DOM elements
 ////////////////////////////////////////
 
 const rollStrength: HTMLElement = document.querySelector('#rollStrength');
@@ -113,33 +52,33 @@ const rolledWisdom: HTMLElement = document.querySelector('#rolledWisdom');
 const rollCharisma: HTMLElement = document.querySelector('#rollCharisma');
 const rolledCharisma: HTMLElement = document.querySelector('#rolledCharisma');
 
-// Event listeners for rolling each attribute
+// Event listeners for rolling ability scores
 
-rollStrength.addEventListener('click', () => setScore(rolledStrength));
+rollStrength.addEventListener('click', () => func.setScore(rolledStrength));
 
-rollDexerity.addEventListener('click', () => setScore(rolledDexerity));
+rollDexerity.addEventListener('click', () => func.setScore(rolledDexerity));
 
-rollConstitution.addEventListener('click', () => setScore(rolledConstitition));
+rollConstitution.addEventListener('click', () => func.setScore(rolledConstitition));
 
-rollWisdom.addEventListener('click', () => setScore(rolledWisdom));
+rollWisdom.addEventListener('click', () => func.setScore(rolledWisdom));
 
-rollIntelligence.addEventListener('click', () => setScore(rolledIntelligence));
+rollIntelligence.addEventListener('click', () => func.setScore(rolledIntelligence));
 
-rollCharisma.addEventListener('click', () => setScore(rolledCharisma));
+rollCharisma.addEventListener('click', () => func.setScore(rolledCharisma));
 
 // Setters for ability scores
 
-let strength: string = null;
+let strength: string = "0";
 
-let dexerity: string = null;
+let dexerity: string = "0";
 
-let constitution: string = null;
+let constitution: string = "0";
 
-let intelligence: string = null;
+let intelligence: string = "0";
 
-let wisdom: string = null;
+let wisdom: string = "0";
 
-let charisma: string = null;
+let charisma: string = "0";
 
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
@@ -156,7 +95,7 @@ const name = <HTMLInputElement>document.querySelector('#name');
 
 const race = <HTMLSelectElement>document.querySelector('#race');
 
-addOptionstoSelect(race, RaceList);
+func.addOptionstoSelect(race, RaceList);
 
 let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
 
@@ -166,7 +105,7 @@ let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,""); 
 
 const cls = <HTMLSelectElement>document.querySelector('#cls');
 
-addOptionstoSelect(cls, ClassList);
+func.addOptionstoSelect(cls, ClassList);
 
 let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
 
@@ -176,7 +115,7 @@ let charCls: string = selectedCls.textContent.toLowerCase();
 
 const alignment = <HTMLSelectElement>document.querySelector('#alignment');
 
-addOptionstoSelect(alignment, Alignments)
+func.addOptionstoSelect(alignment, Alignments)
 
 let selectedAlignment = <HTMLOptionElement>alignment.options[alignment.selectedIndex];
 
@@ -184,7 +123,7 @@ const availableAlignments = () => {
 
   alignment.innerHTML = '';
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  addOptionstoSelect(alignment, Races[charRace].alignments);
+  func.addOptionstoSelect(alignment, Races[charRace].alignments);
 
 }
 
@@ -216,8 +155,8 @@ const showOptionalSubraceSelect = () => {
 
   Races[charRace].subrace
     ? (
-      addOptionstoSelect(subrace, ["-"]),  // Make first option "null"
-      addOptionstoSelect(subrace, Races[charRace].subrace.name),
+      func.addOptionstoSelect(subrace, ["-"]),  // Make first option "null"
+      func.addOptionstoSelect(subrace, Races[charRace].subrace.name),
       subraceSelectSection.classList.remove('d-none')
       )
     : subraceSelectSection.classList.add('d-none')
@@ -269,7 +208,7 @@ const showDraconicAncestrySelect = () => {
 
   Races[charRace].special.draconicAncestry
     ? (
-        addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
+        func.addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
         draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
         draconicAncestrySection.classList.remove('d-none')
       )
@@ -293,7 +232,7 @@ const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage'
 
 const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
 
-addOptionstoSelect(extraLanguage, Languages.standard);
+func.addOptionstoSelect(extraLanguage, Languages.standard);
 
 const showExtraLanguageInput = () => {
 
@@ -390,19 +329,19 @@ race.addEventListener('change', clearRacialSkils)
 
 const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
 
-addOptionstoSelect(skill1, Skills);
+func.addOptionstoSelect(skill1, Skills);
 
 let skillList1 = skill1.children;
 
 const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
 
-addOptionstoSelect(skill2, Skills);
+func.addOptionstoSelect(skill2, Skills);
 
 let skillList2 = skill2.children;
 
 const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
 
-addOptionstoSelect(skill3, Skills);
+func.addOptionstoSelect(skill3, Skills);
 
 let skillList3 = skill3.children;
 
@@ -424,9 +363,9 @@ const highlightAvailableSkills = () => {
   skill2.innerHTML = "";
   skill3.innerHTML = "";
 
-  addOptionstoSelect(skill1, availableSkills);
-  addOptionstoSelect(skill2, availableSkills);
-  addOptionstoSelect(skill3, availableSkills);
+  func.addOptionstoSelect(skill1, availableSkills);
+  func.addOptionstoSelect(skill2, availableSkills);
+  func.addOptionstoSelect(skill3, availableSkills);
 
 }
 
@@ -518,8 +457,8 @@ const addNewExperienceButton = <HTMLElement>document.querySelector('#addExp');
 // General functions
 
 const charImageSet = () => {
-  let characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
-  characterImg.src = getCharacterImage(characterAttributes);
+  let characterAttributes = func.getCharacterAttributes(charCls, charRace, charGender);
+  characterImg.src = func.getCharacterImage(characterAttributes);
 }
 
 const charLevelUp = () => {
@@ -531,7 +470,7 @@ const charLevelUp = () => {
 const updateProficiencyBonus = () => {
   proficiencyBonus = Levels[currentLevel.textContent].bonus;
   proficiencyBonusPreview.textContent = String(Levels[currentLevel.textContent].bonus);
-  appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
+  func.appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 }
 
 const addExp = () => {
@@ -722,8 +661,8 @@ const racialAbilityModifier = () => {
 
 // Add ability options to extra ability select element
 
-addOptionstoSelect(extraAbilityModifier1, Abilities);
-addOptionstoSelect(extraAbilityModifier2, Abilities);
+func.addOptionstoSelect(extraAbilityModifier1, Abilities);
+func.addOptionstoSelect(extraAbilityModifier2, Abilities);
 
 // Display extra ability modifier field if race is Half-Elf
 
@@ -837,7 +776,7 @@ const getSkillModifier = skillText => {
 
   let skillAbility = (singleWord.exec(skillText));
   let skillAbilityScore: number = lookupAbilityScore(skillAbility[0].toLowerCase());
-  abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+  abilityScoreMod = func.getAbilityScoreModifier(skillAbilityScore);
   return totalMod = abilityScoreMod + proficiencyBonus;
 
 };
@@ -853,7 +792,7 @@ const highightSkill = (skillDescription) => {
       ? (
           skill.style.color = 'green',
           getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent),
-          appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])
+          func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])
         )
       : console.log('Highlight Skill: not a match');
   }
@@ -878,7 +817,7 @@ const highlightSkills = () => {
     ) {
       skill.style.color = 'green';
       getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-      appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
+      func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
     } else {
       // if no match dim selection
       skill.style.color = '#ccc';
@@ -898,7 +837,7 @@ const highlightRacialSKills = () => {
 
   Races[charRace].special.stonecunning
     ? (
-        showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
+        func.showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
       )
     : stonecunningPreview.parentElement.classList.add('d-none')
 
@@ -906,7 +845,7 @@ const highlightRacialSKills = () => {
 
   Races[charRace].special.toolProficiency
     ? (
-        showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
+        func.showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
       )
     : toolProficiencyPreview.parentElement.classList.add('d-none')
 
@@ -1046,7 +985,7 @@ const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponPr
 
 const initialHitPoints = () => {
   // 1st level is max hit points + constiution modifier + racial modifier
-  let modifier: number = getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
+  let modifier: number = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
   let hitpoints: number = (ClassProps[charCls].hitdie + modifier);
   hitPointPreview.textContent = String(hitpoints);
 }
@@ -1054,7 +993,7 @@ const initialHitPoints = () => {
 const addHitPoints = () => {
   let currentHitPoints: number = Number(hitPointPreview.textContent);
   let rolledHitPoints: number = func.randomIntFromRange(1, ClassProps[charCls].hitdie)
-  modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod
+  modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod
   let hitPointsToAdd: number = (rolledHitPoints + modifier);
   // Prevent negative or zero hit points on level up
   if(rolledHitPoints + modifier <= 0) {
@@ -1065,20 +1004,20 @@ const addHitPoints = () => {
 
 const armorClass = () => {
   let base: number = 10;
-  let dexMod: number = getAbilityScoreModifier(Number(dexerity))
+  let dexMod: number = func.getAbilityScoreModifier(Number(dexerity))
   let armorMod: number = 0;
   let ac = String(base + dexMod + armorMod);
   armorClassPreview.textContent = ac;
 }
 
 const initiativeMod = () => {
-  let dexMod: number = getAbilityScoreModifier(Number(dexerity))
+  let dexMod: number = func.getAbilityScoreModifier(Number(dexerity))
   initiativeModPreview.textContent = String(dexMod);
 }
 
 const baseSpeed = () => speedPreview.textContent = Races[charRace].speed;
 
-const passivePerception = () => passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
+const passivePerception = () => passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom));
 
 const darkvision = () => {
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
@@ -1124,9 +1063,9 @@ const calculateSavingThrowMods = () => {
     for(let i = 0; i < savingThrowListItems.length; i++) {
       let string: string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
       if(string === ability) {
-        let abilityMod: number = getAbilityScoreModifier(lookupAbilityScore(ability));
+        let abilityMod: number = func.getAbilityScoreModifier(lookupAbilityScore(ability));
         let totalMod: number = Number(abilityMod + proficiencyBonus);
-        appendSigntoValue(totalMod, savingThrowListItems[i].childNodes[3]);
+        func.appendSigntoValue(totalMod, savingThrowListItems[i].childNodes[3]);
       }
     }
   });

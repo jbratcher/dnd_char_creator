@@ -2,15 +2,12 @@
 
 var _functions = require('./functions.js');
 
-var _characterImages = require('./characterImages.js');
-
 var _info = require('./info.js');
 
 // Initialize variables
-var sign; ////////////////////////////////////////
+////////////////////////////////////////
 // Imports
 ////////////////////////////////////////
-
 var modifier;
 var totalMod;
 var abilityScore;
@@ -18,54 +15,7 @@ var abilityScoreMod;
 var proficiencyBonus;
 var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
 ////////////////////////////////////////
-// Set/Get functions
-////////////////////////////////////////
-var addOptionstoSelect = function addOptionstoSelect(selectElement, dataArray) {
-    dataArray.map(function (optionText) {
-        var optionElement = document.createElement("option");
-        optionElement.textContent = optionText;
-        selectElement.appendChild(optionElement);
-    });
-};
-var showElement = function showElement(element) {
-    element.classList.remove('d-none');
-    element.classList.add('d-flex');
-};
-var showElementWithProps = function showElementWithProps(element, titleText, contentText) {
-    element.parentElement.classList.remove('d-none');
-    element.parentElement.classList.add('d-flex');
-    element.setAttribute('title', titleText);
-    element.textContent = contentText;
-};
-var setScore = function setScore(abilityScorePreview) {
-    var score = _functions.Functions.rollAbilityScore();
-    _functions.Functions.setToMinMax(score);
-    abilityScorePreview.textContent = String(score);
-};
-var getCharacterImage = function getCharacterImage(genderedImages) {
-    var randomIndex = _functions.Functions.randomIntFromRange(0, genderedImages.length - 1);
-    return genderedImages[randomIndex];
-};
-// Get Character Attributes to set preview image
-var getCharacterAttributes = function getCharacterAttributes(charCls, charRace, charGender) {
-    if (charGender !== 'male' && charGender !== "female") {
-        var gender_1 = _functions.Functions.randomBoolean();
-        gender_1 ? charGender = "male" : charGender = "female";
-    }
-    return _characterImages.CharacterImages[charRace][charCls][charGender];
-};
-// Set modifier to ability score modifier value
-var getAbilityScoreModifier = function getAbilityScoreModifier(abilityScore) {
-    return modifier = Math.floor(abilityScore / 2 - 5);
-};
-// Append sign to value
-var appendSigntoValue = function appendSigntoValue(value, node) {
-    value > 0 ? sign = "+" : sign = "-";
-    value = Math.abs(value);
-    node.textContent = sign + " " + value;
-};
-////////////////////////////////////////
-// Declare big 6 attributes
+// Ability score DOM elements
 ////////////////////////////////////////
 var rollStrength = document.querySelector('#rollStrength');
 var rolledStrength = document.querySelector('#rolledStrength');
@@ -79,32 +29,32 @@ var rollWisdom = document.querySelector('#rollWisdom');
 var rolledWisdom = document.querySelector('#rolledWisdom');
 var rollCharisma = document.querySelector('#rollCharisma');
 var rolledCharisma = document.querySelector('#rolledCharisma');
-// Event listeners for rolling each attribute
+// Event listeners for rolling ability scores
 rollStrength.addEventListener('click', function () {
-    return setScore(rolledStrength);
+    return _functions.Functions.setScore(rolledStrength);
 });
 rollDexerity.addEventListener('click', function () {
-    return setScore(rolledDexerity);
+    return _functions.Functions.setScore(rolledDexerity);
 });
 rollConstitution.addEventListener('click', function () {
-    return setScore(rolledConstitition);
+    return _functions.Functions.setScore(rolledConstitition);
 });
 rollWisdom.addEventListener('click', function () {
-    return setScore(rolledWisdom);
+    return _functions.Functions.setScore(rolledWisdom);
 });
 rollIntelligence.addEventListener('click', function () {
-    return setScore(rolledIntelligence);
+    return _functions.Functions.setScore(rolledIntelligence);
 });
 rollCharisma.addEventListener('click', function () {
-    return setScore(rolledCharisma);
+    return _functions.Functions.setScore(rolledCharisma);
 });
 // Setters for ability scores
-var strength = null;
-var dexerity = null;
-var constitution = null;
-var intelligence = null;
-var wisdom = null;
-var charisma = null;
+var strength = "0";
+var dexerity = "0";
+var constitution = "0";
+var intelligence = "0";
+var wisdom = "0";
+var charisma = "0";
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
 // and add dynamic updating
@@ -114,22 +64,22 @@ var charisma = null;
 var name = document.querySelector('#name');
 // Race
 var race = document.querySelector('#race');
-addOptionstoSelect(race, _info.RaceList);
+_functions.Functions.addOptionstoSelect(race, _info.RaceList);
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, ""); // "i.e. human, halfelf, halforc"
 // Class
 var cls = document.querySelector('#cls');
-addOptionstoSelect(cls, _info.ClassList);
+_functions.Functions.addOptionstoSelect(cls, _info.ClassList);
 var selectedCls = cls.options[cls.selectedIndex];
 var charCls = selectedCls.textContent.toLowerCase();
 // Alignment
 var alignment = document.querySelector('#alignment');
-addOptionstoSelect(alignment, _info.Alignments);
+_functions.Functions.addOptionstoSelect(alignment, _info.Alignments);
 var selectedAlignment = alignment.options[alignment.selectedIndex];
 var availableAlignments = function availableAlignments() {
     alignment.innerHTML = '';
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    addOptionstoSelect(alignment, _info.Races[charRace].alignments);
+    _functions.Functions.addOptionstoSelect(alignment, _info.Races[charRace].alignments);
 };
 race.addEventListener('change', availableAlignments);
 // Gender
@@ -144,8 +94,8 @@ var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     subrace.innerHTML = "-"; // Reset any subrace from previous selection
-    _info.Races[charRace].subrace ? (addOptionstoSelect(subrace, ["-"]), // Make first option "null"
-    addOptionstoSelect(subrace, _info.Races[charRace].subrace.name), subraceSelectSection.classList.remove('d-none')) : subraceSelectSection.classList.add('d-none');
+    _info.Races[charRace].subrace ? (_functions.Functions.addOptionstoSelect(subrace, ["-"]), // Make first option "null"
+    _functions.Functions.addOptionstoSelect(subrace, _info.Races[charRace].subrace.name), subraceSelectSection.classList.remove('d-none')) : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect);
 var setSubRace = function setSubRace() {
@@ -169,7 +119,7 @@ var draconicAncestry = document.querySelector('#draconicAncestry');
 var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 var showDraconicAncestrySelect = function showDraconicAncestrySelect() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    _info.Races[charRace].special.draconicAncestry ? (addOptionstoSelect(draconicAncestry, _info.Races[charRace].special.draconicAncestry.types), draconicAncestryHelp.textContent = 'Choose a dragon lineage.', draconicAncestrySection.classList.remove('d-none')) : (draconicAncestrySection.classList.add('d-none'), draconicAncestryHelp.textContent = '');
+    _info.Races[charRace].special.draconicAncestry ? (_functions.Functions.addOptionstoSelect(draconicAncestry, _info.Races[charRace].special.draconicAncestry.types), draconicAncestryHelp.textContent = 'Choose a dragon lineage.', draconicAncestrySection.classList.remove('d-none')) : (draconicAncestrySection.classList.add('d-none'), draconicAncestryHelp.textContent = '');
 };
 race.addEventListener('change', showDraconicAncestrySelect);
 showDraconicAncestrySelect();
@@ -178,7 +128,7 @@ showDraconicAncestrySelect();
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
-addOptionstoSelect(extraLanguage, _info.Languages.standard);
+_functions.Functions.addOptionstoSelect(extraLanguage, _info.Languages.standard);
 var showExtraLanguageInput = function showExtraLanguageInput() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     console.log(charRace);
@@ -233,13 +183,13 @@ var clearRacialSkils = function clearRacialSkils() {
 race.addEventListener('change', clearRacialSkils);
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
-addOptionstoSelect(skill1, _info.Skills);
+_functions.Functions.addOptionstoSelect(skill1, _info.Skills);
 var skillList1 = skill1.children;
 var skill2 = document.querySelector('#skillsSelect2');
-addOptionstoSelect(skill2, _info.Skills);
+_functions.Functions.addOptionstoSelect(skill2, _info.Skills);
 var skillList2 = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
-addOptionstoSelect(skill3, _info.Skills);
+_functions.Functions.addOptionstoSelect(skill3, _info.Skills);
 var skillList3 = skill3.children;
 var availableSkills = _info.ClassProps[charCls].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -251,9 +201,9 @@ var highlightAvailableSkills = function highlightAvailableSkills() {
     skill1.innerHTML = "";
     skill2.innerHTML = "";
     skill3.innerHTML = "";
-    addOptionstoSelect(skill1, availableSkills);
-    addOptionstoSelect(skill2, availableSkills);
-    addOptionstoSelect(skill3, availableSkills);
+    _functions.Functions.addOptionstoSelect(skill1, availableSkills);
+    _functions.Functions.addOptionstoSelect(skill2, availableSkills);
+    _functions.Functions.addOptionstoSelect(skill3, availableSkills);
 };
 // dynamically change available skills based on character class
 cls.addEventListener('change', function () {
@@ -306,8 +256,8 @@ var levelUpButton = document.querySelector('#levelUpButton');
 var addNewExperienceButton = document.querySelector('#addExp');
 // General functions
 var charImageSet = function charImageSet() {
-    var characterAttributes = getCharacterAttributes(charCls, charRace, charGender);
-    characterImg.src = getCharacterImage(characterAttributes);
+    var characterAttributes = _functions.Functions.getCharacterAttributes(charCls, charRace, charGender);
+    characterImg.src = _functions.Functions.getCharacterImage(characterAttributes);
 };
 var charLevelUp = function charLevelUp() {
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
@@ -317,7 +267,7 @@ var charLevelUp = function charLevelUp() {
 var updateProficiencyBonus = function updateProficiencyBonus() {
     proficiencyBonus = _info.Levels[currentLevel.textContent].bonus;
     proficiencyBonusPreview.textContent = String(_info.Levels[currentLevel.textContent].bonus);
-    appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
+    _functions.Functions.appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 };
 var addExp = function addExp() {
     var currentExpNum = Number(currentExperience.textContent);
@@ -432,8 +382,8 @@ var racialAbilityModifier = function racialAbilityModifier() {
     }
 };
 // Add ability options to extra ability select element
-addOptionstoSelect(extraAbilityModifier1, _info.Abilities);
-addOptionstoSelect(extraAbilityModifier2, _info.Abilities);
+_functions.Functions.addOptionstoSelect(extraAbilityModifier1, _info.Abilities);
+_functions.Functions.addOptionstoSelect(extraAbilityModifier2, _info.Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function showExtraModifiersInput() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
@@ -503,7 +453,7 @@ var getSelectedSkills = function getSelectedSkills() {
 var getSkillModifier = function getSkillModifier(skillText) {
     var skillAbility = singleWord.exec(skillText);
     var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
-    abilityScoreMod = getAbilityScoreModifier(skillAbilityScore);
+    abilityScoreMod = _functions.Functions.getAbilityScoreModifier(skillAbilityScore);
     return totalMod = abilityScoreMod + proficiencyBonus;
 };
 var highightSkill = function highightSkill(skillDescription) {
@@ -511,7 +461,7 @@ var highightSkill = function highightSkill(skillDescription) {
         var skill = skillsPreviewListItems[i];
         var skillName = skillsPreviewListItems[i].childNodes[1];
         var skillText = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
-        skillText === skillDescription ? (skill.style.color = 'green', getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent), appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])) : console.log('Highlight Skill: not a match');
+        skillText === skillDescription ? (skill.style.color = 'green', getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent), _functions.Functions.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])) : console.log('Highlight Skill: not a match');
     }
 };
 var highlightSkills = function highlightSkills() {
@@ -528,7 +478,7 @@ var highlightSkills = function highlightSkills() {
         if (skillText === selectedSkill1.textContent.trim() || skillText === selectedSkill2.textContent.trim() || skillText === selectedSkill3.textContent.trim()) {
             skill.style.color = 'green';
             getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-            appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
+            _functions.Functions.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
         } else {
             // if no match dim selection
             skill.style.color = '#ccc';
@@ -540,9 +490,9 @@ var highlightRacialSKills = function highlightRacialSKills() {
     var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
     var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
     // Dwarf Stonecunning
-    _info.Races[charRace].special.stonecunning ? showElementWithProps(stonecunningPreview, _info.Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none');
+    _info.Races[charRace].special.stonecunning ? _functions.Functions.showElementWithProps(stonecunningPreview, _info.Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none');
     // Dwarf tool proficiency
-    _info.Races[charRace].special.toolProficiency ? showElementWithProps(toolProficiencyPreview, _info.Races[charRace].special.stonecunning.info, 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : toolProficiencyPreview.parentElement.classList.add('d-none');
+    _info.Races[charRace].special.toolProficiency ? _functions.Functions.showElementWithProps(toolProficiencyPreview, _info.Races[charRace].special.stonecunning.info, 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : toolProficiencyPreview.parentElement.classList.add('d-none');
     // Dragonborn Draconic Ancestry
     _info.Races[charRace].special.draconicAncestry ? (draconicAncestryPreview.parentElement.classList.remove('d-none'), draconicAncestryPreview.parentElement.classList.add('d-flex'), draconicAncestryPreview.setAttribute('title', _info.Races.dragonborn.special.draconicAncestry.info), dragonType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color), damageType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type), breathWeapon.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath), damageResistancePreview.parentElement.classList.remove('d-none'), damageResistancePreview.parentElement.classList.add('d-flex'), damageResistanceType.textContent = _info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type) : (draconicAncestryPreview.parentElement.classList.add('d-none'), draconicAncestryHelp.textContent = "");
     //  Elf Keen Senses Perception Bonus Skill
@@ -583,14 +533,14 @@ var weaponProficiencesPreview = document.querySelector('#weaponProficiences');
 // Combat functions
 var initialHitPoints = function initialHitPoints() {
     // 1st level is max hit points + constiution modifier + racial modifier
-    var modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
+    var modifier = _functions.Functions.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitpoints = _info.ClassProps[charCls].hitdie + modifier;
     hitPointPreview.textContent = String(hitpoints);
 };
 var addHitPoints = function addHitPoints() {
     var currentHitPoints = Number(hitPointPreview.textContent);
     var rolledHitPoints = _functions.Functions.randomIntFromRange(1, _info.ClassProps[charCls].hitdie);
-    modifier = getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
+    modifier = _functions.Functions.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitPointsToAdd = rolledHitPoints + modifier;
     // Prevent negative or zero hit points on level up
     if (rolledHitPoints + modifier <= 0) {
@@ -600,20 +550,20 @@ var addHitPoints = function addHitPoints() {
 };
 var armorClass = function armorClass() {
     var base = 10;
-    var dexMod = getAbilityScoreModifier(Number(dexerity));
+    var dexMod = _functions.Functions.getAbilityScoreModifier(Number(dexerity));
     var armorMod = 0;
     var ac = String(base + dexMod + armorMod);
     armorClassPreview.textContent = ac;
 };
 var initiativeMod = function initiativeMod() {
-    var dexMod = getAbilityScoreModifier(Number(dexerity));
+    var dexMod = _functions.Functions.getAbilityScoreModifier(Number(dexerity));
     initiativeModPreview.textContent = String(dexMod);
 };
 var baseSpeed = function baseSpeed() {
     return speedPreview.textContent = _info.Races[charRace].speed;
 };
 var passivePerception = function passivePerception() {
-    return passivePerceptionPreview.textContent = String(10 + getAbilityScoreModifier(wisdom));
+    return passivePerceptionPreview.textContent = String(10 + _functions.Functions.getAbilityScoreModifier(wisdom));
 };
 var darkvision = function darkvision() {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
@@ -646,9 +596,9 @@ var calculateSavingThrowMods = function calculateSavingThrowMods() {
         for (var i = 0; i < savingThrowListItems.length; i++) {
             var string = singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0].toLowerCase();
             if (string === ability) {
-                var abilityMod = getAbilityScoreModifier(lookupAbilityScore(ability));
+                var abilityMod = _functions.Functions.getAbilityScoreModifier(lookupAbilityScore(ability));
                 var totalMod_1 = Number(abilityMod + proficiencyBonus);
-                appendSigntoValue(totalMod_1, savingThrowListItems[i].childNodes[3]);
+                _functions.Functions.appendSigntoValue(totalMod_1, savingThrowListItems[i].childNodes[3]);
             }
         }
     });
