@@ -95,7 +95,7 @@ const name = <HTMLInputElement>document.querySelector('#name');
 
 const race = <HTMLSelectElement>document.querySelector('#race');
 
-func.addOptionstoSelect(race, RaceList);
+func.addOptionsToSelect(race, RaceList);
 
 let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
 
@@ -105,7 +105,7 @@ let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,""); 
 
 const cls = <HTMLSelectElement>document.querySelector('#cls');
 
-func.addOptionstoSelect(cls, ClassList);
+func.addOptionsToSelect(cls, ClassList);
 
 let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
 
@@ -115,19 +115,21 @@ let charCls: string = selectedCls.textContent.toLowerCase();
 
 const alignment = <HTMLSelectElement>document.querySelector('#alignment');
 
-func.addOptionstoSelect(alignment, Alignments)
+func.addOptionsToSelect(alignment, Alignments)
 
 let selectedAlignment = <HTMLOptionElement>alignment.options[alignment.selectedIndex];
 
+// limits alignment options to race recommendations
+
 const availableAlignments = () => {
 
-  alignment.innerHTML = '';
+  alignment.innerHTML = "";  // reset alignment select options
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  func.addOptionstoSelect(alignment, Races[charRace].alignments);
+  func.addOptionsToSelect(alignment, Races[charRace].alignments);
 
 }
 
-race.addEventListener('change', availableAlignments);
+race.addEventListener('change', availableAlignments);  // Alignment options regenerate on race selection
 
 // Gender
 
@@ -152,26 +154,35 @@ const showOptionalSubraceSelect = () => {
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
 
   subrace.innerHTML = "-"  // Reset any subrace from previous selection
+  subraceHelp.textContent = "";
 
   Races[charRace].subrace
     ? (
-      func.addOptionstoSelect(subrace, ["-"]),  // Make first option "null"
-      func.addOptionstoSelect(subrace, Races[charRace].subrace.name),
+      func.addOptionsToSelect(subrace, ["-"]),  // Make first option "null"
+      func.addOptionsToSelect(subrace, Races[charRace].subrace.name),
       subraceSelectSection.classList.remove('d-none')
       )
     : subraceSelectSection.classList.add('d-none')
 
 }
 
-race.addEventListener('change', showOptionalSubraceSelect);
+race.addEventListener('change', showOptionalSubraceSelect);  // Subrace options regenerate on race selection change
 
 const setSubRace = () => {
-  
+
   charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
-  
+
 }
 
-subrace.addEventListener('change', setSubRace);
+const setSubraceHelpText = () => {
+  subraceHelp.textContent = "";
+  let text =  `${Races[charRace].subrace.helpText}`;
+  subraceHelp.textContent = text;
+}
+
+subrace.addEventListener('change', setSubRace);  // explicity set subrace value on subrace selection change
+
+subrace.addEventListener('change', setSubraceHelpText);
 
 // Age
 
@@ -208,7 +219,7 @@ const showDraconicAncestrySelect = () => {
 
   Races[charRace].special.draconicAncestry
     ? (
-        func.addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
+        func.addOptionsToSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
         draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
         draconicAncestrySection.classList.remove('d-none')
       )
@@ -232,12 +243,12 @@ const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage'
 
 const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
 
-func.addOptionstoSelect(extraLanguage, Languages.standard);
+func.addOptionsToSelect(extraLanguage, Languages.standard);
 
 const showExtraLanguageInput = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  
+
   console.log(charRace);
   console.log(charSubrace);
 
@@ -261,8 +272,8 @@ const showExtraLanguageInput = () => {
       extraLanguageField.classList.add('d-none'),
       extraLanguageHelp.textContent = ''
     )
-    
-      
+
+
 }
 
 race.addEventListener('change', showExtraLanguageInput);
@@ -289,14 +300,14 @@ const clearRacialSkils = () => {
   charmResistance.setAttribute('title', "");
   fearResistance.textContent = "";
   fearResistance.setAttribute('title', "");
-  
+
   draconicAncestryPreview.parentElement.classList.remove('d-flex');
   draconicAncestryPreview.parentElement.classList.add('d-none');
   draconicAncestryPreview.setAttribute('title', "");
   dragonType.textContent = "";
   damageType.textContent = "";
   breathWeapon.textContent = "";
-  
+
   trancePreview.parentElement.classList.remove('d-flex');
   trancePreview.parentElement.classList.add('d-none');
   tranceInfo.setAttribute('title', "");
@@ -337,19 +348,19 @@ race.addEventListener('change', clearRacialSkils)
 
 const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
 
-func.addOptionstoSelect(skill1, Skills);
+func.addOptionsToSelect(skill1, Skills);
 
 let skillList1 = skill1.children;
 
 const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
 
-func.addOptionstoSelect(skill2, Skills);
+func.addOptionsToSelect(skill2, Skills);
 
 let skillList2 = skill2.children;
 
 const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
 
-func.addOptionstoSelect(skill3, Skills);
+func.addOptionsToSelect(skill3, Skills);
 
 let skillList3 = skill3.children;
 
@@ -371,9 +382,9 @@ const highlightAvailableSkills = () => {
   skill2.innerHTML = "";
   skill3.innerHTML = "";
 
-  func.addOptionstoSelect(skill1, availableSkills);
-  func.addOptionstoSelect(skill2, availableSkills);
-  func.addOptionstoSelect(skill3, availableSkills);
+  func.addOptionsToSelect(skill1, availableSkills);
+  func.addOptionsToSelect(skill2, availableSkills);
+  func.addOptionsToSelect(skill3, availableSkills);
 
 }
 
@@ -675,8 +686,8 @@ const racialAbilityModifier = () => {
 
 // Add ability options to extra ability select element
 
-func.addOptionstoSelect(extraAbilityModifier1, Abilities);
-func.addOptionstoSelect(extraAbilityModifier2, Abilities);
+func.addOptionsToSelect(extraAbilityModifier1, Abilities);
+func.addOptionsToSelect(extraAbilityModifier2, Abilities);
 
 // Display extra ability modifier field if race is Half-Elf
 
@@ -897,7 +908,7 @@ const highlightRacialSKills = () => {
         tranceInfo.setAttribute('title', Races[charRace].special.trance.info)
       )
     : null
-    
+
   // Half-orc special abilities
   
   Races[charRace].special.menacing
@@ -907,7 +918,7 @@ const highlightRacialSKills = () => {
         menacingInfo.setAttribute('title', Races[charRace].special.menacing.info)
       )
     : null
-    
+
   Races[charRace].special.relentlessEndurance
     ? (
         relentlessEndurancePreview.parentElement.classList.remove('d-none'),
@@ -915,7 +926,7 @@ const highlightRacialSKills = () => {
         relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance.info)
       )
     : null
-    
+
   Races[charRace].special.savageAttacks
     ? (
         savageAttacksPreview.parentElement.classList.remove('d-none'),
@@ -923,7 +934,7 @@ const highlightRacialSKills = () => {
         savageAttacksInfo.setAttribute('title', Races[charRace].special.savageAttacks.info)
       )
     : null
-    
+
   // Tiefling special abilities
   
   Races[charRace].special.hellishResistance
@@ -943,7 +954,7 @@ const highlightRacialSKills = () => {
     : null
     
   // Halfling lightfoot stealth skill
-    
+
   Races[charRace].subrace.naturallyStealthy
     ? (
         stealthPreview.parentElement.classList.remove('d-none'),
@@ -951,9 +962,9 @@ const highlightRacialSKills = () => {
         stealthInfo.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info)
       )
     : null
-    
+
   // Rock gnome special
-    
+
   Races[charRace].subrace.artificersLore
     ? (
         artificersLorePreview.parentElement.classList.remove('d-none'),
@@ -961,9 +972,9 @@ const highlightRacialSKills = () => {
         artificersLoreInfo.setAttribute('title', Races[charRace].subrace.artificersLore.info)
       )
     : null
-    
+
   // Rock gnome special
-    
+
   Races[charRace].subrace.tinker
     ? (
         tinkerPreview.parentElement.classList.remove('d-none'),

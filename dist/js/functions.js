@@ -28,7 +28,7 @@ var Functions = exports.Functions = {
     ////////////////////////////////////////
     // Set/Get functions
     ////////////////////////////////////////
-    addOptionstoSelect: function addOptionstoSelect(selectElement, dataArray) {
+    addOptionsToSelect: function addOptionsToSelect(selectElement, dataArray) {
         dataArray.map(function (optionText) {
             var optionElement = document.createElement("option");
             optionElement.textContent = optionText;
