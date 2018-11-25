@@ -48,24 +48,25 @@ var charisma = "0";
 var name = document.querySelector('#name');
 // Race
 var race = document.querySelector('#race');
-func.addOptionstoSelect(race, RaceList);
+func.addOptionsToSelect(race, RaceList);
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, ""); // "i.e. human, halfelf, halforc"
 // Class
 var cls = document.querySelector('#cls');
-func.addOptionstoSelect(cls, ClassList);
+func.addOptionsToSelect(cls, ClassList);
 var selectedCls = cls.options[cls.selectedIndex];
 var charCls = selectedCls.textContent.toLowerCase();
 // Alignment
 var alignment = document.querySelector('#alignment');
-func.addOptionstoSelect(alignment, Alignments);
+func.addOptionsToSelect(alignment, Alignments);
 var selectedAlignment = alignment.options[alignment.selectedIndex];
+// limits alignment options to race recommendations
 var availableAlignments = function () {
-    alignment.innerHTML = '';
+    alignment.innerHTML = ""; // reset alignment select options
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    func.addOptionstoSelect(alignment, Races[charRace].alignments);
+    func.addOptionsToSelect(alignment, Races[charRace].alignments);
 };
-race.addEventListener('change', availableAlignments);
+race.addEventListener('change', availableAlignments); // Alignment options regenerate on race selection
 // Gender
 var gender = document.querySelector('#gender');
 var charGender = gender.value.toLowerCase();
@@ -78,17 +79,24 @@ var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 var showOptionalSubraceSelect = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     subrace.innerHTML = "-"; // Reset any subrace from previous selection
+    subraceHelp.textContent = "";
     Races[charRace].subrace
-        ? (func.addOptionstoSelect(subrace, ["-"]), // Make first option "null"
-            func.addOptionstoSelect(subrace, Races[charRace].subrace.name),
+        ? (func.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
+            func.addOptionsToSelect(subrace, Races[charRace].subrace.name),
             subraceSelectSection.classList.remove('d-none'))
         : subraceSelectSection.classList.add('d-none');
 };
-race.addEventListener('change', showOptionalSubraceSelect);
+race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
 var setSubRace = function () {
     charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 };
-subrace.addEventListener('change', setSubRace);
+var setSubraceHelpText = function () {
+    subraceHelp.textContent = "";
+    var text = "" + Races[charRace].subrace.helpText;
+    subraceHelp.textContent = text;
+};
+subrace.addEventListener('change', setSubRace); // explicity set subrace value on subrace selection change
+subrace.addEventListener('change', setSubraceHelpText);
 // Age
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
@@ -107,7 +115,7 @@ var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 var showDraconicAncestrySelect = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     Races[charRace].special.draconicAncestry
-        ? (func.addOptionstoSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
+        ? (func.addOptionsToSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
             draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
             draconicAncestrySection.classList.remove('d-none'))
         : (draconicAncestrySection.classList.add('d-none'),
@@ -120,7 +128,7 @@ showDraconicAncestrySelect();
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
-func.addOptionstoSelect(extraLanguage, Languages.standard);
+func.addOptionsToSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     console.log(charRace);
@@ -186,13 +194,13 @@ var clearRacialSkils = function () {
 race.addEventListener('change', clearRacialSkils);
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
-func.addOptionstoSelect(skill1, Skills);
+func.addOptionsToSelect(skill1, Skills);
 var skillList1 = skill1.children;
 var skill2 = document.querySelector('#skillsSelect2');
-func.addOptionstoSelect(skill2, Skills);
+func.addOptionsToSelect(skill2, Skills);
 var skillList2 = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
-func.addOptionstoSelect(skill3, Skills);
+func.addOptionsToSelect(skill3, Skills);
 var skillList3 = skill3.children;
 var availableSkills = ClassProps[charCls].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -204,9 +212,9 @@ var highlightAvailableSkills = function () {
     skill1.innerHTML = "";
     skill2.innerHTML = "";
     skill3.innerHTML = "";
-    func.addOptionstoSelect(skill1, availableSkills);
-    func.addOptionstoSelect(skill2, availableSkills);
-    func.addOptionstoSelect(skill3, availableSkills);
+    func.addOptionsToSelect(skill1, availableSkills);
+    func.addOptionsToSelect(skill2, availableSkills);
+    func.addOptionsToSelect(skill3, availableSkills);
 };
 // dynamically change available skills based on character class
 cls.addEventListener('change', function () {
@@ -383,8 +391,8 @@ var racialAbilityModifier = function () {
     }
 };
 // Add ability options to extra ability select element
-func.addOptionstoSelect(extraAbilityModifier1, Abilities);
-func.addOptionstoSelect(extraAbilityModifier2, Abilities);
+func.addOptionsToSelect(extraAbilityModifier1, Abilities);
+func.addOptionsToSelect(extraAbilityModifier2, Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
