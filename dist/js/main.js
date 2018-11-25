@@ -142,6 +142,7 @@ var racialBonuses = function racialBonuses() {
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
 var clearRacialSkils = function clearRacialSkils() {
+    languagesPreview.textContent = "";
     // set text content and attr to null in preview, specialResistances
     poisonResistance.textContent = "";
     poisonResistance.setAttribute('title', "");
@@ -179,6 +180,12 @@ var clearRacialSkils = function clearRacialSkils() {
     savageAttacksPreview.parentElement.classList.remove('d-flex');
     savageAttacksPreview.parentElement.classList.add('d-none');
     savageAttacksInfo.setAttribute('title', "");
+    hellishResistancePreview.parentElement.classList.remove('d-flex');
+    hellishResistancePreview.parentElement.classList.add('d-none');
+    hellishResistanceInfo.setAttribute('title', "");
+    infernalLegacyPreview.parentElement.classList.remove('d-flex');
+    infernalLegacyPreview.parentElement.classList.add('d-none');
+    infernalLegacyInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -250,6 +257,10 @@ var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePre
 var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
 var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
 var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
+var hellishResistancePreview = document.querySelector('#hellishResistancePreview');
+var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
+var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
+var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -499,10 +510,13 @@ var highlightRacialSKills = function highlightRacialSKills() {
     _info.Races[charRace].special.keenSenses ? highightSkill('perception') : null;
     // Elf Trance sleep skill
     _info.Races[charRace].special.trance ? (trancePreview.parentElement.classList.remove('d-none'), trancePreview.parentElement.classList.add('d-flex'), tranceInfo.setAttribute('title', _info.Races[charRace].special.trance.info)) : null;
-    // Half-orc special
+    // Half-orc special abilities
     _info.Races[charRace].special.menacing ? (menacingPreview.parentElement.classList.remove('d-none'), menacingPreview.parentElement.classList.add('d-flex'), menacingInfo.setAttribute('title', _info.Races[charRace].special.menacing.info)) : null;
     _info.Races[charRace].special.relentlessEndurance ? (relentlessEndurancePreview.parentElement.classList.remove('d-none'), relentlessEndurancePreview.parentElement.classList.add('d-flex'), relentlessEnduranceInfo.setAttribute('title', _info.Races[charRace].special.relentlessEndurance.info)) : null;
     _info.Races[charRace].special.savageAttacks ? (savageAttacksPreview.parentElement.classList.remove('d-none'), savageAttacksPreview.parentElement.classList.add('d-flex'), savageAttacksInfo.setAttribute('title', _info.Races[charRace].special.savageAttacks.info)) : null;
+    // Tiefling special abilities
+    _info.Races[charRace].special.hellishResistance ? (hellishResistancePreview.parentElement.classList.remove('d-none'), hellishResistancePreview.parentElement.classList.add('d-flex'), hellishResistanceInfo.setAttribute('title', _info.Races[charRace].special.hellishResistance.info)) : null;
+    _info.Races[charRace].special.infernalLegacy ? (infernalLegacyPreview.parentElement.classList.remove('d-none'), infernalLegacyPreview.parentElement.classList.add('d-flex'), infernalLegacyInfo.setAttribute('title', _info.Races[charRace].special.infernalLegacy.info)) : null;
     // Halfling lightfoot stealth skill
     _info.Races[charRace].subrace.naturallyStealthy ? (stealthPreview.parentElement.classList.remove('d-none'), stealthPreview.parentElement.classList.add('d-flex'), stealthInfo.setAttribute('title', _info.Races[charRace].subrace.naturallyStealthy.info)) : null;
     // Rock gnome special

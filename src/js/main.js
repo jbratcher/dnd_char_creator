@@ -144,6 +144,7 @@ var racialBonuses = function () {
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
 var clearRacialSkils = function () {
+    languagesPreview.textContent = "";
     // set text content and attr to null in preview, specialResistances
     poisonResistance.textContent = "";
     poisonResistance.setAttribute('title', "");
@@ -182,6 +183,12 @@ var clearRacialSkils = function () {
     savageAttacksPreview.parentElement.classList.remove('d-flex');
     savageAttacksPreview.parentElement.classList.add('d-none');
     savageAttacksInfo.setAttribute('title', "");
+    hellishResistancePreview.parentElement.classList.remove('d-flex');
+    hellishResistancePreview.parentElement.classList.add('d-none');
+    hellishResistanceInfo.setAttribute('title', "");
+    infernalLegacyPreview.parentElement.classList.remove('d-flex');
+    infernalLegacyPreview.parentElement.classList.add('d-none');
+    infernalLegacyInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
 // Skill select
@@ -253,6 +260,10 @@ var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePre
 var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
 var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
 var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
+var hellishResistancePreview = document.querySelector('#hellishResistancePreview');
+var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
+var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
+var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -534,7 +545,7 @@ var highlightRacialSKills = function () {
             trancePreview.parentElement.classList.add('d-flex'),
             tranceInfo.setAttribute('title', Races[charRace].special.trance.info))
         : null;
-    // Half-orc special
+    // Half-orc special abilities
     Races[charRace].special.menacing
         ? (menacingPreview.parentElement.classList.remove('d-none'),
             menacingPreview.parentElement.classList.add('d-flex'),
@@ -549,6 +560,17 @@ var highlightRacialSKills = function () {
         ? (savageAttacksPreview.parentElement.classList.remove('d-none'),
             savageAttacksPreview.parentElement.classList.add('d-flex'),
             savageAttacksInfo.setAttribute('title', Races[charRace].special.savageAttacks.info))
+        : null;
+    // Tiefling special abilities
+    Races[charRace].special.hellishResistance
+        ? (hellishResistancePreview.parentElement.classList.remove('d-none'),
+            hellishResistancePreview.parentElement.classList.add('d-flex'),
+            hellishResistanceInfo.setAttribute('title', Races[charRace].special.hellishResistance.info))
+        : null;
+    Races[charRace].special.infernalLegacy
+        ? (infernalLegacyPreview.parentElement.classList.remove('d-none'),
+            infernalLegacyPreview.parentElement.classList.add('d-flex'),
+            infernalLegacyInfo.setAttribute('title', Races[charRace].special.infernalLegacy.info))
         : null;
     // Halfling lightfoot stealth skill
     Races[charRace].subrace.naturallyStealthy

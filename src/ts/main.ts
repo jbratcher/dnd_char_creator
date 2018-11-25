@@ -278,6 +278,8 @@ const racialBonuses = () => {
 }
 
 const clearRacialSkils = () => {
+  
+  languagesPreview.textContent = ""
 
   // set text content and attr to null in preview, specialResistances
 
@@ -320,6 +322,12 @@ const clearRacialSkils = () => {
   savageAttacksPreview.parentElement.classList.remove('d-flex');
   savageAttacksPreview.parentElement.classList.add('d-none');
   savageAttacksInfo.setAttribute('title', "");
+  hellishResistancePreview.parentElement.classList.remove('d-flex');
+  hellishResistancePreview.parentElement.classList.add('d-none');
+  hellishResistanceInfo.setAttribute('title', "");
+  infernalLegacyPreview.parentElement.classList.remove('d-flex');
+  infernalLegacyPreview.parentElement.classList.add('d-none');
+  infernalLegacyInfo.setAttribute('title', "");
 
 }
 
@@ -445,6 +453,12 @@ const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentless
 
 const savageAttacksPreview = <HTMLElement>document.querySelector('#savageAttacksPreview');
 const savageAttacksInfo = <HTMLElement>document.querySelector('#savageAttacksInfo');
+
+const hellishResistancePreview = <HTMLElement>document.querySelector('#hellishResistancePreview');
+const hellishResistanceInfo = <HTMLElement>document.querySelector('#hellishResistanceInfo');
+
+const infernalLegacyPreview = <HTMLElement>document.querySelector('#infernalLegacyPreview');
+const infernalLegacyInfo = <HTMLElement>document.querySelector('#infernalLegacyInfo');
 
 // General buttons
 
@@ -884,7 +898,7 @@ const highlightRacialSKills = () => {
       )
     : null
     
-  // Half-orc special
+  // Half-orc special abilities
   
   Races[charRace].special.menacing
     ? (
@@ -907,6 +921,24 @@ const highlightRacialSKills = () => {
         savageAttacksPreview.parentElement.classList.remove('d-none'),
         savageAttacksPreview.parentElement.classList.add('d-flex'),
         savageAttacksInfo.setAttribute('title', Races[charRace].special.savageAttacks.info)
+      )
+    : null
+    
+  // Tiefling special abilities
+  
+  Races[charRace].special.hellishResistance
+    ? (
+        hellishResistancePreview.parentElement.classList.remove('d-none'),
+        hellishResistancePreview.parentElement.classList.add('d-flex'),
+        hellishResistanceInfo.setAttribute('title', Races[charRace].special.hellishResistance.info)
+      )
+    : null
+    
+  Races[charRace].special.infernalLegacy
+    ? (
+        infernalLegacyPreview.parentElement.classList.remove('d-none'),
+        infernalLegacyPreview.parentElement.classList.add('d-flex'),
+        infernalLegacyInfo.setAttribute('title', Races[charRace].special.infernalLegacy.info)
       )
     : null
     
