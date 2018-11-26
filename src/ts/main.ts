@@ -853,6 +853,8 @@ const highlightSkills = () => {
 const highlightRacialSKills = () => {
 
   charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  
+  charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
 
   let selectedDraconicAncestry = <HTMLOptionElement>draconicAncestry.options[draconicAncestry.selectedIndex];
 
@@ -902,84 +904,45 @@ const highlightRacialSKills = () => {
   // Elf Trance sleep skill
 
   Races[charRace].special.trance
-    ? (
-        trancePreview.parentElement.classList.remove('d-none'),
-        trancePreview.parentElement.classList.add('d-flex'),
-        tranceInfo.setAttribute('title', Races[charRace].special.trance.info)
-      )
+    ? func.showElementWithProps(tranceInfo, Races[charRace].special.trance.info, "Details")
     : null
 
   // Half-orc special abilities
   
   Races[charRace].special.menacing
-    ? (
-        menacingPreview.parentElement.classList.remove('d-none'),
-        menacingPreview.parentElement.classList.add('d-flex'),
-        menacingInfo.setAttribute('title', Races[charRace].special.menacing.info)
-      )
+    ? func.showElementWithProps(menacingInfo, Races[charRace].special.menacing.info, "Details")
     : null
 
   Races[charRace].special.relentlessEndurance
-    ? (
-        relentlessEndurancePreview.parentElement.classList.remove('d-none'),
-        relentlessEndurancePreview.parentElement.classList.add('d-flex'),
-        relentlessEnduranceInfo.setAttribute('title', Races[charRace].special.relentlessEndurance.info)
-      )
+    ? func.showElementWithProps(relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
     : null
 
   Races[charRace].special.savageAttacks
-    ? (
-        savageAttacksPreview.parentElement.classList.remove('d-none'),
-        savageAttacksPreview.parentElement.classList.add('d-flex'),
-        savageAttacksInfo.setAttribute('title', Races[charRace].special.savageAttacks.info)
-      )
+    ? func.showElementWithProps(savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
     : null
 
   // Tiefling special abilities
   
   Races[charRace].special.hellishResistance
-    ? (
-        hellishResistancePreview.parentElement.classList.remove('d-none'),
-        hellishResistancePreview.parentElement.classList.add('d-flex'),
-        hellishResistanceInfo.setAttribute('title', Races[charRace].special.hellishResistance.info)
-      )
+    ? func.showElementWithProps(hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
     : null
     
   Races[charRace].special.infernalLegacy
-    ? (
-        infernalLegacyPreview.parentElement.classList.remove('d-none'),
-        infernalLegacyPreview.parentElement.classList.add('d-flex'),
-        infernalLegacyInfo.setAttribute('title', Races[charRace].special.infernalLegacy.info)
-      )
+    ? func.showElementWithProps(infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
     : null
     
   // Halfling lightfoot stealth skill
 
-  Races[charRace].subrace.naturallyStealthy
-    ? (
-        stealthPreview.parentElement.classList.remove('d-none'),
-        stealthPreview.parentElement.classList.add('d-flex'),
-        stealthInfo.setAttribute('title', Races[charRace].subrace.naturallyStealthy.info)
-      )
+  charSubrace === "lightfoot"
+    ? func.showElementWithProps(stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
     : null
 
-  // Rock gnome special
+  // Rock gnome special abilities
 
-  Races[charRace].subrace.artificersLore
-    ? (
-        artificersLorePreview.parentElement.classList.remove('d-none'),
-        artificersLorePreview.parentElement.classList.add('d-flex'),
-        artificersLoreInfo.setAttribute('title', Races[charRace].subrace.artificersLore.info)
-      )
-    : null
-
-  // Rock gnome special
-
-  Races[charRace].subrace.tinker
-    ? (
-        tinkerPreview.parentElement.classList.remove('d-none'),
-        tinkerPreview.parentElement.classList.add('d-flex'),
-        tinkerPreview.setAttribute('title', Races[charRace].subrace.tinker.info),
+  charSubrace === "rockgnome"
+    ? ( 
+      func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
+      func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
         tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details)
       )
     : null
