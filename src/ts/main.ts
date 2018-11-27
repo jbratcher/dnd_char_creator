@@ -290,7 +290,8 @@ const racialBonuses = () => {
 
 const clearRacialSkils = () => {
   
-  languagesPreview.textContent = ""
+  languagesPreview.textContent = "-"
+  weaponProficiencesPreview.textContent = "-"
 
   // set text content and attr to null in preview, specialResistances
 
@@ -343,6 +344,7 @@ const clearRacialSkils = () => {
 }
 
 race.addEventListener('change', clearRacialSkils)
+subrace.addEventListener('change', clearRacialSkils)
 
 // Skill select
 
@@ -985,7 +987,7 @@ const darkvisionPreview = <HTMLElement>document.querySelector('#darkvisionPrevie
 
 const sizePreview = <HTMLElement>document.querySelector('#size');
 
-const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponProficiences');
+const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponProficiencesPreview');
 
 // Combat functions
 
@@ -1039,16 +1041,20 @@ const setCharacterSize = () => sizePreview.textContent = Races[charRace].size;
 const calculateWeaponProficiencies = () => {
 
   charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
 
-  if(charRace === 'dwarf') {
-
-    Races[charRace].weaponProficiences.map(weapon => {
-
+  charRace === 'dwarf'
+    ? Races[charRace].weaponProficiences.map(weapon => {
       weaponProficiencesPreview.textContent += weapon + ", ";
-
     })
+    : null;
+  
+  charSubrace === 'highelf'
+    ? Races[charRace].subrace.weaponProficiences.map(weapon => {
+      weaponProficiencesPreview.textContent += weapon + ", ";
+    })
+    : null;
 
-  }
 
 }
 

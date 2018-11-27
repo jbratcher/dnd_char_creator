@@ -390,7 +390,7 @@ export const Races = {
             dwarvernToughness: {
                 hitpointModifier: 1
             },
-            helpText: `As	a	hill dwarf,	you	have keen	senses,	deep intuition,	and	remarkable resilience.`
+            helpText: `As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.`
         },
         weaponProficiences: [
             "Battleaxe",

@@ -368,7 +368,7 @@ export var Races = {
             dwarvernToughness: {
                 hitpointModifier: 1
             },
-            helpText: "As\ta\thill dwarf,\tyou\thave keen\tsenses,\tdeep intuition,\tand\tremarkable resilience."
+            helpText: "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience."
         },
         weaponProficiences: [
             "Battleaxe",

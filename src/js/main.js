@@ -152,7 +152,8 @@ var racialBonuses = function () {
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
 var clearRacialSkils = function () {
-    languagesPreview.textContent = "";
+    languagesPreview.textContent = "-";
+    weaponProficiencesPreview.textContent = "-";
     // set text content and attr to null in preview, specialResistances
     poisonResistance.textContent = "";
     poisonResistance.setAttribute('title', "");
@@ -199,6 +200,7 @@ var clearRacialSkils = function () {
     infernalLegacyInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
+subrace.addEventListener('change', clearRacialSkils);
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 func.addOptionsToSelect(skill1, Skills);
@@ -599,7 +601,7 @@ var speedPreview = document.querySelector('#speed');
 var passivePerceptionPreview = document.querySelector('#passivePerception');
 var darkvisionPreview = document.querySelector('#darkvisionPreview');
 var sizePreview = document.querySelector('#size');
-var weaponProficiencesPreview = document.querySelector('#weaponProficiences');
+var weaponProficiencesPreview = document.querySelector('#weaponProficiencesPreview');
 // Combat functions
 var initialHitPoints = function () {
     // 1st level is max hit points + constiution modifier + racial modifier
@@ -643,11 +645,17 @@ var darkvision = function () {
 var setCharacterSize = function () { return sizePreview.textContent = Races[charRace].size; };
 var calculateWeaponProficiencies = function () {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    if (charRace === 'dwarf') {
-        Races[charRace].weaponProficiences.map(function (weapon) {
+    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+    charRace === 'dwarf'
+        ? Races[charRace].weaponProficiences.map(function (weapon) {
             weaponProficiencesPreview.textContent += weapon + ", ";
-        });
-    }
+        })
+        : null;
+    charSubrace === 'highelf'
+        ? Races[charRace].subrace.weaponProficiences.map(function (weapon) {
+            weaponProficiencesPreview.textContent += weapon + ", ";
+        })
+        : null;
 };
 // Saving throws
 var savingThrowList = document.querySelector('#savingThrowPreviewList');

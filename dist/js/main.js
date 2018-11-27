@@ -2,7 +2,11 @@
 
 var _functions = require('./functions.js');
 
+var func = _interopRequireWildcard(_functions);
+
 var _info = require('./info.js');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // Initialize variables
 ////////////////////////////////////////
@@ -31,22 +35,22 @@ var rollCharisma = document.querySelector('#rollCharisma');
 var rolledCharisma = document.querySelector('#rolledCharisma');
 // Event listeners for rolling ability scores
 rollStrength.addEventListener('click', function () {
-    return _functions.Functions.setScore(rolledStrength);
+    return func.setScore(rolledStrength);
 });
 rollDexerity.addEventListener('click', function () {
-    return _functions.Functions.setScore(rolledDexerity);
+    return func.setScore(rolledDexerity);
 });
 rollConstitution.addEventListener('click', function () {
-    return _functions.Functions.setScore(rolledConstitition);
+    return func.setScore(rolledConstitition);
 });
 rollWisdom.addEventListener('click', function () {
-    return _functions.Functions.setScore(rolledWisdom);
+    return func.setScore(rolledWisdom);
 });
 rollIntelligence.addEventListener('click', function () {
-    return _functions.Functions.setScore(rolledIntelligence);
+    return func.setScore(rolledIntelligence);
 });
 rollCharisma.addEventListener('click', function () {
-    return _functions.Functions.setScore(rolledCharisma);
+    return func.setScore(rolledCharisma);
 });
 // Setters for ability scores
 var strength = "0";
@@ -64,23 +68,23 @@ var charisma = "0";
 var name = document.querySelector('#name');
 // Race
 var race = document.querySelector('#race');
-_functions.Functions.addOptionsToSelect(race, _info.RaceList);
+func.addOptionsToSelect(race, _info.RaceList);
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, ""); // "i.e. human, halfelf, halforc"
 // Class
 var cls = document.querySelector('#cls');
-_functions.Functions.addOptionsToSelect(cls, _info.ClassList);
+func.addOptionsToSelect(cls, _info.ClassList);
 var selectedCls = cls.options[cls.selectedIndex];
 var charCls = selectedCls.textContent.toLowerCase();
 // Alignment
 var alignment = document.querySelector('#alignment');
-_functions.Functions.addOptionsToSelect(alignment, _info.Alignments);
+func.addOptionsToSelect(alignment, _info.Alignments);
 var selectedAlignment = alignment.options[alignment.selectedIndex];
 // limits alignment options to race recommendations
 var availableAlignments = function availableAlignments() {
     alignment.innerHTML = ""; // reset alignment select options
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    _functions.Functions.addOptionsToSelect(alignment, _info.Races[charRace].alignments);
+    func.addOptionsToSelect(alignment, _info.Races[charRace].alignments);
 };
 race.addEventListener('change', availableAlignments); // Alignment options regenerate on race selection
 // Gender
@@ -96,8 +100,8 @@ var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     subrace.innerHTML = "-"; // Reset any subrace from previous selection
     subraceHelp.textContent = "";
-    _info.Races[charRace].subrace ? (_functions.Functions.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
-    _functions.Functions.addOptionsToSelect(subrace, _info.Races[charRace].subrace.name), subraceSelectSection.classList.remove('d-none')) : subraceSelectSection.classList.add('d-none');
+    _info.Races[charRace].subrace ? (func.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
+    func.addOptionsToSelect(subrace, _info.Races[charRace].subrace.name), subraceSelectSection.classList.remove('d-none')) : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
 var setSubRace = function setSubRace() {
@@ -127,7 +131,7 @@ var draconicAncestry = document.querySelector('#draconicAncestry');
 var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 var showDraconicAncestrySelect = function showDraconicAncestrySelect() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    _info.Races[charRace].special.draconicAncestry ? (_functions.Functions.addOptionsToSelect(draconicAncestry, _info.Races[charRace].special.draconicAncestry.types), draconicAncestryHelp.textContent = 'Choose a dragon lineage.', draconicAncestrySection.classList.remove('d-none')) : (draconicAncestrySection.classList.add('d-none'), draconicAncestryHelp.textContent = '');
+    _info.Races[charRace].special.draconicAncestry ? (func.addOptionsToSelect(draconicAncestry, _info.Races[charRace].special.draconicAncestry.types), draconicAncestryHelp.textContent = 'Choose a dragon lineage.', draconicAncestrySection.classList.remove('d-none')) : (draconicAncestrySection.classList.add('d-none'), draconicAncestryHelp.textContent = '');
 };
 race.addEventListener('change', showDraconicAncestrySelect);
 showDraconicAncestrySelect();
@@ -136,7 +140,7 @@ showDraconicAncestrySelect();
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
-_functions.Functions.addOptionsToSelect(extraLanguage, _info.Languages.standard);
+func.addOptionsToSelect(extraLanguage, _info.Languages.standard);
 var showExtraLanguageInput = function showExtraLanguageInput() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
     console.log(charRace);
@@ -150,7 +154,8 @@ var racialBonuses = function racialBonuses() {
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
 var clearRacialSkils = function clearRacialSkils() {
-    languagesPreview.textContent = "";
+    languagesPreview.textContent = "-";
+    weaponProficiencesPreview.textContent = "-";
     // set text content and attr to null in preview, specialResistances
     poisonResistance.textContent = "";
     poisonResistance.setAttribute('title', "");
@@ -196,15 +201,16 @@ var clearRacialSkils = function clearRacialSkils() {
     infernalLegacyInfo.setAttribute('title', "");
 };
 race.addEventListener('change', clearRacialSkils);
+subrace.addEventListener('change', clearRacialSkils);
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
-_functions.Functions.addOptionsToSelect(skill1, _info.Skills);
+func.addOptionsToSelect(skill1, _info.Skills);
 var skillList1 = skill1.children;
 var skill2 = document.querySelector('#skillsSelect2');
-_functions.Functions.addOptionsToSelect(skill2, _info.Skills);
+func.addOptionsToSelect(skill2, _info.Skills);
 var skillList2 = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
-_functions.Functions.addOptionsToSelect(skill3, _info.Skills);
+func.addOptionsToSelect(skill3, _info.Skills);
 var skillList3 = skill3.children;
 var availableSkills = _info.ClassProps[charCls].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
@@ -216,9 +222,9 @@ var highlightAvailableSkills = function highlightAvailableSkills() {
     skill1.innerHTML = "";
     skill2.innerHTML = "";
     skill3.innerHTML = "";
-    _functions.Functions.addOptionsToSelect(skill1, availableSkills);
-    _functions.Functions.addOptionsToSelect(skill2, availableSkills);
-    _functions.Functions.addOptionsToSelect(skill3, availableSkills);
+    func.addOptionsToSelect(skill1, availableSkills);
+    func.addOptionsToSelect(skill2, availableSkills);
+    func.addOptionsToSelect(skill3, availableSkills);
 };
 // dynamically change available skills based on character class
 cls.addEventListener('change', function () {
@@ -275,8 +281,8 @@ var levelUpButton = document.querySelector('#levelUpButton');
 var addNewExperienceButton = document.querySelector('#addExp');
 // General functions
 var charImageSet = function charImageSet() {
-    var characterAttributes = _functions.Functions.getCharacterAttributes(charCls, charRace, charGender);
-    characterImg.src = _functions.Functions.getCharacterImage(characterAttributes);
+    var characterAttributes = func.getCharacterAttributes(charCls, charRace, charGender);
+    characterImg.src = func.getCharacterImage(characterAttributes);
 };
 var charLevelUp = function charLevelUp() {
     currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
@@ -286,7 +292,7 @@ var charLevelUp = function charLevelUp() {
 var updateProficiencyBonus = function updateProficiencyBonus() {
     proficiencyBonus = _info.Levels[currentLevel.textContent].bonus;
     proficiencyBonusPreview.textContent = String(_info.Levels[currentLevel.textContent].bonus);
-    _functions.Functions.appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
+    func.appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
 };
 var addExp = function addExp() {
     var currentExpNum = Number(currentExperience.textContent);
@@ -401,8 +407,8 @@ var racialAbilityModifier = function racialAbilityModifier() {
     }
 };
 // Add ability options to extra ability select element
-_functions.Functions.addOptionsToSelect(extraAbilityModifier1, _info.Abilities);
-_functions.Functions.addOptionsToSelect(extraAbilityModifier2, _info.Abilities);
+func.addOptionsToSelect(extraAbilityModifier1, _info.Abilities);
+func.addOptionsToSelect(extraAbilityModifier2, _info.Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function showExtraModifiersInput() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
@@ -472,7 +478,7 @@ var getSelectedSkills = function getSelectedSkills() {
 var getSkillModifier = function getSkillModifier(skillText) {
     var skillAbility = singleWord.exec(skillText);
     var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
-    abilityScoreMod = _functions.Functions.getAbilityScoreModifier(skillAbilityScore);
+    abilityScoreMod = func.getAbilityScoreModifier(skillAbilityScore);
     return totalMod = abilityScoreMod + proficiencyBonus;
 };
 var highightSkill = function highightSkill(skillDescription) {
@@ -480,7 +486,7 @@ var highightSkill = function highightSkill(skillDescription) {
         var skill = skillsPreviewListItems[i];
         var skillName = skillsPreviewListItems[i].childNodes[1];
         var skillText = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
-        skillText === skillDescription ? (skill.style.color = 'green', getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent), _functions.Functions.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])) : console.log('Highlight Skill: not a match');
+        skillText === skillDescription ? (skill.style.color = 'green', getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent), func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])) : console.log('Highlight Skill: not a match');
     }
 };
 var highlightSkills = function highlightSkills() {
@@ -497,7 +503,7 @@ var highlightSkills = function highlightSkills() {
         if (skillText === selectedSkill1.textContent.trim() || skillText === selectedSkill2.textContent.trim() || skillText === selectedSkill3.textContent.trim()) {
             skill.style.color = 'green';
             getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-            _functions.Functions.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
+            func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
         } else {
             // if no match dim selection
             skill.style.color = '#ccc';
@@ -506,31 +512,30 @@ var highlightSkills = function highlightSkills() {
 };
 var highlightRacialSKills = function highlightRacialSKills() {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
     var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
     var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
     // Dwarf Stonecunning
-    _info.Races[charRace].special.stonecunning ? _functions.Functions.showElementWithProps(stonecunningPreview, _info.Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none');
+    _info.Races[charRace].special.stonecunning ? func.showElementWithProps(stonecunningPreview, _info.Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)") : stonecunningPreview.parentElement.classList.add('d-none');
     // Dwarf tool proficiency
-    _info.Races[charRace].special.toolProficiency ? _functions.Functions.showElementWithProps(toolProficiencyPreview, _info.Races[charRace].special.stonecunning.info, 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : toolProficiencyPreview.parentElement.classList.add('d-none');
+    _info.Races[charRace].special.toolProficiency ? func.showElementWithProps(toolProficiencyPreview, _info.Races[charRace].special.stonecunning.info, 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : toolProficiencyPreview.parentElement.classList.add('d-none');
     // Dragonborn Draconic Ancestry
     _info.Races[charRace].special.draconicAncestry ? (draconicAncestryPreview.parentElement.classList.remove('d-none'), draconicAncestryPreview.parentElement.classList.add('d-flex'), draconicAncestryPreview.setAttribute('title', _info.Races.dragonborn.special.draconicAncestry.info), dragonType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color), damageType.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type), breathWeapon.textContent = String(_info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath), damageResistancePreview.parentElement.classList.remove('d-none'), damageResistancePreview.parentElement.classList.add('d-flex'), damageResistanceType.textContent = _info.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type) : (draconicAncestryPreview.parentElement.classList.add('d-none'), draconicAncestryHelp.textContent = "");
     //  Elf Keen Senses Perception Bonus Skill
     _info.Races[charRace].special.keenSenses ? highightSkill('perception') : null;
     // Elf Trance sleep skill
-    _info.Races[charRace].special.trance ? (trancePreview.parentElement.classList.remove('d-none'), trancePreview.parentElement.classList.add('d-flex'), tranceInfo.setAttribute('title', _info.Races[charRace].special.trance.info)) : null;
+    _info.Races[charRace].special.trance ? func.showElementWithProps(tranceInfo, _info.Races[charRace].special.trance.info, "Details") : null;
     // Half-orc special abilities
-    _info.Races[charRace].special.menacing ? (menacingPreview.parentElement.classList.remove('d-none'), menacingPreview.parentElement.classList.add('d-flex'), menacingInfo.setAttribute('title', _info.Races[charRace].special.menacing.info)) : null;
-    _info.Races[charRace].special.relentlessEndurance ? (relentlessEndurancePreview.parentElement.classList.remove('d-none'), relentlessEndurancePreview.parentElement.classList.add('d-flex'), relentlessEnduranceInfo.setAttribute('title', _info.Races[charRace].special.relentlessEndurance.info)) : null;
-    _info.Races[charRace].special.savageAttacks ? (savageAttacksPreview.parentElement.classList.remove('d-none'), savageAttacksPreview.parentElement.classList.add('d-flex'), savageAttacksInfo.setAttribute('title', _info.Races[charRace].special.savageAttacks.info)) : null;
+    _info.Races[charRace].special.menacing ? func.showElementWithProps(menacingInfo, _info.Races[charRace].special.menacing.info, "Details") : null;
+    _info.Races[charRace].special.relentlessEndurance ? func.showElementWithProps(relentlessEnduranceInfo, _info.Races[charRace].special.relentlessEndurance.info, "Details") : null;
+    _info.Races[charRace].special.savageAttacks ? func.showElementWithProps(savageAttacksInfo, _info.Races[charRace].special.savageAttacks.info, "Details") : null;
     // Tiefling special abilities
-    _info.Races[charRace].special.hellishResistance ? (hellishResistancePreview.parentElement.classList.remove('d-none'), hellishResistancePreview.parentElement.classList.add('d-flex'), hellishResistanceInfo.setAttribute('title', _info.Races[charRace].special.hellishResistance.info)) : null;
-    _info.Races[charRace].special.infernalLegacy ? (infernalLegacyPreview.parentElement.classList.remove('d-none'), infernalLegacyPreview.parentElement.classList.add('d-flex'), infernalLegacyInfo.setAttribute('title', _info.Races[charRace].special.infernalLegacy.info)) : null;
+    _info.Races[charRace].special.hellishResistance ? func.showElementWithProps(hellishResistanceInfo, _info.Races[charRace].special.hellishResistance.info, "Details") : null;
+    _info.Races[charRace].special.infernalLegacy ? func.showElementWithProps(infernalLegacyInfo, _info.Races[charRace].special.infernalLegacy.info, "Details") : null;
     // Halfling lightfoot stealth skill
-    _info.Races[charRace].subrace.naturallyStealthy ? (stealthPreview.parentElement.classList.remove('d-none'), stealthPreview.parentElement.classList.add('d-flex'), stealthInfo.setAttribute('title', _info.Races[charRace].subrace.naturallyStealthy.info)) : null;
-    // Rock gnome special
-    _info.Races[charRace].subrace.artificersLore ? (artificersLorePreview.parentElement.classList.remove('d-none'), artificersLorePreview.parentElement.classList.add('d-flex'), artificersLoreInfo.setAttribute('title', _info.Races[charRace].subrace.artificersLore.info)) : null;
-    // Rock gnome special
-    _info.Races[charRace].subrace.tinker ? (tinkerPreview.parentElement.classList.remove('d-none'), tinkerPreview.parentElement.classList.add('d-flex'), tinkerPreview.setAttribute('title', _info.Races[charRace].subrace.tinker.info), tinkerInfo.setAttribute('title', _info.Races[charRace].subrace.tinker.details)) : null;
+    charSubrace === "lightfoot" ? func.showElementWithProps(stealthInfo, _info.Races[charRace].subrace.naturallyStealthy.info, "Details") : null;
+    // Rock gnome special abilities
+    charSubrace === "rockgnome" ? (func.showElementWithProps(artificersLoreInfo, _info.Races[charRace].subrace.artificersLore.info, "Details"), func.showElementWithProps(tinkerPreview, _info.Races[charRace].subrace.tinker.info, "Tinker"), tinkerInfo.setAttribute('title', _info.Races[charRace].subrace.tinker.details)) : null;
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {
@@ -551,18 +556,18 @@ var speedPreview = document.querySelector('#speed');
 var passivePerceptionPreview = document.querySelector('#passivePerception');
 var darkvisionPreview = document.querySelector('#darkvisionPreview');
 var sizePreview = document.querySelector('#size');
-var weaponProficiencesPreview = document.querySelector('#weaponProficiences');
+var weaponProficiencesPreview = document.querySelector('#weaponProficiencesPreview');
 // Combat functions
 var initialHitPoints = function initialHitPoints() {
     // 1st level is max hit points + constiution modifier + racial modifier
-    var modifier = _functions.Functions.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
+    var modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitpoints = _info.ClassProps[charCls].hitdie + modifier;
     hitPointPreview.textContent = String(hitpoints);
 };
 var addHitPoints = function addHitPoints() {
     var currentHitPoints = Number(hitPointPreview.textContent);
-    var rolledHitPoints = _functions.Functions.randomIntFromRange(1, _info.ClassProps[charCls].hitdie);
-    modifier = _functions.Functions.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
+    var rolledHitPoints = func.randomIntFromRange(1, _info.ClassProps[charCls].hitdie);
+    modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitPointsToAdd = rolledHitPoints + modifier;
     // Prevent negative or zero hit points on level up
     if (rolledHitPoints + modifier <= 0) {
@@ -572,20 +577,20 @@ var addHitPoints = function addHitPoints() {
 };
 var armorClass = function armorClass() {
     var base = 10;
-    var dexMod = _functions.Functions.getAbilityScoreModifier(Number(dexerity));
+    var dexMod = func.getAbilityScoreModifier(Number(dexerity));
     var armorMod = 0;
     var ac = String(base + dexMod + armorMod);
     armorClassPreview.textContent = ac;
 };
 var initiativeMod = function initiativeMod() {
-    var dexMod = _functions.Functions.getAbilityScoreModifier(Number(dexerity));
+    var dexMod = func.getAbilityScoreModifier(Number(dexerity));
     initiativeModPreview.textContent = String(dexMod);
 };
 var baseSpeed = function baseSpeed() {
     return speedPreview.textContent = _info.Races[charRace].speed;
 };
 var passivePerception = function passivePerception() {
-    return passivePerceptionPreview.textContent = String(10 + _functions.Functions.getAbilityScoreModifier(wisdom));
+    return passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom));
 };
 var darkvision = function darkvision() {
     charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
@@ -600,11 +605,13 @@ var setCharacterSize = function setCharacterSize() {
 };
 var calculateWeaponProficiencies = function calculateWeaponProficiencies() {
     charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    if (charRace === 'dwarf') {
-        _info.Races[charRace].weaponProficiences.map(function (weapon) {
-            weaponProficiencesPreview.textContent += weapon + ", ";
-        });
-    }
+    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+    charRace === 'dwarf' ? _info.Races[charRace].weaponProficiences.map(function (weapon) {
+        weaponProficiencesPreview.textContent += weapon + ", ";
+    }) : null;
+    charSubrace === 'highelf' ? _info.Races[charRace].subrace.weaponProficiences.map(function (weapon) {
+        weaponProficiencesPreview.textContent += weapon + ", ";
+    }) : null;
 };
 // Saving throws
 var savingThrowList = document.querySelector('#savingThrowPreviewList');
@@ -618,9 +625,9 @@ var calculateSavingThrowMods = function calculateSavingThrowMods() {
         for (var i = 0; i < savingThrowListItems.length; i++) {
             var string = singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0].toLowerCase();
             if (string === ability) {
-                var abilityMod = _functions.Functions.getAbilityScoreModifier(lookupAbilityScore(ability));
+                var abilityMod = func.getAbilityScoreModifier(lookupAbilityScore(ability));
                 var totalMod_1 = Number(abilityMod + proficiencyBonus);
-                _functions.Functions.appendSigntoValue(totalMod_1, savingThrowListItems[i].childNodes[3]);
+                func.appendSigntoValue(totalMod_1, savingThrowListItems[i].childNodes[3]);
             }
         }
     });
