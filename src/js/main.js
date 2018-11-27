@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 // Imports
 ////////////////////////////////////////
-import { Functions as func } from './functions.js';
+import * as func from './functions.js';
 import { Abilities, Alignments, ClassList, ClassProps, Levels, Languages, Races, RaceList, Skills } from './info.js';
 // Initialize variables
 var modifier;

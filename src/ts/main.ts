@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////////////////////
 
-import { Functions as func } from './functions.js';
+import * as func from './functions.js';
 
 import {
   Abilities,
