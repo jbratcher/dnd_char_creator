@@ -240,6 +240,7 @@ export var Races = {
             "Chaotic Evil"
         ],
         darkvision: false,
+        info: "Your draconic heritage manifests in a variety of traits you share with other dragonborn.",
         languages: [
             'Common',
             'Draconic'
@@ -335,6 +336,7 @@ export var Races = {
             "Lawful Evil"
         ],
         darkvision: true,
+        info: "Your dwarf character has an assortment of inborn abilities, part and parcel of dwarven nature.",
         languages: [
             'Common',
             'Dwarfish'
@@ -392,6 +394,7 @@ export var Races = {
             "Chaotic Evil"
         ],
         darkvision: true,
+        info: "Your elf character has a variety of natural abilities, the result of thousands of years of elven refinement.",
         languages: [
             'Common',
             'Elfish'
@@ -445,6 +448,7 @@ export var Races = {
             "Chaotic Good"
         ],
         darkvision: true,
+        info: "Your gnome character has certain characteristics in common with all other gnomes.",
         languages: [
             "Common",
             "Gnomish"
@@ -502,6 +506,7 @@ export var Races = {
         ],
         bonusSkills: 2,
         darkvision: true,
+        info: "Your half-elf character has some qualities in common with elves and some that are unique to half-elves.",
         languages: [
             "Common",
             "Elfish"
@@ -535,6 +540,7 @@ export var Races = {
             "Lawful Good",
         ],
         darkvision: false,
+        info: "Your halfling character has a number of traits in common with all other halflings.",
         languages: [
             "Common",
             "Halfling"
@@ -588,6 +594,7 @@ export var Races = {
             "Chaotic Evil"
         ],
         darkvision: true,
+        info: "Your half-orc character has certain traits deriving from your orc ancestry.",
         languages: [
             "Common",
             "Orc"
@@ -627,6 +634,7 @@ export var Races = {
             "Chaotic Evil"
         ],
         darkvision: false,
+        info: "It\u2019s hard to make generalizations about humans, but your human character has these traits.",
         languages: [
             "Common"
         ],
@@ -653,6 +661,7 @@ export var Races = {
             "Chaotic Evil"
         ],
         darkvision: true,
+        info: "Tieflings share certain racial traits as a result of their infernal descent.",
         languages: [
             "Common",
             "Infernal"

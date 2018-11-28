@@ -101,6 +101,18 @@ let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
 
 let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,""); // "i.e. human, halfelf, halforc"
 
+const raceHelp = <HTMLElement>document.querySelector('#raceHelp');
+
+const setRaceHelpText = () => {
+  raceHelp.textContent = "";
+  let text =  `${Races[charRace].info}`;
+  raceHelp.textContent = text;
+}
+
+setRaceHelpText();
+
+race.addEventListener('change', setRaceHelpText);
+
 // Class
 
 const cls = <HTMLSelectElement>document.querySelector('#cls');

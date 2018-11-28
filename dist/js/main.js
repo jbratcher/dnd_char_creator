@@ -71,6 +71,14 @@ var race = document.querySelector('#race');
 func.addOptionsToSelect(race, _info.RaceList);
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, ""); // "i.e. human, halfelf, halforc"
+var raceHelp = document.querySelector('#raceHelp');
+var setRaceHelpText = function setRaceHelpText() {
+    raceHelp.textContent = "";
+    var text = "" + _info.Races[charRace].info;
+    raceHelp.textContent = text;
+};
+setRaceHelpText();
+race.addEventListener('change', setRaceHelpText);
 // Class
 var cls = document.querySelector('#cls');
 func.addOptionsToSelect(cls, _info.ClassList);
