@@ -35,7 +35,7 @@ export const showElement = element => {
   element.classList.add('d-flex');
 };
 
-export const showElementWithProps = (element, titleText, contentText: string = "") => {
+export const showElementWithProps = (element, titleText: string = "", contentText: string = "") => {
   element.parentElement.classList.remove('d-none');
   element.parentElement.classList.add('d-flex');
   element.setAttribute('title', titleText);

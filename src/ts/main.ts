@@ -183,7 +183,6 @@ race.addEventListener('change', showOptionalSubraceSelect);  // Subrace options 
 
 const setSubrace = () => {
   charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,"");
-  console.log(charSubrace);
 }
 
 func.setText(subraceHelp, "");
@@ -203,10 +202,8 @@ const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 // Displays race specific age help text on race selection
 
 const ageHelpText = () => {
-
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  ageHelp.textContent = `Please enter an age between ${Races[charRace].age.min} and  ${Races[charRace].age.max}`
-
+  setRace();
+  func.setText(ageHelp, `Please enter an age between ${Races[charRace].age.min} and  ${Races[charRace].age.max}` )
 }
 
 race.addEventListener('change', ageHelpText);
@@ -225,7 +222,7 @@ const draconicAncestryHelp = <HTMLElement>document.querySelector('#draconicAnces
 
 const showDraconicAncestrySelect = () => {
 
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  setRace();
 
   Races[charRace].special.draconicAncestry
     ? (

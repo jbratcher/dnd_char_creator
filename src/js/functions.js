@@ -25,6 +25,7 @@ export var showElement = function (element) {
     element.classList.add('d-flex');
 };
 export var showElementWithProps = function (element, titleText, contentText) {
+    if (titleText === void 0) { titleText = ""; }
     if (contentText === void 0) { contentText = ""; }
     element.parentElement.classList.remove('d-none');
     element.parentElement.classList.add('d-flex');

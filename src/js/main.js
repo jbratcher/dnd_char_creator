@@ -98,7 +98,6 @@ var showOptionalSubraceSelect = function () {
 race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
 var setSubrace = function () {
     charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
-    console.log(charSubrace);
 };
 func.setText(subraceHelp, "");
 subrace.addEventListener('change', function () {
@@ -110,8 +109,8 @@ var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
 // Displays race specific age help text on race selection
 var ageHelpText = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    ageHelp.textContent = "Please enter an age between " + Races[charRace].age.min + " and  " + Races[charRace].age.max;
+    setRace();
+    func.setText(ageHelp, "Please enter an age between " + Races[charRace].age.min + " and  " + Races[charRace].age.max);
 };
 race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
@@ -121,7 +120,7 @@ var draconicAncestrySection = document.querySelector('#draconicAncestrySection')
 var draconicAncestry = document.querySelector('#draconicAncestry');
 var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 var showDraconicAncestrySelect = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     Races[charRace].special.draconicAncestry
         ? (func.addOptionsToSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
             draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
