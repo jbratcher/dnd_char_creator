@@ -75,4 +75,12 @@ export const appendSigntoValue = (value, node) => {
   node.textContent = `${sign} ${value}`;
 };
 
+// Clear element text then set to new value
+
+export const setText = (element, text) => {
+  element.textContent = "";
+  let newText = text;
+  element.textContent = text;
+};
+
 

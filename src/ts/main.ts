@@ -103,15 +103,16 @@ let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,""); 
 
 const raceHelp = <HTMLElement>document.querySelector('#raceHelp');
 
-const setRaceHelpText = () => {
-  raceHelp.textContent = "";
-  let text =  `${Races[charRace].info}`;
-  raceHelp.textContent = text;
+const setRace = () => {
+  charRace = race.options[race.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
 }
 
-setRaceHelpText();
+func.setText(raceHelp, Races[charRace].info);
 
-race.addEventListener('change', setRaceHelpText);
+race.addEventListener('change', function() {
+  setRace();
+  func.setText(raceHelp, Races[charRace].info);
+});
 
 // Class
 
@@ -180,21 +181,18 @@ const showOptionalSubraceSelect = () => {
 
 race.addEventListener('change', showOptionalSubraceSelect);  // Subrace options regenerate on race selection change
 
-const setSubRace = () => {
-
-  charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
-
+const setSubrace = () => {
+  charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,"");
+  console.log(charSubrace);
 }
 
-const setSubraceHelpText = () => {
-  subraceHelp.textContent = "";
-  let text =  `${Races[charRace].subrace.helpText}`;
-  subraceHelp.textContent = text;
-}
+func.setText(subraceHelp, "");
 
-subrace.addEventListener('change', setSubRace);  // explicity set subrace value on subrace selection change
+subrace.addEventListener('change', function() {
+  setSubrace();
+  func.setText(subraceHelp, Races[charRace].subrace.helpText);
 
-subrace.addEventListener('change', setSubraceHelpText);
+});
 
 // Age
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = undefined;
+exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = undefined;
 
 var _characterImages = require('./characterImages.js');
 
@@ -71,4 +71,10 @@ var appendSigntoValue = exports.appendSigntoValue = function appendSigntoValue(v
     value > 0 ? sign = "+" : sign = "-";
     value = Math.abs(value);
     node.textContent = sign + " " + value;
+};
+// Clear element text then set to new value
+var setText = exports.setText = function setText(element, text) {
+    element.textContent = "";
+    var newText = text;
+    element.textContent = text;
 };

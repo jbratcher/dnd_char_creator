@@ -56,3 +56,9 @@ export var appendSigntoValue = function (value, node) {
     value = Math.abs(value);
     node.textContent = sign + " " + value;
 };
+// Clear element text then set to new value
+export var setText = function (element, text) {
+    element.textContent = "";
+    var newText = text;
+    element.textContent = text;
+};

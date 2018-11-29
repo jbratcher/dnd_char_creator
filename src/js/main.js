@@ -52,13 +52,14 @@ func.addOptionsToSelect(race, RaceList);
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, ""); // "i.e. human, halfelf, halforc"
 var raceHelp = document.querySelector('#raceHelp');
-var setRaceHelpText = function () {
-    raceHelp.textContent = "";
-    var text = "" + Races[charRace].info;
-    raceHelp.textContent = text;
+var setRace = function () {
+    charRace = race.options[race.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
 };
-setRaceHelpText();
-race.addEventListener('change', setRaceHelpText);
+func.setText(raceHelp, Races[charRace].info);
+race.addEventListener('change', function () {
+    setRace();
+    func.setText(raceHelp, Races[charRace].info);
+});
 // Class
 var cls = document.querySelector('#cls');
 func.addOptionsToSelect(cls, ClassList);
@@ -95,16 +96,15 @@ var showOptionalSubraceSelect = function () {
         : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
-var setSubRace = function () {
-    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+var setSubrace = function () {
+    charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
+    console.log(charSubrace);
 };
-var setSubraceHelpText = function () {
-    subraceHelp.textContent = "";
-    var text = "" + Races[charRace].subrace.helpText;
-    subraceHelp.textContent = text;
-};
-subrace.addEventListener('change', setSubRace); // explicity set subrace value on subrace selection change
-subrace.addEventListener('change', setSubraceHelpText);
+func.setText(subraceHelp, "");
+subrace.addEventListener('change', function () {
+    setSubrace();
+    func.setText(subraceHelp, Races[charRace].subrace.helpText);
+});
 // Age
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');

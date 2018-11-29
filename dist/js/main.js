@@ -72,13 +72,14 @@ func.addOptionsToSelect(race, _info.RaceList);
 var selectedRace = race.options[race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, ""); // "i.e. human, halfelf, halforc"
 var raceHelp = document.querySelector('#raceHelp');
-var setRaceHelpText = function setRaceHelpText() {
-    raceHelp.textContent = "";
-    var text = "" + _info.Races[charRace].info;
-    raceHelp.textContent = text;
+var setRace = function setRace() {
+    charRace = race.options[race.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
 };
-setRaceHelpText();
-race.addEventListener('change', setRaceHelpText);
+func.setText(raceHelp, _info.Races[charRace].info);
+race.addEventListener('change', function () {
+    setRace();
+    func.setText(raceHelp, _info.Races[charRace].info);
+});
 // Class
 var cls = document.querySelector('#cls');
 func.addOptionsToSelect(cls, _info.ClassList);
@@ -112,16 +113,15 @@ var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
     func.addOptionsToSelect(subrace, _info.Races[charRace].subrace.name), subraceSelectSection.classList.remove('d-none')) : subraceSelectSection.classList.add('d-none');
 };
 race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
-var setSubRace = function setSubRace() {
-    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+var setSubrace = function setSubrace() {
+    charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
+    console.log(charSubrace);
 };
-var setSubraceHelpText = function setSubraceHelpText() {
-    subraceHelp.textContent = "";
-    var text = "" + _info.Races[charRace].subrace.helpText;
-    subraceHelp.textContent = text;
-};
-subrace.addEventListener('change', setSubRace); // explicity set subrace value on subrace selection change
-subrace.addEventListener('change', setSubraceHelpText);
+func.setText(subraceHelp, "");
+subrace.addEventListener('change', function () {
+    setSubrace();
+    func.setText(subraceHelp, _info.Races[charRace].subrace.helpText);
+});
 // Age
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
