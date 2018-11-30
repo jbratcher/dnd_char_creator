@@ -72,7 +72,7 @@ var selectedAlignment = alignment.options[alignment.selectedIndex];
 // limits alignment options to race recommendations
 var availableAlignments = function () {
     alignment.innerHTML = ""; // reset alignment select options
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     func.addOptionsToSelect(alignment, Races[charRace].alignments);
 };
 race.addEventListener('change', availableAlignments); // Alignment options regenerate on race selection
@@ -86,7 +86,7 @@ var subraceHelp = document.querySelector('#subraceHelp');
 var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
 var showOptionalSubraceSelect = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     subrace.innerHTML = "-"; // Reset any subrace from previous selection
     subraceHelp.textContent = "";
     Races[charRace].subrace
@@ -137,9 +137,8 @@ var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 func.addOptionsToSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    console.log(charRace);
-    console.log(charSubrace);
+    setRace();
+    setSubrace();
     charRace === 'human'
         ? (extraLanguageField.classList.remove('d-none'),
             extraLanguageHelp.textContent = 'Humans get to choose 1 extra language')
@@ -371,7 +370,7 @@ var lookupAbilityScore = function (ability) {
     }
 };
 var subraceAbilityModifier = function () {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     if (Races[charRace].subrace) {
         var subraceAbility = Races[charRace].subrace.ability;
         var subraceAbilityMod = Races[charRace].subrace.modifier;
@@ -386,7 +385,7 @@ var subraceAbilityModifier = function () {
     }
 };
 var racialAbilityModifier = function () {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     var racialAbility = Races[charRace].abilityModifier.ability;
     var racialAbilityMod = Races[charRace].abilityModifier.modifier;
     // if ability matches abilityPreview node text, add modifier to score
@@ -415,7 +414,7 @@ func.addOptionsToSelect(extraAbilityModifier1, Abilities);
 func.addOptionsToSelect(extraAbilityModifier2, Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     charRace === 'halfelf'
         ? extraAbilityModifier.classList.remove('d-none')
         : extraAbilityModifier.classList.add('d-none');
@@ -439,7 +438,7 @@ var hideMod1Selection = function () {
 extraAbilityModifier1.addEventListener('change', hideMod1Selection);
 // Set value of Dwarven Toughtness hit point modifier based on race selection
 var addDwarvenToughness = function () {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     charRace === "dwarf"
         ? dwarvenToughnessMod = 1
         : dwarvenToughnessMod = 0;
@@ -528,8 +527,8 @@ var highlightSkills = function () {
     }
 };
 var highlightRacialSKills = function () {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+    setRace();
+    setSubrace();
     var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
     var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
     // Dwarf Stonecunning
@@ -641,7 +640,7 @@ var initiativeMod = function () {
 var baseSpeed = function () { return speedPreview.textContent = Races[charRace].speed; };
 var passivePerception = function () { return passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom)); };
 var darkvision = function () {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     if (Races[charRace].darkvision) {
         darkvisionPreview.textContent = '60 ft.';
     }
@@ -651,8 +650,8 @@ var darkvision = function () {
 };
 var setCharacterSize = function () { return sizePreview.textContent = Races[charRace].size; };
 var calculateWeaponProficiencies = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+    setRace();
+    setSubrace();
     charRace === 'dwarf'
         ? Races[charRace].weaponProficiences.map(function (weapon) {
             weaponProficiencesPreview.textContent += weapon + ", ";
@@ -689,7 +688,7 @@ var poisonResistance = document.querySelector('#poisonResistance');
 var charmResistance = document.querySelector('#charmResistance');
 var fearResistance = document.querySelector('#fearResistance');
 var calculateSpecialResistances = function () {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     if (charRace === 'dwarf') {
         poisonResistance.textContent = "Advantage, Resistance";
         poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);

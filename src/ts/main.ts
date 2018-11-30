@@ -137,7 +137,7 @@ let selectedAlignment = <HTMLOptionElement>alignment.options[alignment.selectedI
 const availableAlignments = () => {
 
   alignment.innerHTML = "";  // reset alignment select options
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  setRace();
   func.addOptionsToSelect(alignment, Races[charRace].alignments);
 
 }
@@ -164,7 +164,7 @@ let charSubrace: string = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
 
 const showOptionalSubraceSelect = () => {
 
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  setRace();
 
   subrace.innerHTML = "-"  // Reset any subrace from previous selection
   subraceHelp.textContent = "";
@@ -254,11 +254,8 @@ func.addOptionsToSelect(extraLanguage, Languages.standard);
 
 const showExtraLanguageInput = () => {
 
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-
-  console.log(charRace);
-  console.log(charSubrace);
-
+  setRace();
+  setSubrace();
 
   charRace === 'human'
     ? (
@@ -636,7 +633,7 @@ const lookupAbilityScore = (ability) => {
 
 const subraceAbilityModifier = () => {
 
-  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  setRace();
 
   if(Races[charRace].subrace) {
 
@@ -661,7 +658,7 @@ const subraceAbilityModifier = () => {
 
 const racialAbilityModifier = () => {
 
-  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  setRace();
   let racialAbility: string = Races[charRace].abilityModifier.ability;
   let racialAbilityMod: number = Races[charRace].abilityModifier.modifier;
 
@@ -702,7 +699,7 @@ func.addOptionsToSelect(extraAbilityModifier2, Abilities);
 
 const showExtraModifiersInput = () => {
 
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  setRace();
 
   charRace === 'halfelf'
     ? extraAbilityModifier.classList.remove('d-none')
@@ -739,11 +736,14 @@ extraAbilityModifier1.addEventListener('change', hideMod1Selection)
 // Set value of Dwarven Toughtness hit point modifier based on race selection
 
 const addDwarvenToughness = () => {
-  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  
+  setRace();
+  
   charRace === "dwarf"
     ? dwarvenToughnessMod = 1
     : dwarvenToughnessMod = 0
   return dwarvenToughnessMod
+  
 }
 
 // if extra ability score is selected add +1 to ability score preview
@@ -861,9 +861,9 @@ const highlightSkills = () => {
 
 const highlightRacialSKills = () => {
 
-  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  setRace();
   
-  charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
+  setSubrace();
 
   let selectedDraconicAncestry = <HTMLOptionElement>draconicAncestry.options[draconicAncestry.selectedIndex];
 
@@ -1035,7 +1035,7 @@ const baseSpeed = () => speedPreview.textContent = Races[charRace].speed;
 const passivePerception = () => passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom));
 
 const darkvision = () => {
-  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
+  setRace();
   if (Races[charRace].darkvision) {
     darkvisionPreview.textContent = '60 ft.'
   } else {
@@ -1047,8 +1047,8 @@ const setCharacterSize = () => sizePreview.textContent = Races[charRace].size;
 
 const calculateWeaponProficiencies = () => {
 
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
-  charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
+  setRace();
+  setSubrace();
 
   charRace === 'dwarf'
     ? Races[charRace].weaponProficiences.map(weapon => {
@@ -1103,7 +1103,7 @@ const fearResistance = <HTMLElement>document.querySelector('#fearResistance');
 
 const calculateSpecialResistances = () => {
 
-  charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g,"");
+  setRace();
 
   if(charRace === 'dwarf') {
 

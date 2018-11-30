@@ -92,7 +92,7 @@ var selectedAlignment = alignment.options[alignment.selectedIndex];
 // limits alignment options to race recommendations
 var availableAlignments = function availableAlignments() {
     alignment.innerHTML = ""; // reset alignment select options
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     func.addOptionsToSelect(alignment, _info.Races[charRace].alignments);
 };
 race.addEventListener('change', availableAlignments); // Alignment options regenerate on race selection
@@ -106,7 +106,7 @@ var subraceHelp = document.querySelector('#subraceHelp');
 var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
 var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     subrace.innerHTML = "-"; // Reset any subrace from previous selection
     subraceHelp.textContent = "";
     _info.Races[charRace].subrace ? (func.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
@@ -115,7 +115,6 @@ var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
 race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
 var setSubrace = function setSubrace() {
     charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
-    console.log(charSubrace);
 };
 func.setText(subraceHelp, "");
 subrace.addEventListener('change', function () {
@@ -127,8 +126,8 @@ var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
 // Displays race specific age help text on race selection
 var ageHelpText = function ageHelpText() {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    ageHelp.textContent = "Please enter an age between " + _info.Races[charRace].age.min + " and  " + _info.Races[charRace].age.max;
+    setRace();
+    func.setText(ageHelp, "Please enter an age between " + _info.Races[charRace].age.min + " and  " + _info.Races[charRace].age.max);
 };
 race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
@@ -138,7 +137,7 @@ var draconicAncestrySection = document.querySelector('#draconicAncestrySection')
 var draconicAncestry = document.querySelector('#draconicAncestry');
 var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 var showDraconicAncestrySelect = function showDraconicAncestrySelect() {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     _info.Races[charRace].special.draconicAncestry ? (func.addOptionsToSelect(draconicAncestry, _info.Races[charRace].special.draconicAncestry.types), draconicAncestryHelp.textContent = 'Choose a dragon lineage.', draconicAncestrySection.classList.remove('d-none')) : (draconicAncestrySection.classList.add('d-none'), draconicAncestryHelp.textContent = '');
 };
 race.addEventListener('change', showDraconicAncestrySelect);
@@ -150,9 +149,8 @@ var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
 func.addOptionsToSelect(extraLanguage, _info.Languages.standard);
 var showExtraLanguageInput = function showExtraLanguageInput() {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    console.log(charRace);
-    console.log(charSubrace);
+    setRace();
+    setSubrace();
     charRace === 'human' ? (extraLanguageField.classList.remove('d-none'), extraLanguageHelp.textContent = 'Humans get to choose 1 extra language') : charRace === 'halfelf' ? (extraLanguageField.classList.remove('d-none'), extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language') : charSubrace === 'highelf' ? (extraLanguageField.classList.remove('d-none'), extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language') : (extraLanguageField.classList.add('d-none'), extraLanguageHelp.textContent = '');
 };
 race.addEventListener('change', showExtraLanguageInput);
@@ -375,7 +373,7 @@ var lookupAbilityScore = function lookupAbilityScore(ability) {
     }
 };
 var subraceAbilityModifier = function subraceAbilityModifier() {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     if (_info.Races[charRace].subrace) {
         var subraceAbility = _info.Races[charRace].subrace.ability;
         var subraceAbilityMod = _info.Races[charRace].subrace.modifier;
@@ -390,7 +388,7 @@ var subraceAbilityModifier = function subraceAbilityModifier() {
     }
 };
 var racialAbilityModifier = function racialAbilityModifier() {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     var racialAbility = _info.Races[charRace].abilityModifier.ability;
     var racialAbilityMod = _info.Races[charRace].abilityModifier.modifier;
     // if ability matches abilityPreview node text, add modifier to score
@@ -419,7 +417,7 @@ func.addOptionsToSelect(extraAbilityModifier1, _info.Abilities);
 func.addOptionsToSelect(extraAbilityModifier2, _info.Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function showExtraModifiersInput() {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     charRace === 'halfelf' ? extraAbilityModifier.classList.remove('d-none') : extraAbilityModifier.classList.add('d-none');
     charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
 };
@@ -439,7 +437,7 @@ var hideMod1Selection = function hideMod1Selection() {
 extraAbilityModifier1.addEventListener('change', hideMod1Selection);
 // Set value of Dwarven Toughtness hit point modifier based on race selection
 var addDwarvenToughness = function addDwarvenToughness() {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     charRace === "dwarf" ? dwarvenToughnessMod = 1 : dwarvenToughnessMod = 0;
     return dwarvenToughnessMod;
 };
@@ -519,8 +517,8 @@ var highlightSkills = function highlightSkills() {
     }
 };
 var highlightRacialSKills = function highlightRacialSKills() {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+    setRace();
+    setSubrace();
     var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
     var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
     // Dwarf Stonecunning
@@ -601,7 +599,7 @@ var passivePerception = function passivePerception() {
     return passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom));
 };
 var darkvision = function darkvision() {
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
+    setRace();
     if (_info.Races[charRace].darkvision) {
         darkvisionPreview.textContent = '60 ft.';
     } else {
@@ -612,8 +610,8 @@ var setCharacterSize = function setCharacterSize() {
     return sizePreview.textContent = _info.Races[charRace].size;
 };
 var calculateWeaponProficiencies = function calculateWeaponProficiencies() {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
-    charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+    setRace();
+    setSubrace();
     charRace === 'dwarf' ? _info.Races[charRace].weaponProficiences.map(function (weapon) {
         weaponProficiencesPreview.textContent += weapon + ", ";
     }) : null;
@@ -646,7 +644,7 @@ var poisonResistance = document.querySelector('#poisonResistance');
 var charmResistance = document.querySelector('#charmResistance');
 var fearResistance = document.querySelector('#fearResistance');
 var calculateSpecialResistances = function calculateSpecialResistances() {
-    charRace = String(race.options[race.selectedIndex].textContent).toLowerCase().replace(/-/g, "");
+    setRace();
     if (charRace === 'dwarf') {
         poisonResistance.textContent = "Advantage, Resistance";
         poisonResistance.setAttribute('title', _info.Races[charRace].special.resilience.info);

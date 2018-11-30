@@ -37,6 +37,9 @@ var showElement = exports.showElement = function showElement(element) {
     element.classList.add('d-flex');
 };
 var showElementWithProps = exports.showElementWithProps = function showElementWithProps(element, titleText, contentText) {
+    if (titleText === void 0) {
+        titleText = "";
+    }
     if (contentText === void 0) {
         contentText = "";
     }
