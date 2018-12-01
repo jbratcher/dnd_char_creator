@@ -97,7 +97,12 @@ var showOptionalSubraceSelect = function () {
 };
 race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
 var setSubrace = function () {
-    charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
+    if (subrace.classList.contains("d-none")) {
+        charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
+    }
+    else {
+        return null;
+    }
 };
 func.setText(subraceHelp, "");
 subrace.addEventListener('change', function () {
@@ -458,7 +463,6 @@ var addHalfElfAbilityMofifiers = function () {
                 var abilityScore_4 = Number(abilityScorePreview);
                 abilityScore_4 += 1;
                 abilityScorePreview = String(abilityScore_4);
-                console.log(abilityScorePreview);
             }
         }
     }
@@ -539,6 +543,8 @@ var highlightRacialSKills = function () {
     Races[charRace].special.toolProficiency
         ? (func.showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, "Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)"))
         : toolProficiencyPreview.parentElement.classList.add('d-none');
+    // Dwarven Toughtness
+    addDwarvenToughness();
     // Dragonborn Draconic Ancestry
     Races[charRace].special.draconicAncestry
         ? (draconicAncestryPreview.parentElement.classList.remove('d-none'),
@@ -561,6 +567,7 @@ var highlightRacialSKills = function () {
         ? func.showElementWithProps(tranceInfo, Races[charRace].special.trance.info, "Details")
         : null;
     // Half-orc special abilities
+    addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
     Races[charRace].special.menacing
         ? func.showElementWithProps(menacingInfo, Races[charRace].special.menacing.info, "Details")
         : null;

@@ -182,7 +182,11 @@ const showOptionalSubraceSelect = () => {
 race.addEventListener('change', showOptionalSubraceSelect);  // Subrace options regenerate on race selection change
 
 const setSubrace = () => {
-  charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,"");
+  if(subrace.classList.contains("d-none")) {
+    charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,"");
+  } else {
+    return null;
+  }
 }
 
 func.setText(subraceHelp, "");
@@ -293,7 +297,7 @@ const racialBonuses = () => {
 }
 
 const clearRacialSkils = () => {
-  
+
   languagesPreview.textContent = "-"
   weaponProficiencesPreview.textContent = "-"
 
@@ -682,7 +686,7 @@ const racialAbilityModifier = () => {
       let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
       if(string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
         let abilityScore: number = Number(abilityScorePreview);
-         abilityScorePreview = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
+        abilityScorePreview = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
       }
     }
 
@@ -736,14 +740,14 @@ extraAbilityModifier1.addEventListener('change', hideMod1Selection)
 // Set value of Dwarven Toughtness hit point modifier based on race selection
 
 const addDwarvenToughness = () => {
-  
+
   setRace();
-  
+
   charRace === "dwarf"
     ? dwarvenToughnessMod = 1
     : dwarvenToughnessMod = 0
   return dwarvenToughnessMod
-  
+
 }
 
 // if extra ability score is selected add +1 to ability score preview
@@ -762,7 +766,6 @@ const addHalfElfAbilityMofifiers = () => {
         let abilityScore: number = Number(abilityScorePreview);
         abilityScore += 1;
         abilityScorePreview = String(abilityScore);
-        console.log(abilityScorePreview);
       }
     }
   }
@@ -862,7 +865,7 @@ const highlightSkills = () => {
 const highlightRacialSKills = () => {
 
   setRace();
-  
+
   setSubrace();
 
   let selectedDraconicAncestry = <HTMLOptionElement>draconicAncestry.options[draconicAncestry.selectedIndex];
@@ -884,6 +887,10 @@ const highlightRacialSKills = () => {
         func.showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
       )
     : toolProficiencyPreview.parentElement.classList.add('d-none')
+
+  // Dwarven Toughtness
+
+  addDwarvenToughness();
 
   // Dragonborn Draconic Ancestry
 
@@ -917,7 +924,9 @@ const highlightRacialSKills = () => {
     : null
 
   // Half-orc special abilities
-  
+
+  addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
+
   Races[charRace].special.menacing
     ? func.showElementWithProps(menacingInfo, Races[charRace].special.menacing.info, "Details")
     : null
@@ -931,15 +940,15 @@ const highlightRacialSKills = () => {
     : null
 
   // Tiefling special abilities
-  
+
   Races[charRace].special.hellishResistance
     ? func.showElementWithProps(hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
     : null
-    
+
   Races[charRace].special.infernalLegacy
     ? func.showElementWithProps(infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
     : null
-    
+
   // Halfling lightfoot stealth skill
 
   charSubrace === "lightfoot"
@@ -949,7 +958,7 @@ const highlightRacialSKills = () => {
   // Rock gnome special abilities
 
   charSubrace === "rockgnome"
-    ? ( 
+    ? (
       func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
       func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
         tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details)
@@ -1055,7 +1064,7 @@ const calculateWeaponProficiencies = () => {
       weaponProficiencesPreview.textContent += weapon + ", ";
     })
     : null;
-  
+
   charSubrace === 'highelf'
     ? Races[charRace].subrace.weaponProficiences.map(weapon => {
       weaponProficiencesPreview.textContent += weapon + ", ";
