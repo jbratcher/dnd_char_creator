@@ -30,9 +30,19 @@ export const addOptionsToSelect = (selectElement, dataArray) => {
   })
 };
 
+export const hideParentElement = (element) => {
+  element.parentElement.classList.remove('d-flex');
+  element.parentElement.classList.add('d-none')
+}
+
+export const resetProps = (element) => {
+  element.textContent = "";
+  element.setAttribute('title', "");
+}
+
 export const showElement = element => {
-  element.classList.remove('d-none');
-  element.classList.add('d-flex');
+  element.parentElement.classList.remove('d-none');
+  element.parentElement.classList.add('d-flex');
 };
 
 export const showElementWithProps = (element, titleText: string = "", contentText: string = "") => {
@@ -82,5 +92,3 @@ export const setText = (element, text) => {
   let newText = text;
   element.textContent = text;
 };
-
-

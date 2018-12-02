@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = undefined;
+exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = undefined;
 
 var _characterImages = require('./characterImages.js');
 
@@ -32,9 +32,17 @@ var addOptionsToSelect = exports.addOptionsToSelect = function addOptionsToSelec
         selectElement.appendChild(optionElement);
     });
 };
+var hideParentElement = exports.hideParentElement = function hideParentElement(element) {
+    element.parentElement.classList.remove('d-flex');
+    element.parentElement.classList.add('d-none');
+};
+var resetProps = exports.resetProps = function resetProps(element) {
+    element.textContent = "";
+    element.setAttribute('title', "");
+};
 var showElement = exports.showElement = function showElement(element) {
-    element.classList.remove('d-none');
-    element.classList.add('d-flex');
+    element.parentElement.classList.remove('d-none');
+    element.parentElement.classList.add('d-flex');
 };
 var showElementWithProps = exports.showElementWithProps = function showElementWithProps(element, titleText, contentText) {
     if (titleText === void 0) {

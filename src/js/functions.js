@@ -20,9 +20,17 @@ export var addOptionsToSelect = function (selectElement, dataArray) {
         selectElement.appendChild(optionElement);
     });
 };
+export var hideParentElement = function (element) {
+    element.parentElement.classList.remove('d-flex');
+    element.parentElement.classList.add('d-none');
+};
+export var resetProps = function (element) {
+    element.textContent = "";
+    element.setAttribute('title', "");
+};
 export var showElement = function (element) {
-    element.classList.remove('d-none');
-    element.classList.add('d-flex');
+    element.parentElement.classList.remove('d-none');
+    element.parentElement.classList.add('d-flex');
 };
 export var showElementWithProps = function (element, titleText, contentText) {
     if (titleText === void 0) { titleText = ""; }
