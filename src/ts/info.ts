@@ -18,7 +18,8 @@ export const ClassProps = {
             "Nature",
             "Perception",
             "Survival"
-        ]
+        ],
+        info: "Barbarian class description"
     },
 
     bard: {
@@ -47,7 +48,8 @@ export const ClassProps = {
             "Slieght of Hand",
             "Stealth",
             "Survival"
-        ]
+        ],
+        info: "Bard class description"
     },
 
     cleric: {
@@ -63,7 +65,8 @@ export const ClassProps = {
             "Medicine",
             "Persuasion",
             "Religion"
-        ]
+        ],
+        info: "Cleric class description"
     },
 
     druid: {
@@ -82,7 +85,8 @@ export const ClassProps = {
             "Perception",
             "Religion",
             "Survival"
-        ]
+        ],
+        info: "Druid class description"
     },
 
     fighter: {
@@ -101,7 +105,8 @@ export const ClassProps = {
             "Intimidation",
             "Perception",
             "Survival"
-        ]
+        ],
+        info: "Fighter class description"
     },
 
     monk: {
@@ -118,7 +123,8 @@ export const ClassProps = {
             "Insight",
             "Religion",
             "Stealth"
-        ]
+        ],
+        info: "Monk class description"
     },
 
     paladin: {
@@ -135,7 +141,8 @@ export const ClassProps = {
             "Medicine",
             "Persuasion",
             "Religion"
-        ]
+        ],
+        info: "Paladin class description"
     },
 
     ranger: {
@@ -176,7 +183,8 @@ export const ClassProps = {
             "Persuasion",
             "Slieght of Hand",
             "Stealth"
-        ]
+        ],
+        info: "Rogue class description"
     },
 
     sorcerer: {
@@ -193,7 +201,8 @@ export const ClassProps = {
             "Intimidation",
             "Persuasion",
             "Religion"
-        ]
+        ],
+        info: "Socerer class description"
     },
 
     warlock: {
@@ -211,7 +220,8 @@ export const ClassProps = {
             "Investigation",
             "Nature",
             "Religion"
-        ]
+        ],
+        info: "Warlock class description"
     },
 
     wizard: {
@@ -228,7 +238,8 @@ export const ClassProps = {
             "Investigation",
             "Medicine",
             "Religion"
-        ]
+        ],
+        info: "Wizard class description"
     }
 
 

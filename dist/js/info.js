@@ -11,43 +11,50 @@ var ClassProps = exports.ClassProps = {
         hitdie: 12,
         savingThrows: ["strength", "constitution"],
         skills: 2,
-        availableSkills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
+        availableSkills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"],
+        info: "Barbarian class description"
     },
     bard: {
         hitdie: 8,
         savingThrows: ["dexerity", "charisma"],
         skills: 3,
-        availableSkills: ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Slieght of Hand", "Stealth", "Survival"]
+        availableSkills: ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Slieght of Hand", "Stealth", "Survival"],
+        info: "Bard class description"
     },
     cleric: {
         hitdie: 8,
         savingThrows: ["wisdom", "charisma"],
         skills: 2,
-        availableSkills: ["History", "Insight", "Medicine", "Persuasion", "Religion"]
+        availableSkills: ["History", "Insight", "Medicine", "Persuasion", "Religion"],
+        info: "Cleric class description"
     },
     druid: {
         hitdie: 8,
         savingThrows: ["intelligence", "wisdom"],
         skills: 2,
-        availableSkills: ["Animal Handling", "Arcana", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"]
+        availableSkills: ["Animal Handling", "Arcana", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"],
+        info: "Druid class description"
     },
     fighter: {
         hitdie: 10,
         savingThrows: ["strength", "constitution"],
         skills: 2,
-        availableSkills: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"]
+        availableSkills: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"],
+        info: "Fighter class description"
     },
     monk: {
         hitdie: 8,
         savingThrows: ["strength", "dexerity"],
         skills: 2,
-        availableSkills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"]
+        availableSkills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"],
+        info: "Monk class description"
     },
     paladin: {
         hitdie: 10,
         savingThrows: ["wisdom", "charisma"],
         skills: 2,
-        availableSkills: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"]
+        availableSkills: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"],
+        info: "Paladin class description"
     },
     ranger: {
         hitdie: 10,
@@ -59,25 +66,29 @@ var ClassProps = exports.ClassProps = {
         hitdie: 8,
         savingThrows: ["dexerity", "intelligence"],
         skills: 4,
-        availableSkills: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Slieght of Hand", "Stealth"]
+        availableSkills: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Slieght of Hand", "Stealth"],
+        info: "Rogue class description"
     },
     sorcerer: {
         hitdie: 6,
         savingThrows: ["constitution", "charisma"],
         skills: 2,
-        availableSkills: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"]
+        availableSkills: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"],
+        info: "Socerer class description"
     },
     warlock: {
         hitdie: 8,
         savingThrows: ["wisdom", "charisma"],
         skills: 2,
-        availableSkills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"]
+        availableSkills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"],
+        info: "Warlock class description"
     },
     wizard: {
         hitdie: 6,
         savingThrows: ["intelligence", "wisdom"],
         skills: 2,
-        availableSkills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"]
+        availableSkills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"],
+        info: "Wizard class description"
     }
 };
 ////////////////////////////////////////

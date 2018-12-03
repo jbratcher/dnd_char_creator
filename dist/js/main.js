@@ -66,6 +66,20 @@ var charisma = "0";
 // General Info
 // Name
 var name = document.querySelector('#name');
+// Class
+var cls = document.querySelector('#cls');
+func.addOptionsToSelect(cls, _info.ClassList);
+var selectedCls = cls.options[cls.selectedIndex];
+var charCls = selectedCls.textContent.toLowerCase();
+var classHelp = document.querySelector('#classHelp');
+var setClass = function setClass() {
+    charCls = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
+};
+func.setText(classHelp, _info.ClassProps[charCls].info);
+cls.addEventListener('change', function () {
+    setClass();
+    func.setText(classHelp, _info.ClassProps[charCls].info);
+});
 // Race
 var race = document.querySelector('#race');
 func.addOptionsToSelect(race, _info.RaceList);
@@ -80,11 +94,6 @@ race.addEventListener('change', function () {
     setRace();
     func.setText(raceHelp, _info.Races[charRace].info);
 });
-// Class
-var cls = document.querySelector('#cls');
-func.addOptionsToSelect(cls, _info.ClassList);
-var selectedCls = cls.options[cls.selectedIndex];
-var charCls = selectedCls.textContent.toLowerCase();
 // Alignment
 var alignment = document.querySelector('#alignment');
 func.addOptionsToSelect(alignment, _info.Alignments);

@@ -16,7 +16,8 @@ export var ClassProps = {
             "Nature",
             "Perception",
             "Survival"
-        ]
+        ],
+        info: "Barbarian class description"
     },
     bard: {
         hitdie: 8,
@@ -44,7 +45,8 @@ export var ClassProps = {
             "Slieght of Hand",
             "Stealth",
             "Survival"
-        ]
+        ],
+        info: "Bard class description"
     },
     cleric: {
         hitdie: 8,
@@ -59,7 +61,8 @@ export var ClassProps = {
             "Medicine",
             "Persuasion",
             "Religion"
-        ]
+        ],
+        info: "Cleric class description"
     },
     druid: {
         hitdie: 8,
@@ -77,7 +80,8 @@ export var ClassProps = {
             "Perception",
             "Religion",
             "Survival"
-        ]
+        ],
+        info: "Druid class description"
     },
     fighter: {
         hitdie: 10,
@@ -95,7 +99,8 @@ export var ClassProps = {
             "Intimidation",
             "Perception",
             "Survival"
-        ]
+        ],
+        info: "Fighter class description"
     },
     monk: {
         hitdie: 8,
@@ -111,7 +116,8 @@ export var ClassProps = {
             "Insight",
             "Religion",
             "Stealth"
-        ]
+        ],
+        info: "Monk class description"
     },
     paladin: {
         hitdie: 10,
@@ -127,7 +133,8 @@ export var ClassProps = {
             "Medicine",
             "Persuasion",
             "Religion"
-        ]
+        ],
+        info: "Paladin class description"
     },
     ranger: {
         hitdie: 10,
@@ -166,7 +173,8 @@ export var ClassProps = {
             "Persuasion",
             "Slieght of Hand",
             "Stealth"
-        ]
+        ],
+        info: "Rogue class description"
     },
     sorcerer: {
         hitdie: 6,
@@ -182,7 +190,8 @@ export var ClassProps = {
             "Intimidation",
             "Persuasion",
             "Religion"
-        ]
+        ],
+        info: "Socerer class description"
     },
     warlock: {
         hitdie: 8,
@@ -199,7 +208,8 @@ export var ClassProps = {
             "Investigation",
             "Nature",
             "Religion"
-        ]
+        ],
+        info: "Warlock class description"
     },
     wizard: {
         hitdie: 6,
@@ -215,7 +225,8 @@ export var ClassProps = {
             "Investigation",
             "Medicine",
             "Religion"
-        ]
+        ],
+        info: "Wizard class description"
     }
 };
 ////////////////////////////////////////

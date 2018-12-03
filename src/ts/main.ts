@@ -91,6 +91,29 @@ let charisma: string = "0";
 
 const name = <HTMLInputElement>document.querySelector('#name');
 
+// Class
+
+const cls = <HTMLSelectElement>document.querySelector('#cls');
+
+func.addOptionsToSelect(cls, ClassList);
+
+let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
+
+let charCls: string = selectedCls.textContent.toLowerCase();
+
+const classHelp = <HTMLElement>document.querySelector('#classHelp');
+
+const setClass = () => {
+  charCls = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
+}
+
+func.setText(classHelp, ClassProps[charCls].info);
+
+cls.addEventListener('change', function() {
+  setClass();
+  func.setText(classHelp, ClassProps[charCls].info);
+});
+
 // Race
 
 const race = <HTMLSelectElement>document.querySelector('#race');
@@ -113,16 +136,6 @@ race.addEventListener('change', function() {
   setRace();
   func.setText(raceHelp, Races[charRace].info);
 });
-
-// Class
-
-const cls = <HTMLSelectElement>document.querySelector('#cls');
-
-func.addOptionsToSelect(cls, ClassList);
-
-let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
-
-let charCls: string = selectedCls.textContent.toLowerCase();
 
 // Alignment
 
