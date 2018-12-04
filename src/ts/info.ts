@@ -19,7 +19,7 @@ export const ClassProps = {
             "Perception",
             "Survival"
         ],
-        info: "Barbarian class description"
+        info: "You are a savage warrior wearing little, if any, armor.  Tough to take down why enraged."
     },
 
     bard: {
@@ -49,7 +49,7 @@ export const ClassProps = {
             "Stealth",
             "Survival"
         ],
-        info: "Bard class description"
+        info: "Minstrel or joker with a trick or two up there sleeve.  Your companions will appreciate your company."
     },
 
     cleric: {
@@ -66,7 +66,7 @@ export const ClassProps = {
             "Persuasion",
             "Religion"
         ],
-        info: "Cleric class description"
+        info: "Heavily-armor magical healer who can also melee."
     },
 
     druid: {
@@ -86,7 +86,7 @@ export const ClassProps = {
             "Religion",
             "Survival"
         ],
-        info: "Druid class description"
+        info: "Natural spell-casters or shape-shifting warriors."
     },
 
     fighter: {
@@ -106,7 +106,7 @@ export const ClassProps = {
             "Perception",
             "Survival"
         ],
-        info: "Fighter class description"
+        info: "The most skilled warriors can use any armor or weapon and take a beating."
     },
 
     monk: {
@@ -124,7 +124,7 @@ export const ClassProps = {
             "Religion",
             "Stealth"
         ],
-        info: "Monk class description"
+        info: "Adept spiritual warriors that can cripple opponents."
     },
 
     paladin: {
@@ -142,7 +142,7 @@ export const ClassProps = {
             "Persuasion",
             "Religion"
         ],
-        info: "Paladin class description"
+        info: "Spirtual warriors usually wearing heaving armor.  Can heal and smite."
     },
 
     ranger: {
@@ -161,7 +161,8 @@ export const ClassProps = {
             "Perception",
             "Stealth",
             "Survival"
-        ]
+        ],
+        info: `Range-focused warriors with survival and animal skills.`
     },
 
     rogue: {
@@ -184,7 +185,7 @@ export const ClassProps = {
             "Slieght of Hand",
             "Stealth"
         ],
-        info: "Rogue class description"
+        info: "Warrior with varied skills. Realizes on wit and agility more than strength."
     },
 
     sorcerer: {
@@ -202,7 +203,7 @@ export const ClassProps = {
             "Persuasion",
             "Religion"
         ],
-        info: "Socerer class description"
+        info: "Spell-caster inherent."
     },
 
     warlock: {
@@ -221,7 +222,7 @@ export const ClassProps = {
             "Nature",
             "Religion"
         ],
-        info: "Warlock class description"
+        info: "Spell-caster who gets their strenght from a pact with a powerful being."
     },
 
     wizard: {
@@ -239,7 +240,7 @@ export const ClassProps = {
             "Medicine",
             "Religion"
         ],
-        info: "Wizard class description"
+        info: "Diverse spell-caster knowledgeable in the magical arts."
     }
 
 

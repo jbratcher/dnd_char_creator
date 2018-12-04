@@ -106,7 +106,7 @@ var showOptionalSubraceSelect = function () {
 };
 race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
 var setSubrace = function () {
-    if (!subrace.classList.contains("d-none")) {
+    if (!subrace.parentElement.classList.contains("d-none")) {
         charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
         console.log(charSubrace);
     }
@@ -154,15 +154,18 @@ func.addOptionsToSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     setRace();
     setSubrace();
+    var extraLanguageHelpText = function (race) {
+        extraLanguageHelp.textContent = "";
+        extraLanguageField.classList.remove('d-none');
+        ;
+        extraLanguageHelp.textContent = race + "s get to choose 1 extra language";
+    };
     charRace === 'human'
-        ? (extraLanguageField.classList.remove('d-none'),
-            extraLanguageHelp.textContent = 'Humans get to choose 1 extra language')
+        ? extraLanguageHelpText("Human")
         : charRace === 'halfelf'
-            ? (extraLanguageField.classList.remove('d-none'),
-                extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language')
+            ? extraLanguageHelpText("Half Elve")
             : charSubrace === 'highelf'
-                ? (extraLanguageField.classList.remove('d-none'),
-                    extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language')
+                ? extraLanguageHelpText("High Elve")
                 : (extraLanguageField.classList.add('d-none'),
                     extraLanguageHelp.textContent = '');
 };
@@ -403,19 +406,19 @@ var racialAbilityModifier = function () {
     var racialAbilityMod = Races[charRace].abilityModifier.modifier;
     // if ability matches abilityPreview node text, add modifier to score
     for (var i = 0; i < abilityScoreListItems.length; i++) {
-        var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+        var abilityText = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
         var abilityScorePreview = abilityScoreListItems[i].childNodes[3];
         var abilityScore_2 = Number(abilityScoreListItems[i].childNodes[3].textContent);
-        if (string.toLowerCase() === racialAbility) {
+        if (abilityText.toLowerCase() === racialAbility) {
             abilityScorePreview.textContent = String(abilityScore_2 + racialAbilityMod);
         }
     }
     // if race has extra ability to modify
     if (Races[charRace].abilityModifier.extraAbility) {
         for (var i = 0; i < abilityScoreListItems.length; i++) {
-            var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+            var abilityText = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
-            if (string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
+            if (abilityText.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
                 var abilityScore_3 = Number(abilityScorePreview);
                 abilityScorePreview = String(abilityScore_3 + Races[charRace].abilityModifier.extraModifier);
             }

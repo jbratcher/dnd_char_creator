@@ -12,83 +12,84 @@ var ClassProps = exports.ClassProps = {
         savingThrows: ["strength", "constitution"],
         skills: 2,
         availableSkills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"],
-        info: "Barbarian class description"
+        info: "You are a savage warrior wearing little, if any, armor.  Tough to take down why enraged."
     },
     bard: {
         hitdie: 8,
         savingThrows: ["dexerity", "charisma"],
         skills: 3,
         availableSkills: ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Slieght of Hand", "Stealth", "Survival"],
-        info: "Bard class description"
+        info: "Minstrel or joker with a trick or two up there sleeve.  Your companions will appreciate your company."
     },
     cleric: {
         hitdie: 8,
         savingThrows: ["wisdom", "charisma"],
         skills: 2,
         availableSkills: ["History", "Insight", "Medicine", "Persuasion", "Religion"],
-        info: "Cleric class description"
+        info: "Heavily-armor magical healer who can also melee."
     },
     druid: {
         hitdie: 8,
         savingThrows: ["intelligence", "wisdom"],
         skills: 2,
         availableSkills: ["Animal Handling", "Arcana", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"],
-        info: "Druid class description"
+        info: "Natural spell-casters or shape-shifting warriors."
     },
     fighter: {
         hitdie: 10,
         savingThrows: ["strength", "constitution"],
         skills: 2,
         availableSkills: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"],
-        info: "Fighter class description"
+        info: "The most skilled warriors can use any armor or weapon and take a beating."
     },
     monk: {
         hitdie: 8,
         savingThrows: ["strength", "dexerity"],
         skills: 2,
         availableSkills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"],
-        info: "Monk class description"
+        info: "Adept spiritual warriors that can cripple opponents."
     },
     paladin: {
         hitdie: 10,
         savingThrows: ["wisdom", "charisma"],
         skills: 2,
         availableSkills: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"],
-        info: "Paladin class description"
+        info: "Spirtual warriors usually wearing heaving armor.  Can heal and smite."
     },
     ranger: {
         hitdie: 10,
         savingThrows: ["strength", "dexerity"],
         skills: 3,
-        availableSkills: ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"]
+        availableSkills: ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"],
+        info: "Range-focused warriors with survival and animal skills."
     },
     rogue: {
         hitdie: 8,
         savingThrows: ["dexerity", "intelligence"],
         skills: 4,
         availableSkills: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Slieght of Hand", "Stealth"],
-        info: "Rogue class description"
+        info: "Warrior with varied skills. Realizes on wit and agility more than strength."
     },
     sorcerer: {
         hitdie: 6,
         savingThrows: ["constitution", "charisma"],
         skills: 2,
         availableSkills: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"],
-        info: "Socerer class description"
+        info: "Spell-caster inherent."
     },
     warlock: {
         hitdie: 8,
         savingThrows: ["wisdom", "charisma"],
         skills: 2,
         availableSkills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"],
-        info: "Warlock class description"
+        info: "Spell-caster who gets their strenght from a pact with a powerful being."
     },
     wizard: {
         hitdie: 6,
         savingThrows: ["intelligence", "wisdom"],
         skills: 2,
         availableSkills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"],
-        info: "Wizard class description"
+        info: "Diverse spell-caster knowledgeable in the magical arts."
     }
 };
 ////////////////////////////////////////

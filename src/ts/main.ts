@@ -195,7 +195,7 @@ const showOptionalSubraceSelect = () => {
 race.addEventListener('change', showOptionalSubraceSelect);  // Subrace options regenerate on race selection change
 
 const setSubrace = () => {
-  if(!subrace.classList.contains("d-none")) {
+  if(!subrace.parentElement.classList.contains("d-none")) {
     charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,"");
     console.log(charSubrace);
   } else {
@@ -275,26 +275,22 @@ const showExtraLanguageInput = () => {
   setRace();
   setSubrace();
 
+  const extraLanguageHelpText = (race) => {
+    extraLanguageHelp.textContent = "";
+    extraLanguageField.classList.remove('d-none');;
+    extraLanguageHelp.textContent = `${race}s get to choose 1 extra language`;
+  }
+
   charRace === 'human'
-    ? (
-        extraLanguageField.classList.remove('d-none'),
-        extraLanguageHelp.textContent = 'Humans get to choose 1 extra language'
-      )
+    ? extraLanguageHelpText("Human")
     : charRace === 'halfelf'
-    ? (
-      extraLanguageField.classList.remove('d-none'),
-      extraLanguageHelp.textContent = 'Half-Elves get to choose 1 extra language'
-    )
+    ? extraLanguageHelpText("Half Elve")
     : charSubrace === 'highelf'
-    ? (
-        extraLanguageField.classList.remove('d-none'),
-        extraLanguageHelp.textContent = 'High Elves get to choose 1 extra language'
-      )
+    ? extraLanguageHelpText("High Elve")
     : (
       extraLanguageField.classList.add('d-none'),
       extraLanguageHelp.textContent = ''
     )
-
 
 }
 
@@ -682,17 +678,18 @@ const subraceAbilityModifier = () => {
 const racialAbilityModifier = () => {
 
   setRace();
+
   let racialAbility: string = Races[charRace].abilityModifier.ability;
   let racialAbilityMod: number = Races[charRace].abilityModifier.modifier;
 
 
   // if ability matches abilityPreview node text, add modifier to score
   for(let i = 0; i < abilityScoreListItems.length; i++) {
-    let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+    let abilityText: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
     let abilityScorePreview = abilityScoreListItems[i].childNodes[3]
     let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
 
-    if(string.toLowerCase() === racialAbility) {
+    if(abilityText.toLowerCase() === racialAbility) {
        abilityScorePreview.textContent = String(abilityScore + racialAbilityMod);
     }
 
@@ -701,9 +698,9 @@ const racialAbilityModifier = () => {
   // if race has extra ability to modify
   if(Races[charRace].abilityModifier.extraAbility) {
     for(let i = 0; i < abilityScoreListItems.length; i++) {
-      let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      let abilityText: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
-      if(string.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
+      if(abilityText.toLowerCase() === Races[charRace].abilityModifier.extraAbility) {
         let abilityScore: number = Number(abilityScorePreview);
         abilityScorePreview = String(abilityScore + Races[charRace].abilityModifier.extraModifier);
       }
