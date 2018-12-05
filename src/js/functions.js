@@ -2,6 +2,7 @@ import { CharacterImages } from './characterImages.js';
 var sign;
 var modifier;
 // Utility functions
+export var capitialize = function (word) { return word.charAt(0).toUpperCase() + word.slice(1); };
 export var randomIntFromRange = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); };
 export var randomBoolean = function () { return Math.random() >= 0.5; }; // Get a random true or false value
 export var rollAbilityScore = function () { return randomIntFromRange(3, 18); };

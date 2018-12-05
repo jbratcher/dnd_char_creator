@@ -3,13 +3,16 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = undefined;
+exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = exports.capitialize = undefined;
 
 var _characterImages = require('./characterImages.js');
 
 var sign;
 var modifier;
 // Utility functions
+var capitialize = exports.capitialize = function capitialize(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+};
 var randomIntFromRange = exports.randomIntFromRange = function randomIntFromRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };

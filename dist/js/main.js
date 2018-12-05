@@ -141,7 +141,7 @@ var ageHelp = document.querySelector('#ageHelp');
 // Displays race specific age help text on race selection
 var ageHelpText = function ageHelpText() {
     setRace();
-    func.setText(ageHelp, "Please enter an age between " + _info.Races[charRace].age.min + " and  " + _info.Races[charRace].age.max);
+    func.setText(ageHelp, func.capitialize(charRace) + " age ranges between " + _info.Races[charRace].age.min + " and  " + _info.Races[charRace].age.max);
 };
 race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load

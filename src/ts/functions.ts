@@ -6,6 +6,8 @@ let modifier: number;
 
 // Utility functions
 
+export const capitialize = word => word.charAt(0).toUpperCase() + word.slice(1);
+
 export const randomIntFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 export const randomBoolean = () => Math.random() >= 0.5;  // Get a random true or false value

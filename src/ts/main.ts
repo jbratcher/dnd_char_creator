@@ -221,7 +221,7 @@ const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 
 const ageHelpText = () => {
   setRace();
-  func.setText(ageHelp, `Please enter an age between ${Races[charRace].age.min} and  ${Races[charRace].age.max}` )
+  func.setText(ageHelp, `${func.capitialize(charRace)} age ranges between ${Races[charRace].age.min} and  ${Races[charRace].age.max}` )
 }
 
 race.addEventListener('change', ageHelpText);
