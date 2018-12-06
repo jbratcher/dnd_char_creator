@@ -96,7 +96,8 @@ var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
 var showOptionalSubraceSelect = function () {
     setRace();
-    subrace.innerHTML = "-"; // Reset any subrace from previous selection
+    // Reset any subrace from previous selection
+    subrace.innerHTML = "-";
     subraceHelp.textContent = "";
     Races[charRace].subrace
         ? (func.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
@@ -108,7 +109,6 @@ race.addEventListener('change', showOptionalSubraceSelect); // Subrace options r
 var setSubrace = function () {
     if (!subrace.parentElement.classList.contains("d-none")) {
         charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
-        console.log(charSubrace);
     }
     else {
         return null;
@@ -249,7 +249,7 @@ var highlightAvailableSkills = function () {
 };
 // dynamically change available skills based on character class
 cls.addEventListener('change', function () {
-    charCls = cls.options[cls.selectedIndex].text.toLowerCase();
+    setClass();
     highlightAvailableSkills();
 });
 // Initialize state for selected class on document load
