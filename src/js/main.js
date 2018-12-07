@@ -18,7 +18,7 @@ var rolledStrength = document.querySelector('#rolledStrength');
 var rollDexerity = document.querySelector('#rollDexerity');
 var rolledDexerity = document.querySelector('#rolledDexerity');
 var rollConstitution = document.querySelector('#rollConstitution');
-var rolledConstitition = document.querySelector('#rolledConstitition');
+var rolledConstitution = document.querySelector('#rolledConstitution');
 var rollIntelligence = document.querySelector('#rollIntelligence');
 var rolledIntelligence = document.querySelector('#rolledIntelligence');
 var rollWisdom = document.querySelector('#rollWisdom');
@@ -28,7 +28,7 @@ var rolledCharisma = document.querySelector('#rolledCharisma');
 // Event listeners for rolling ability scores
 rollStrength.addEventListener('click', function () { return func.setScore(rolledStrength); });
 rollDexerity.addEventListener('click', function () { return func.setScore(rolledDexerity); });
-rollConstitution.addEventListener('click', function () { return func.setScore(rolledConstitition); });
+rollConstitution.addEventListener('click', function () { return func.setScore(rolledConstitution); });
 rollWisdom.addEventListener('click', function () { return func.setScore(rolledWisdom); });
 rollIntelligence.addEventListener('click', function () { return func.setScore(rolledIntelligence); });
 rollCharisma.addEventListener('click', function () { return func.setScore(rolledCharisma); });
@@ -320,6 +320,17 @@ var addExp = function () {
     var newExpNum = Number(addNewExperienceInput.value);
     currentExperience.textContent = String(currentExpNum + newExpNum);
 };
+var setAbilityScorePreview = function () {
+    // loop through abilities lowercased
+    Abilities.map(function (ability) {
+        // get ability score from rolled score node
+        var rolledScoreNode = eval("rolled" + ability);
+        // get preview element 
+        var previewElement = eval(ability.toLowerCase() + "Preview");
+        // set preview element text to ability score
+        previewElement.textContent = rolledScoreNode.textContent;
+    });
+};
 var generalInfo = function () {
     strength = null;
     dexerity = null;
@@ -328,16 +339,9 @@ var generalInfo = function () {
     wisdom = null;
     charisma = null;
     // Get current state of info required to create character
-    selectedCls = cls.options[cls.selectedIndex];
-    charCls = selectedCls.textContent.toLowerCase();
-    selectedRace = race.options[race.selectedIndex];
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    strength = rolledStrength.textContent;
-    dexerity = rolledDexerity.textContent;
-    constitution = rolledConstitition.textContent;
-    intelligence = rolledIntelligence.textContent;
-    wisdom = rolledWisdom.textContent;
-    charisma = rolledCharisma.textContent;
+    setClass();
+    setRace();
+    setAbilityScorePreview();
     selectedAlignment = alignment.options[alignment.selectedIndex];
     charGender = gender.value.toLowerCase();
     languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ") + (", " + String(extraLanguage.value));
@@ -348,12 +352,6 @@ var generalInfo = function () {
     racePreview.textContent = selectedRace.textContent;
     genderPreview.textContent = gender.value;
     agePreview.textContent = age.value;
-    strengthPreview.textContent = strength;
-    dexerityPreview.textContent = dexerity;
-    constitutionPreview.textContent = constitution;
-    wisdomPreview.textContent = wisdom;
-    intelligencePreview.textContent = intelligence;
-    charismaPreview.textContent = charisma;
     clsPreview.textContent = selectedCls.textContent;
     alignmentPreview.textContent = selectedAlignment.textContent;
 };
@@ -439,7 +437,7 @@ var showExtraModifiersInput = function () {
         : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
-// Hide first selection in 2nd select list
+// Hide first selection in 2nd select list (Half-elf racial ability)
 var hideMod1Selection = function () {
     var firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
     extraAbilityModifier2.innerHTML = "";
@@ -777,7 +775,7 @@ createCharacterButton.addEventListener('click', function (e) {
 levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Get level up variables
-    constitution = rolledConstitition.textContent;
+    constitution = rolledConstitution.textContent;
     selectedCls = cls.options[cls.selectedIndex];
     charCls = selectedCls.textContent.toLowerCase();
     if (currentLevel.textContent === "20") {

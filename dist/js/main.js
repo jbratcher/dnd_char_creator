@@ -26,7 +26,7 @@ var rolledStrength = document.querySelector('#rolledStrength');
 var rollDexerity = document.querySelector('#rollDexerity');
 var rolledDexerity = document.querySelector('#rolledDexerity');
 var rollConstitution = document.querySelector('#rollConstitution');
-var rolledConstitition = document.querySelector('#rolledConstitition');
+var rolledConstitution = document.querySelector('#rolledConstitution');
 var rollIntelligence = document.querySelector('#rollIntelligence');
 var rolledIntelligence = document.querySelector('#rolledIntelligence');
 var rollWisdom = document.querySelector('#rollWisdom');
@@ -41,7 +41,7 @@ rollDexerity.addEventListener('click', function () {
     return func.setScore(rolledDexerity);
 });
 rollConstitution.addEventListener('click', function () {
-    return func.setScore(rolledConstitition);
+    return func.setScore(rolledConstitution);
 });
 rollWisdom.addEventListener('click', function () {
     return func.setScore(rolledWisdom);
@@ -116,7 +116,8 @@ var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
 var showOptionalSubraceSelect = function showOptionalSubraceSelect() {
     setRace();
-    subrace.innerHTML = "-"; // Reset any subrace from previous selection
+    // Reset any subrace from previous selection
+    subrace.innerHTML = "-";
     subraceHelp.textContent = "";
     _info.Races[charRace].subrace ? (func.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
     func.addOptionsToSelect(subrace, _info.Races[charRace].subrace.name), subraceSelectSection.classList.remove('d-none')) : subraceSelectSection.classList.add('d-none');
@@ -125,7 +126,6 @@ race.addEventListener('change', showOptionalSubraceSelect); // Subrace options r
 var setSubrace = function setSubrace() {
     if (!subrace.parentElement.classList.contains("d-none")) {
         charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
-        console.log(charSubrace);
     } else {
         return null;
     }
@@ -253,7 +253,7 @@ var highlightAvailableSkills = function highlightAvailableSkills() {
 };
 // dynamically change available skills based on character class
 cls.addEventListener('change', function () {
-    charCls = cls.options[cls.selectedIndex].text.toLowerCase();
+    setClass();
     highlightAvailableSkills();
 });
 // Initialize state for selected class on document load
@@ -324,6 +324,17 @@ var addExp = function addExp() {
     var newExpNum = Number(addNewExperienceInput.value);
     currentExperience.textContent = String(currentExpNum + newExpNum);
 };
+var setAbilityScorePreview = function setAbilityScorePreview() {
+    // loop through abilities lowercased
+    _info.Abilities.map(function (ability) {
+        // get ability score from rolled score node
+        var rolledScoreNode = eval("rolled" + ability);
+        // get preview element 
+        var previewElement = eval(ability.toLowerCase() + "Preview");
+        // set preview element text to ability score
+        previewElement.textContent = rolledScoreNode.textContent;
+    });
+};
 var generalInfo = function generalInfo() {
     strength = null;
     dexerity = null;
@@ -332,16 +343,9 @@ var generalInfo = function generalInfo() {
     wisdom = null;
     charisma = null;
     // Get current state of info required to create character
-    selectedCls = cls.options[cls.selectedIndex];
-    charCls = selectedCls.textContent.toLowerCase();
-    selectedRace = race.options[race.selectedIndex];
-    charRace = selectedRace.textContent.toLowerCase().replace(/-/g, "");
-    strength = rolledStrength.textContent;
-    dexerity = rolledDexerity.textContent;
-    constitution = rolledConstitition.textContent;
-    intelligence = rolledIntelligence.textContent;
-    wisdom = rolledWisdom.textContent;
-    charisma = rolledCharisma.textContent;
+    setClass();
+    setRace();
+    setAbilityScorePreview();
     selectedAlignment = alignment.options[alignment.selectedIndex];
     charGender = gender.value.toLowerCase();
     languagesPreview.textContent = _info.Races[charRace].languages.map(function (lang) {
@@ -354,12 +358,6 @@ var generalInfo = function generalInfo() {
     racePreview.textContent = selectedRace.textContent;
     genderPreview.textContent = gender.value;
     agePreview.textContent = age.value;
-    strengthPreview.textContent = strength;
-    dexerityPreview.textContent = dexerity;
-    constitutionPreview.textContent = constitution;
-    wisdomPreview.textContent = wisdom;
-    intelligencePreview.textContent = intelligence;
-    charismaPreview.textContent = charisma;
     clsPreview.textContent = selectedCls.textContent;
     alignmentPreview.textContent = selectedAlignment.textContent;
 };
@@ -441,7 +439,7 @@ var showExtraModifiersInput = function showExtraModifiersInput() {
     charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
-// Hide first selection in 2nd select list
+// Hide first selection in 2nd select list (Half-elf racial ability)
 var hideMod1Selection = function hideMod1Selection() {
     var firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
     extraAbilityModifier2.innerHTML = "";
@@ -733,7 +731,7 @@ createCharacterButton.addEventListener('click', function (e) {
 levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Get level up variables
-    constitution = rolledConstitition.textContent;
+    constitution = rolledConstitution.textContent;
     selectedCls = cls.options[cls.selectedIndex];
     charCls = selectedCls.textContent.toLowerCase();
     if (currentLevel.textContent === "20") {

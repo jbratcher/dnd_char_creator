@@ -41,7 +41,7 @@ const rollDexerity: HTMLElement = document.querySelector('#rollDexerity');
 const rolledDexerity: HTMLElement = document.querySelector('#rolledDexerity');
 
 const rollConstitution: HTMLElement = document.querySelector('#rollConstitution');
-const rolledConstitition: HTMLElement = document.querySelector('#rolledConstitition');
+const rolledConstitution: HTMLElement = document.querySelector('#rolledConstitution');
 
 const rollIntelligence: HTMLElement = document.querySelector('#rollIntelligence');
 const rolledIntelligence: HTMLElement = document.querySelector('#rolledIntelligence');
@@ -58,7 +58,7 @@ rollStrength.addEventListener('click', () => func.setScore(rolledStrength));
 
 rollDexerity.addEventListener('click', () => func.setScore(rolledDexerity));
 
-rollConstitution.addEventListener('click', () => func.setScore(rolledConstitition));
+rollConstitution.addEventListener('click', () => func.setScore(rolledConstitution));
 
 rollWisdom.addEventListener('click', () => func.setScore(rolledWisdom));
 
@@ -527,6 +527,20 @@ const addExp = () => {
     currentExperience.textContent = String(currentExpNum + newExpNum);
 }
 
+const setAbilityScorePreview = () => {
+    
+  // loop through abilities lowercased
+  Abilities.map(ability => {
+    // get ability score from rolled score node
+    let rolledScoreNode = eval("rolled" + ability);
+    // get preview element 
+    let previewElement = eval(ability.toLowerCase() + "Preview");
+    // set preview element text to ability score
+    previewElement.textContent = rolledScoreNode.textContent;
+  })
+
+}
+
 const generalInfo = () => {
 
   strength = null;
@@ -543,25 +557,11 @@ const generalInfo = () => {
 
   // Get current state of info required to create character
 
-  selectedCls = cls.options[cls.selectedIndex];
+  setClass();
 
-  charCls = selectedCls.textContent.toLowerCase();
-
-  selectedRace = race.options[race.selectedIndex];
-
-  charRace = selectedRace.textContent.toLowerCase().replace(/-/g,"");
-
-  strength = rolledStrength.textContent;
-
-  dexerity = rolledDexerity.textContent;
-
-  constitution = rolledConstitition.textContent;
-
-  intelligence = rolledIntelligence.textContent;
-
-  wisdom = rolledWisdom.textContent;
-
-  charisma = rolledCharisma.textContent;
+  setRace();
+  
+  setAbilityScorePreview();
 
   selectedAlignment = alignment.options[alignment.selectedIndex];
 
@@ -582,18 +582,6 @@ const generalInfo = () => {
   genderPreview.textContent = gender.value;
 
   agePreview.textContent = age.value;
-
-  strengthPreview.textContent = strength;
-
-  dexerityPreview.textContent = dexerity;
-
-  constitutionPreview.textContent = constitution;
-
-  wisdomPreview.textContent = wisdom;
-
-  intelligencePreview.textContent = intelligence;
-
-  charismaPreview.textContent = charisma;
 
   clsPreview.textContent = selectedCls.textContent;
 
@@ -680,7 +668,6 @@ const racialAbilityModifier = () => {
   let racialAbility: string = Races[charRace].abilityModifier.ability;
   let racialAbilityMod: number = Races[charRace].abilityModifier.modifier;
 
-
   // if ability matches abilityPreview node text, add modifier to score
   for(let i = 0; i < abilityScoreListItems.length; i++) {
     let abilityText: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
@@ -731,7 +718,7 @@ const showExtraModifiersInput = () => {
 
 race.addEventListener('change', showExtraModifiersInput);
 
-// Hide first selection in 2nd select list
+// Hide first selection in 2nd select list (Half-elf racial ability)
 
 const hideMod1Selection = () => {
 
@@ -1251,7 +1238,7 @@ levelUpButton.addEventListener('click', e => {
 
   // Get level up variables
 
-  constitution = rolledConstitition.textContent;
+  constitution = rolledConstitution.textContent;
   selectedCls = cls.options[cls.selectedIndex];
   charCls = selectedCls.textContent.toLowerCase();
 
