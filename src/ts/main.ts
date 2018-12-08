@@ -85,13 +85,14 @@ let charisma: string = "0";
 // and add dynamic updating
 ////////////////////////////////////////////////////////////
 
-// General Info
+////////////////////////////////////////////////////////////
+// General Info / User Input
+////////////////////////////////////////////////////////////
 
-// Name
+// User input in chronological order
 
-const name = <HTMLInputElement>document.querySelector('#name');
 
-// Class
+// Class Select
 
 const cls = <HTMLSelectElement>document.querySelector('#cls');
 
@@ -114,7 +115,8 @@ cls.addEventListener('change', function() {
   func.setText(classHelp, ClassProps[charCls].info);
 });
 
-// Race
+
+// Race Select
 
 const race = <HTMLSelectElement>document.querySelector('#race');
 
@@ -137,33 +139,8 @@ race.addEventListener('change', function() {
   func.setText(raceHelp, Races[charRace].info);
 });
 
-// Alignment
 
-const alignment = <HTMLSelectElement>document.querySelector('#alignment');
-
-func.addOptionsToSelect(alignment, Alignments)
-
-let selectedAlignment = <HTMLOptionElement>alignment.options[alignment.selectedIndex];
-
-// limits alignment options to race recommendations
-
-const availableAlignments = () => {
-
-  alignment.innerHTML = "";  // reset alignment select options
-  setRace();
-  func.addOptionsToSelect(alignment, Races[charRace].alignments);
-
-}
-
-race.addEventListener('change', availableAlignments);  // Alignment options regenerate on race selection
-
-// Gender
-
-const gender = <HTMLInputElement>document.querySelector('#gender');
-
-let charGender: string = gender.value.toLowerCase();
-
-// Subrace
+// Subrace Select (Optional, if subrace exists)
 
 const subraceSelectSection = <HTMLElement>document.querySelector('#optionalSubrace');
 
@@ -183,6 +160,7 @@ const showOptionalSubraceSelect = () => {
   subrace.innerHTML = "-"
   subraceHelp.textContent = "";
 
+  // if race has a subrace, show and populate subrace select element
   Races[charRace].subrace
     ? (
       func.addOptionsToSelect(subrace, ["-"]),  // Make first option "null"
@@ -193,23 +171,64 @@ const showOptionalSubraceSelect = () => {
 
 }
 
-race.addEventListener('change', showOptionalSubraceSelect);  // Subrace options regenerate on race selection change
+// Subrace options regenerate on race selection change
+race.addEventListener('change', showOptionalSubraceSelect);  
 
 const setSubrace = () => {
+  // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
   if(!subrace.parentElement.classList.contains("d-none")) {
-    charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,"");
+    charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,""); // normalize subrace text to all lowercase joined letters
   } else {
+    // if subrace does not exist for selected race
     return null;
   }
 }
 
-func.setText(subraceHelp, "");
-
+// On subrace selection, get value of subrace and display descriptive text
 subrace.addEventListener('change', function() {
+  func.setText(subraceHelp, "");
   setSubrace();
   func.setText(subraceHelp, Races[charRace].subrace.helpText);
 
 });
+
+
+// Alignment
+
+const alignment = <HTMLSelectElement>document.querySelector('#alignment');
+
+func.addOptionsToSelect(alignment, Alignments)
+
+let selectedAlignment = <HTMLOptionElement>alignment.options[alignment.selectedIndex];
+
+const setAlignment = () => {
+  let charAlignment: string = selectedAlignment.textContent // "Lawful Good, Chaotic Evil, True Neutral"
+}
+
+// limits alignment options to race recommendations
+const availableAlignments = () => {
+
+  alignment.innerHTML = "";  // reset alignment select options
+  setRace();
+  func.addOptionsToSelect(alignment, Races[charRace].alignments);
+
+}
+
+// Alignment options regenerate on race selection
+race.addEventListener('change', availableAlignments);  
+
+
+// Name
+
+const name = <HTMLInputElement>document.querySelector('#name');
+
+
+// Gender
+
+const gender = <HTMLInputElement>document.querySelector('#gender');
+
+let charGender: string = gender.value.toLowerCase();
+
 
 // Age
 
@@ -217,8 +236,8 @@ const age = <HTMLInputElement>document.querySelector('#age');
 
 const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 
-// Displays race specific age help text on race selection
 
+// Displays race specific age help text on race selection
 const ageHelpText = () => {
   setRace();
   func.setText(ageHelp, `${func.capitialize(charRace)} age ranges between ${Races[charRace].age.min} and  ${Races[charRace].age.max}` )
@@ -227,10 +246,10 @@ const ageHelpText = () => {
 race.addEventListener('change', ageHelpText);
 
 // Iniialize help text on page load
-
 ageHelpText();
 
-// Dragonborn: Draconic Ancestry
+
+// Dragonborn: Draconic Ancestry / Dragonborn "subrace"
 
 const draconicAncestrySection = <HTMLElement>document.querySelector('#draconicAncestrySection');
 
@@ -242,6 +261,7 @@ const showDraconicAncestrySelect = () => {
 
   setRace();
 
+  // if ancestry exists, populate and show ancestry select element 
   Races[charRace].special.draconicAncestry
     ? (
         func.addOptionsToSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
@@ -254,13 +274,17 @@ const showDraconicAncestrySelect = () => {
       )
 }
 
+// Draconic ancestry options regenerate on race selection
 race.addEventListener('change', showDraconicAncestrySelect);
 
+// Initialize on page load
 showDraconicAncestrySelect();
+
 
 // Extra Language Selection: Human and Half-elf
 
-// Display extra language field if race selection is human or halfelf and add language options
+
+// Display extra language select element if race selection is Human, Half-Elf, or High Elf and populate lwith anguage options
 
 const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
 
@@ -275,18 +299,21 @@ const showExtraLanguageInput = () => {
   setRace();
   setSubrace();
 
-  const extraLanguageHelpText = (race) => {
-    extraLanguageHelp.textContent = "";
-    extraLanguageField.classList.remove('d-none');;
-    extraLanguageHelp.textContent = `${race}s get to choose 1 extra language`;
-  }
-
   charRace === 'human'
-    ? extraLanguageHelpText("Human")
+    ? (
+        extraLanguageField.classList.remove('d-none'),
+        func.setText(extraLanguageHelp, `Humans get to choose 1 extra language` )
+      )
     : charRace === 'halfelf'
-    ? extraLanguageHelpText("Half Elve")
+    ? (
+        extraLanguageField.classList.remove('d-none'),
+        func.setText(extraLanguageHelp, `Half-Elves get to choose 1 extra language` )
+      )
     : charSubrace === 'highelf'
-    ? extraLanguageHelpText("High Elve")
+    ? (
+        extraLanguageField.classList.remove('d-none'),
+        func.setText(extraLanguageHelp, `High Elves get to choose 1 extra language` )
+      )
     : (
       extraLanguageField.classList.add('d-none'),
       extraLanguageHelp.textContent = ''

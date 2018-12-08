@@ -43,10 +43,11 @@ var charisma = "0";
 // Get character info input elements, populate with data
 // and add dynamic updating
 ////////////////////////////////////////////////////////////
-// General Info
-// Name
-var name = document.querySelector('#name');
-// Class
+////////////////////////////////////////////////////////////
+// General Info / User Input
+////////////////////////////////////////////////////////////
+// User input in chronological order
+// Class Select
 var cls = document.querySelector('#cls');
 func.addOptionsToSelect(cls, ClassList);
 var selectedCls = cls.options[cls.selectedIndex];
@@ -60,7 +61,7 @@ cls.addEventListener('change', function () {
     setClass();
     func.setText(classHelp, ClassProps[charCls].info);
 });
-// Race
+// Race Select
 var race = document.querySelector('#race');
 func.addOptionsToSelect(race, RaceList);
 var selectedRace = race.options[race.selectedIndex];
@@ -74,21 +75,7 @@ race.addEventListener('change', function () {
     setRace();
     func.setText(raceHelp, Races[charRace].info);
 });
-// Alignment
-var alignment = document.querySelector('#alignment');
-func.addOptionsToSelect(alignment, Alignments);
-var selectedAlignment = alignment.options[alignment.selectedIndex];
-// limits alignment options to race recommendations
-var availableAlignments = function () {
-    alignment.innerHTML = ""; // reset alignment select options
-    setRace();
-    func.addOptionsToSelect(alignment, Races[charRace].alignments);
-};
-race.addEventListener('change', availableAlignments); // Alignment options regenerate on race selection
-// Gender
-var gender = document.querySelector('#gender');
-var charGender = gender.value.toLowerCase();
-// Subrace
+// Subrace Select (Optional, if subrace exists)
 var subraceSelectSection = document.querySelector('#optionalSubrace');
 var subrace = document.querySelector('#subrace');
 var subraceHelp = document.querySelector('#subraceHelp');
@@ -99,26 +86,51 @@ var showOptionalSubraceSelect = function () {
     // Reset any subrace from previous selection
     subrace.innerHTML = "-";
     subraceHelp.textContent = "";
+    // if race has a subrace, show and populate subrace select element
     Races[charRace].subrace
         ? (func.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
             func.addOptionsToSelect(subrace, Races[charRace].subrace.name),
             subraceSelectSection.classList.remove('d-none'))
         : subraceSelectSection.classList.add('d-none');
 };
-race.addEventListener('change', showOptionalSubraceSelect); // Subrace options regenerate on race selection change
+// Subrace options regenerate on race selection change
+race.addEventListener('change', showOptionalSubraceSelect);
 var setSubrace = function () {
+    // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
     if (!subrace.parentElement.classList.contains("d-none")) {
-        charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, "");
+        charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, ""); // normalize subrace text to all lowercase joined letters
     }
     else {
+        // if subrace does not exist for selected race
         return null;
     }
 };
-func.setText(subraceHelp, "");
+// On subrace selection, get value of subrace and display descriptive text
 subrace.addEventListener('change', function () {
+    func.setText(subraceHelp, "");
     setSubrace();
     func.setText(subraceHelp, Races[charRace].subrace.helpText);
 });
+// Alignment
+var alignment = document.querySelector('#alignment');
+func.addOptionsToSelect(alignment, Alignments);
+var selectedAlignment = alignment.options[alignment.selectedIndex];
+var setAlignment = function () {
+    var charAlignment = selectedAlignment.textContent; // "Lawful Good, Chaotic Evil, True Neutral"
+};
+// limits alignment options to race recommendations
+var availableAlignments = function () {
+    alignment.innerHTML = ""; // reset alignment select options
+    setRace();
+    func.addOptionsToSelect(alignment, Races[charRace].alignments);
+};
+// Alignment options regenerate on race selection
+race.addEventListener('change', availableAlignments);
+// Name
+var name = document.querySelector('#name');
+// Gender
+var gender = document.querySelector('#gender');
+var charGender = gender.value.toLowerCase();
 // Age
 var age = document.querySelector('#age');
 var ageHelp = document.querySelector('#ageHelp');
@@ -130,12 +142,13 @@ var ageHelpText = function () {
 race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 ageHelpText();
-// Dragonborn: Draconic Ancestry
+// Dragonborn: Draconic Ancestry / Dragonborn "subrace"
 var draconicAncestrySection = document.querySelector('#draconicAncestrySection');
 var draconicAncestry = document.querySelector('#draconicAncestry');
 var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 var showDraconicAncestrySelect = function () {
     setRace();
+    // if ancestry exists, populate and show ancestry select element 
     Races[charRace].special.draconicAncestry
         ? (func.addOptionsToSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
             draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
@@ -143,10 +156,12 @@ var showDraconicAncestrySelect = function () {
         : (draconicAncestrySection.classList.add('d-none'),
             draconicAncestryHelp.textContent = '');
 };
+// Draconic ancestry options regenerate on race selection
 race.addEventListener('change', showDraconicAncestrySelect);
+// Initialize on page load
 showDraconicAncestrySelect();
 // Extra Language Selection: Human and Half-elf
-// Display extra language field if race selection is human or halfelf and add language options
+// Display extra language select element if race selection is Human, Half-Elf, or High Elf and populate lwith anguage options
 var extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
@@ -154,18 +169,15 @@ func.addOptionsToSelect(extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     setRace();
     setSubrace();
-    var extraLanguageHelpText = function (race) {
-        extraLanguageHelp.textContent = "";
-        extraLanguageField.classList.remove('d-none');
-        ;
-        extraLanguageHelp.textContent = race + "s get to choose 1 extra language";
-    };
     charRace === 'human'
-        ? extraLanguageHelpText("Human")
+        ? (extraLanguageField.classList.remove('d-none'),
+            func.setText(extraLanguageHelp, "Humans get to choose 1 extra language"))
         : charRace === 'halfelf'
-            ? extraLanguageHelpText("Half Elve")
+            ? (extraLanguageField.classList.remove('d-none'),
+                func.setText(extraLanguageHelp, "Half-Elves get to choose 1 extra language"))
             : charSubrace === 'highelf'
-                ? extraLanguageHelpText("High Elve")
+                ? (extraLanguageField.classList.remove('d-none'),
+                    func.setText(extraLanguageHelp, "High Elves get to choose 1 extra language"))
                 : (extraLanguageField.classList.add('d-none'),
                     extraLanguageHelp.textContent = '');
 };
