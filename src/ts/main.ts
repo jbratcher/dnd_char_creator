@@ -569,19 +569,18 @@ const setAbilityScorePreview = () => {
 
 }
 
+const resetAbilityScores = () => {
+  Abilities.map(ability => {
+    console.log(ability);
+    return ability = null;
+  })
+}
+
 const generalInfo = () => {
-
-  strength = null;
-
-  dexerity = null;
-
-  constitution = null;
-
-  intelligence = null;
-
-  wisdom = null;
-
-  charisma = null;
+  
+  // initialize values at character creation
+  
+  resetAbilityScores();
 
   // Get current state of info required to create character
 
@@ -589,17 +588,21 @@ const generalInfo = () => {
 
   setRace();
   
+  setSubrace();
+  
+  // Post info from character creation to preview area
+  
   setAbilityScorePreview();
 
   selectedAlignment = alignment.options[alignment.selectedIndex];
 
   charGender = gender.value.toLowerCase();
   
+  // convert languages array into line-separated list items (use innerHTML instead of textCotent)
+  
   let knownLanguages = Races[charRace].languages.toString().split().join("\r\n") + `${String(extraLanguage.value)}`
   
   func.showElementWithProps(languagesPreview, "Known Languages", knownLanguages)
-
-  // Post info from character creation to preview area
 
   currentLevel.textContent = String(Levels[0].level);
 
