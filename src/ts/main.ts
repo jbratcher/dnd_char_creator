@@ -283,7 +283,6 @@ showDraconicAncestrySelect();
 
 // Extra Language Selection: Human and Half-elf
 
-
 // Display extra language select element if race selection is Human, Half-Elf, or High Elf and populate lwith anguage options
 
 const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
@@ -324,6 +323,8 @@ const showExtraLanguageInput = () => {
 race.addEventListener('change', showExtraLanguageInput);
 
 subrace.addEventListener('change', showExtraLanguageInput);
+
+// Function to combine related functions (TODO: can be combined with other racial)
 
 const racialBonuses = () => {
 
@@ -593,8 +594,10 @@ const generalInfo = () => {
   selectedAlignment = alignment.options[alignment.selectedIndex];
 
   charGender = gender.value.toLowerCase();
-
-  languagesPreview.textContent = Races[charRace].languages.map(lang => lang).join(", ") + `, ${String(extraLanguage.value)}`;
+  
+  let knownLanguages = Races[charRace].languages.toString().split().join("\r\n") + `${String(extraLanguage.value)}`
+  
+  func.showElementWithProps(languagesPreview, "Known Languages", knownLanguages)
 
   // Post info from character creation to preview area
 

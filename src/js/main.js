@@ -183,6 +183,7 @@ var showExtraLanguageInput = function () {
 };
 race.addEventListener('change', showExtraLanguageInput);
 subrace.addEventListener('change', showExtraLanguageInput);
+// Function to combine related functions (TODO: can be combined with other racial)
 var racialBonuses = function () {
     addDwarvenToughness();
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
@@ -356,7 +357,8 @@ var generalInfo = function () {
     setAbilityScorePreview();
     selectedAlignment = alignment.options[alignment.selectedIndex];
     charGender = gender.value.toLowerCase();
-    languagesPreview.textContent = Races[charRace].languages.map(function (lang) { return lang; }).join(", ") + (", " + String(extraLanguage.value));
+    var knownLanguages = Races[charRace].languages.toString().split().join("\r\n") + ("" + String(extraLanguage.value));
+    func.showElementWithProps(languagesPreview, "Known Languages", knownLanguages);
     // Post info from character creation to preview area
     currentLevel.textContent = String(Levels[0].level);
     experienceNextLevel.textContent = String(Levels[0].experience);
