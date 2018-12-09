@@ -394,7 +394,9 @@ var dwarvenToughnessMod = 0;
 var lookupAbilityScore = function (ability) {
     // if ability matches abilityScore in list return number value of abilityScore
     for (var i = 0; i < abilityScoreListItems.length; i++) {
+        // gets ability score name from preview li > b element(Strength, Dexerity, etc.)
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+        // if preview ability score name matches passed ability score, get ability score from li > span element
         if (string.toLowerCase() === ability) {
             abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
             return abilityScore;
