@@ -677,14 +677,15 @@ const subraceAbilityModifier = () => {
 
   if(Races[charRace].subrace) {
 
+    // get subrace bonus ability and modifier value
     let subraceAbility: string = Races[charRace].subrace.ability;
     let subraceAbilityMod: number = Races[charRace].subrace.modifier;
 
+    // if ability score text matches li text, add bonus modifier to value
     for(let i = 0; i < abilityScoreListItems.length; i++) {
       let abilityText: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
       let abilityScorePreview = abilityScoreListItems[i].childNodes[3]
       let abilityScore: number = Number(abilityScoreListItems[i].childNodes[3].textContent);
-
       if(abilityText.toLowerCase() === subraceAbility) {
          abilityScorePreview.textContent = String(abilityScore + subraceAbilityMod);
 
@@ -730,16 +731,16 @@ const racialAbilityModifier = () => {
 
 }
 
-// Add ability options to extra ability select element
-
-func.addOptionsToSelect(extraAbilityModifier1, Abilities);
-func.addOptionsToSelect(extraAbilityModifier2, Abilities);
-
 // Display extra ability modifier field if race is Half-Elf
 
 const showExtraModifiersInput = () => {
 
   setRace();
+  
+  // Add ability options to extra ability select element
+
+  func.addOptionsToSelect(extraAbilityModifier1, Abilities);
+  func.addOptionsToSelect(extraAbilityModifier2, Abilities);
 
   charRace === 'halfelf'
     ? extraAbilityModifier.classList.remove('d-none')
@@ -753,25 +754,31 @@ const showExtraModifiersInput = () => {
 
 race.addEventListener('change', showExtraModifiersInput);
 
-// Hide first selection in 2nd select list (Half-elf racial ability)
+// Hide ability selected in either select element from the other select element
 
-const hideMod1Selection = () => {
+const hideModSelection = (extraAbilityModifier, otherAbilityModifier) => {
 
-  let firstSelection: string = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
+  let firstSelection: string = extraAbilityModifier.options[extraAbilityModifier.selectedIndex].textContent;
 
-  extraAbilityModifier2.innerHTML = "";
+  otherAbilityModifier.innerHTML = "";
 
   Abilities.map(ability => {
     if(ability !== firstSelection) {
       let abilityElement2 = <HTMLOptionElement>document.createElement("option");
       abilityElement2.textContent = ability;
-      extraAbilityModifier2.appendChild(abilityElement2);
+      otherAbilityModifier.appendChild(abilityElement2);
     }
   })
 
 }
 
-extraAbilityModifier1.addEventListener('change', hideMod1Selection)
+extraAbilityModifier1.addEventListener('change', function() {
+  hideModSelection(extraAbilityModifier1, extraAbilityModifier2)
+})
+
+extraAbilityModifier2.addEventListener('change', function() {
+  hideModSelection(extraAbilityModifier2, extraAbilityModifier1)
+})
 
 // Set value of Dwarven Toughtness hit point modifier based on race selection
 

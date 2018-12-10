@@ -184,6 +184,7 @@ var showExtraLanguageInput = function showExtraLanguageInput() {
 };
 race.addEventListener('change', showExtraLanguageInput);
 subrace.addEventListener('change', showExtraLanguageInput);
+// Function to combine related functions (TODO: can be combined with other racial)
 var racialBonuses = function racialBonuses() {
     addDwarvenToughness();
     addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
@@ -344,23 +345,26 @@ var setAbilityScorePreview = function setAbilityScorePreview() {
         previewElement.textContent = rolledScoreNode.textContent;
     });
 };
+var resetAbilityScores = function resetAbilityScores() {
+    _info.Abilities.map(function (ability) {
+        console.log(ability);
+        return ability = null;
+    });
+};
 var generalInfo = function generalInfo() {
-    strength = null;
-    dexerity = null;
-    constitution = null;
-    intelligence = null;
-    wisdom = null;
-    charisma = null;
+    // initialize values at character creation
+    resetAbilityScores();
     // Get current state of info required to create character
     setClass();
     setRace();
+    setSubrace();
+    // Post info from character creation to preview area
     setAbilityScorePreview();
     selectedAlignment = alignment.options[alignment.selectedIndex];
     charGender = gender.value.toLowerCase();
-    languagesPreview.textContent = _info.Races[charRace].languages.map(function (lang) {
-        return lang;
-    }).join(", ") + (", " + String(extraLanguage.value));
-    // Post info from character creation to preview area
+    // convert languages array into line-separated list items (use innerHTML instead of textCotent)
+    var knownLanguages = _info.Races[charRace].languages.toString().split().join("\r\n") + ("" + String(extraLanguage.value));
+    func.showElementWithProps(languagesPreview, "Known Languages", knownLanguages);
     currentLevel.textContent = String(_info.Levels[0].level);
     experienceNextLevel.textContent = String(_info.Levels[0].experience);
     namePreview.textContent = name.value;
@@ -391,7 +395,9 @@ var dwarvenToughnessMod = 0;
 var lookupAbilityScore = function lookupAbilityScore(ability) {
     // if ability matches abilityScore in list return number value of abilityScore
     for (var i = 0; i < abilityScoreListItems.length; i++) {
+        // gets ability score name from preview li > b element(Strength, Dexerity, etc.)
         var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+        // if preview ability score name matches passed ability score, get ability score from li > span element
         if (string.toLowerCase() === ability) {
             abilityScore = Number(abilityScoreListItems[i].childNodes[3].textContent);
             return abilityScore;
@@ -401,8 +407,10 @@ var lookupAbilityScore = function lookupAbilityScore(ability) {
 var subraceAbilityModifier = function subraceAbilityModifier() {
     setRace();
     if (_info.Races[charRace].subrace) {
+        // get subrace bonus ability and modifier value
         var subraceAbility = _info.Races[charRace].subrace.ability;
         var subraceAbilityMod = _info.Races[charRace].subrace.modifier;
+        // if ability score text matches li text, add bonus modifier to value
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var abilityText = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             var abilityScorePreview = abilityScoreListItems[i].childNodes[3];
@@ -438,29 +446,34 @@ var racialAbilityModifier = function racialAbilityModifier() {
         }
     }
 };
-// Add ability options to extra ability select element
-func.addOptionsToSelect(extraAbilityModifier1, _info.Abilities);
-func.addOptionsToSelect(extraAbilityModifier2, _info.Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function showExtraModifiersInput() {
     setRace();
+    // Add ability options to extra ability select element
+    func.addOptionsToSelect(extraAbilityModifier1, _info.Abilities);
+    func.addOptionsToSelect(extraAbilityModifier2, _info.Abilities);
     charRace === 'halfelf' ? extraAbilityModifier.classList.remove('d-none') : extraAbilityModifier.classList.add('d-none');
     charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
-// Hide first selection in 2nd select list (Half-elf racial ability)
-var hideMod1Selection = function hideMod1Selection() {
-    var firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
-    extraAbilityModifier2.innerHTML = "";
+// Hide ability selected in either select element from the other select element
+var hideModSelection = function hideModSelection(extraAbilityModifier, otherAbilityModifier) {
+    var firstSelection = extraAbilityModifier.options[extraAbilityModifier.selectedIndex].textContent;
+    otherAbilityModifier.innerHTML = "";
     _info.Abilities.map(function (ability) {
         if (ability !== firstSelection) {
             var abilityElement2 = document.createElement("option");
             abilityElement2.textContent = ability;
-            extraAbilityModifier2.appendChild(abilityElement2);
+            otherAbilityModifier.appendChild(abilityElement2);
         }
     });
 };
-extraAbilityModifier1.addEventListener('change', hideMod1Selection);
+extraAbilityModifier1.addEventListener('change', function () {
+    hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
+});
+extraAbilityModifier2.addEventListener('change', function () {
+    hideModSelection(extraAbilityModifier2, extraAbilityModifier1);
+});
 // Set value of Dwarven Toughtness hit point modifier based on race selection
 var addDwarvenToughness = function addDwarvenToughness() {
     setRace();

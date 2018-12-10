@@ -406,8 +406,10 @@ var lookupAbilityScore = function (ability) {
 var subraceAbilityModifier = function () {
     setRace();
     if (Races[charRace].subrace) {
+        // get subrace bonus ability and modifier value
         var subraceAbility = Races[charRace].subrace.ability;
         var subraceAbilityMod = Races[charRace].subrace.modifier;
+        // if ability score text matches li text, add bonus modifier to value
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var abilityText = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
             var abilityScorePreview = abilityScoreListItems[i].childNodes[3];
@@ -443,12 +445,12 @@ var racialAbilityModifier = function () {
         }
     }
 };
-// Add ability options to extra ability select element
-func.addOptionsToSelect(extraAbilityModifier1, Abilities);
-func.addOptionsToSelect(extraAbilityModifier2, Abilities);
 // Display extra ability modifier field if race is Half-Elf
 var showExtraModifiersInput = function () {
     setRace();
+    // Add ability options to extra ability select element
+    func.addOptionsToSelect(extraAbilityModifier1, Abilities);
+    func.addOptionsToSelect(extraAbilityModifier2, Abilities);
     charRace === 'halfelf'
         ? extraAbilityModifier.classList.remove('d-none')
         : extraAbilityModifier.classList.add('d-none');
@@ -457,19 +459,24 @@ var showExtraModifiersInput = function () {
         : extraAbilityModifierHelp.textContent = '';
 };
 race.addEventListener('change', showExtraModifiersInput);
-// Hide first selection in 2nd select list (Half-elf racial ability)
-var hideMod1Selection = function () {
-    var firstSelection = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
-    extraAbilityModifier2.innerHTML = "";
+// Hide ability selected in either select element from the other select element
+var hideModSelection = function (extraAbilityModifier, otherAbilityModifier) {
+    var firstSelection = extraAbilityModifier.options[extraAbilityModifier.selectedIndex].textContent;
+    otherAbilityModifier.innerHTML = "";
     Abilities.map(function (ability) {
         if (ability !== firstSelection) {
             var abilityElement2 = document.createElement("option");
             abilityElement2.textContent = ability;
-            extraAbilityModifier2.appendChild(abilityElement2);
+            otherAbilityModifier.appendChild(abilityElement2);
         }
     });
 };
-extraAbilityModifier1.addEventListener('change', hideMod1Selection);
+extraAbilityModifier1.addEventListener('change', function () {
+    hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
+});
+extraAbilityModifier2.addEventListener('change', function () {
+    hideModSelection(extraAbilityModifier2, extraAbilityModifier1);
+});
 // Set value of Dwarven Toughtness hit point modifier based on race selection
 var addDwarvenToughness = function () {
     setRace();
