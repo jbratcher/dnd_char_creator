@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 // Classes object
 ////////////////////////////////////////
-export var ClassProps = {
+export var Classes = {
     barbarian: {
         hitdie: 12,
         savingThrows: [

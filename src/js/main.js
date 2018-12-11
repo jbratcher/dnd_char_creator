@@ -2,12 +2,12 @@
 // Imports
 ////////////////////////////////////////
 import * as func from './functions.js';
-import { Abilities, Alignments, ClassList, ClassProps, Levels, Languages, Races, RaceList, Skills } from './info.js';
-// Initialize variables
-var modifier;
-var totalMod;
-var abilityScore;
-var abilityScoreMod;
+import { Abilities, Alignments, ClassList, Classes, Levels, Languages, Races, RaceList, Skills } from './info.js';
+// Initialize  global variables
+var modifier; // integer value that increases or decreases key values
+var totalMod; // integer value to combine modifier values before adding to key value
+var abilityScore; // character ability score
+var abilityScoreMod; // character ability score modifier
 var proficiencyBonus;
 var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
 ////////////////////////////////////////
@@ -32,7 +32,7 @@ rollConstitution.addEventListener('click', function () { return func.setScore(ro
 rollWisdom.addEventListener('click', function () { return func.setScore(rolledWisdom); });
 rollIntelligence.addEventListener('click', function () { return func.setScore(rolledIntelligence); });
 rollCharisma.addEventListener('click', function () { return func.setScore(rolledCharisma); });
-// Setters for ability scores
+// Setters for ability scores (string for textContent display)
 var strength = "0";
 var dexerity = "0";
 var constitution = "0";
@@ -48,18 +48,18 @@ var charisma = "0";
 ////////////////////////////////////////////////////////////
 // User input in chronological order
 // Class Select
-var cls = document.querySelector('#cls');
+var cls = document.querySelector('#cls'); // cls here due to reserved Class keyword
 func.addOptionsToSelect(cls, ClassList);
-var selectedCls = cls.options[cls.selectedIndex];
-var charCls = selectedCls.textContent.toLowerCase();
+var selectedClass = cls.options[cls.selectedIndex];
+var charClass = selectedClass.textContent.toLowerCase();
 var classHelp = document.querySelector('#classHelp');
 var setClass = function () {
-    charCls = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
+    charClass = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
 };
-func.setText(classHelp, ClassProps[charCls].info);
+func.setText(classHelp, Classes[charClass].info);
 cls.addEventListener('change', function () {
     setClass();
-    func.setText(classHelp, ClassProps[charCls].info);
+    func.setText(classHelp, Classes[charClass].info);
 });
 // Race Select
 var race = document.querySelector('#race');
@@ -246,13 +246,13 @@ var skillList2 = skill2.children;
 var skill3 = document.querySelector('#skillsSelect3');
 func.addOptionsToSelect(skill3, Skills);
 var skillList3 = skill3.children;
-var availableSkills = ClassProps[charCls].availableSkills;
+var availableSkills = Classes[charClass].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
 var selectedSkill2 = skill1.options[skill2.selectedIndex];
 var selectedSkill3 = skill1.options[skill3.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function () {
-    availableSkills = ClassProps[charCls].availableSkills;
+    availableSkills = Classes[charClass].availableSkills;
     skill1.innerHTML = "";
     skill2.innerHTML = "";
     skill3.innerHTML = "";
@@ -315,7 +315,7 @@ var levelUpButton = document.querySelector('#levelUpButton');
 var addNewExperienceButton = document.querySelector('#addExp');
 // General functions
 var charImageSet = function () {
-    var characterAttributes = func.getCharacterAttributes(charCls, charRace, charGender);
+    var characterAttributes = func.getCharacterAttributes(charClass, charRace, charGender);
     characterImg.src = func.getCharacterImage(characterAttributes);
 };
 var charLevelUp = function () {
@@ -370,7 +370,7 @@ var generalInfo = function () {
     racePreview.textContent = selectedRace.textContent;
     genderPreview.textContent = gender.value;
     agePreview.textContent = age.value;
-    clsPreview.textContent = selectedCls.textContent;
+    clsPreview.textContent = selectedClass.textContent;
     alignmentPreview.textContent = selectedAlignment.textContent;
 };
 ////////////////////////////////////////////////////////////
@@ -658,12 +658,12 @@ var weaponProficiencesPreview = document.querySelector('#weaponProficiencesPrevi
 var initialHitPoints = function () {
     // 1st level is max hit points + constiution modifier + racial modifier
     var modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
-    var hitpoints = (ClassProps[charCls].hitdie + modifier);
+    var hitpoints = (Classes[charClass].hitdie + modifier);
     hitPointPreview.textContent = String(hitpoints);
 };
 var addHitPoints = function () {
     var currentHitPoints = Number(hitPointPreview.textContent);
-    var rolledHitPoints = func.randomIntFromRange(1, ClassProps[charCls].hitdie);
+    var rolledHitPoints = func.randomIntFromRange(1, Classes[charClass].hitdie);
     modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitPointsToAdd = (rolledHitPoints + modifier);
     // Prevent negative or zero hit points on level up
@@ -714,8 +714,8 @@ var savingThrowList = document.querySelector('#savingThrowPreviewList');
 var savingThrowListItems = savingThrowList.children;
 // saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
 var calculateSavingThrowMods = function () {
-    charCls = selectedCls.textContent.toLowerCase();
-    var abilities = ClassProps[charCls].savingThrows;
+    setClass();
+    var abilities = Classes[charClass].savingThrows;
     abilities.map(function (ability) {
         // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
         for (var i = 0; i < savingThrowListItems.length; i++) {
@@ -801,10 +801,9 @@ createCharacterButton.addEventListener('click', function (e) {
 // Level advancement button submit
 levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
+    setClass();
     // Get level up variables
     constitution = rolledConstitution.textContent;
-    selectedCls = cls.options[cls.selectedIndex];
-    charCls = selectedCls.textContent.toLowerCase();
     if (currentLevel.textContent === "20") {
         return;
     }

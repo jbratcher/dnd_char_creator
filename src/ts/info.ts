@@ -2,7 +2,7 @@
 // Classes object
 ////////////////////////////////////////
 
-export const ClassProps = {
+export const Classes = {
 
     barbarian: {
         hitdie: 12,

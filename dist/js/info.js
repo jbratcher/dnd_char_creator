@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 ////////////////////////////////////////
 // Classes object
 ////////////////////////////////////////
-var ClassProps = exports.ClassProps = {
+var Classes = exports.Classes = {
     barbarian: {
         hitdie: 12,
         savingThrows: ["strength", "constitution"],

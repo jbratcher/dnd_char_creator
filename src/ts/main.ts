@@ -8,7 +8,7 @@ import {
   Abilities,
   Alignments,
   ClassList,
-  ClassProps,
+  Classes,
   Levels,
   Languages,
   Races,
@@ -16,15 +16,15 @@ import {
   Skills
 } from './info.js';
 
-// Initialize variables
+// Initialize  global variables
 
-let modifier: number;
+let modifier: number;  // integer value that increases or decreases key values
 
-let totalMod: number;
+let totalMod: number;  // integer value to combine modifier values before adding to key value
 
-let abilityScore: number;
+let abilityScore: number;  // character ability score
 
-let abilityScoreMod: number;
+let abilityScoreMod: number;  // character ability score modifier
 
 let proficiencyBonus: number;
 
@@ -66,7 +66,7 @@ rollIntelligence.addEventListener('click', () => func.setScore(rolledIntelligenc
 
 rollCharisma.addEventListener('click', () => func.setScore(rolledCharisma));
 
-// Setters for ability scores
+// Setters for ability scores (string for textContent display)
 
 let strength: string = "0";
 
@@ -94,25 +94,25 @@ let charisma: string = "0";
 
 // Class Select
 
-const cls = <HTMLSelectElement>document.querySelector('#cls');
+const cls = <HTMLSelectElement>document.querySelector('#cls');  // cls here due to reserved Class keyword
 
 func.addOptionsToSelect(cls, ClassList);
 
-let selectedCls = <HTMLOptionElement>cls.options[cls.selectedIndex];
+let selectedClass = <HTMLOptionElement>cls.options[cls.selectedIndex];
 
-let charCls: string = selectedCls.textContent.toLowerCase();
+let charClass: string = selectedClass.textContent.toLowerCase();
 
 const classHelp = <HTMLElement>document.querySelector('#classHelp');
 
 const setClass = () => {
-  charCls = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
+  charClass = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
 }
 
-func.setText(classHelp, ClassProps[charCls].info);
+func.setText(classHelp, Classes[charClass].info);
 
 cls.addEventListener('change', function() {
   setClass();
-  func.setText(classHelp, ClassProps[charCls].info);
+  func.setText(classHelp, Classes[charClass].info);
 });
 
 
@@ -417,7 +417,7 @@ func.addOptionsToSelect(skill3, Skills);
 
 let skillList3 = skill3.children;
 
-let availableSkills = ClassProps[charCls].availableSkills;
+let availableSkills = Classes[charClass].availableSkills;
 
 let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
@@ -429,7 +429,7 @@ let selectedSkill3 = skill1.options[skill3.selectedIndex];
 
 const highlightAvailableSkills = () => {
 
-  availableSkills = ClassProps[charCls].availableSkills;
+  availableSkills = Classes[charClass].availableSkills;
 
   skill1.innerHTML = "";
   skill2.innerHTML = "";
@@ -533,7 +533,7 @@ const addNewExperienceButton = <HTMLElement>document.querySelector('#addExp');
 // General functions
 
 const charImageSet = () => {
-  let characterAttributes = func.getCharacterAttributes(charCls, charRace, charGender);
+  let characterAttributes = func.getCharacterAttributes(charClass, charRace, charGender);
   characterImg.src = func.getCharacterImage(characterAttributes);
 }
 
@@ -616,7 +616,7 @@ const generalInfo = () => {
 
   agePreview.textContent = age.value;
 
-  clsPreview.textContent = selectedCls.textContent;
+  clsPreview.textContent = selectedClass.textContent;
 
   alignmentPreview.textContent = selectedAlignment.textContent;
 
@@ -1056,13 +1056,13 @@ const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponPr
 const initialHitPoints = () => {
   // 1st level is max hit points + constiution modifier + racial modifier
   let modifier: number = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
-  let hitpoints: number = (ClassProps[charCls].hitdie + modifier);
+  let hitpoints: number = (Classes[charClass].hitdie + modifier);
   hitPointPreview.textContent = String(hitpoints);
 }
 
 const addHitPoints = () => {
   let currentHitPoints: number = Number(hitPointPreview.textContent);
-  let rolledHitPoints: number = func.randomIntFromRange(1, ClassProps[charCls].hitdie)
+  let rolledHitPoints: number = func.randomIntFromRange(1, Classes[charClass].hitdie)
   modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod
   let hitPointsToAdd: number = (rolledHitPoints + modifier);
   // Prevent negative or zero hit points on level up
@@ -1129,8 +1129,9 @@ const savingThrowListItems = savingThrowList.children;
 
 const calculateSavingThrowMods = () => {
 
-  charCls = selectedCls.textContent.toLowerCase();
-  let abilities = ClassProps[charCls].savingThrows;
+  setClass();
+  
+  let abilities = Classes[charClass].savingThrows;
 
   abilities.map(ability => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
@@ -1277,12 +1278,12 @@ createCharacterButton.addEventListener('click', e => {
 levelUpButton.addEventListener('click', e => {
 
   e.preventDefault();
+  
+  setClass();
 
   // Get level up variables
 
   constitution = rolledConstitution.textContent;
-  selectedCls = cls.options[cls.selectedIndex];
-  charCls = selectedCls.textContent.toLowerCase();
 
   if(currentLevel.textContent === "20") {
     return;
