@@ -447,11 +447,10 @@ var racialAbilityModifier = function racialAbilityModifier() {
     }
 };
 // Display extra ability modifier field if race is Half-Elf
+func.addOptionsToSelect(extraAbilityModifier1, _info.Abilities);
 var showExtraModifiersInput = function showExtraModifiersInput() {
     setRace();
     // Add ability options to extra ability select element
-    func.addOptionsToSelect(extraAbilityModifier1, _info.Abilities);
-    func.addOptionsToSelect(extraAbilityModifier2, _info.Abilities);
     charRace === 'halfelf' ? extraAbilityModifier.classList.remove('d-none') : extraAbilityModifier.classList.add('d-none');
     charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
 };
@@ -468,6 +467,7 @@ var hideModSelection = function hideModSelection(extraAbilityModifier, otherAbil
         }
     });
 };
+hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
 extraAbilityModifier1.addEventListener('change', function () {
     hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
 });

@@ -733,14 +733,13 @@ const racialAbilityModifier = () => {
 
 // Display extra ability modifier field if race is Half-Elf
 
+func.addOptionsToSelect(extraAbilityModifier1, Abilities);
+
 const showExtraModifiersInput = () => {
 
   setRace();
   
   // Add ability options to extra ability select element
-
-  func.addOptionsToSelect(extraAbilityModifier1, Abilities);
-  func.addOptionsToSelect(extraAbilityModifier2, Abilities);
 
   charRace === 'halfelf'
     ? extraAbilityModifier.classList.remove('d-none')
@@ -771,6 +770,8 @@ const hideModSelection = (extraAbilityModifier, otherAbilityModifier) => {
   })
 
 }
+
+hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
 
 extraAbilityModifier1.addEventListener('change', function() {
   hideModSelection(extraAbilityModifier1, extraAbilityModifier2)
