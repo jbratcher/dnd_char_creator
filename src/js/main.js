@@ -248,8 +248,8 @@ func.addOptionsToSelect(skill3, Skills);
 var skillList3 = skill3.children;
 var availableSkills = Classes[charClass].availableSkills;
 var selectedSkill1 = skill1.options[skill1.selectedIndex];
-var selectedSkill2 = skill1.options[skill2.selectedIndex];
-var selectedSkill3 = skill1.options[skill3.selectedIndex];
+var selectedSkill2 = skill2.options[skill2.selectedIndex];
+var selectedSkill3 = skill3.options[skill3.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function () {
     availableSkills = Classes[charClass].availableSkills;
@@ -288,27 +288,6 @@ var alignmentPreview = document.querySelector('#alignmentPreview');
 var characterImg = document.querySelector('#characterImg');
 var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
 var languagesPreview = document.querySelector('#languagesPreview');
-// Special Abilities
-var trancePreview = document.querySelector('#trancePreview');
-var tranceInfo = document.querySelector('#tranceInfo');
-var stealthPreview = document.querySelector('#stealthPreview');
-var stealthInfo = document.querySelector('#stealthInfo');
-var artificersLorePreview = document.querySelector('#artificersLorePreview');
-var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
-var tinkerPreview = document.querySelector('#tinkerPreview');
-var tinkerInfo = document.querySelector('#tinkerInfo');
-var damageResistancePreview = document.querySelector('#damageResistancePreview');
-var damageResistanceType = document.querySelector('#damageResistanceType');
-var menacingPreview = document.querySelector('#menacingPreview');
-var menacingInfo = document.querySelector('#menacingInfo');
-var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
-var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
-var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
-var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
-var hellishResistancePreview = document.querySelector('#hellishResistancePreview');
-var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
-var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
-var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
 // General buttons
 var createCharacterButton = document.querySelector('#createCharacterButton');
 var levelUpButton = document.querySelector('#levelUpButton');
@@ -488,13 +467,14 @@ var addDwarvenToughness = function () {
 // if extra ability score is selected add +1 to ability score preview
 var addHalfElfAbilityMofifiers = function () {
     if (charRace === 'halfelf') {
-        // get selected abilities
+        // get selected abilities text
         var mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
         var mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
-        // get selected abilities preview element
+        // get selected abilities preview element text
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;
             var string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+            // if either selected ability text matches abiltiy preview element text, update ability score
             if (string === mod1 || string === mod2) {
                 var abilityScore_4 = Number(abilityScorePreview);
                 abilityScore_4 += 1;
@@ -507,22 +487,44 @@ var addHalfElfAbilityMofifiers = function () {
 // Skills Preview
 ////////////////////////////////////////////////////////////
 // Skill variables
+// Skill Lists
 var skillsPreviewList = document.querySelector('#skillsPreviewList');
 var skillsPreviewListItems = skillsPreviewList.children;
 var additionalSkillsPreviewList = document.querySelector('#additionalSkillsPreviewList');
 var additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
+// Special Abilities
 var stonecunningPreview = document.querySelector('#stonecunningPreview');
 var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
 var draconicAncestryPreview = document.querySelector('#draconicAncestryPreview');
 var dragonType = document.querySelector('#dragonType');
 var damageType = document.querySelector('#damageType');
 var breathWeapon = document.querySelector('#breathWeapon');
+var trancePreview = document.querySelector('#trancePreview');
+var tranceInfo = document.querySelector('#tranceInfo');
+var stealthPreview = document.querySelector('#stealthPreview');
+var stealthInfo = document.querySelector('#stealthInfo');
+var artificersLorePreview = document.querySelector('#artificersLorePreview');
+var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
+var tinkerPreview = document.querySelector('#tinkerPreview');
+var tinkerInfo = document.querySelector('#tinkerInfo');
+var damageResistancePreview = document.querySelector('#damageResistancePreview');
+var damageResistanceType = document.querySelector('#damageResistanceType');
+var menacingPreview = document.querySelector('#menacingPreview');
+var menacingInfo = document.querySelector('#menacingInfo');
+var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
+var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
+var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
+var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
+var hellishResistancePreview = document.querySelector('#hellishResistancePreview');
+var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
+var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
+var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
 // Skill functions
 // const showSkillSlots = () => {}
 var getSelectedSkills = function () {
     selectedSkill1 = skill1.options[skill1.selectedIndex];
-    selectedSkill2 = skill1.options[skill2.selectedIndex];
-    selectedSkill3 = skill1.options[skill3.selectedIndex];
+    selectedSkill2 = skill2.options[skill2.selectedIndex];
+    selectedSkill3 = skill3.options[skill3.selectedIndex];
 };
 var getSkillModifier = function (skillText) {
     var skillAbility = (singleWord.exec(skillText));

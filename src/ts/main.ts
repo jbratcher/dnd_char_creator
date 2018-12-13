@@ -421,9 +421,9 @@ let availableSkills = Classes[charClass].availableSkills;
 
 let selectedSkill1 = skill1.options[skill1.selectedIndex];
 
-let selectedSkill2 = skill1.options[skill2.selectedIndex];
+let selectedSkill2 = skill2.options[skill2.selectedIndex];
 
-let selectedSkill3 = skill1.options[skill3.selectedIndex];
+let selectedSkill3 = skill3.options[skill3.selectedIndex];
 
 // Skill functions
 
@@ -489,38 +489,6 @@ const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
 const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
 
 const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview');
-
-// Special Abilities
-
-const trancePreview = <HTMLElement>document.querySelector('#trancePreview');
-const tranceInfo = <HTMLElement>document.querySelector('#tranceInfo');
-
-const stealthPreview = <HTMLElement>document.querySelector('#stealthPreview');
-const stealthInfo = <HTMLElement>document.querySelector('#stealthInfo');
-
-const artificersLorePreview = <HTMLElement>document.querySelector('#artificersLorePreview');
-const artificersLoreInfo = <HTMLElement>document.querySelector('#artificersLoreInfo');
-
-const tinkerPreview = <HTMLElement>document.querySelector('#tinkerPreview');
-const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
-
-const damageResistancePreview = <HTMLElement>document.querySelector('#damageResistancePreview');
-const damageResistanceType = <HTMLElement>document.querySelector('#damageResistanceType');
-
-const menacingPreview = <HTMLElement>document.querySelector('#menacingPreview');
-const menacingInfo = <HTMLElement>document.querySelector('#menacingInfo');
-
-const relentlessEndurancePreview = <HTMLElement>document.querySelector('#relentlessEndurancePreview');
-const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentlessEnduranceInfo');
-
-const savageAttacksPreview = <HTMLElement>document.querySelector('#savageAttacksPreview');
-const savageAttacksInfo = <HTMLElement>document.querySelector('#savageAttacksInfo');
-
-const hellishResistancePreview = <HTMLElement>document.querySelector('#hellishResistancePreview');
-const hellishResistanceInfo = <HTMLElement>document.querySelector('#hellishResistanceInfo');
-
-const infernalLegacyPreview = <HTMLElement>document.querySelector('#infernalLegacyPreview');
-const infernalLegacyInfo = <HTMLElement>document.querySelector('#infernalLegacyInfo');
 
 // General buttons
 
@@ -652,7 +620,7 @@ const extraAbilityModifier2 = <HTMLSelectElement>document.querySelector('#extraA
 
 const extraAbilityModifierHelp = <HTMLElement>document.querySelector('#extraAbilityModifierHelp');
 
-let dwarvenToughnessMod = 0;
+let dwarvenToughnessMod: number = 0;
 
 // Ability Score functions
 
@@ -799,13 +767,14 @@ const addDwarvenToughness = () => {
 const addHalfElfAbilityMofifiers = () => {
 
   if(charRace === 'halfelf') {
-    // get selected abilities
+    // get selected abilities text
     let mod1: string = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
     let mod2: string = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
-    // get selected abilities preview element
+    // get selected abilities preview element text
     for(let i = 0; i < abilityScoreListItems.length; i++) {
       let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent
       let string: string = singleWord.exec(abilityScoreListItems[i].childNodes[1].textContent)[0];
+      // if either selected ability text matches abiltiy preview element text, update ability score
       if(string === mod1 || string === mod2) {
         let abilityScore: number = Number(abilityScorePreview);
         abilityScore += 1;
@@ -822,6 +791,8 @@ const addHalfElfAbilityMofifiers = () => {
 
 // Skill variables
 
+// Skill Lists
+
 const skillsPreviewList = <HTMLElement>document.querySelector('#skillsPreviewList');
 
 const skillsPreviewListItems = skillsPreviewList.children;
@@ -829,6 +800,8 @@ const skillsPreviewListItems = skillsPreviewList.children;
 const additionalSkillsPreviewList = <HTMLElement>document.querySelector('#additionalSkillsPreviewList');
 
 const additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
+
+// Special Abilities
 
 const stonecunningPreview = <HTMLElement>document.querySelector('#stonecunningPreview');
 
@@ -842,6 +815,36 @@ const damageType = <HTMLElement>document.querySelector('#damageType');
 
 const breathWeapon = <HTMLElement>document.querySelector('#breathWeapon');
 
+const trancePreview = <HTMLElement>document.querySelector('#trancePreview');
+const tranceInfo = <HTMLElement>document.querySelector('#tranceInfo');
+
+const stealthPreview = <HTMLElement>document.querySelector('#stealthPreview');
+const stealthInfo = <HTMLElement>document.querySelector('#stealthInfo');
+
+const artificersLorePreview = <HTMLElement>document.querySelector('#artificersLorePreview');
+const artificersLoreInfo = <HTMLElement>document.querySelector('#artificersLoreInfo');
+
+const tinkerPreview = <HTMLElement>document.querySelector('#tinkerPreview');
+const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
+
+const damageResistancePreview = <HTMLElement>document.querySelector('#damageResistancePreview');
+const damageResistanceType = <HTMLElement>document.querySelector('#damageResistanceType');
+
+const menacingPreview = <HTMLElement>document.querySelector('#menacingPreview');
+const menacingInfo = <HTMLElement>document.querySelector('#menacingInfo');
+
+const relentlessEndurancePreview = <HTMLElement>document.querySelector('#relentlessEndurancePreview');
+const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentlessEnduranceInfo');
+
+const savageAttacksPreview = <HTMLElement>document.querySelector('#savageAttacksPreview');
+const savageAttacksInfo = <HTMLElement>document.querySelector('#savageAttacksInfo');
+
+const hellishResistancePreview = <HTMLElement>document.querySelector('#hellishResistancePreview');
+const hellishResistanceInfo = <HTMLElement>document.querySelector('#hellishResistanceInfo');
+
+const infernalLegacyPreview = <HTMLElement>document.querySelector('#infernalLegacyPreview');
+const infernalLegacyInfo = <HTMLElement>document.querySelector('#infernalLegacyInfo');
+
 
 // Skill functions
 
@@ -849,8 +852,8 @@ const breathWeapon = <HTMLElement>document.querySelector('#breathWeapon');
 
 const getSelectedSkills = () => {
   selectedSkill1 = skill1.options[skill1.selectedIndex];
-  selectedSkill2 = skill1.options[skill2.selectedIndex];
-  selectedSkill3 = skill1.options[skill3.selectedIndex];
+  selectedSkill2 = skill2.options[skill2.selectedIndex];
+  selectedSkill3 = skill3.options[skill3.selectedIndex];
 }
 
 const getSkillModifier = skillText => {
