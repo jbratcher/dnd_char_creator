@@ -519,31 +519,70 @@ var hellishResistancePreview = document.querySelector('#hellishResistancePreview
 var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
 var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
 var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
+// Racial skills functions
+// Dragonborn
+var dragonbornDraconicAncestry = function () {
+    var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
+    var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
+    return Races[charRace].special.draconicAncestry
+        ? (draconicAncestryPreview.parentElement.classList.remove('d-none'),
+            draconicAncestryPreview.parentElement.classList.add('d-flex'),
+            draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
+            dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
+            damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
+            breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
+            damageResistancePreview.parentElement.classList.remove('d-none'),
+            damageResistancePreview.parentElement.classList.add('d-flex'),
+            damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type)
+        : (draconicAncestryPreview.parentElement.classList.remove('d-flex'),
+            draconicAncestryPreview.parentElement.classList.add('d-none'),
+            draconicAncestryHelp.textContent = "");
+};
+// Dwarf 
+// Dwarf Stonecunning
+var dwarfStonecunning = function () {
+    return Races[charRace].special.stonecunning
+        ? (func.showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)"))
+        : stonecunningPreview.parentElement.classList.add('d-none');
+};
+// Dwarf tool proficiency
+var dwarfToolProficiency = function () {
+    return Races[charRace].special.toolProficiency
+        ? (func.showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, "Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)"))
+        : toolProficiencyPreview.parentElement.classList.add('d-none');
+};
 // Skill functions
-// const showSkillSlots = () => {}
+// const showSkillSlots = (characterClass) => {
+//   // get number of skills for class
+//   const numberOfSkills: number = Classes[charClass].skills
+//   //loop through and display skill selects
+// }
 var getSelectedSkills = function () {
     selectedSkill1 = skill1.options[skill1.selectedIndex];
     selectedSkill2 = skill2.options[skill2.selectedIndex];
     selectedSkill3 = skill3.options[skill3.selectedIndex];
 };
+// Get any modifiers to the proficiency bonus for a skill
 var getSkillModifier = function (skillText) {
-    var skillAbility = (singleWord.exec(skillText));
+    var skillAbility = String(singleWord.exec(skillText));
     var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
     abilityScoreMod = func.getAbilityScoreModifier(skillAbilityScore);
     return totalMod = abilityScoreMod + proficiencyBonus;
 };
-var highightSkill = function (skillDescription) {
+// highlight a single skill
+var highightSkill = function (skillText) {
     for (var i = 0; i < skillsPreviewListItems.length; i++) {
         var skill = skillsPreviewListItems[i];
         var skillName = skillsPreviewListItems[i].childNodes[1];
-        var skillText = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
-        skillText === skillDescription
+        var skillText_1 = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+        skillText_1 === skillText_1
             ? (skill.style.color = 'green',
                 getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent),
                 func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]))
             : console.log('Highlight Skill: not a match');
     }
 };
+// highlight choosen skills on character creation
 var highlightSkills = function () {
     // Get current values of required info
     getSelectedSkills();
@@ -571,32 +610,12 @@ var highlightSkills = function () {
 var highlightRacialSKills = function () {
     setRace();
     setSubrace();
-    var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
-    var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
-    // Dwarf Stonecunning
-    Races[charRace].special.stonecunning
-        ? (func.showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)"))
-        : stonecunningPreview.parentElement.classList.add('d-none');
-    // Dwarf tool proficiency
-    Races[charRace].special.toolProficiency
-        ? (func.showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, "Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)"))
-        : toolProficiencyPreview.parentElement.classList.add('d-none');
-    // Dwarven Toughtness
+    // Dwarf
+    dwarfStonecunning();
+    dwarfToolProficiency();
     addDwarvenToughness();
-    // Dragonborn Draconic Ancestry
-    Races[charRace].special.draconicAncestry
-        ? (draconicAncestryPreview.parentElement.classList.remove('d-none'),
-            draconicAncestryPreview.parentElement.classList.add('d-flex'),
-            draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
-            dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
-            damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
-            breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
-            damageResistancePreview.parentElement.classList.remove('d-none'),
-            damageResistancePreview.parentElement.classList.add('d-flex'),
-            damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type)
-        : (draconicAncestryPreview.parentElement.classList.remove('d-flex'),
-            draconicAncestryPreview.parentElement.classList.add('d-none'),
-            draconicAncestryHelp.textContent = "");
+    // Dragonborn
+    dragonbornDraconicAncestry();
     //  Elf Keen Senses Perception Bonus Skill
     Races[charRace].special.keenSenses
         ? highightSkill('perception')
