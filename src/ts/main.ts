@@ -901,6 +901,96 @@ const dwarfToolProficiency = () => {
   
 }
 
+// Elf Keen Senses Perception Bonus Skill
+
+const elfKeenSenses = () => {
+  
+  return Races[charRace].special.keenSenses
+    ? highightSkill('perception')
+    : null
+  
+}
+
+// Elf Trance sleep skill
+  
+const elfTrance = () => {
+  
+  return Races[charRace].special.trance
+    ? func.showElementWithProps(tranceInfo, Races[charRace].special.trance.info, "Details")
+    : null
+  
+}  
+
+// Halfling lightfoot stealth skill
+
+const lightfootNaturallyStealthy = () => {
+  
+  return charSubrace === "lightfoot"
+    ? func.showElementWithProps(stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
+    : null
+  
+}
+
+// Half-orc special abilities
+
+const halforcMenacing = () => {
+  
+  return Races[charRace].special.menacing
+    ? func.showElementWithProps(menacingInfo, Races[charRace].special.menacing.info, "Details")
+    : null
+  
+}
+
+const halforcRelentlessEndurance = () => {
+  
+  return Races[charRace].special.relentlessEndurance
+    ? func.showElementWithProps(relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
+    : null
+  
+}
+
+const halforcSavageAttacks = () => {
+  
+  return Races[charRace].special.savageAttacks
+    ? func.showElementWithProps(savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
+    : null
+  
+}
+
+// Rock gnome special abilities
+
+const rockgnomeSpecials = () => {
+  
+  return charSubrace === "rockgnome"
+    ? (
+      console.log(charSubrace),
+      func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
+      func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
+        tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
+        tinkerInfo.textContent = "Details"
+      )
+    : null
+  
+}
+
+
+// Tiefling special abilities\
+
+const tieflingHellishResistance = () => {
+  
+  return Races[charRace].special.hellishResistance
+    ? func.showElementWithProps(hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
+    : null
+  
+}
+
+const tieflingInfernalLegacy = () => {
+  
+  return Races[charRace].special.infernalLegacy
+    ? func.showElementWithProps(infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
+    : null
+  
+}
 
 // Skill functions
 
@@ -992,62 +1082,40 @@ const highlightRacialSKills = () => {
   // Dragonborn
     
   dragonbornDraconicAncestry();
+  
+  // Elf
 
-  //  Elf Keen Senses Perception Bonus Skill
-
-  Races[charRace].special.keenSenses
-    ? highightSkill('perception')
-    : null
-
-  // Elf Trance sleep skill
-
-  Races[charRace].special.trance
-    ? func.showElementWithProps(tranceInfo, Races[charRace].special.trance.info, "Details")
-    : null
-
-  // Half-orc special abilities
-
+  elfKeenSenses();
+  
+  elfTrance();
+  
+  // Half-Elf
+  
   addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 
-  Races[charRace].special.menacing
-    ? func.showElementWithProps(menacingInfo, Races[charRace].special.menacing.info, "Details")
-    : null
+  // Half-orc
 
-  Races[charRace].special.relentlessEndurance
-    ? func.showElementWithProps(relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
-    : null
+  halforcMenacing();
+  
+  halforcRelentlessEndurance();
+  
+  halforcSavageAttacks();
+    
+  // Tiefling 
 
-  Races[charRace].special.savageAttacks
-    ? func.showElementWithProps(savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
-    : null
+  tieflingHellishResistance();
+  
+  tieflingInfernalLegacy();
+  
+  // Subrace skills
+  
+  // Halfling Lightfoots
 
-  // Tiefling special abilities
-
-  Races[charRace].special.hellishResistance
-    ? func.showElementWithProps(hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
-    : null
-
-  Races[charRace].special.infernalLegacy
-    ? func.showElementWithProps(infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
-    : null
-
-  // Halfling lightfoot stealth skill
-
-  charSubrace === "lightfoot"
-    ? func.showElementWithProps(stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
-    : null
+  lightfootNaturallyStealthy();
 
   // Rock gnome special abilities
 
-  charSubrace === "rockgnome"
-    ? (
-      console.log(charSubrace),
-      func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
-      func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
-        tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
-        tinkerInfo.textContent = "Details"
-      )
-    : null
+  rockgnomeSpecials();
 
 }
 
