@@ -4,6 +4,8 @@
 
 import * as func from './functions.js';
 
+import * as ele from './domElements.js'
+
 import {
   Abilities,
   Alignments,
@@ -14,7 +16,7 @@ import {
   Races,
   RaceList,
   Skills
-} from './info.js';
+} from './characterInfo.js';
 
 // Initialize  global variables
 
@@ -30,42 +32,6 @@ let proficiencyBonus: number;
 
 const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
 
-////////////////////////////////////////
-// Ability score DOM elements
-////////////////////////////////////////
-
-const rollStrength: HTMLElement = document.querySelector('#rollStrength');
-const rolledStrength: HTMLElement = document.querySelector('#rolledStrength');
-
-const rollDexerity: HTMLElement = document.querySelector('#rollDexerity');
-const rolledDexerity: HTMLElement = document.querySelector('#rolledDexerity');
-
-const rollConstitution: HTMLElement = document.querySelector('#rollConstitution');
-const rolledConstitution: HTMLElement = document.querySelector('#rolledConstitution');
-
-const rollIntelligence: HTMLElement = document.querySelector('#rollIntelligence');
-const rolledIntelligence: HTMLElement = document.querySelector('#rolledIntelligence');
-
-const rollWisdom: HTMLElement = document.querySelector('#rollWisdom');
-const rolledWisdom: HTMLElement = document.querySelector('#rolledWisdom');
-
-const rollCharisma: HTMLElement = document.querySelector('#rollCharisma');
-const rolledCharisma: HTMLElement = document.querySelector('#rolledCharisma');
-
-// Event listeners for rolling ability scores
-
-rollStrength.addEventListener('click', () => func.setScore(rolledStrength));
-
-rollDexerity.addEventListener('click', () => func.setScore(rolledDexerity));
-
-rollConstitution.addEventListener('click', () => func.setScore(rolledConstitution));
-
-rollWisdom.addEventListener('click', () => func.setScore(rolledWisdom));
-
-rollIntelligence.addEventListener('click', () => func.setScore(rolledIntelligence));
-
-rollCharisma.addEventListener('click', () => func.setScore(rolledCharisma));
-
 // Setters for ability scores (string for textContent display)
 
 let strength: string = "0";
@@ -79,6 +45,21 @@ let intelligence: string = "0";
 let wisdom: string = "0";
 
 let charisma: string = "0";
+
+// Event listeners for rolling ability scores
+
+ele.rollStrength.addEventListener('click', () => func.setScore(ele.rolledStrength));
+
+ele.rollDexerity.addEventListener('click', () => func.setScore(ele.rolledDexerity));
+
+ele.rollConstitution.addEventListener('click', () => func.setScore(ele.rolledConstitution));
+
+ele.rollWisdom.addEventListener('click', () => func.setScore(ele.rolledWisdom));
+
+ele.rollIntelligence.addEventListener('click', () => func.setScore(ele.rolledIntelligence));
+
+ele.rollCharisma.addEventListener('click', () => func.setScore(ele.rolledCharisma));
+
 
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
@@ -1389,7 +1370,7 @@ levelUpButton.addEventListener('click', e => {
 
   // Get level up variables
 
-  constitution = rolledConstitution.textContent;
+  constitution = ele.rolledConstitution.textContent;
 
   if(currentLevel.textContent === "20") {
     return;

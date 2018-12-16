@@ -2,7 +2,8 @@
 // Imports
 ////////////////////////////////////////
 import * as func from './functions.js';
-import { Abilities, Alignments, ClassList, Classes, Levels, Languages, Races, RaceList, Skills } from './info.js';
+import * as ele from './domElements.js';
+import { Abilities, Alignments, ClassList, Classes, Levels, Languages, Races, RaceList, Skills } from './characterInfo.js';
 // Initialize  global variables
 var modifier; // integer value that increases or decreases key values
 var totalMod; // integer value to combine modifier values before adding to key value
@@ -10,28 +11,6 @@ var abilityScore; // character ability score
 var abilityScoreMod; // character ability score modifier
 var proficiencyBonus;
 var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
-////////////////////////////////////////
-// Ability score DOM elements
-////////////////////////////////////////
-var rollStrength = document.querySelector('#rollStrength');
-var rolledStrength = document.querySelector('#rolledStrength');
-var rollDexerity = document.querySelector('#rollDexerity');
-var rolledDexerity = document.querySelector('#rolledDexerity');
-var rollConstitution = document.querySelector('#rollConstitution');
-var rolledConstitution = document.querySelector('#rolledConstitution');
-var rollIntelligence = document.querySelector('#rollIntelligence');
-var rolledIntelligence = document.querySelector('#rolledIntelligence');
-var rollWisdom = document.querySelector('#rollWisdom');
-var rolledWisdom = document.querySelector('#rolledWisdom');
-var rollCharisma = document.querySelector('#rollCharisma');
-var rolledCharisma = document.querySelector('#rolledCharisma');
-// Event listeners for rolling ability scores
-rollStrength.addEventListener('click', function () { return func.setScore(rolledStrength); });
-rollDexerity.addEventListener('click', function () { return func.setScore(rolledDexerity); });
-rollConstitution.addEventListener('click', function () { return func.setScore(rolledConstitution); });
-rollWisdom.addEventListener('click', function () { return func.setScore(rolledWisdom); });
-rollIntelligence.addEventListener('click', function () { return func.setScore(rolledIntelligence); });
-rollCharisma.addEventListener('click', function () { return func.setScore(rolledCharisma); });
 // Setters for ability scores (string for textContent display)
 var strength = "0";
 var dexerity = "0";
@@ -39,6 +18,13 @@ var constitution = "0";
 var intelligence = "0";
 var wisdom = "0";
 var charisma = "0";
+// Event listeners for rolling ability scores
+ele.rollStrength.addEventListener('click', function () { return func.setScore(ele.rolledStrength); });
+ele.rollDexerity.addEventListener('click', function () { return func.setScore(ele.rolledDexerity); });
+ele.rollConstitution.addEventListener('click', function () { return func.setScore(ele.rolledConstitution); });
+ele.rollWisdom.addEventListener('click', function () { return func.setScore(ele.rolledWisdom); });
+ele.rollIntelligence.addEventListener('click', function () { return func.setScore(ele.rolledIntelligence); });
+ele.rollCharisma.addEventListener('click', function () { return func.setScore(ele.rolledCharisma); });
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
 // and add dynamic updating
@@ -858,7 +844,7 @@ levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
     setClass();
     // Get level up variables
-    constitution = rolledConstitution.textContent;
+    constitution = ele.rolledConstitution.textContent;
     if (currentLevel.textContent === "20") {
         return;
     }
