@@ -34,57 +34,51 @@ ele.rollCharisma.addEventListener('click', function () { return func.setScore(el
 ////////////////////////////////////////////////////////////
 // User input in chronological order
 // Class Select
-var cls = document.querySelector('#cls'); // cls here due to reserved Class keyword
-func.addOptionsToSelect(cls, ClassList);
-var selectedClass = cls.options[cls.selectedIndex];
+func.addOptionsToSelect(ele.cls, ClassList);
+var selectedClass = ele.cls.options[ele.cls.selectedIndex];
 var charClass = selectedClass.textContent.toLowerCase();
-var classHelp = document.querySelector('#classHelp');
 var setClass = function () {
-    charClass = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
+    charClass = ele.cls.options[ele.cls.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
 };
-func.setText(classHelp, Classes[charClass].info);
-cls.addEventListener('change', function () {
+func.setText(ele.classHelp, Classes[charClass].info);
+ele.cls.addEventListener('change', function () {
     setClass();
-    func.setText(classHelp, Classes[charClass].info);
+    func.setText(ele.classHelp, Classes[charClass].info);
 });
 // Race Select
-var race = document.querySelector('#race');
-func.addOptionsToSelect(race, RaceList);
-var selectedRace = race.options[race.selectedIndex];
+func.addOptionsToSelect(ele.race, RaceList);
+var selectedRace = ele.race.options[ele.race.selectedIndex];
 var charRace = selectedRace.textContent.toLowerCase().replace(/-/g, ""); // "i.e. human, halfelf, halforc"
-var raceHelp = document.querySelector('#raceHelp');
 var setRace = function () {
-    charRace = race.options[race.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
+    charRace = ele.race.options[ele.race.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
 };
-func.setText(raceHelp, Races[charRace].info);
-race.addEventListener('change', function () {
+func.setText(ele.raceHelp, Races[charRace].info);
+ele.race.addEventListener('change', function () {
     setRace();
-    func.setText(raceHelp, Races[charRace].info);
+    func.setText(ele.raceHelp, Races[charRace].info);
 });
 // Subrace Select (Optional, if subrace exists)
-var subraceSelectSection = document.querySelector('#optionalSubrace');
-var subrace = document.querySelector('#subrace');
-var subraceHelp = document.querySelector('#subraceHelp');
-var charSubrace = subrace.textContent.toLowerCase().replace(/-|\s/g, "");
+var selectedSubrace = ele.subrace.options[ele.subrace.selectedIndex];
+var charSubrace = selectedSubrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
 var showOptionalSubraceSelect = function () {
     setRace();
     // Reset any subrace from previous selection
-    subrace.innerHTML = "-";
-    subraceHelp.textContent = "";
+    ele.subrace.innerHTML = "-";
+    ele.subraceHelp.textContent = "";
     // if race has a subrace, show and populate subrace select element
     Races[charRace].subrace
-        ? (func.addOptionsToSelect(subrace, ["-"]), // Make first option "null"
-            func.addOptionsToSelect(subrace, Races[charRace].subrace.name),
-            subraceSelectSection.classList.remove('d-none'))
-        : subraceSelectSection.classList.add('d-none');
+        ? (func.addOptionsToSelect(ele.subrace, ["-"]), // Make first option "null"
+            func.addOptionsToSelect(ele.subrace, Races[charRace].subrace.name),
+            ele.subraceSelectSection.classList.remove('d-none'))
+        : ele.subraceSelectSection.classList.add('d-none');
 };
 // Subrace options regenerate on race selection change
-race.addEventListener('change', showOptionalSubraceSelect);
+ele.race.addEventListener('change', showOptionalSubraceSelect);
 var setSubrace = function () {
     // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
-    if (!subrace.parentElement.classList.contains("d-none")) {
-        charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, ""); // normalize subrace text to all lowercase joined letters
+    if (!ele.subrace.parentElement.classList.contains("d-none")) {
+        charSubrace = ele.subrace.options[ele.subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, ""); // normalize subrace text to all lowercase joined letters
     }
     else {
         // if subrace does not exist for selected race
@@ -92,40 +86,37 @@ var setSubrace = function () {
     }
 };
 // On subrace selection, get value of subrace and display descriptive text
-subrace.addEventListener('change', function () {
-    func.setText(subraceHelp, "");
+ele.subrace.addEventListener('change', function () {
+    func.setText(ele.subraceHelp, "");
     setSubrace();
-    func.setText(subraceHelp, Races[charRace].subrace.helpText);
+    func.setText(ele.subraceHelp, Races[charRace].subrace.helpText);
 });
 // Alignment
-var alignment = document.querySelector('#alignment');
-func.addOptionsToSelect(alignment, Alignments);
-var selectedAlignment = alignment.options[alignment.selectedIndex];
+func.addOptionsToSelect(ele.alignment, Alignments);
+var selectedAlignment = ele.alignment.options[ele.alignment.selectedIndex];
+var charAlignment = selectedAlignment.textContent; // "Lawful Good, Chaotic Evil, True Neutral"
 var setAlignment = function () {
-    var charAlignment = selectedAlignment.textContent; // "Lawful Good, Chaotic Evil, True Neutral"
+    var charAlignment = selectedAlignment.textContent;
 };
 // limits alignment options to race recommendations
 var availableAlignments = function () {
-    alignment.innerHTML = ""; // reset alignment select options
+    ele.alignment.innerHTML = ""; // reset alignment select options
     setRace();
-    func.addOptionsToSelect(alignment, Races[charRace].alignments);
+    func.addOptionsToSelect(ele.alignment, Races[charRace].alignments);
 };
 // Alignment options regenerate on race selection
-race.addEventListener('change', availableAlignments);
+ele.race.addEventListener('change', availableAlignments);
 // Name
-var name = document.querySelector('#name');
+// see domElements.ts
 // Gender
-var gender = document.querySelector('#gender');
-var charGender = gender.value.toLowerCase();
+var charGender = ele.gender.value.toLowerCase();
 // Age
-var age = document.querySelector('#age');
-var ageHelp = document.querySelector('#ageHelp');
 // Displays race specific age help text on race selection
 var ageHelpText = function () {
     setRace();
-    func.setText(ageHelp, func.capitialize(charRace) + " age ranges between " + Races[charRace].age.min + " and  " + Races[charRace].age.max);
+    func.setText(ele.ageHelp, func.capitialize(charRace) + " age ranges between " + Races[charRace].age.min + " and  " + Races[charRace].age.max);
 };
-race.addEventListener('change', ageHelpText);
+ele.race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 ageHelpText();
 // Dragonborn: Draconic Ancestry / Dragonborn "subrace"
@@ -143,7 +134,7 @@ var showDraconicAncestrySelect = function () {
             draconicAncestryHelp.textContent = '');
 };
 // Draconic ancestry options regenerate on race selection
-race.addEventListener('change', showDraconicAncestrySelect);
+ele.race.addEventListener('change', showDraconicAncestrySelect);
 // Initialize on page load
 showDraconicAncestrySelect();
 // Extra Language Selection: Human and Half-elf
@@ -167,8 +158,8 @@ var showExtraLanguageInput = function () {
                 : (extraLanguageField.classList.add('d-none'),
                     extraLanguageHelp.textContent = '');
 };
-race.addEventListener('change', showExtraLanguageInput);
-subrace.addEventListener('change', showExtraLanguageInput);
+ele.race.addEventListener('change', showExtraLanguageInput);
+ele.subrace.addEventListener('change', showExtraLanguageInput);
 // Function to combine related functions (TODO: can be combined with other racial)
 var racialBonuses = function () {
     addDwarvenToughness();
@@ -220,8 +211,8 @@ var clearRacialSkils = function () {
     func.hideParentElement(infernalLegacyPreview);
     func.resetProps(infernalLegacyInfo);
 };
-race.addEventListener('change', clearRacialSkils);
-subrace.addEventListener('change', clearRacialSkils);
+ele.race.addEventListener('change', clearRacialSkils);
+ele.subrace.addEventListener('change', clearRacialSkils);
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 func.addOptionsToSelect(skill1, Skills);
@@ -247,7 +238,7 @@ var highlightAvailableSkills = function () {
     func.addOptionsToSelect(skill3, availableSkills);
 };
 // dynamically change available skills based on character class
-cls.addEventListener('change', function () {
+ele.cls.addEventListener('change', function () {
     setClass();
     highlightAvailableSkills();
 });
@@ -311,7 +302,6 @@ var setAbilityScorePreview = function () {
 };
 var resetAbilityScores = function () {
     Abilities.map(function (ability) {
-        console.log(ability);
         return ability = null;
     });
 };
@@ -324,17 +314,17 @@ var generalInfo = function () {
     setSubrace();
     // Post info from character creation to preview area
     setAbilityScorePreview();
-    selectedAlignment = alignment.options[alignment.selectedIndex];
-    charGender = gender.value.toLowerCase();
+    selectedAlignment = ele.alignment.options[ele.alignment.selectedIndex];
+    charGender = ele.gender.value.toLowerCase();
     // convert languages array into line-separated list items (use innerHTML instead of textCotent)
     var knownLanguages = Races[charRace].languages.toString().split().join("\r\n") + ("" + String(extraLanguage.value));
     func.showElementWithProps(languagesPreview, "Known Languages", knownLanguages);
     currentLevel.textContent = String(Levels[0].level);
     experienceNextLevel.textContent = String(Levels[0].experience);
-    namePreview.textContent = name.value;
+    namePreview.textContent = ele.name.value;
     racePreview.textContent = selectedRace.textContent;
-    genderPreview.textContent = gender.value;
-    agePreview.textContent = age.value;
+    genderPreview.textContent = ele.gender.value;
+    agePreview.textContent = ele.age.value;
     clsPreview.textContent = selectedClass.textContent;
     alignmentPreview.textContent = selectedAlignment.textContent;
 };
@@ -422,7 +412,7 @@ var showExtraModifiersInput = function () {
         ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1'
         : extraAbilityModifierHelp.textContent = '';
 };
-race.addEventListener('change', showExtraModifiersInput);
+ele.race.addEventListener('change', showExtraModifiersInput);
 // Hide ability selected in either select element from the other select element
 var hideModSelection = function (extraAbilityModifier, otherAbilityModifier) {
     var firstSelection = extraAbilityModifier.options[extraAbilityModifier.selectedIndex].textContent;
@@ -574,8 +564,7 @@ var halforcSavageAttacks = function () {
 // Rock gnome special abilities
 var rockgnomeSpecials = function () {
     return charSubrace === "rockgnome"
-        ? (console.log(charSubrace),
-            func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
+        ? (func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
             func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
             tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
             tinkerInfo.textContent = "Details")
@@ -620,7 +609,7 @@ var highightSkill = function (skillText) {
             ? (skill.style.color = 'green',
                 getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent),
                 func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]))
-            : console.log('Highlight Skill: not a match');
+            : null;
     }
 };
 // highlight choosen skills on character creation

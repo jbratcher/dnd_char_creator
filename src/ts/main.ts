@@ -75,61 +75,49 @@ ele.rollCharisma.addEventListener('click', () => func.setScore(ele.rolledCharism
 
 // Class Select
 
-const cls = <HTMLSelectElement>document.querySelector('#cls');  // cls here due to reserved Class keyword
+func.addOptionsToSelect(ele.cls, ClassList);
 
-func.addOptionsToSelect(cls, ClassList);
-
-let selectedClass = <HTMLOptionElement>cls.options[cls.selectedIndex];
+let selectedClass = <HTMLOptionElement>ele.cls.options[ele.cls.selectedIndex];
 
 let charClass: string = selectedClass.textContent.toLowerCase();
 
-const classHelp = <HTMLElement>document.querySelector('#classHelp');
-
 const setClass = () => {
-  charClass = cls.options[cls.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
+  charClass = ele.cls.options[ele.cls.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
 }
 
-func.setText(classHelp, Classes[charClass].info);
+func.setText(ele.classHelp, Classes[charClass].info);
 
-cls.addEventListener('change', function() {
+ele.cls.addEventListener('change', function() {
   setClass();
-  func.setText(classHelp, Classes[charClass].info);
+  func.setText(ele.classHelp, Classes[charClass].info);
 });
 
 
 // Race Select
 
-const race = <HTMLSelectElement>document.querySelector('#race');
+func.addOptionsToSelect(ele.race, RaceList);
 
-func.addOptionsToSelect(race, RaceList);
-
-let selectedRace = <HTMLOptionElement>race.options[race.selectedIndex];
+let selectedRace = <HTMLOptionElement>ele.race.options[ele.race.selectedIndex];
 
 let charRace: string = selectedRace.textContent.toLowerCase().replace(/-/g,""); // "i.e. human, halfelf, halforc"
 
-const raceHelp = <HTMLElement>document.querySelector('#raceHelp');
-
 const setRace = () => {
-  charRace = race.options[race.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
+  charRace = ele.race.options[ele.race.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
 }
 
-func.setText(raceHelp, Races[charRace].info);
+func.setText(ele.raceHelp, Races[charRace].info);
 
-race.addEventListener('change', function() {
+ele.race.addEventListener('change', function() {
   setRace();
-  func.setText(raceHelp, Races[charRace].info);
+  func.setText(ele.raceHelp, Races[charRace].info);
 });
 
 
 // Subrace Select (Optional, if subrace exists)
 
-const subraceSelectSection = <HTMLElement>document.querySelector('#optionalSubrace');
+let selectedSubrace = <HTMLOptionElement>ele.subrace.options[ele.subrace.selectedIndex];
 
-const subrace = <HTMLSelectElement>document.querySelector('#subrace');
-
-const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
-
-let charSubrace: string = subrace.textContent.toLowerCase().replace(/-|\s/g,"");
+let charSubrace: string = selectedSubrace.textContent.toLowerCase().replace(/-|\s/g,"");
 
 // Subrace select
 
@@ -138,27 +126,27 @@ const showOptionalSubraceSelect = () => {
   setRace();
 
   // Reset any subrace from previous selection
-  subrace.innerHTML = "-"
-  subraceHelp.textContent = "";
+  ele.subrace.innerHTML = "-"
+  ele.subraceHelp.textContent = "";
 
   // if race has a subrace, show and populate subrace select element
   Races[charRace].subrace
     ? (
-      func.addOptionsToSelect(subrace, ["-"]),  // Make first option "null"
-      func.addOptionsToSelect(subrace, Races[charRace].subrace.name),
-      subraceSelectSection.classList.remove('d-none')
+      func.addOptionsToSelect(ele.subrace, ["-"]),  // Make first option "null"
+      func.addOptionsToSelect(ele.subrace, Races[charRace].subrace.name),
+      ele.subraceSelectSection.classList.remove('d-none')
       )
-    : subraceSelectSection.classList.add('d-none')
+    : ele.subraceSelectSection.classList.add('d-none')
 
 }
 
 // Subrace options regenerate on race selection change
-race.addEventListener('change', showOptionalSubraceSelect);  
+ele.race.addEventListener('change', showOptionalSubraceSelect);  
 
 const setSubrace = () => {
   // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
-  if(!subrace.parentElement.classList.contains("d-none")) {
-    charSubrace = subrace.options[subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,""); // normalize subrace text to all lowercase joined letters
+  if(!ele.subrace.parentElement.classList.contains("d-none")) {
+    charSubrace = ele.subrace.options[ele.subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,""); // normalize subrace text to all lowercase joined letters
   } else {
     // if subrace does not exist for selected race
     return null;
@@ -166,65 +154,56 @@ const setSubrace = () => {
 }
 
 // On subrace selection, get value of subrace and display descriptive text
-subrace.addEventListener('change', function() {
-  func.setText(subraceHelp, "");
+ele.subrace.addEventListener('change', function() {
+  func.setText(ele.subraceHelp, "");
   setSubrace();
-  func.setText(subraceHelp, Races[charRace].subrace.helpText);
+  func.setText(ele.subraceHelp, Races[charRace].subrace.helpText);
 
 });
 
 
 // Alignment
 
-const alignment = <HTMLSelectElement>document.querySelector('#alignment');
+func.addOptionsToSelect(ele.alignment, Alignments)
 
-func.addOptionsToSelect(alignment, Alignments)
+let selectedAlignment = <HTMLOptionElement>ele.alignment.options[ele.alignment.selectedIndex];
 
-let selectedAlignment = <HTMLOptionElement>alignment.options[alignment.selectedIndex];
+let charAlignment: string = selectedAlignment.textContent // "Lawful Good, Chaotic Evil, True Neutral"
 
 const setAlignment = () => {
-  let charAlignment: string = selectedAlignment.textContent // "Lawful Good, Chaotic Evil, True Neutral"
+  let charAlignment: string = selectedAlignment.textContent;
 }
 
 // limits alignment options to race recommendations
 const availableAlignments = () => {
 
-  alignment.innerHTML = "";  // reset alignment select options
+  ele.alignment.innerHTML = "";  // reset alignment select options
   setRace();
-  func.addOptionsToSelect(alignment, Races[charRace].alignments);
+  func.addOptionsToSelect(ele.alignment, Races[charRace].alignments);
 
 }
 
 // Alignment options regenerate on race selection
-race.addEventListener('change', availableAlignments);  
+ele.race.addEventListener('change', availableAlignments);  
 
 
 // Name
-
-const name = <HTMLInputElement>document.querySelector('#name');
-
+// see domElements.ts
 
 // Gender
 
-const gender = <HTMLInputElement>document.querySelector('#gender');
-
-let charGender: string = gender.value.toLowerCase();
+let charGender: string = ele.gender.value.toLowerCase();
 
 
 // Age
 
-const age = <HTMLInputElement>document.querySelector('#age');
-
-const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
-
-
 // Displays race specific age help text on race selection
 const ageHelpText = () => {
   setRace();
-  func.setText(ageHelp, `${func.capitialize(charRace)} age ranges between ${Races[charRace].age.min} and  ${Races[charRace].age.max}` )
+  func.setText(ele.ageHelp, `${func.capitialize(charRace)} age ranges between ${Races[charRace].age.min} and  ${Races[charRace].age.max}` )
 }
 
-race.addEventListener('change', ageHelpText);
+ele.race.addEventListener('change', ageHelpText);
 
 // Iniialize help text on page load
 ageHelpText();
@@ -256,7 +235,7 @@ const showDraconicAncestrySelect = () => {
 }
 
 // Draconic ancestry options regenerate on race selection
-race.addEventListener('change', showDraconicAncestrySelect);
+ele.race.addEventListener('change', showDraconicAncestrySelect);
 
 // Initialize on page load
 showDraconicAncestrySelect();
@@ -301,9 +280,9 @@ const showExtraLanguageInput = () => {
 
 }
 
-race.addEventListener('change', showExtraLanguageInput);
+ele.race.addEventListener('change', showExtraLanguageInput);
 
-subrace.addEventListener('change', showExtraLanguageInput);
+ele.subrace.addEventListener('change', showExtraLanguageInput);
 
 // Function to combine related functions (TODO: can be combined with other racial)
 
@@ -375,8 +354,8 @@ const clearRacialSkils = () => {
 
 }
 
-race.addEventListener('change', clearRacialSkils)
-subrace.addEventListener('change', clearRacialSkils)
+ele.race.addEventListener('change', clearRacialSkils)
+ele.subrace.addEventListener('change', clearRacialSkils)
 
 // Skill select
 
@@ -424,7 +403,7 @@ const highlightAvailableSkills = () => {
 
 // dynamically change available skills based on character class
 
-cls.addEventListener('change', () => {
+ele.cls.addEventListener('change', () => {
   setClass();
   highlightAvailableSkills();
 });
@@ -520,7 +499,6 @@ const setAbilityScorePreview = () => {
 
 const resetAbilityScores = () => {
   Abilities.map(ability => {
-    console.log(ability);
     return ability = null;
   })
 }
@@ -543,9 +521,9 @@ const generalInfo = () => {
   
   setAbilityScorePreview();
 
-  selectedAlignment = alignment.options[alignment.selectedIndex];
+  selectedAlignment = ele.alignment.options[ele.alignment.selectedIndex];
 
-  charGender = gender.value.toLowerCase();
+  charGender = ele.gender.value.toLowerCase();
   
   // convert languages array into line-separated list items (use innerHTML instead of textCotent)
   
@@ -557,13 +535,13 @@ const generalInfo = () => {
 
   experienceNextLevel.textContent = String(Levels[0].experience);
 
-  namePreview.textContent = name.value;
+  namePreview.textContent = ele.name.value;
 
   racePreview.textContent = selectedRace.textContent;
 
-  genderPreview.textContent = gender.value;
+  genderPreview.textContent = ele.gender.value;
 
-  agePreview.textContent = age.value;
+  agePreview.textContent = ele.age.value;
 
   clsPreview.textContent = selectedClass.textContent;
 
@@ -700,7 +678,7 @@ const showExtraModifiersInput = () => {
 
 }
 
-race.addEventListener('change', showExtraModifiersInput);
+ele.race.addEventListener('change', showExtraModifiersInput);
 
 // Hide ability selected in either select element from the other select element
 
@@ -944,7 +922,6 @@ const rockgnomeSpecials = () => {
   
   return charSubrace === "rockgnome"
     ? (
-      console.log(charSubrace),
       func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
       func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
         tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
@@ -1014,7 +991,7 @@ const highightSkill = skillText => {
           getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent),
           func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])
         )
-      : console.log('Highlight Skill: not a match');
+      : null;
   }
 
 }
