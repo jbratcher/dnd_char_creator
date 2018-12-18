@@ -117,7 +117,7 @@ ele.race.addEventListener('change', function() {
 
 let selectedSubrace = <HTMLOptionElement>ele.subrace.options[ele.subrace.selectedIndex];
 
-let charSubrace: string = selectedSubrace.textContent.toLowerCase().replace(/-|\s/g,"");
+let charSubrace: string = ele.subrace.textContent.toLowerCase().replace(/-|\s/g,"");
 
 // Subrace select
 
@@ -128,6 +128,7 @@ const showOptionalSubraceSelect = () => {
   // Reset any subrace from previous selection
   ele.subrace.innerHTML = "-"
   ele.subraceHelp.textContent = "";
+  charSubrace = null;
 
   // if race has a subrace, show and populate subrace select element
   Races[charRace].subrace
@@ -146,7 +147,8 @@ ele.race.addEventListener('change', showOptionalSubraceSelect);
 const setSubrace = () => {
   // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
   if(!ele.subrace.parentElement.classList.contains("d-none")) {
-    charSubrace = ele.subrace.options[ele.subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g,""); // normalize subrace text to all lowercase joined letters
+    charSubrace = ele.subrace.textContent.toLowerCase().replace(/-|\s/g,"") // normalize subrace text to all lowercase joined letters
+    console.log(charSubrace);
   } else {
     // if subrace does not exist for selected race
     return null;

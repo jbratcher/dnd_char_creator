@@ -59,13 +59,14 @@ ele.race.addEventListener('change', function () {
 });
 // Subrace Select (Optional, if subrace exists)
 var selectedSubrace = ele.subrace.options[ele.subrace.selectedIndex];
-var charSubrace = selectedSubrace.textContent.toLowerCase().replace(/-|\s/g, "");
+var charSubrace = ele.subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
 var showOptionalSubraceSelect = function () {
     setRace();
     // Reset any subrace from previous selection
     ele.subrace.innerHTML = "-";
     ele.subraceHelp.textContent = "";
+    charSubrace = null;
     // if race has a subrace, show and populate subrace select element
     Races[charRace].subrace
         ? (func.addOptionsToSelect(ele.subrace, ["-"]), // Make first option "null"
@@ -78,7 +79,8 @@ ele.race.addEventListener('change', showOptionalSubraceSelect);
 var setSubrace = function () {
     // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
     if (!ele.subrace.parentElement.classList.contains("d-none")) {
-        charSubrace = ele.subrace.options[ele.subrace.selectedIndex].textContent.toLowerCase().replace(/-|\s/g, ""); // normalize subrace text to all lowercase joined letters
+        charSubrace = ele.subrace.textContent.toLowerCase().replace(/-|\s/g, ""); // normalize subrace text to all lowercase joined letters
+        console.log(charSubrace);
     }
     else {
         // if subrace does not exist for selected race
