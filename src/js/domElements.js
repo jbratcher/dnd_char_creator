@@ -38,3 +38,15 @@ export var rollWisdom = document.querySelector('#rollWisdom');
 export var rolledWisdom = document.querySelector('#rolledWisdom');
 export var rollCharisma = document.querySelector('#rollCharisma');
 export var rolledCharisma = document.querySelector('#rolledCharisma');
+////////////////////////////////////////
+// Racial traits
+////////////////////////////////////////
+// Dragonborn Draconic Ancestry
+export var draconicAncestrySection = document.querySelector('#draconicAncestrySection');
+export var draconicAncestry = document.querySelector('#draconicAncestry');
+export var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
+export var draconicAncestryPreview = document.querySelector('#draconicAncestryPreview');
+// Extra Language trait for Half-Elf, High Elf, and Human
+export var extraLanguageField = document.querySelector('#extraLanguageField');
+export var extraLanguage = document.querySelector('#extraLanguage');
+export var extraLanguageHelp = document.querySelector('#extraLanguageHelp');

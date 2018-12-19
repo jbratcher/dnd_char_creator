@@ -119,99 +119,40 @@ ele.race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 ageHelpText();
 // Dragonborn: Draconic Ancestry / Dragonborn "subrace"
-var draconicAncestrySection = document.querySelector('#draconicAncestrySection');
-var draconicAncestry = document.querySelector('#draconicAncestry');
-var draconicAncestryHelp = document.querySelector('#draconicAncestryHelp');
 var showDraconicAncestrySelect = function () {
     setRace();
     // if ancestry exists, populate and show ancestry select element 
     Races[charRace].special.draconicAncestry
-        ? (func.addOptionsToSelect(draconicAncestry, Races[charRace].special.draconicAncestry.types),
-            draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
-            draconicAncestrySection.classList.remove('d-none'))
-        : (draconicAncestrySection.classList.add('d-none'),
-            draconicAncestryHelp.textContent = '');
+        ? (func.addOptionsToSelect(ele.draconicAncestry, Races[charRace].special.draconicAncestry.types),
+            ele.draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
+            ele.draconicAncestrySection.classList.remove('d-none'))
+        : (ele.draconicAncestrySection.classList.add('d-none'),
+            ele.draconicAncestryHelp.textContent = '');
 };
 // Draconic ancestry options regenerate on race selection
 ele.race.addEventListener('change', showDraconicAncestrySelect);
 // Initialize on page load
 showDraconicAncestrySelect();
 // Extra Language Selection: Human and Half-elf
-// Display extra language select element if race selection is Human, Half-Elf, or High Elf and populate lwith anguage options
-var extraLanguageField = document.querySelector('#extraLanguageField');
-var extraLanguage = document.querySelector('#extraLanguage');
-var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
-func.addOptionsToSelect(extraLanguage, Languages.standard);
+// Display extra language select element if race selection is Human, Half-Elf, or High Elf and populate with language options
+func.addOptionsToSelect(ele.extraLanguage, Languages.standard);
 var showExtraLanguageInput = function () {
     setRace();
     setSubrace();
     charRace === 'human'
-        ? (extraLanguageField.classList.remove('d-none'),
-            func.setText(extraLanguageHelp, "Humans get to choose 1 extra language"))
+        ? (ele.extraLanguageField.classList.remove('d-none'),
+            func.setText(ele.extraLanguageHelp, "Humans get to choose 1 extra language"))
         : charRace === 'halfelf'
-            ? (extraLanguageField.classList.remove('d-none'),
-                func.setText(extraLanguageHelp, "Half-Elves get to choose 1 extra language"))
+            ? (ele.extraLanguageField.classList.remove('d-none'),
+                func.setText(ele.extraLanguageHelp, "Half-Elves get to choose 1 extra language"))
             : charSubrace === 'highelf'
-                ? (extraLanguageField.classList.remove('d-none'),
-                    func.setText(extraLanguageHelp, "High Elves get to choose 1 extra language"))
-                : (extraLanguageField.classList.add('d-none'),
-                    extraLanguageHelp.textContent = '');
+                ? (ele.extraLanguageField.classList.remove('d-none'),
+                    func.setText(ele.extraLanguageHelp, "High Elves get to choose 1 extra language"))
+                : (ele.extraLanguageField.classList.add('d-none'),
+                    ele.extraLanguageHelp.textContent = '');
 };
 ele.race.addEventListener('change', showExtraLanguageInput);
 ele.subrace.addEventListener('change', showExtraLanguageInput);
-// Function to combine related functions (TODO: can be combined with other racial)
-var racialBonuses = function () {
-    addDwarvenToughness();
-    addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
-};
-var clearRacialSkils = function () {
-    // set text content and attr to 'null', hide elements in preview
-    // Combat tab
-    func.resetProps(weaponProficiencesPreview);
-    func.resetProps(poisonResistance);
-    func.resetProps(charmResistance);
-    func.resetProps(fearResistance);
-    // Skills tab - Additional Skills
-    func.resetProps(languagesPreview);
-    func.hideParentElement(toolProficiencyPreview);
-    func.resetProps(toolProficiencyPreview);
-    // Dwarf
-    func.hideParentElement(stonecunningPreview);
-    func.resetProps(stonecunningPreview);
-    // Dragonborn
-    func.hideParentElement(draconicAncestryPreview);
-    func.resetProps(draconicAncestryPreview);
-    func.hideParentElement(damageResistancePreview);
-    func.resetProps(damageResistanceType);
-    dragonType.textContent = "";
-    damageType.textContent = "";
-    breathWeapon.textContent = "";
-    // Elf
-    func.hideParentElement(trancePreview);
-    func.resetProps(tranceInfo);
-    // Halfling - Lightfoot
-    func.hideParentElement(stealthPreview);
-    func.resetProps(stealthInfo);
-    // Gnome - Rock Gnome
-    func.hideParentElement(artificersLorePreview);
-    func.resetProps(artificersLoreInfo);
-    func.hideParentElement(tinkerPreview);
-    func.resetProps(tinkerInfo);
-    // Half-orc
-    func.hideParentElement(menacingPreview);
-    func.resetProps(menacingInfo);
-    func.hideParentElement(relentlessEndurancePreview);
-    func.resetProps(relentlessEnduranceInfo);
-    func.hideParentElement(savageAttacksPreview);
-    func.resetProps(savageAttacksInfo);
-    // Tiefling
-    func.hideParentElement(hellishResistancePreview);
-    func.resetProps(hellishResistanceInfo);
-    func.hideParentElement(infernalLegacyPreview);
-    func.resetProps(infernalLegacyInfo);
-};
-ele.race.addEventListener('change', clearRacialSkils);
-ele.subrace.addEventListener('change', clearRacialSkils);
 // Skill select
 var skill1 = document.querySelector('#skillsSelect1');
 func.addOptionsToSelect(skill1, Skills);
@@ -316,7 +257,7 @@ var generalInfo = function () {
     selectedAlignment = ele.alignment.options[ele.alignment.selectedIndex];
     charGender = ele.gender.value.toLowerCase();
     // convert languages array into line-separated list items (use innerHTML instead of textCotent)
-    var knownLanguages = Races[charRace].languages.toString().split().join("\r\n") + ("" + String(extraLanguage.value));
+    var knownLanguages = Races[charRace].languages.toString().split().join("\r\n") + ("" + String(ele.extraLanguage.value));
     func.showElementWithProps(languagesPreview, "Known Languages", knownLanguages);
     currentLevel.textContent = String(Levels[0].level);
     experienceNextLevel.textContent = String(Levels[0].experience);
@@ -431,14 +372,6 @@ extraAbilityModifier1.addEventListener('change', function () {
 extraAbilityModifier2.addEventListener('change', function () {
     hideModSelection(extraAbilityModifier2, extraAbilityModifier1);
 });
-// Set value of Dwarven Toughtness hit point modifier based on race selection
-var addDwarvenToughness = function () {
-    setRace();
-    charRace === "dwarf"
-        ? dwarvenToughnessMod = 1
-        : dwarvenToughnessMod = 0;
-    return dwarvenToughnessMod;
-};
 // if extra ability score is selected add +1 to ability score preview
 var addHalfElfAbilityMofifiers = function () {
     if (charRace === 'halfelf') {
@@ -470,7 +403,6 @@ var additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
 // Special Abilities
 var stonecunningPreview = document.querySelector('#stonecunningPreview');
 var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
-var draconicAncestryPreview = document.querySelector('#draconicAncestryPreview');
 var dragonType = document.querySelector('#dragonType');
 var damageType = document.querySelector('#damageType');
 var breathWeapon = document.querySelector('#breathWeapon');
@@ -497,21 +429,23 @@ var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
 // Racial skills functions
 // Dragonborn
 var dragonbornDraconicAncestry = function () {
-    var selectedDraconicAncestry = draconicAncestry.options[draconicAncestry.selectedIndex];
+    var selectedDraconicAncestry = ele.draconicAncestry.options[ele.draconicAncestry.selectedIndex];
     var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
+    console.log(selectedDraconicAncestry);
+    console.log(charDraconicAncestry);
     return Races[charRace].special.draconicAncestry
-        ? (draconicAncestryPreview.parentElement.classList.remove('d-none'),
-            draconicAncestryPreview.parentElement.classList.add('d-flex'),
-            draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
+        ? (ele.draconicAncestryPreview.parentElement.classList.remove('d-none'),
+            ele.draconicAncestryPreview.parentElement.classList.add('d-flex'),
+            ele.draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
             dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
             damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
             breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
             damageResistancePreview.parentElement.classList.remove('d-none'),
             damageResistancePreview.parentElement.classList.add('d-flex'),
             damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type)
-        : (draconicAncestryPreview.parentElement.classList.remove('d-flex'),
-            draconicAncestryPreview.parentElement.classList.add('d-none'),
-            draconicAncestryHelp.textContent = "");
+        : (ele.draconicAncestryPreview.parentElement.classList.remove('d-flex'),
+            ele.draconicAncestryPreview.parentElement.classList.add('d-none'),
+            ele.draconicAncestryHelp.textContent = "");
 };
 // Dwarf 
 // Dwarf Stonecunning
@@ -636,6 +570,18 @@ var highlightSkills = function () {
         }
     }
 };
+// Set value of Dwarven Toughtness hit point modifier based on race selection
+var addDwarvenToughness = function () {
+    setRace();
+    charRace === "dwarf"
+        ? dwarvenToughnessMod = 1
+        : dwarvenToughnessMod = 0;
+    return dwarvenToughnessMod;
+};
+var racialBonuses = function () {
+    addDwarvenToughness();
+    addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
+};
 var highlightRacialSKills = function () {
     setRace();
     setSubrace();
@@ -671,6 +617,55 @@ var skillCreation = function () {
     // Preview racial abilities
     highlightRacialSKills();
 };
+// Function to combine related functions (TODO: can be combined with other racial)
+var clearRacialSkils = function () {
+    // set text content and attr to 'null', hide elements in preview
+    // Combat tab
+    func.resetProps(weaponProficiencesPreview);
+    func.resetProps(poisonResistance);
+    func.resetProps(charmResistance);
+    func.resetProps(fearResistance);
+    // Skills tab - Additional Skills
+    func.resetProps(languagesPreview);
+    func.hideParentElement(toolProficiencyPreview);
+    func.resetProps(toolProficiencyPreview);
+    // Dwarf
+    func.hideParentElement(stonecunningPreview);
+    func.resetProps(stonecunningPreview);
+    // Dragonborn
+    func.hideParentElement(ele.draconicAncestryPreview);
+    func.resetProps(ele.draconicAncestryPreview);
+    func.hideParentElement(damageResistancePreview);
+    func.resetProps(damageResistanceType);
+    dragonType.textContent = "";
+    damageType.textContent = "";
+    breathWeapon.textContent = "";
+    // Elf
+    func.hideParentElement(trancePreview);
+    func.resetProps(tranceInfo);
+    // Halfling - Lightfoot
+    func.hideParentElement(stealthPreview);
+    func.resetProps(stealthInfo);
+    // Gnome - Rock Gnome
+    func.hideParentElement(artificersLorePreview);
+    func.resetProps(artificersLoreInfo);
+    func.hideParentElement(tinkerPreview);
+    func.resetProps(tinkerInfo);
+    // Half-orc
+    func.hideParentElement(menacingPreview);
+    func.resetProps(menacingInfo);
+    func.hideParentElement(relentlessEndurancePreview);
+    func.resetProps(relentlessEnduranceInfo);
+    func.hideParentElement(savageAttacksPreview);
+    func.resetProps(savageAttacksInfo);
+    // Tiefling
+    func.hideParentElement(hellishResistancePreview);
+    func.resetProps(hellishResistanceInfo);
+    func.hideParentElement(infernalLegacyPreview);
+    func.resetProps(infernalLegacyInfo);
+};
+ele.race.addEventListener('change', clearRacialSkils);
+ele.subrace.addEventListener('change', clearRacialSkils);
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////

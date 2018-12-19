@@ -67,3 +67,26 @@ export const rolledWisdom: HTMLElement = document.querySelector('#rolledWisdom')
 
 export const rollCharisma: HTMLElement = document.querySelector('#rollCharisma');
 export const rolledCharisma: HTMLElement = document.querySelector('#rolledCharisma');
+
+////////////////////////////////////////
+// Racial traits
+////////////////////////////////////////
+
+// Dragonborn Draconic Ancestry
+
+export const draconicAncestrySection = <HTMLElement>document.querySelector('#draconicAncestrySection');
+
+export const draconicAncestry = <HTMLSelectElement>document.querySelector('#draconicAncestry');
+
+export const draconicAncestryHelp = <HTMLElement>document.querySelector('#draconicAncestryHelp');
+
+export const draconicAncestryPreview = <HTMLElement>document.querySelector('#draconicAncestryPreview');
+
+// Extra Language trait for Half-Elf, High Elf, and Human
+
+export const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
+
+export const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage');
+
+export const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
+
