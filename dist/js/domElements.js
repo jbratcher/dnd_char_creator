@@ -55,3 +55,34 @@ var draconicAncestryPreview = exports.draconicAncestryPreview = document.querySe
 var extraLanguageField = exports.extraLanguageField = document.querySelector('#extraLanguageField');
 var extraLanguage = exports.extraLanguage = document.querySelector('#extraLanguage');
 var extraLanguageHelp = exports.extraLanguageHelp = document.querySelector('#extraLanguageHelp');
+////////////////////////////////////////
+// Character Skills
+////////////////////////////////////////
+var skill1 = exports.skill1 = document.querySelector('#skillsSelect1');
+var skill2 = exports.skill2 = document.querySelector('#skillsSelect2');
+var skill3 = exports.skill3 = document.querySelector('#skillsSelect3');
+////////////////////////////////////////////////////////////
+// Level and experience elements (preview section)
+////////////////////////////////////////////////////////////
+// Elements
+var currentLevel = exports.currentLevel = document.querySelector('#currentLevel');
+var currentExperience = exports.currentExperience = document.querySelector('#currentExperience');
+var experienceNextLevel = exports.experienceNextLevel = document.querySelector('#experienceNextLevel');
+var addNewExperienceInput = exports.addNewExperienceInput = document.querySelector('#addNewExperience');
+// Buttons
+var createCharacterButton = exports.createCharacterButton = document.querySelector('#createCharacterButton');
+var levelUpButton = exports.levelUpButton = document.querySelector('#levelUpButton');
+var addNewExperienceButton = exports.addNewExperienceButton = document.querySelector('#addExp');
+////////////////////////////////////////////////////////////
+// General Preview information
+////////////////////////////////////////////////////////////
+// General Preview variables
+var namePreview = exports.namePreview = document.querySelector('#namePreview');
+var racePreview = exports.racePreview = document.querySelector('#racePreview');
+var genderPreview = exports.genderPreview = document.querySelector('#genderPreview');
+var agePreview = exports.agePreview = document.querySelector('#agePreview');
+var clsPreview = exports.clsPreview = document.querySelector('#clsPreview');
+var alignmentPreview = exports.alignmentPreview = document.querySelector('#alignmentPreview');
+var characterImg = exports.characterImg = document.querySelector('#characterImg');
+var proficiencyBonusPreview = exports.proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
+var languagesPreview = exports.languagesPreview = document.querySelector('#languagesPreview');

@@ -158,28 +158,25 @@ var showExtraLanguageInput = function showExtraLanguageInput() {
 ele.race.addEventListener('change', showExtraLanguageInput);
 ele.subrace.addEventListener('change', showExtraLanguageInput);
 // Skill select
-var skill1 = document.querySelector('#skillsSelect1');
-func.addOptionsToSelect(skill1, _characterInfo.Skills);
-var skillList1 = skill1.children;
-var skill2 = document.querySelector('#skillsSelect2');
-func.addOptionsToSelect(skill2, _characterInfo.Skills);
-var skillList2 = skill2.children;
-var skill3 = document.querySelector('#skillsSelect3');
-func.addOptionsToSelect(skill3, _characterInfo.Skills);
-var skillList3 = skill3.children;
+func.addOptionsToSelect(ele.skill1, _characterInfo.Skills);
+var skillList1 = ele.skill1.children;
+func.addOptionsToSelect(ele.skill2, _characterInfo.Skills);
+var skillList2 = ele.skill2.children;
+func.addOptionsToSelect(ele.skill3, _characterInfo.Skills);
+var skillList3 = ele.skill3.children;
 var availableSkills = _characterInfo.Classes[charClass].availableSkills;
-var selectedSkill1 = skill1.options[skill1.selectedIndex];
-var selectedSkill2 = skill2.options[skill2.selectedIndex];
-var selectedSkill3 = skill3.options[skill3.selectedIndex];
+var selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
+var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
+var selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function highlightAvailableSkills() {
     availableSkills = _characterInfo.Classes[charClass].availableSkills;
-    skill1.innerHTML = "";
-    skill2.innerHTML = "";
-    skill3.innerHTML = "";
-    func.addOptionsToSelect(skill1, availableSkills);
-    func.addOptionsToSelect(skill2, availableSkills);
-    func.addOptionsToSelect(skill3, availableSkills);
+    ele.skill1.innerHTML = "";
+    ele.skill2.innerHTML = "";
+    ele.skill3.innerHTML = "";
+    func.addOptionsToSelect(ele.skill1, availableSkills);
+    func.addOptionsToSelect(ele.skill2, availableSkills);
+    func.addOptionsToSelect(ele.skill3, availableSkills);
 };
 // dynamically change available skills based on character class
 ele.cls.addEventListener('change', function () {
@@ -189,49 +186,27 @@ ele.cls.addEventListener('change', function () {
 // Initialize state for selected class on document load
 highlightAvailableSkills();
 ////////////////////////////////////////////////////////////
-// Get character info preview elements
-////////////////////////////////////////////////////////////
-// Level and experience section
-var currentLevel = document.querySelector('#currentLevel');
-var currentExperience = document.querySelector('#currentExperience');
-var experienceNextLevel = document.querySelector('#experienceNextLevel');
-var addNewExperienceInput = document.querySelector('#addNewExperience');
-////////////////////////////////////////////////////////////
 // General Preview information
 ////////////////////////////////////////////////////////////
-// General Preview variables
-var namePreview = document.querySelector('#namePreview');
-var racePreview = document.querySelector('#racePreview');
-var genderPreview = document.querySelector('#genderPreview');
-var agePreview = document.querySelector('#agePreview');
-var clsPreview = document.querySelector('#clsPreview');
-var alignmentPreview = document.querySelector('#alignmentPreview');
-var characterImg = document.querySelector('#characterImg');
-var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
-var languagesPreview = document.querySelector('#languagesPreview');
-// General buttons
-var createCharacterButton = document.querySelector('#createCharacterButton');
-var levelUpButton = document.querySelector('#levelUpButton');
-var addNewExperienceButton = document.querySelector('#addExp');
 // General functions
 var charImageSet = function charImageSet() {
     var characterAttributes = func.getCharacterAttributes(charClass, charRace, charGender);
-    characterImg.src = func.getCharacterImage(characterAttributes);
+    ele.characterImg.src = func.getCharacterImage(characterAttributes);
 };
 var charLevelUp = function charLevelUp() {
-    currentLevel.textContent = String(Number(currentLevel.textContent) + 1);
-    experienceNextLevel.textContent = String(_characterInfo.Levels[Number(currentLevel.textContent) - 1].experience);
+    ele.currentLevel.textContent = String(Number(ele.currentLevel.textContent) + 1);
+    ele.experienceNextLevel.textContent = String(_characterInfo.Levels[Number(ele.currentLevel.textContent) - 1].experience);
     updateProficiencyBonus();
 };
 var updateProficiencyBonus = function updateProficiencyBonus() {
-    proficiencyBonus = _characterInfo.Levels[currentLevel.textContent].bonus;
-    proficiencyBonusPreview.textContent = String(_characterInfo.Levels[currentLevel.textContent].bonus);
-    func.appendSigntoValue(proficiencyBonus, proficiencyBonusPreview);
+    proficiencyBonus = _characterInfo.Levels[ele.currentLevel.textContent].bonus;
+    ele.proficiencyBonusPreview.textContent = String(_characterInfo.Levels[ele.currentLevel.textContent].bonus);
+    func.appendSigntoValue(proficiencyBonus, ele.proficiencyBonusPreview);
 };
 var addExp = function addExp() {
-    var currentExpNum = Number(currentExperience.textContent);
-    var newExpNum = Number(addNewExperienceInput.value);
-    currentExperience.textContent = String(currentExpNum + newExpNum);
+    var currentExpNum = Number(ele.currentExperience.textContent);
+    var newExpNum = Number(ele.addNewExperienceInput.value);
+    ele.currentExperience.textContent = String(currentExpNum + newExpNum);
 };
 var setAbilityScorePreview = function setAbilityScorePreview() {
     // loop through abilities lowercased
@@ -262,15 +237,15 @@ var generalInfo = function generalInfo() {
     charGender = ele.gender.value.toLowerCase();
     // convert languages array into line-separated list items (use innerHTML instead of textCotent)
     var knownLanguages = _characterInfo.Races[charRace].languages.toString().split().join("\r\n") + ("" + String(ele.extraLanguage.value));
-    func.showElementWithProps(languagesPreview, "Known Languages", knownLanguages);
-    currentLevel.textContent = String(_characterInfo.Levels[0].level);
-    experienceNextLevel.textContent = String(_characterInfo.Levels[0].experience);
-    namePreview.textContent = ele.name.value;
-    racePreview.textContent = selectedRace.textContent;
-    genderPreview.textContent = ele.gender.value;
-    agePreview.textContent = ele.age.value;
-    clsPreview.textContent = selectedClass.textContent;
-    alignmentPreview.textContent = selectedAlignment.textContent;
+    func.showElementWithProps(ele.languagesPreview, "Known Languages", knownLanguages);
+    ele.currentLevel.textContent = String(_characterInfo.Levels[0].level);
+    ele.experienceNextLevel.textContent = String(_characterInfo.Levels[0].experience);
+    ele.namePreview.textContent = ele.name.value;
+    ele.racePreview.textContent = selectedRace.textContent;
+    ele.genderPreview.textContent = ele.gender.value;
+    ele.agePreview.textContent = ele.age.value;
+    ele.clsPreview.textContent = selectedClass.textContent;
+    ele.alignmentPreview.textContent = selectedAlignment.textContent;
 };
 ////////////////////////////////////////////////////////////
 // Ability Scores
@@ -484,9 +459,9 @@ var tieflingInfernalLegacy = function tieflingInfernalLegacy() {
 //   //loop through and display skill selects
 // }
 var getSelectedSkills = function getSelectedSkills() {
-    selectedSkill1 = skill1.options[skill1.selectedIndex];
-    selectedSkill2 = skill2.options[skill2.selectedIndex];
-    selectedSkill3 = skill3.options[skill3.selectedIndex];
+    selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
+    selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
+    selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
 };
 // Get any modifiers to the proficiency bonus for a skill
 var getSkillModifier = function getSkillModifier(skillText) {
@@ -580,7 +555,7 @@ var clearRacialSkils = function clearRacialSkils() {
     func.resetProps(charmResistance);
     func.resetProps(fearResistance);
     // Skills tab - Additional Skills
-    func.resetProps(languagesPreview);
+    func.resetProps(ele.languagesPreview);
     func.hideParentElement(toolProficiencyPreview);
     func.resetProps(toolProficiencyPreview);
     // Dwarf
@@ -766,7 +741,7 @@ var combatCreation = function combatCreation() {
 ////////////////////////////////////////////////////////////
 // Character Creation
 ////////////////////////////////////////////////////////////
-createCharacterButton.addEventListener('click', function (e) {
+ele.createCharacterButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Character Creation functions
     generalInfo(); // General tab functions
@@ -778,20 +753,20 @@ createCharacterButton.addEventListener('click', function (e) {
 // Preview Functions
 ////////////////////////////////////////////////////////////
 // Level advancement button submit
-levelUpButton.addEventListener('click', function (e) {
+ele.levelUpButton.addEventListener('click', function (e) {
     e.preventDefault();
     setClass();
     // Get level up variables
     constitution = ele.rolledConstitution.textContent;
-    if (currentLevel.textContent === "20") {
+    if (ele.currentLevel.textContent === "20") {
         return;
     }
     charLevelUp();
     addHitPoints();
     highlightSkills();
 });
-addNewExperienceButton.addEventListener('click', function (e) {
+ele.addNewExperienceButton.addEventListener('click', function (e) {
     e.preventDefault();
     addExp();
-    addNewExperienceInput.value = null;
+    ele.addNewExperienceInput.value = null;
 });

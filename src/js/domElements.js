@@ -50,3 +50,34 @@ export var draconicAncestryPreview = document.querySelector('#draconicAncestryPr
 export var extraLanguageField = document.querySelector('#extraLanguageField');
 export var extraLanguage = document.querySelector('#extraLanguage');
 export var extraLanguageHelp = document.querySelector('#extraLanguageHelp');
+////////////////////////////////////////
+// Character Skills
+////////////////////////////////////////
+export var skill1 = document.querySelector('#skillsSelect1');
+export var skill2 = document.querySelector('#skillsSelect2');
+export var skill3 = document.querySelector('#skillsSelect3');
+////////////////////////////////////////////////////////////
+// Level and experience elements (preview section)
+////////////////////////////////////////////////////////////
+// Elements
+export var currentLevel = document.querySelector('#currentLevel');
+export var currentExperience = document.querySelector('#currentExperience');
+export var experienceNextLevel = document.querySelector('#experienceNextLevel');
+export var addNewExperienceInput = document.querySelector('#addNewExperience');
+// Buttons
+export var createCharacterButton = document.querySelector('#createCharacterButton');
+export var levelUpButton = document.querySelector('#levelUpButton');
+export var addNewExperienceButton = document.querySelector('#addExp');
+////////////////////////////////////////////////////////////
+// General Preview information
+////////////////////////////////////////////////////////////
+// General Preview variables
+export var namePreview = document.querySelector('#namePreview');
+export var racePreview = document.querySelector('#racePreview');
+export var genderPreview = document.querySelector('#genderPreview');
+export var agePreview = document.querySelector('#agePreview');
+export var clsPreview = document.querySelector('#clsPreview');
+export var alignmentPreview = document.querySelector('#alignmentPreview');
+export var characterImg = document.querySelector('#characterImg');
+export var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
+export var languagesPreview = document.querySelector('#languagesPreview');

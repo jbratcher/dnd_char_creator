@@ -90,3 +90,58 @@ export const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLa
 
 export const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
 
+////////////////////////////////////////
+// Character Skills
+////////////////////////////////////////
+
+export const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1');
+
+export const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
+
+export const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
+
+////////////////////////////////////////////////////////////
+// Level and experience elements (preview section)
+////////////////////////////////////////////////////////////
+
+// Elements
+
+export const currentLevel = <HTMLElement>document.querySelector('#currentLevel');
+
+export const currentExperience = <HTMLElement>document.querySelector('#currentExperience');
+
+export const experienceNextLevel = <HTMLElement>document.querySelector('#experienceNextLevel');
+
+export const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewExperience');
+
+// Buttons
+
+export const createCharacterButton = <HTMLElement>document.querySelector('#createCharacterButton');
+
+export const levelUpButton = <HTMLElement>document.querySelector('#levelUpButton');
+
+export const addNewExperienceButton = <HTMLElement>document.querySelector('#addExp');
+
+////////////////////////////////////////////////////////////
+// General Preview information
+////////////////////////////////////////////////////////////
+
+// General Preview variables
+
+export const namePreview = <HTMLElement>document.querySelector('#namePreview');
+
+export const racePreview = <HTMLElement>document.querySelector('#racePreview');
+
+export const genderPreview = <HTMLInputElement>document.querySelector('#genderPreview');
+
+export const agePreview = <HTMLElement>document.querySelector('#agePreview');
+
+export const clsPreview = <HTMLElement>document.querySelector('#clsPreview');
+
+export const alignmentPreview = <HTMLElement>document.querySelector('#alignmentPreview');
+
+export const characterImg = <HTMLImageElement>document.querySelector('#characterImg');
+
+export const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
+
+export const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview');
