@@ -86,3 +86,18 @@ var alignmentPreview = exports.alignmentPreview = document.querySelector('#align
 var characterImg = exports.characterImg = document.querySelector('#characterImg');
 var proficiencyBonusPreview = exports.proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
 var languagesPreview = exports.languagesPreview = document.querySelector('#languagesPreview');
+////////////////////////////////////////////////////////////
+// Ability Scores
+////////////////////////////////////////////////////////////
+// Ability score variables
+var abilityScoreList = exports.abilityScoreList = document.querySelector('#abilityScoreList');
+var strengthPreview = exports.strengthPreview = document.querySelector('#strengthPreview');
+var dexerityPreview = exports.dexerityPreview = document.querySelector('#dexerityPreview');
+var constitutionPreview = exports.constitutionPreview = document.querySelector('#constitutionPreview');
+var wisdomPreview = exports.wisdomPreview = document.querySelector('#wisdomPreview');
+var intelligencePreview = exports.intelligencePreview = document.querySelector('#intelligencePreview');
+var charismaPreview = exports.charismaPreview = document.querySelector('#charismaPreview');
+var extraAbilityModifier = exports.extraAbilityModifier = document.querySelector('#extraAbilityModifier');
+var extraAbilityModifier1 = exports.extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
+var extraAbilityModifier2 = exports.extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
+var extraAbilityModifierHelp = exports.extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');

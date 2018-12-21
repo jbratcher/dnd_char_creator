@@ -420,29 +420,7 @@ const generalInfo = () => {
 
 // Ability score variables
 
-let abilityScoreList = <HTMLElement>document.querySelector('#abilityScoreList');
-
-let abilityScoreListItems = abilityScoreList.children;
-
-const strengthPreview = <HTMLElement>document.querySelector('#strengthPreview');
-
-const dexerityPreview = <HTMLElement>document.querySelector('#dexerityPreview');
-
-const constitutionPreview = <HTMLElement>document.querySelector('#constitutionPreview');
-
-const wisdomPreview = <HTMLElement>document.querySelector('#wisdomPreview');
-
-const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePreview');
-
-const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
-
-const extraAbilityModifier = <HTMLElement>document.querySelector('#extraAbilityModifier');
-
-const extraAbilityModifier1 = <HTMLSelectElement>document.querySelector('#extraAbilityModifier1');
-
-const extraAbilityModifier2 = <HTMLSelectElement>document.querySelector('#extraAbilityModifier2');
-
-const extraAbilityModifierHelp = <HTMLElement>document.querySelector('#extraAbilityModifierHelp');
+let abilityScoreListItems = ele.abilityScoreList.children;
 
 let dwarvenToughnessMod: number = 0;
 
@@ -525,7 +503,7 @@ const racialAbilityModifier = () => {
 
 // Display extra ability modifier field if race is Half-Elf
 
-func.addOptionsToSelect(extraAbilityModifier1, Abilities);
+func.addOptionsToSelect(ele.extraAbilityModifier1, Abilities);
 
 const showExtraModifiersInput = () => {
 
@@ -534,12 +512,12 @@ const showExtraModifiersInput = () => {
   // Add ability options to extra ability select element
 
   charRace === 'halfelf'
-    ? extraAbilityModifier.classList.remove('d-none')
-    : extraAbilityModifier.classList.add('d-none');
+    ? ele.extraAbilityModifier.classList.remove('d-none')
+    : ele.extraAbilityModifier.classList.add('d-none');
 
   charRace === 'halfelf'
-    ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1'
-    : extraAbilityModifierHelp.textContent = '';
+    ? ele.extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1'
+    : ele.extraAbilityModifierHelp.textContent = '';
 
 }
 
@@ -563,14 +541,14 @@ const hideModSelection = (extraAbilityModifier, otherAbilityModifier) => {
 
 }
 
-hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
+hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2);
 
-extraAbilityModifier1.addEventListener('change', function() {
-  hideModSelection(extraAbilityModifier1, extraAbilityModifier2)
+ele.extraAbilityModifier1.addEventListener('change', function() {
+  hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2)
 })
 
-extraAbilityModifier2.addEventListener('change', function() {
-  hideModSelection(extraAbilityModifier2, extraAbilityModifier1)
+ele.extraAbilityModifier2.addEventListener('change', function() {
+  hideModSelection(ele.extraAbilityModifier2, ele.extraAbilityModifier1)
 })
 
 // if extra ability score is selected add +1 to ability score preview
@@ -579,8 +557,8 @@ const addHalfElfAbilityMofifiers = () => {
 
   if(charRace === 'halfelf') {
     // get selected abilities text
-    let mod1: string = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
-    let mod2: string = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
+    let mod1: string = ele.extraAbilityModifier1.options[ele.extraAbilityModifier1.selectedIndex].textContent;
+    let mod2: string = ele.extraAbilityModifier2.options[ele.extraAbilityModifier2.selectedIndex].textContent;
     // get selected abilities preview element text
     for(let i = 0; i < abilityScoreListItems.length; i++) {
       let abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent

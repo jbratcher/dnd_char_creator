@@ -251,18 +251,7 @@ var generalInfo = function generalInfo() {
 // Ability Scores
 ////////////////////////////////////////////////////////////
 // Ability score variables
-var abilityScoreList = document.querySelector('#abilityScoreList');
-var abilityScoreListItems = abilityScoreList.children;
-var strengthPreview = document.querySelector('#strengthPreview');
-var dexerityPreview = document.querySelector('#dexerityPreview');
-var constitutionPreview = document.querySelector('#constitutionPreview');
-var wisdomPreview = document.querySelector('#wisdomPreview');
-var intelligencePreview = document.querySelector('#intelligencePreview');
-var charismaPreview = document.querySelector('#charismaPreview');
-var extraAbilityModifier = document.querySelector('#extraAbilityModifier');
-var extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
-var extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
-var extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');
+var abilityScoreListItems = ele.abilityScoreList.children;
 var dwarvenToughnessMod = 0;
 // Ability Score functions
 var lookupAbilityScore = function lookupAbilityScore(ability) {
@@ -320,12 +309,12 @@ var racialAbilityModifier = function racialAbilityModifier() {
     }
 };
 // Display extra ability modifier field if race is Half-Elf
-func.addOptionsToSelect(extraAbilityModifier1, _characterInfo.Abilities);
+func.addOptionsToSelect(ele.extraAbilityModifier1, _characterInfo.Abilities);
 var showExtraModifiersInput = function showExtraModifiersInput() {
     setRace();
     // Add ability options to extra ability select element
-    charRace === 'halfelf' ? extraAbilityModifier.classList.remove('d-none') : extraAbilityModifier.classList.add('d-none');
-    charRace === 'halfelf' ? extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : extraAbilityModifierHelp.textContent = '';
+    charRace === 'halfelf' ? ele.extraAbilityModifier.classList.remove('d-none') : ele.extraAbilityModifier.classList.add('d-none');
+    charRace === 'halfelf' ? ele.extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1' : ele.extraAbilityModifierHelp.textContent = '';
 };
 ele.race.addEventListener('change', showExtraModifiersInput);
 // Hide ability selected in either select element from the other select element
@@ -340,19 +329,19 @@ var hideModSelection = function hideModSelection(extraAbilityModifier, otherAbil
         }
     });
 };
-hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
-extraAbilityModifier1.addEventListener('change', function () {
-    hideModSelection(extraAbilityModifier1, extraAbilityModifier2);
+hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2);
+ele.extraAbilityModifier1.addEventListener('change', function () {
+    hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2);
 });
-extraAbilityModifier2.addEventListener('change', function () {
-    hideModSelection(extraAbilityModifier2, extraAbilityModifier1);
+ele.extraAbilityModifier2.addEventListener('change', function () {
+    hideModSelection(ele.extraAbilityModifier2, ele.extraAbilityModifier1);
 });
 // if extra ability score is selected add +1 to ability score preview
 var addHalfElfAbilityMofifiers = function addHalfElfAbilityMofifiers() {
     if (charRace === 'halfelf') {
         // get selected abilities text
-        var mod1 = extraAbilityModifier1.options[extraAbilityModifier1.selectedIndex].textContent;
-        var mod2 = extraAbilityModifier2.options[extraAbilityModifier2.selectedIndex].textContent;
+        var mod1 = ele.extraAbilityModifier1.options[ele.extraAbilityModifier1.selectedIndex].textContent;
+        var mod2 = ele.extraAbilityModifier2.options[ele.extraAbilityModifier2.selectedIndex].textContent;
         // get selected abilities preview element text
         for (var i = 0; i < abilityScoreListItems.length; i++) {
             var abilityScorePreview = abilityScoreListItems[i].childNodes[3].textContent;

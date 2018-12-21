@@ -145,3 +145,31 @@ export const characterImg = <HTMLImageElement>document.querySelector('#character
 export const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
 
 export const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview');
+
+////////////////////////////////////////////////////////////
+// Ability Scores
+////////////////////////////////////////////////////////////
+
+// Ability score variables
+
+export const abilityScoreList = <HTMLElement>document.querySelector('#abilityScoreList');
+
+export const strengthPreview = <HTMLElement>document.querySelector('#strengthPreview');
+
+export const dexerityPreview = <HTMLElement>document.querySelector('#dexerityPreview');
+
+export const constitutionPreview = <HTMLElement>document.querySelector('#constitutionPreview');
+
+export const wisdomPreview = <HTMLElement>document.querySelector('#wisdomPreview');
+
+export const intelligencePreview = <HTMLElement>document.querySelector('#intelligencePreview');
+
+export const charismaPreview = <HTMLElement>document.querySelector('#charismaPreview');
+
+export const extraAbilityModifier = <HTMLElement>document.querySelector('#extraAbilityModifier');
+
+export const extraAbilityModifier1 = <HTMLSelectElement>document.querySelector('#extraAbilityModifier1');
+
+export const extraAbilityModifier2 = <HTMLSelectElement>document.querySelector('#extraAbilityModifier2');
+
+export const extraAbilityModifierHelp = <HTMLElement>document.querySelector('#extraAbilityModifierHelp');

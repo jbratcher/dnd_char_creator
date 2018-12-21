@@ -81,3 +81,18 @@ export var alignmentPreview = document.querySelector('#alignmentPreview');
 export var characterImg = document.querySelector('#characterImg');
 export var proficiencyBonusPreview = document.querySelector('#proficiencyBonusPreview');
 export var languagesPreview = document.querySelector('#languagesPreview');
+////////////////////////////////////////////////////////////
+// Ability Scores
+////////////////////////////////////////////////////////////
+// Ability score variables
+export var abilityScoreList = document.querySelector('#abilityScoreList');
+export var strengthPreview = document.querySelector('#strengthPreview');
+export var dexerityPreview = document.querySelector('#dexerityPreview');
+export var constitutionPreview = document.querySelector('#constitutionPreview');
+export var wisdomPreview = document.querySelector('#wisdomPreview');
+export var intelligencePreview = document.querySelector('#intelligencePreview');
+export var charismaPreview = document.querySelector('#charismaPreview');
+export var extraAbilityModifier = document.querySelector('#extraAbilityModifier');
+export var extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
+export var extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
+export var extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');
