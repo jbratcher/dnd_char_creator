@@ -578,60 +578,6 @@ const addHalfElfAbilityMofifiers = () => {
 // Skills Preview
 ////////////////////////////////////////////////////////////
 
-// Skill variables
-
-// Skill Lists
-
-const skillsPreviewList = <HTMLElement>document.querySelector('#skillsPreviewList');
-
-const skillsPreviewListItems = skillsPreviewList.children;
-
-const additionalSkillsPreviewList = <HTMLElement>document.querySelector('#additionalSkillsPreviewList');
-
-const additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
-
-// Special Abilities
-
-const stonecunningPreview = <HTMLElement>document.querySelector('#stonecunningPreview');
-
-const toolProficiencyPreview = <HTMLElement>document.querySelector('#toolProficiencyPreview');
-
-const dragonType = <HTMLElement>document.querySelector('#dragonType');
-
-const damageType = <HTMLElement>document.querySelector('#damageType');
-
-const breathWeapon = <HTMLElement>document.querySelector('#breathWeapon');
-
-const trancePreview = <HTMLElement>document.querySelector('#trancePreview');
-const tranceInfo = <HTMLElement>document.querySelector('#tranceInfo');
-
-const stealthPreview = <HTMLElement>document.querySelector('#stealthPreview');
-const stealthInfo = <HTMLElement>document.querySelector('#stealthInfo');
-
-const artificersLorePreview = <HTMLElement>document.querySelector('#artificersLorePreview');
-const artificersLoreInfo = <HTMLElement>document.querySelector('#artificersLoreInfo');
-
-const tinkerPreview = <HTMLElement>document.querySelector('#tinkerPreview');
-const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
-
-const damageResistancePreview = <HTMLElement>document.querySelector('#damageResistancePreview');
-const damageResistanceType = <HTMLElement>document.querySelector('#damageResistanceType');
-
-const menacingPreview = <HTMLElement>document.querySelector('#menacingPreview');
-const menacingInfo = <HTMLElement>document.querySelector('#menacingInfo');
-
-const relentlessEndurancePreview = <HTMLElement>document.querySelector('#relentlessEndurancePreview');
-const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentlessEnduranceInfo');
-
-const savageAttacksPreview = <HTMLElement>document.querySelector('#savageAttacksPreview');
-const savageAttacksInfo = <HTMLElement>document.querySelector('#savageAttacksInfo');
-
-const hellishResistancePreview = <HTMLElement>document.querySelector('#hellishResistancePreview');
-const hellishResistanceInfo = <HTMLElement>document.querySelector('#hellishResistanceInfo');
-
-const infernalLegacyPreview = <HTMLElement>document.querySelector('#infernalLegacyPreview');
-const infernalLegacyInfo = <HTMLElement>document.querySelector('#infernalLegacyInfo');
-
 // Racial skills functions
 
 // Dragonborn
@@ -650,12 +596,12 @@ const dragonbornDraconicAncestry = () => {
         ele.draconicAncestryPreview.parentElement.classList.remove('d-none'),
         ele.draconicAncestryPreview.parentElement.classList.add('d-flex'),
         ele.draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
-        dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
-        damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
-        breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
-        damageResistancePreview.parentElement.classList.remove('d-none'),
-        damageResistancePreview.parentElement.classList.add('d-flex'),
-        damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type
+        ele.dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
+        ele.damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
+        ele.breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
+        ele.damageResistancePreview.parentElement.classList.remove('d-none'),
+        ele.damageResistancePreview.parentElement.classList.add('d-flex'),
+        ele.damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type
       )
     : (
         ele.draconicAncestryPreview.parentElement.classList.remove('d-flex'),
@@ -673,9 +619,9 @@ const dwarfStonecunning = () => {
   
   return Races[charRace].special.stonecunning
     ? (
-        func.showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
+        func.showElementWithProps(ele.stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
       )
-    : stonecunningPreview.parentElement.classList.add('d-none')
+    : ele.stonecunningPreview.parentElement.classList.add('d-none')
   
 }
 
@@ -685,9 +631,9 @@ const dwarfToolProficiency = () => {
   
   return Races[charRace].special.toolProficiency
     ? (
-        func.showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
+        func.showElementWithProps(ele.toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
       )
-    : toolProficiencyPreview.parentElement.classList.add('d-none')
+    : ele.toolProficiencyPreview.parentElement.classList.add('d-none')
   
 }
 
@@ -706,7 +652,7 @@ const elfKeenSenses = () => {
 const elfTrance = () => {
   
   return Races[charRace].special.trance
-    ? func.showElementWithProps(tranceInfo, Races[charRace].special.trance.info, "Details")
+    ? func.showElementWithProps(ele.tranceInfo, Races[charRace].special.trance.info, "Details")
     : null
   
 }  
@@ -716,7 +662,7 @@ const elfTrance = () => {
 const lightfootNaturallyStealthy = () => {
   
   return charSubrace === "lightfoot"
-    ? func.showElementWithProps(stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
+    ? func.showElementWithProps(ele.stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
     : null
   
 }
@@ -726,7 +672,7 @@ const lightfootNaturallyStealthy = () => {
 const halforcMenacing = () => {
   
   return Races[charRace].special.menacing
-    ? func.showElementWithProps(menacingInfo, Races[charRace].special.menacing.info, "Details")
+    ? func.showElementWithProps(ele.menacingInfo, Races[charRace].special.menacing.info, "Details")
     : null
   
 }
@@ -734,7 +680,7 @@ const halforcMenacing = () => {
 const halforcRelentlessEndurance = () => {
   
   return Races[charRace].special.relentlessEndurance
-    ? func.showElementWithProps(relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
+    ? func.showElementWithProps(ele.relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
     : null
   
 }
@@ -742,7 +688,7 @@ const halforcRelentlessEndurance = () => {
 const halforcSavageAttacks = () => {
   
   return Races[charRace].special.savageAttacks
-    ? func.showElementWithProps(savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
+    ? func.showElementWithProps(ele.savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
     : null
   
 }
@@ -753,10 +699,10 @@ const rockgnomeSpecials = () => {
   
   return charSubrace === "rockgnome"
     ? (
-      func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
-      func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
-        tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
-        tinkerInfo.textContent = "Details"
+      func.showElementWithProps(ele.artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
+      func.showElementWithProps(ele.tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
+        ele.tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
+        ele.tinkerInfo.textContent = "Details"
       )
     : null
   
@@ -768,7 +714,7 @@ const rockgnomeSpecials = () => {
 const tieflingHellishResistance = () => {
   
   return Races[charRace].special.hellishResistance
-    ? func.showElementWithProps(hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
+    ? func.showElementWithProps(ele.hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
     : null
   
 }
@@ -776,7 +722,7 @@ const tieflingHellishResistance = () => {
 const tieflingInfernalLegacy = () => {
   
   return Races[charRace].special.infernalLegacy
-    ? func.showElementWithProps(infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
+    ? func.showElementWithProps(ele.infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
     : null
   
 }
@@ -811,16 +757,16 @@ const getSkillModifier = skillText => {
 // highlight a single skill
 const highightSkill = skillText => {
 
-  for(let i = 0; i < skillsPreviewListItems.length; i++) {
-    let skill = <HTMLElement>skillsPreviewListItems[i];
-    let skillName = <HTMLElement>skillsPreviewListItems[i].childNodes[1];
-    let skillText = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+  for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
+    let skill = <HTMLElement>ele.skillsPreviewListItems[i];
+    let skillName = <HTMLElement>ele.skillsPreviewListItems[i].childNodes[1];
+    let skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
 
     skillText === skillText
       ? (
           skill.style.color = 'green',
-          getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent),
-          func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5])
+          getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
+          func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])
         )
       : null;
   }
@@ -833,20 +779,20 @@ const highlightSkills = () => {
   getSelectedSkills();
   updateProficiencyBonus();
   // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
-  for(let i = 0; i < skillsPreviewListItems.length; i++) {
-    let skill = <HTMLElement>skillsPreviewListItems[i];
-    let skillName = <HTMLElement>skillsPreviewListItems[i].childNodes[1];
-    let skillText = skillsPreviewListItems[i].childNodes[1].textContent;
+  for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
+    let skill = <HTMLElement>ele.skillsPreviewListItems[i];
+    let skillName = <HTMLElement>ele.skillsPreviewListItems[i].childNodes[1];
+    let skillText = ele.skillsPreviewListItems[i].childNodes[1].textContent;
     // reset modifier node to '-'
-    skillsPreviewListItems[i].childNodes[5].textContent = "-";
+    ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
     if(
       skillText === selectedSkill1.textContent.trim()
       || skillText === selectedSkill2.textContent.trim()
       || skillText === selectedSkill3.textContent.trim()
     ) {
       skill.style.color = 'green';
-      getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-      func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
+      getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
+      func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]);
     } else {
       // if no match dim selection
       skill.style.color = '#ccc';
@@ -961,49 +907,49 @@ const clearRacialSkils = () => {
   // Skills tab - Additional Skills
 
   func.resetProps(ele.languagesPreview);
-  func.hideParentElement(toolProficiencyPreview);
-  func.resetProps(toolProficiencyPreview);
+  func.hideParentElement(ele.toolProficiencyPreview);
+  func.resetProps(ele.toolProficiencyPreview);
 
   // Dwarf
-  func.hideParentElement(stonecunningPreview);
-  func.resetProps(stonecunningPreview);
+  func.hideParentElement(ele.stonecunningPreview);
+  func.resetProps(ele.stonecunningPreview);
 
   // Dragonborn
   func.hideParentElement(ele.draconicAncestryPreview);
   func.resetProps(ele.draconicAncestryPreview);
-  func.hideParentElement(damageResistancePreview);
-  func.resetProps(damageResistanceType);
-  dragonType.textContent = "";
-  damageType.textContent = "";
-  breathWeapon.textContent = "";
+  func.hideParentElement(ele.damageResistancePreview);
+  func.resetProps(ele.damageResistanceType);
+  ele.dragonType.textContent = "";
+  ele.damageType.textContent = "";
+  ele.breathWeapon.textContent = "";
 
   // Elf
-  func.hideParentElement(trancePreview);
-  func.resetProps(tranceInfo);
+  func.hideParentElement(ele.trancePreview);
+  func.resetProps(ele.tranceInfo);
 
   // Halfling - Lightfoot
-  func.hideParentElement(stealthPreview);
-  func.resetProps(stealthInfo);
+  func.hideParentElement(ele.stealthPreview);
+  func.resetProps(ele.stealthInfo);
 
   // Gnome - Rock Gnome
-  func.hideParentElement(artificersLorePreview);
-  func.resetProps(artificersLoreInfo);
-  func.hideParentElement(tinkerPreview);
-  func.resetProps(tinkerInfo);
+  func.hideParentElement(ele.artificersLorePreview);
+  func.resetProps(ele.artificersLoreInfo);
+  func.hideParentElement(ele.tinkerPreview);
+  func.resetProps(ele.tinkerInfo);
 
   // Half-orc
-  func.hideParentElement(menacingPreview);
-  func.resetProps(menacingInfo);
-  func.hideParentElement(relentlessEndurancePreview);
-  func.resetProps(relentlessEnduranceInfo);
-  func.hideParentElement(savageAttacksPreview);
-  func.resetProps(savageAttacksInfo);
+  func.hideParentElement(ele.menacingPreview);
+  func.resetProps(ele.menacingInfo);
+  func.hideParentElement(ele.relentlessEndurancePreview);
+  func.resetProps(ele.relentlessEnduranceInfo);
+  func.hideParentElement(ele.savageAttacksPreview);
+  func.resetProps(ele.savageAttacksInfo);
 
   // Tiefling
-  func.hideParentElement(hellishResistancePreview);
-  func.resetProps(hellishResistanceInfo);
-  func.hideParentElement(infernalLegacyPreview);
-  func.resetProps(infernalLegacyInfo);
+  func.hideParentElement(ele.hellishResistancePreview);
+  func.resetProps(ele.hellishResistanceInfo);
+  func.hideParentElement(ele.infernalLegacyPreview);
+  func.resetProps(ele.infernalLegacyInfo);
 
 }
 

@@ -96,3 +96,38 @@ export var extraAbilityModifier = document.querySelector('#extraAbilityModifier'
 export var extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
 export var extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
 export var extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');
+////////////////////////////////////////////////////////////
+// Skills Preview
+////////////////////////////////////////////////////////////
+// Skill variables
+// Skill Lists
+export var skillsPreviewList = document.querySelector('#skillsPreviewList');
+export var skillsPreviewListItems = skillsPreviewList.children;
+export var additionalSkillsPreviewList = document.querySelector('#additionalSkillsPreviewList');
+export var additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
+// Special Abilities
+export var stonecunningPreview = document.querySelector('#stonecunningPreview');
+export var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
+export var dragonType = document.querySelector('#dragonType');
+export var damageType = document.querySelector('#damageType');
+export var breathWeapon = document.querySelector('#breathWeapon');
+export var trancePreview = document.querySelector('#trancePreview');
+export var tranceInfo = document.querySelector('#tranceInfo');
+export var stealthPreview = document.querySelector('#stealthPreview');
+export var stealthInfo = document.querySelector('#stealthInfo');
+export var artificersLorePreview = document.querySelector('#artificersLorePreview');
+export var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
+export var tinkerPreview = document.querySelector('#tinkerPreview');
+export var tinkerInfo = document.querySelector('#tinkerInfo');
+export var damageResistancePreview = document.querySelector('#damageResistancePreview');
+export var damageResistanceType = document.querySelector('#damageResistanceType');
+export var menacingPreview = document.querySelector('#menacingPreview');
+export var menacingInfo = document.querySelector('#menacingInfo');
+export var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
+export var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
+export var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
+export var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
+export var hellishResistancePreview = document.querySelector('#hellishResistancePreview');
+export var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
+export var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
+export var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');

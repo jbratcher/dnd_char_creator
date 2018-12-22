@@ -358,38 +358,6 @@ var addHalfElfAbilityMofifiers = function () {
 ////////////////////////////////////////////////////////////
 // Skills Preview
 ////////////////////////////////////////////////////////////
-// Skill variables
-// Skill Lists
-var skillsPreviewList = document.querySelector('#skillsPreviewList');
-var skillsPreviewListItems = skillsPreviewList.children;
-var additionalSkillsPreviewList = document.querySelector('#additionalSkillsPreviewList');
-var additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
-// Special Abilities
-var stonecunningPreview = document.querySelector('#stonecunningPreview');
-var toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
-var dragonType = document.querySelector('#dragonType');
-var damageType = document.querySelector('#damageType');
-var breathWeapon = document.querySelector('#breathWeapon');
-var trancePreview = document.querySelector('#trancePreview');
-var tranceInfo = document.querySelector('#tranceInfo');
-var stealthPreview = document.querySelector('#stealthPreview');
-var stealthInfo = document.querySelector('#stealthInfo');
-var artificersLorePreview = document.querySelector('#artificersLorePreview');
-var artificersLoreInfo = document.querySelector('#artificersLoreInfo');
-var tinkerPreview = document.querySelector('#tinkerPreview');
-var tinkerInfo = document.querySelector('#tinkerInfo');
-var damageResistancePreview = document.querySelector('#damageResistancePreview');
-var damageResistanceType = document.querySelector('#damageResistanceType');
-var menacingPreview = document.querySelector('#menacingPreview');
-var menacingInfo = document.querySelector('#menacingInfo');
-var relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
-var relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
-var savageAttacksPreview = document.querySelector('#savageAttacksPreview');
-var savageAttacksInfo = document.querySelector('#savageAttacksInfo');
-var hellishResistancePreview = document.querySelector('#hellishResistancePreview');
-var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
-var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
-var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
 // Racial skills functions
 // Dragonborn
 var dragonbornDraconicAncestry = function () {
@@ -401,12 +369,12 @@ var dragonbornDraconicAncestry = function () {
         ? (ele.draconicAncestryPreview.parentElement.classList.remove('d-none'),
             ele.draconicAncestryPreview.parentElement.classList.add('d-flex'),
             ele.draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
-            dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
-            damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
-            breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
-            damageResistancePreview.parentElement.classList.remove('d-none'),
-            damageResistancePreview.parentElement.classList.add('d-flex'),
-            damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type)
+            ele.dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
+            ele.damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
+            ele.breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
+            ele.damageResistancePreview.parentElement.classList.remove('d-none'),
+            ele.damageResistancePreview.parentElement.classList.add('d-flex'),
+            ele.damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type)
         : (ele.draconicAncestryPreview.parentElement.classList.remove('d-flex'),
             ele.draconicAncestryPreview.parentElement.classList.add('d-none'),
             ele.draconicAncestryHelp.textContent = "");
@@ -415,14 +383,14 @@ var dragonbornDraconicAncestry = function () {
 // Dwarf Stonecunning
 var dwarfStonecunning = function () {
     return Races[charRace].special.stonecunning
-        ? (func.showElementWithProps(stonecunningPreview, Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)"))
-        : stonecunningPreview.parentElement.classList.add('d-none');
+        ? (func.showElementWithProps(ele.stonecunningPreview, Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)"))
+        : ele.stonecunningPreview.parentElement.classList.add('d-none');
 };
 // Dwarf tool proficiency
 var dwarfToolProficiency = function () {
     return Races[charRace].special.toolProficiency
-        ? (func.showElementWithProps(toolProficiencyPreview, Races[charRace].special.stonecunning.info, "Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)"))
-        : toolProficiencyPreview.parentElement.classList.add('d-none');
+        ? (func.showElementWithProps(ele.toolProficiencyPreview, Races[charRace].special.stonecunning.info, "Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)"))
+        : ele.toolProficiencyPreview.parentElement.classList.add('d-none');
 };
 // Elf Keen Senses Perception Bonus Skill
 var elfKeenSenses = function () {
@@ -433,49 +401,49 @@ var elfKeenSenses = function () {
 // Elf Trance sleep skill
 var elfTrance = function () {
     return Races[charRace].special.trance
-        ? func.showElementWithProps(tranceInfo, Races[charRace].special.trance.info, "Details")
+        ? func.showElementWithProps(ele.tranceInfo, Races[charRace].special.trance.info, "Details")
         : null;
 };
 // Halfling lightfoot stealth skill
 var lightfootNaturallyStealthy = function () {
     return charSubrace === "lightfoot"
-        ? func.showElementWithProps(stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
+        ? func.showElementWithProps(ele.stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
         : null;
 };
 // Half-orc special abilities
 var halforcMenacing = function () {
     return Races[charRace].special.menacing
-        ? func.showElementWithProps(menacingInfo, Races[charRace].special.menacing.info, "Details")
+        ? func.showElementWithProps(ele.menacingInfo, Races[charRace].special.menacing.info, "Details")
         : null;
 };
 var halforcRelentlessEndurance = function () {
     return Races[charRace].special.relentlessEndurance
-        ? func.showElementWithProps(relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
+        ? func.showElementWithProps(ele.relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
         : null;
 };
 var halforcSavageAttacks = function () {
     return Races[charRace].special.savageAttacks
-        ? func.showElementWithProps(savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
+        ? func.showElementWithProps(ele.savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
         : null;
 };
 // Rock gnome special abilities
 var rockgnomeSpecials = function () {
     return charSubrace === "rockgnome"
-        ? (func.showElementWithProps(artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
-            func.showElementWithProps(tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
-            tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
-            tinkerInfo.textContent = "Details")
+        ? (func.showElementWithProps(ele.artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
+            func.showElementWithProps(ele.tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
+            ele.tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
+            ele.tinkerInfo.textContent = "Details")
         : null;
 };
 // Tiefling special abilities\
 var tieflingHellishResistance = function () {
     return Races[charRace].special.hellishResistance
-        ? func.showElementWithProps(hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
+        ? func.showElementWithProps(ele.hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
         : null;
 };
 var tieflingInfernalLegacy = function () {
     return Races[charRace].special.infernalLegacy
-        ? func.showElementWithProps(infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
+        ? func.showElementWithProps(ele.infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
         : null;
 };
 // Skill functions
@@ -498,14 +466,14 @@ var getSkillModifier = function (skillText) {
 };
 // highlight a single skill
 var highightSkill = function (skillText) {
-    for (var i = 0; i < skillsPreviewListItems.length; i++) {
-        var skill = skillsPreviewListItems[i];
-        var skillName = skillsPreviewListItems[i].childNodes[1];
-        var skillText_1 = String(skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+    for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
+        var skill = ele.skillsPreviewListItems[i];
+        var skillName = ele.skillsPreviewListItems[i].childNodes[1];
+        var skillText_1 = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
         skillText_1 === skillText_1
             ? (skill.style.color = 'green',
-                getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent),
-                func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]))
+                getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
+                func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]))
             : null;
     }
 };
@@ -515,18 +483,18 @@ var highlightSkills = function () {
     getSelectedSkills();
     updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
-    for (var i = 0; i < skillsPreviewListItems.length; i++) {
-        var skill = skillsPreviewListItems[i];
-        var skillName = skillsPreviewListItems[i].childNodes[1];
-        var skillText = skillsPreviewListItems[i].childNodes[1].textContent;
+    for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
+        var skill = ele.skillsPreviewListItems[i];
+        var skillName = ele.skillsPreviewListItems[i].childNodes[1];
+        var skillText = ele.skillsPreviewListItems[i].childNodes[1].textContent;
         // reset modifier node to '-'
-        skillsPreviewListItems[i].childNodes[5].textContent = "-";
+        ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
         if (skillText === selectedSkill1.textContent.trim()
             || skillText === selectedSkill2.textContent.trim()
             || skillText === selectedSkill3.textContent.trim()) {
             skill.style.color = 'green';
-            getSkillModifier(skillsPreviewListItems[i].childNodes[3].textContent);
-            func.appendSigntoValue(totalMod, skillsPreviewListItems[i].childNodes[5]);
+            getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
+            func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]);
         }
         else {
             // if no match dim selection
@@ -591,42 +559,42 @@ var clearRacialSkils = function () {
     func.resetProps(fearResistance);
     // Skills tab - Additional Skills
     func.resetProps(ele.languagesPreview);
-    func.hideParentElement(toolProficiencyPreview);
-    func.resetProps(toolProficiencyPreview);
+    func.hideParentElement(ele.toolProficiencyPreview);
+    func.resetProps(ele.toolProficiencyPreview);
     // Dwarf
-    func.hideParentElement(stonecunningPreview);
-    func.resetProps(stonecunningPreview);
+    func.hideParentElement(ele.stonecunningPreview);
+    func.resetProps(ele.stonecunningPreview);
     // Dragonborn
     func.hideParentElement(ele.draconicAncestryPreview);
     func.resetProps(ele.draconicAncestryPreview);
-    func.hideParentElement(damageResistancePreview);
-    func.resetProps(damageResistanceType);
-    dragonType.textContent = "";
-    damageType.textContent = "";
-    breathWeapon.textContent = "";
+    func.hideParentElement(ele.damageResistancePreview);
+    func.resetProps(ele.damageResistanceType);
+    ele.dragonType.textContent = "";
+    ele.damageType.textContent = "";
+    ele.breathWeapon.textContent = "";
     // Elf
-    func.hideParentElement(trancePreview);
-    func.resetProps(tranceInfo);
+    func.hideParentElement(ele.trancePreview);
+    func.resetProps(ele.tranceInfo);
     // Halfling - Lightfoot
-    func.hideParentElement(stealthPreview);
-    func.resetProps(stealthInfo);
+    func.hideParentElement(ele.stealthPreview);
+    func.resetProps(ele.stealthInfo);
     // Gnome - Rock Gnome
-    func.hideParentElement(artificersLorePreview);
-    func.resetProps(artificersLoreInfo);
-    func.hideParentElement(tinkerPreview);
-    func.resetProps(tinkerInfo);
+    func.hideParentElement(ele.artificersLorePreview);
+    func.resetProps(ele.artificersLoreInfo);
+    func.hideParentElement(ele.tinkerPreview);
+    func.resetProps(ele.tinkerInfo);
     // Half-orc
-    func.hideParentElement(menacingPreview);
-    func.resetProps(menacingInfo);
-    func.hideParentElement(relentlessEndurancePreview);
-    func.resetProps(relentlessEnduranceInfo);
-    func.hideParentElement(savageAttacksPreview);
-    func.resetProps(savageAttacksInfo);
+    func.hideParentElement(ele.menacingPreview);
+    func.resetProps(ele.menacingInfo);
+    func.hideParentElement(ele.relentlessEndurancePreview);
+    func.resetProps(ele.relentlessEnduranceInfo);
+    func.hideParentElement(ele.savageAttacksPreview);
+    func.resetProps(ele.savageAttacksInfo);
     // Tiefling
-    func.hideParentElement(hellishResistancePreview);
-    func.resetProps(hellishResistanceInfo);
-    func.hideParentElement(infernalLegacyPreview);
-    func.resetProps(infernalLegacyInfo);
+    func.hideParentElement(ele.hellishResistancePreview);
+    func.resetProps(ele.hellishResistanceInfo);
+    func.hideParentElement(ele.infernalLegacyPreview);
+    func.resetProps(ele.infernalLegacyInfo);
 };
 ele.race.addEventListener('change', clearRacialSkils);
 ele.subrace.addEventListener('change', clearRacialSkils);

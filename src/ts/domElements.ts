@@ -173,3 +173,61 @@ export const extraAbilityModifier1 = <HTMLSelectElement>document.querySelector('
 export const extraAbilityModifier2 = <HTMLSelectElement>document.querySelector('#extraAbilityModifier2');
 
 export const extraAbilityModifierHelp = <HTMLElement>document.querySelector('#extraAbilityModifierHelp');
+
+////////////////////////////////////////////////////////////
+// Skills Preview
+////////////////////////////////////////////////////////////
+
+// Skill variables
+
+// Skill Lists
+
+export const skillsPreviewList = <HTMLElement>document.querySelector('#skillsPreviewList');
+
+export const skillsPreviewListItems = skillsPreviewList.children;
+
+export const additionalSkillsPreviewList = <HTMLElement>document.querySelector('#additionalSkillsPreviewList');
+
+export const additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
+
+// Special Abilities
+
+export const stonecunningPreview = <HTMLElement>document.querySelector('#stonecunningPreview');
+
+export const toolProficiencyPreview = <HTMLElement>document.querySelector('#toolProficiencyPreview');
+
+export const dragonType = <HTMLElement>document.querySelector('#dragonType');
+
+export const damageType = <HTMLElement>document.querySelector('#damageType');
+
+export const breathWeapon = <HTMLElement>document.querySelector('#breathWeapon');
+
+export const trancePreview = <HTMLElement>document.querySelector('#trancePreview');
+export const tranceInfo = <HTMLElement>document.querySelector('#tranceInfo');
+
+export const stealthPreview = <HTMLElement>document.querySelector('#stealthPreview');
+export const stealthInfo = <HTMLElement>document.querySelector('#stealthInfo');
+
+export const artificersLorePreview = <HTMLElement>document.querySelector('#artificersLorePreview');
+export const artificersLoreInfo = <HTMLElement>document.querySelector('#artificersLoreInfo');
+
+export const tinkerPreview = <HTMLElement>document.querySelector('#tinkerPreview');
+export const tinkerInfo = <HTMLElement>document.querySelector('#tinkerInfo');
+
+export const damageResistancePreview = <HTMLElement>document.querySelector('#damageResistancePreview');
+export const damageResistanceType = <HTMLElement>document.querySelector('#damageResistanceType');
+
+export const menacingPreview = <HTMLElement>document.querySelector('#menacingPreview');
+export const menacingInfo = <HTMLElement>document.querySelector('#menacingInfo');
+
+export const relentlessEndurancePreview = <HTMLElement>document.querySelector('#relentlessEndurancePreview');
+export const relentlessEnduranceInfo = <HTMLElement>document.querySelector('#relentlessEnduranceInfo');
+
+export const savageAttacksPreview = <HTMLElement>document.querySelector('#savageAttacksPreview');
+export const savageAttacksInfo = <HTMLElement>document.querySelector('#savageAttacksInfo');
+
+export const hellishResistancePreview = <HTMLElement>document.querySelector('#hellishResistancePreview');
+export const hellishResistanceInfo = <HTMLElement>document.querySelector('#hellishResistanceInfo');
+
+export const infernalLegacyPreview = <HTMLElement>document.querySelector('#infernalLegacyPreview');
+export const infernalLegacyInfo = <HTMLElement>document.querySelector('#infernalLegacyInfo');
