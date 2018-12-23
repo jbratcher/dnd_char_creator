@@ -231,3 +231,44 @@ export const hellishResistanceInfo = <HTMLElement>document.querySelector('#helli
 
 export const infernalLegacyPreview = <HTMLElement>document.querySelector('#infernalLegacyPreview');
 export const infernalLegacyInfo = <HTMLElement>document.querySelector('#infernalLegacyInfo');
+
+////////////////////////////////////////////////////////////
+// Combat
+////////////////////////////////////////////////////////////
+
+// Combat variables
+
+export const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints');
+
+export const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
+
+export const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
+
+export const speedPreview = <HTMLElement>document.querySelector('#speed');
+
+export const passivePerceptionPreview = <HTMLElement>document.querySelector('#passivePerception');
+
+export const darkvisionPreview = <HTMLElement>document.querySelector('#darkvisionPreview');
+
+export const sizePreview = <HTMLElement>document.querySelector('#size');
+
+export const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponProficiencesPreview');
+
+// Saving Throws 
+
+export const savingThrowList = <HTMLElement>document.querySelector('#savingThrowPreviewList');
+
+export const savingThrowListItems = savingThrowList.children;
+
+// Special Resistances
+
+export const specialResistances = <HTMLElement>document.querySelector('#specialResistances');
+
+export const poisonResistance = <HTMLElement>document.querySelector('#poisonResistance');
+
+export const charmResistance = <HTMLElement>document.querySelector('#charmResistance');
+
+export const fearResistance = <HTMLElement>document.querySelector('#fearResistance');
+
+
+

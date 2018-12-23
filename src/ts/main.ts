@@ -587,9 +587,6 @@ const dragonbornDraconicAncestry = () => {
   let selectedDraconicAncestry = ele.draconicAncestry.options[ele.draconicAncestry.selectedIndex];
 
   let charDraconicAncestry: string = selectedDraconicAncestry.textContent.toLowerCase();
-  
-  console.log(selectedDraconicAncestry);
-  console.log(charDraconicAncestry);
     
   return Races[charRace].special.draconicAncestry
     ? (
@@ -899,10 +896,10 @@ const clearRacialSkils = () => {
 
   // Combat tab
 
-  func.resetProps(weaponProficiencesPreview);
-  func.resetProps(poisonResistance);
-  func.resetProps(charmResistance);
-  func.resetProps(fearResistance);
+  func.resetProps(ele.weaponProficiencesPreview);
+  func.resetProps(ele.poisonResistance);
+  func.resetProps(ele.charmResistance);
+  func.resetProps(ele.fearResistance);
 
   // Skills tab - Additional Skills
 
@@ -960,35 +957,17 @@ ele.subrace.addEventListener('change', clearRacialSkils)
 // Combat
 ////////////////////////////////////////////////////////////
 
-// Combat variables
-
-const hitPointPreview = <HTMLElement>document.querySelector('#hitPoints');
-
-const armorClassPreview = <HTMLElement>document.querySelector('#armorClass');
-
-const initiativeModPreview = <HTMLElement>document.querySelector('#initiative');
-
-const speedPreview = <HTMLElement>document.querySelector('#speed');
-
-const passivePerceptionPreview = <HTMLElement>document.querySelector('#passivePerception');
-
-const darkvisionPreview = <HTMLElement>document.querySelector('#darkvisionPreview');
-
-const sizePreview = <HTMLElement>document.querySelector('#size');
-
-const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponProficiencesPreview');
-
 // Combat functions
 
 const initialHitPoints = () => {
   // 1st level is max hit points + constiution modifier + racial modifier
   let modifier: number = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
   let hitpoints: number = (Classes[charClass].hitdie + modifier);
-  hitPointPreview.textContent = String(hitpoints);
+  ele.hitPointPreview.textContent = String(hitpoints);
 }
 
 const addHitPoints = () => {
-  let currentHitPoints: number = Number(hitPointPreview.textContent);
+  let currentHitPoints: number = Number(ele.hitPointPreview.textContent);
   let rolledHitPoints: number = func.randomIntFromRange(1, Classes[charClass].hitdie)
   modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod
   let hitPointsToAdd: number = (rolledHitPoints + modifier);
@@ -996,7 +975,7 @@ const addHitPoints = () => {
   if(rolledHitPoints + modifier <= 0) {
     hitPointsToAdd = 1;
   }
-  hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
+  ele.hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
 }
 
 const armorClass = () => {
@@ -1004,28 +983,28 @@ const armorClass = () => {
   let dexMod: number = func.getAbilityScoreModifier(Number(dexerity))
   let armorMod: number = 0;
   let ac = String(base + dexMod + armorMod);
-  armorClassPreview.textContent = ac;
+  ele.armorClassPreview.textContent = ac;
 }
 
 const initiativeMod = () => {
   let dexMod: number = func.getAbilityScoreModifier(Number(dexerity))
-  initiativeModPreview.textContent = String(dexMod);
+  ele.initiativeModPreview.textContent = String(dexMod);
 }
 
-const baseSpeed = () => speedPreview.textContent = Races[charRace].speed;
+const baseSpeed = () => ele.speedPreview.textContent = Races[charRace].speed;
 
-const passivePerception = () => passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom));
+const passivePerception = () => ele.passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom));
 
 const darkvision = () => {
   setRace();
   if (Races[charRace].darkvision) {
-    darkvisionPreview.textContent = '60 ft.'
+    ele.passivePerceptionPreview.textContent = '60 ft.'
   } else {
-    darkvisionPreview.textContent = 'None'
+    ele.passivePerceptionPreview.textContent = 'None'
   }
 }
 
-const setCharacterSize = () => sizePreview.textContent = Races[charRace].size;
+const setCharacterSize = () => ele.sizePreview.textContent = Races[charRace].size;
 
 const calculateWeaponProficiencies = () => {
 
@@ -1034,13 +1013,13 @@ const calculateWeaponProficiencies = () => {
 
   charRace === 'dwarf'
     ? Races[charRace].weaponProficiences.map(weapon => {
-      weaponProficiencesPreview.textContent += weapon + ", ";
+      ele.weaponProficiencesPreview.textContent += weapon + ", ";
     })
     : null;
 
   charSubrace === 'highelf'
     ? Races[charRace].subrace.weaponProficiences.map(weapon => {
-      weaponProficiencesPreview.textContent += weapon + ", ";
+      ele.weaponProficiencesPreview.textContent += weapon + ", ";
     })
     : null;
 
@@ -1049,8 +1028,7 @@ const calculateWeaponProficiencies = () => {
 
 // Saving throws
 
-const savingThrowList = <HTMLElement>document.querySelector('#savingThrowPreviewList');
-const savingThrowListItems = savingThrowList.children;
+// See domElements.ts
 
 // saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
 
@@ -1062,27 +1040,19 @@ const calculateSavingThrowMods = () => {
 
   abilities.map(ability => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
-    for(let i = 0; i < savingThrowListItems.length; i++) {
-      let string: string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+    for(let i = 0; i < ele.savingThrowListItems.length; i++) {
+      let string: string = (singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
       if(string === ability) {
         let abilityMod: number = func.getAbilityScoreModifier(lookupAbilityScore(ability));
         let totalMod: number = Number(abilityMod + proficiencyBonus);
-        func.appendSigntoValue(totalMod, savingThrowListItems[i].childNodes[3]);
+        func.appendSigntoValue(totalMod, ele.savingThrowListItems[i].childNodes[3]);
       }
     }
   });
 
 }
 
-// Special Resistances
-
-const specialResistances = <HTMLElement>document.querySelector('#specialResistances');
-
-const poisonResistance = <HTMLElement>document.querySelector('#poisonResistance');
-
-const charmResistance = <HTMLElement>document.querySelector('#charmResistance');
-
-const fearResistance = <HTMLElement>document.querySelector('#fearResistance');
+// Special Resistances functions
 
 const calculateSpecialResistances = () => {
 
@@ -1090,15 +1060,15 @@ const calculateSpecialResistances = () => {
 
   if(charRace === 'dwarf') {
 
-    poisonResistance.textContent = `Advantage, Resistance`;
-    poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
+    ele.poisonResistance.textContent = `Advantage, Resistance`;
+    ele.poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
 
   }
 
   if(charRace === 'elf' || charRace === 'halfelf') {
 
-    charmResistance.textContent = 'Advantage';
-    charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
+    ele.charmResistance.textContent = 'Advantage';
+    ele.charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
 
   }
 
@@ -1108,10 +1078,10 @@ const calculateSpecialResistances = () => {
 
     types.map(type => {
     // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
-    for(let i = 0; i < savingThrowListItems.length; i++) {
-      let string: string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+    for(let i = 0; i < ele.savingThrowListItems.length; i++) {
+      let string: string = (singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
       if(string === type) {
-        savingThrowListItems[i].childNodes[1].textContent += ` (Advantage)`;
+        ele.savingThrowListItems[i].childNodes[1].textContent += ` (Advantage)`;
       }
     }
   });
@@ -1120,8 +1090,8 @@ const calculateSpecialResistances = () => {
 
   if(charRace === 'halfling') {
 
-    fearResistance.textContent = 'Advantage';
-    fearResistance.setAttribute('title', Races[charRace].special.brave.info);
+    ele.fearResistance.textContent = 'Advantage';
+    ele.fearResistance.setAttribute('title', Races[charRace].special.brave.info);
 
   }
 

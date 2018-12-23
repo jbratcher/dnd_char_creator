@@ -131,3 +131,23 @@ export var hellishResistancePreview = document.querySelector('#hellishResistance
 export var hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
 export var infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
 export var infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
+////////////////////////////////////////////////////////////
+// Combat
+////////////////////////////////////////////////////////////
+// Combat variables
+export var hitPointPreview = document.querySelector('#hitPoints');
+export var armorClassPreview = document.querySelector('#armorClass');
+export var initiativeModPreview = document.querySelector('#initiative');
+export var speedPreview = document.querySelector('#speed');
+export var passivePerceptionPreview = document.querySelector('#passivePerception');
+export var darkvisionPreview = document.querySelector('#darkvisionPreview');
+export var sizePreview = document.querySelector('#size');
+export var weaponProficiencesPreview = document.querySelector('#weaponProficiencesPreview');
+// Saving Throws 
+export var savingThrowList = document.querySelector('#savingThrowPreviewList');
+export var savingThrowListItems = savingThrowList.children;
+// Special Resistances
+export var specialResistances = document.querySelector('#specialResistances');
+export var poisonResistance = document.querySelector('#poisonResistance');
+export var charmResistance = document.querySelector('#charmResistance');
+export var fearResistance = document.querySelector('#fearResistance');

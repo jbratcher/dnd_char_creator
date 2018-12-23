@@ -363,8 +363,6 @@ var addHalfElfAbilityMofifiers = function () {
 var dragonbornDraconicAncestry = function () {
     var selectedDraconicAncestry = ele.draconicAncestry.options[ele.draconicAncestry.selectedIndex];
     var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
-    console.log(selectedDraconicAncestry);
-    console.log(charDraconicAncestry);
     return Races[charRace].special.draconicAncestry
         ? (ele.draconicAncestryPreview.parentElement.classList.remove('d-none'),
             ele.draconicAncestryPreview.parentElement.classList.add('d-flex'),
@@ -553,10 +551,10 @@ var skillCreation = function () {
 var clearRacialSkils = function () {
     // set text content and attr to 'null', hide elements in preview
     // Combat tab
-    func.resetProps(weaponProficiencesPreview);
-    func.resetProps(poisonResistance);
-    func.resetProps(charmResistance);
-    func.resetProps(fearResistance);
+    func.resetProps(ele.weaponProficiencesPreview);
+    func.resetProps(ele.poisonResistance);
+    func.resetProps(ele.charmResistance);
+    func.resetProps(ele.fearResistance);
     // Skills tab - Additional Skills
     func.resetProps(ele.languagesPreview);
     func.hideParentElement(ele.toolProficiencyPreview);
@@ -601,24 +599,15 @@ ele.subrace.addEventListener('change', clearRacialSkils);
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////
-// Combat variables
-var hitPointPreview = document.querySelector('#hitPoints');
-var armorClassPreview = document.querySelector('#armorClass');
-var initiativeModPreview = document.querySelector('#initiative');
-var speedPreview = document.querySelector('#speed');
-var passivePerceptionPreview = document.querySelector('#passivePerception');
-var darkvisionPreview = document.querySelector('#darkvisionPreview');
-var sizePreview = document.querySelector('#size');
-var weaponProficiencesPreview = document.querySelector('#weaponProficiencesPreview');
 // Combat functions
 var initialHitPoints = function () {
     // 1st level is max hit points + constiution modifier + racial modifier
     var modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitpoints = (Classes[charClass].hitdie + modifier);
-    hitPointPreview.textContent = String(hitpoints);
+    ele.hitPointPreview.textContent = String(hitpoints);
 };
 var addHitPoints = function () {
-    var currentHitPoints = Number(hitPointPreview.textContent);
+    var currentHitPoints = Number(ele.hitPointPreview.textContent);
     var rolledHitPoints = func.randomIntFromRange(1, Classes[charClass].hitdie);
     modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
     var hitPointsToAdd = (rolledHitPoints + modifier);
@@ -626,94 +615,89 @@ var addHitPoints = function () {
     if (rolledHitPoints + modifier <= 0) {
         hitPointsToAdd = 1;
     }
-    hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
+    ele.hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
 };
 var armorClass = function () {
     var base = 10;
     var dexMod = func.getAbilityScoreModifier(Number(dexerity));
     var armorMod = 0;
     var ac = String(base + dexMod + armorMod);
-    armorClassPreview.textContent = ac;
+    ele.armorClassPreview.textContent = ac;
 };
 var initiativeMod = function () {
     var dexMod = func.getAbilityScoreModifier(Number(dexerity));
-    initiativeModPreview.textContent = String(dexMod);
+    ele.initiativeModPreview.textContent = String(dexMod);
 };
-var baseSpeed = function () { return speedPreview.textContent = Races[charRace].speed; };
-var passivePerception = function () { return passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom)); };
+var baseSpeed = function () { return ele.speedPreview.textContent = Races[charRace].speed; };
+var passivePerception = function () { return ele.passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom)); };
 var darkvision = function () {
     setRace();
     if (Races[charRace].darkvision) {
-        darkvisionPreview.textContent = '60 ft.';
+        ele.passivePerceptionPreview.textContent = '60 ft.';
     }
     else {
-        darkvisionPreview.textContent = 'None';
+        ele.passivePerceptionPreview.textContent = 'None';
     }
 };
-var setCharacterSize = function () { return sizePreview.textContent = Races[charRace].size; };
+var setCharacterSize = function () { return ele.sizePreview.textContent = Races[charRace].size; };
 var calculateWeaponProficiencies = function () {
     setRace();
     setSubrace();
     charRace === 'dwarf'
         ? Races[charRace].weaponProficiences.map(function (weapon) {
-            weaponProficiencesPreview.textContent += weapon + ", ";
+            ele.weaponProficiencesPreview.textContent += weapon + ", ";
         })
         : null;
     charSubrace === 'highelf'
         ? Races[charRace].subrace.weaponProficiences.map(function (weapon) {
-            weaponProficiencesPreview.textContent += weapon + ", ";
+            ele.weaponProficiencesPreview.textContent += weapon + ", ";
         })
         : null;
 };
 // Saving throws
-var savingThrowList = document.querySelector('#savingThrowPreviewList');
-var savingThrowListItems = savingThrowList.children;
+// See domElements.ts
 // saving throw mod is class ability score modifier and class proficiency bonus on listed types of saving throws (i.e. wizard, intelligence)
 var calculateSavingThrowMods = function () {
     setClass();
     var abilities = Classes[charClass].savingThrows;
     abilities.map(function (ability) {
         // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
-        for (var i = 0; i < savingThrowListItems.length; i++) {
-            var string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+        for (var i = 0; i < ele.savingThrowListItems.length; i++) {
+            var string = (singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
             if (string === ability) {
                 var abilityMod = func.getAbilityScoreModifier(lookupAbilityScore(ability));
                 var totalMod_1 = Number(abilityMod + proficiencyBonus);
-                func.appendSigntoValue(totalMod_1, savingThrowListItems[i].childNodes[3]);
+                func.appendSigntoValue(totalMod_1, ele.savingThrowListItems[i].childNodes[3]);
             }
         }
     });
 };
-// Special Resistances
-var specialResistances = document.querySelector('#specialResistances');
-var poisonResistance = document.querySelector('#poisonResistance');
-var charmResistance = document.querySelector('#charmResistance');
-var fearResistance = document.querySelector('#fearResistance');
+// Special Resistances functions
 var calculateSpecialResistances = function () {
     setRace();
     if (charRace === 'dwarf') {
-        poisonResistance.textContent = "Advantage, Resistance";
-        poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
+        ele.poisonResistance.textContent = "Advantage, Resistance";
+        ele.poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
     }
     if (charRace === 'elf' || charRace === 'halfelf') {
-        charmResistance.textContent = 'Advantage';
-        charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
+        ele.charmResistance.textContent = 'Advantage';
+        ele.charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
     }
     if (charRace === 'gnome') {
         var types = Races[charRace].special.gnomeCunning.type;
         types.map(function (type) {
             // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
-            for (var i = 0; i < savingThrowListItems.length; i++) {
-                var string = (singleWord.exec(savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+            for (var i = 0; i < ele.savingThrowListItems.length; i++) {
+                var string = (singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
                 if (string === type) {
-                    savingThrowListItems[i].childNodes[1].textContent += " (Advantage)";
+                    ele.savingThrowListItems[i].childNodes[1].textContent += " (Advantage)";
                 }
             }
         });
     }
     if (charRace === 'halfling') {
-        fearResistance.textContent = 'Advantage';
-        fearResistance.setAttribute('title', Races[charRace].special.brave.info);
+        ele.fearResistance.textContent = 'Advantage';
+        ele.fearResistance.setAttribute('title', Races[charRace].special.brave.info);
     }
 };
 var combatCreation = function () {
