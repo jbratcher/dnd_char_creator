@@ -18,13 +18,6 @@ var constitution = "0";
 var intelligence = "0";
 var wisdom = "0";
 var charisma = "0";
-// Event listeners for rolling ability scores
-ele.rollStrength.addEventListener('click', function () { return func.setScore(ele.rolledStrength); });
-ele.rollDexerity.addEventListener('click', function () { return func.setScore(ele.rolledDexerity); });
-ele.rollConstitution.addEventListener('click', function () { return func.setScore(ele.rolledConstitution); });
-ele.rollWisdom.addEventListener('click', function () { return func.setScore(ele.rolledWisdom); });
-ele.rollIntelligence.addEventListener('click', function () { return func.setScore(ele.rolledIntelligence); });
-ele.rollCharisma.addEventListener('click', function () { return func.setScore(ele.rolledCharisma); });
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
 // and add dynamic updating
@@ -34,17 +27,22 @@ ele.rollCharisma.addEventListener('click', function () { return func.setScore(el
 ////////////////////////////////////////////////////////////
 // User input in chronological order
 // Class Select
+// Add available classes to select and set value of class
 func.addOptionsToSelect(ele.cls, ClassList);
 var selectedClass = ele.cls.options[ele.cls.selectedIndex];
 var charClass = selectedClass.textContent.toLowerCase();
+// Set value of character property to current selected item
+// const setCharacterProperty = (property: string, selectElement: HTMLSelectElement) => {
+//   let selectedPropertyIndex = <HTMLOptionElement>selectElement.options[selectElement.selectedIndex];
+//   property = selectedPropertyIndex.textContent.toLowerCase().replace(/-/g,"");
+// }
+// Set value of class variable to current selected item
 var setClass = function () {
-    charClass = ele.cls.options[ele.cls.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
+    selectedClass = ele.cls.options[ele.cls.selectedIndex];
+    charClass = selectedClass.textContent.toLowerCase().replace(/-/g, "");
 };
+// Set class description text and change on class selection change
 func.setText(ele.classHelp, Classes[charClass].info);
-ele.cls.addEventListener('change', function () {
-    setClass();
-    func.setText(ele.classHelp, Classes[charClass].info);
-});
 // Race Select
 func.addOptionsToSelect(ele.race, RaceList);
 var selectedRace = ele.race.options[ele.race.selectedIndex];
@@ -53,10 +51,6 @@ var setRace = function () {
     charRace = ele.race.options[ele.race.selectedIndex].textContent.toLowerCase().replace(/-/g, "");
 };
 func.setText(ele.raceHelp, Races[charRace].info);
-ele.race.addEventListener('change', function () {
-    setRace();
-    func.setText(ele.raceHelp, Races[charRace].info);
-});
 // Subrace Select (Optional, if subrace exists)
 var charSubrace = ele.subrace.textContent.toLowerCase().replace(/-|\s/g, "");
 // Subrace select
@@ -73,8 +67,6 @@ var showOptionalSubraceSelect = function () {
             ele.subraceSelectSection.classList.remove('d-none'))
         : ele.subraceSelectSection.classList.add('d-none');
 };
-// Subrace options regenerate on race selection change
-ele.race.addEventListener('change', showOptionalSubraceSelect);
 var setSubrace = function () {
     // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
     if (!ele.subrace.parentElement.classList.contains("d-none")) {
@@ -84,12 +76,6 @@ var setSubrace = function () {
         return null;
     }
 };
-// On subrace selection, get value of subrace and display descriptive text
-ele.subrace.addEventListener('change', function () {
-    func.setText(ele.subraceHelp, "");
-    setSubrace();
-    func.setText(ele.subraceHelp, Races[charRace].subrace.helpText);
-});
 // Alignment
 func.addOptionsToSelect(ele.alignment, Alignments);
 var selectedAlignment = ele.alignment.options[ele.alignment.selectedIndex];
@@ -103,8 +89,6 @@ var availableAlignments = function () {
     setRace();
     func.addOptionsToSelect(ele.alignment, Races[charRace].alignments);
 };
-// Alignment options regenerate on race selection
-ele.race.addEventListener('change', availableAlignments);
 // Name
 // see domElements.ts
 // Gender
@@ -115,7 +99,6 @@ var ageHelpText = function () {
     setRace();
     func.setText(ele.ageHelp, func.capitialize(charRace) + " age ranges between " + Races[charRace].age.min + " and  " + Races[charRace].age.max);
 };
-ele.race.addEventListener('change', ageHelpText);
 // Iniialize help text on page load
 ageHelpText();
 // Dragonborn: Draconic Ancestry / Dragonborn "subrace"
@@ -129,8 +112,6 @@ var showDraconicAncestrySelect = function () {
         : (ele.draconicAncestrySection.classList.add('d-none'),
             ele.draconicAncestryHelp.textContent = '');
 };
-// Draconic ancestry options regenerate on race selection
-ele.race.addEventListener('change', showDraconicAncestrySelect);
 // Initialize on page load
 showDraconicAncestrySelect();
 // Extra Language Selection: Human and Half-elf
@@ -151,8 +132,6 @@ var showExtraLanguageInput = function () {
                 : (ele.extraLanguageField.classList.add('d-none'),
                     ele.extraLanguageHelp.textContent = '');
 };
-ele.race.addEventListener('change', showExtraLanguageInput);
-ele.subrace.addEventListener('change', showExtraLanguageInput);
 // Skill select
 func.addOptionsToSelect(ele.skill1, Skills);
 var skillList1 = ele.skill1.children;
@@ -166,19 +145,12 @@ var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
 var selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function () {
+    setClass();
     availableSkills = Classes[charClass].availableSkills;
-    ele.skill1.innerHTML = "";
-    ele.skill2.innerHTML = "";
-    ele.skill3.innerHTML = "";
     func.addOptionsToSelect(ele.skill1, availableSkills);
     func.addOptionsToSelect(ele.skill2, availableSkills);
     func.addOptionsToSelect(ele.skill3, availableSkills);
 };
-// dynamically change available skills based on character class
-ele.cls.addEventListener('change', function () {
-    setClass();
-    highlightAvailableSkills();
-});
 // Initialize state for selected class on document load
 highlightAvailableSkills();
 ////////////////////////////////////////////////////////////
@@ -240,7 +212,7 @@ var generalInfo = function () {
     ele.racePreview.textContent = selectedRace.textContent;
     ele.genderPreview.textContent = ele.gender.value;
     ele.agePreview.textContent = ele.age.value;
-    ele.clsPreview.textContent = selectedClass.textContent;
+    ele.clsPreview.textContent = func.capitialize(charClass);
     ele.alignmentPreview.textContent = selectedAlignment.textContent;
 };
 ////////////////////////////////////////////////////////////
@@ -316,7 +288,6 @@ var showExtraModifiersInput = function () {
         ? ele.extraAbilityModifierHelp.textContent = 'Half-Elves get to choose 2 extra ability scores to add +1'
         : ele.extraAbilityModifierHelp.textContent = '';
 };
-ele.race.addEventListener('change', showExtraModifiersInput);
 // Hide ability selected in either select element from the other select element
 var hideModSelection = function (extraAbilityModifier, otherAbilityModifier) {
     var firstSelection = extraAbilityModifier.options[extraAbilityModifier.selectedIndex].textContent;
@@ -330,12 +301,6 @@ var hideModSelection = function (extraAbilityModifier, otherAbilityModifier) {
     });
 };
 hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2);
-ele.extraAbilityModifier1.addEventListener('change', function () {
-    hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2);
-});
-ele.extraAbilityModifier2.addEventListener('change', function () {
-    hideModSelection(ele.extraAbilityModifier2, ele.extraAbilityModifier1);
-});
 // if extra ability score is selected add +1 to ability score preview
 var addHalfElfAbilityMofifiers = function () {
     if (charRace === 'halfelf') {
@@ -594,8 +559,6 @@ var clearRacialSkils = function () {
     func.hideParentElement(ele.infernalLegacyPreview);
     func.resetProps(ele.infernalLegacyInfo);
 };
-ele.race.addEventListener('change', clearRacialSkils);
-ele.subrace.addEventListener('change', clearRacialSkils);
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////
@@ -724,6 +687,48 @@ var combatCreation = function () {
     calculateSpecialResistances();
     calculateWeaponProficiencies();
 };
+////////////////////////////////////////////////////////////
+// Event Listeners
+////////////////////////////////////////////////////////////
+// Event listeners for rolling ability scores
+ele.rollStrength.addEventListener('click', function () { return func.setScore(ele.rolledStrength); });
+ele.rollDexerity.addEventListener('click', function () { return func.setScore(ele.rolledDexerity); });
+ele.rollConstitution.addEventListener('click', function () { return func.setScore(ele.rolledConstitution); });
+ele.rollWisdom.addEventListener('click', function () { return func.setScore(ele.rolledWisdom); });
+ele.rollIntelligence.addEventListener('click', function () { return func.setScore(ele.rolledIntelligence); });
+ele.rollCharisma.addEventListener('click', function () { return func.setScore(ele.rolledCharisma); });
+// Handle Class selection changes
+ele.cls.addEventListener('change', function () {
+    setClass();
+    func.setText(ele.classHelp, Classes[charClass].info);
+    highlightAvailableSkills();
+});
+// Handle race and subrace selection changes
+ele.race.addEventListener('change', function () {
+    setRace();
+    func.setText(ele.raceHelp, Races[charRace].info);
+    showOptionalSubraceSelect();
+    availableAlignments();
+    ageHelpText();
+    showDraconicAncestrySelect();
+    showExtraLanguageInput();
+    showExtraModifiersInput();
+    clearRacialSkils();
+});
+// On subrace selection, get value of subrace and display descriptive text
+ele.subrace.addEventListener('change', function () {
+    setSubrace();
+    func.setText(ele.subraceHelp, Races[charRace].subrace.helpText);
+    showExtraLanguageInput();
+    clearRacialSkils();
+});
+// Hide ability from extra ability modifier list
+ele.extraAbilityModifier1.addEventListener('change', function () {
+    hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2);
+});
+ele.extraAbilityModifier2.addEventListener('change', function () {
+    hideModSelection(ele.extraAbilityModifier2, ele.extraAbilityModifier1);
+});
 ////////////////////////////////////////////////////////////
 // Character Creation
 ////////////////////////////////////////////////////////////

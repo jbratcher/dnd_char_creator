@@ -25,6 +25,7 @@ export const setToMinMax = (score) => score > 18
 ////////////////////////////////////////
 
 export const addOptionsToSelect = (selectElement, dataArray) => {
+  selectElement.innerHTML = ""
   dataArray.map(optionText => {
     let optionElement: HTMLOptionElement = document.createElement("option");
     optionElement.textContent = optionText;

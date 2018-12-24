@@ -2,7 +2,6 @@
 // DOM Elements
 ////////////////////////////////////////
 
-
 ////////////////////////////////////////
 // Character Attributes
 ////////////////////////////////////////
@@ -13,11 +12,13 @@ export const cls = <HTMLSelectElement>document.querySelector('#cls');  // cls he
 
 export const classHelp = <HTMLElement>document.querySelector('#classHelp');
 
+
 // Race select
 
 export const race = <HTMLSelectElement>document.querySelector('#race');
 
 export const raceHelp = <HTMLElement>document.querySelector('#raceHelp');
+
 
 // Subrace select
 
@@ -27,17 +28,21 @@ export const subrace = <HTMLSelectElement>document.querySelector('#subrace');
 
 export const subraceHelp = <HTMLElement>document.querySelector('#subraceHelp');
 
+
 // Alignment
 
 export const alignment = <HTMLSelectElement>document.querySelector('#alignment');
+
 
 // Name
 
 export const name = <HTMLInputElement>document.querySelector('#name');
 
+
 // Gender
 
 export const gender = <HTMLInputElement>document.querySelector('#gender');
+
 
 // Age 
 
@@ -50,23 +55,24 @@ export const ageHelp = <HTMLElement>document.querySelector('#ageHelp');
 // Ability score
 ////////////////////////////////////////
 
-export const rollStrength: HTMLElement = document.querySelector('#rollStrength');
-export const rolledStrength: HTMLElement = document.querySelector('#rolledStrength');
+export const rollStrength = <HTMLElement>document.querySelector('#rollStrength');
+export const rolledStrength = <HTMLElement>document.querySelector('#rolledStrength');
 
-export const rollDexerity: HTMLElement = document.querySelector('#rollDexerity');
-export const rolledDexerity: HTMLElement = document.querySelector('#rolledDexerity');
+export const rollDexerity = <HTMLElement>document.querySelector('#rollDexerity');
+export const rolledDexerity = <HTMLElement>document.querySelector('#rolledDexerity');
 
-export const rollConstitution: HTMLElement = document.querySelector('#rollConstitution');
-export const rolledConstitution: HTMLElement = document.querySelector('#rolledConstitution');
+export const rollConstitution = <HTMLElement>document.querySelector('#rollConstitution');
+export const rolledConstitution = <HTMLElement>document.querySelector('#rolledConstitution');
 
-export const rollIntelligence: HTMLElement = document.querySelector('#rollIntelligence');
-export const rolledIntelligence: HTMLElement = document.querySelector('#rolledIntelligence');
+export const rollIntelligence = <HTMLElement>document.querySelector('#rollIntelligence');
+export const rolledIntelligence = <HTMLElement>document.querySelector('#rolledIntelligence');
 
-export const rollWisdom: HTMLElement = document.querySelector('#rollWisdom');
-export const rolledWisdom: HTMLElement = document.querySelector('#rolledWisdom');
+export const rollWisdom = <HTMLElement>document.querySelector('#rollWisdom');
+export const rolledWisdom = <HTMLElement>document.querySelector('#rolledWisdom');
 
-export const rollCharisma: HTMLElement = document.querySelector('#rollCharisma');
-export const rolledCharisma: HTMLElement = document.querySelector('#rolledCharisma');
+export const rollCharisma = <HTMLElement>document.querySelector('#rollCharisma');
+export const rolledCharisma = <HTMLElement>document.querySelector('#rolledCharisma');
+
 
 ////////////////////////////////////////
 // Racial traits
@@ -82,6 +88,7 @@ export const draconicAncestryHelp = <HTMLElement>document.querySelector('#dracon
 
 export const draconicAncestryPreview = <HTMLElement>document.querySelector('#draconicAncestryPreview');
 
+
 // Extra Language trait for Half-Elf, High Elf, and Human
 
 export const extraLanguageField = <HTMLElement>document.querySelector('#extraLanguageField');
@@ -89,6 +96,7 @@ export const extraLanguageField = <HTMLElement>document.querySelector('#extraLan
 export const extraLanguage = <HTMLSelectElement>document.querySelector('#extraLanguage');
 
 export const extraLanguageHelp = <HTMLElement>document.querySelector('#extraLanguageHelp');
+
 
 ////////////////////////////////////////
 // Character Skills
@@ -99,6 +107,7 @@ export const skill1 = <HTMLSelectElement>document.querySelector('#skillsSelect1'
 export const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2');
 
 export const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
+
 
 ////////////////////////////////////////////////////////////
 // Level and experience elements (preview section)
@@ -114,6 +123,7 @@ export const experienceNextLevel = <HTMLElement>document.querySelector('#experie
 
 export const addNewExperienceInput = <HTMLInputElement>document.querySelector('#addNewExperience');
 
+
 // Buttons
 
 export const createCharacterButton = <HTMLElement>document.querySelector('#createCharacterButton');
@@ -121,6 +131,7 @@ export const createCharacterButton = <HTMLElement>document.querySelector('#creat
 export const levelUpButton = <HTMLElement>document.querySelector('#levelUpButton');
 
 export const addNewExperienceButton = <HTMLElement>document.querySelector('#addExp');
+
 
 ////////////////////////////////////////////////////////////
 // General Preview information
@@ -145,6 +156,7 @@ export const characterImg = <HTMLImageElement>document.querySelector('#character
 export const proficiencyBonusPreview = <HTMLElement>document.querySelector('#proficiencyBonusPreview');
 
 export const languagesPreview = <HTMLElement>document.querySelector('#languagesPreview');
+
 
 ////////////////////////////////////////////////////////////
 // Ability Scores
@@ -174,6 +186,7 @@ export const extraAbilityModifier2 = <HTMLSelectElement>document.querySelector('
 
 export const extraAbilityModifierHelp = <HTMLElement>document.querySelector('#extraAbilityModifierHelp');
 
+
 ////////////////////////////////////////////////////////////
 // Skills Preview
 ////////////////////////////////////////////////////////////
@@ -189,6 +202,7 @@ export const skillsPreviewListItems = skillsPreviewList.children;
 export const additionalSkillsPreviewList = <HTMLElement>document.querySelector('#additionalSkillsPreviewList');
 
 export const additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
+
 
 // Special Abilities
 
@@ -232,6 +246,7 @@ export const hellishResistanceInfo = <HTMLElement>document.querySelector('#helli
 export const infernalLegacyPreview = <HTMLElement>document.querySelector('#infernalLegacyPreview');
 export const infernalLegacyInfo = <HTMLElement>document.querySelector('#infernalLegacyInfo');
 
+
 ////////////////////////////////////////////////////////////
 // Combat
 ////////////////////////////////////////////////////////////
@@ -254,11 +269,13 @@ export const sizePreview = <HTMLElement>document.querySelector('#size');
 
 export const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponProficiencesPreview');
 
+
 // Saving Throws 
 
 export const savingThrowList = <HTMLElement>document.querySelector('#savingThrowPreviewList');
 
 export const savingThrowListItems = savingThrowList.children;
+
 
 // Special Resistances
 
@@ -269,6 +286,3 @@ export const poisonResistance = <HTMLElement>document.querySelector('#poisonResi
 export const charmResistance = <HTMLElement>document.querySelector('#charmResistance');
 
 export const fearResistance = <HTMLElement>document.querySelector('#fearResistance');
-
-
-

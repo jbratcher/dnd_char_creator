@@ -101,3 +101,58 @@ var extraAbilityModifier = exports.extraAbilityModifier = document.querySelector
 var extraAbilityModifier1 = exports.extraAbilityModifier1 = document.querySelector('#extraAbilityModifier1');
 var extraAbilityModifier2 = exports.extraAbilityModifier2 = document.querySelector('#extraAbilityModifier2');
 var extraAbilityModifierHelp = exports.extraAbilityModifierHelp = document.querySelector('#extraAbilityModifierHelp');
+////////////////////////////////////////////////////////////
+// Skills Preview
+////////////////////////////////////////////////////////////
+// Skill variables
+// Skill Lists
+var skillsPreviewList = exports.skillsPreviewList = document.querySelector('#skillsPreviewList');
+var skillsPreviewListItems = exports.skillsPreviewListItems = skillsPreviewList.children;
+var additionalSkillsPreviewList = exports.additionalSkillsPreviewList = document.querySelector('#additionalSkillsPreviewList');
+var additionalSkillsPreviewListItems = exports.additionalSkillsPreviewListItems = additionalSkillsPreviewList.children;
+// Special Abilities
+var stonecunningPreview = exports.stonecunningPreview = document.querySelector('#stonecunningPreview');
+var toolProficiencyPreview = exports.toolProficiencyPreview = document.querySelector('#toolProficiencyPreview');
+var dragonType = exports.dragonType = document.querySelector('#dragonType');
+var damageType = exports.damageType = document.querySelector('#damageType');
+var breathWeapon = exports.breathWeapon = document.querySelector('#breathWeapon');
+var trancePreview = exports.trancePreview = document.querySelector('#trancePreview');
+var tranceInfo = exports.tranceInfo = document.querySelector('#tranceInfo');
+var stealthPreview = exports.stealthPreview = document.querySelector('#stealthPreview');
+var stealthInfo = exports.stealthInfo = document.querySelector('#stealthInfo');
+var artificersLorePreview = exports.artificersLorePreview = document.querySelector('#artificersLorePreview');
+var artificersLoreInfo = exports.artificersLoreInfo = document.querySelector('#artificersLoreInfo');
+var tinkerPreview = exports.tinkerPreview = document.querySelector('#tinkerPreview');
+var tinkerInfo = exports.tinkerInfo = document.querySelector('#tinkerInfo');
+var damageResistancePreview = exports.damageResistancePreview = document.querySelector('#damageResistancePreview');
+var damageResistanceType = exports.damageResistanceType = document.querySelector('#damageResistanceType');
+var menacingPreview = exports.menacingPreview = document.querySelector('#menacingPreview');
+var menacingInfo = exports.menacingInfo = document.querySelector('#menacingInfo');
+var relentlessEndurancePreview = exports.relentlessEndurancePreview = document.querySelector('#relentlessEndurancePreview');
+var relentlessEnduranceInfo = exports.relentlessEnduranceInfo = document.querySelector('#relentlessEnduranceInfo');
+var savageAttacksPreview = exports.savageAttacksPreview = document.querySelector('#savageAttacksPreview');
+var savageAttacksInfo = exports.savageAttacksInfo = document.querySelector('#savageAttacksInfo');
+var hellishResistancePreview = exports.hellishResistancePreview = document.querySelector('#hellishResistancePreview');
+var hellishResistanceInfo = exports.hellishResistanceInfo = document.querySelector('#hellishResistanceInfo');
+var infernalLegacyPreview = exports.infernalLegacyPreview = document.querySelector('#infernalLegacyPreview');
+var infernalLegacyInfo = exports.infernalLegacyInfo = document.querySelector('#infernalLegacyInfo');
+////////////////////////////////////////////////////////////
+// Combat
+////////////////////////////////////////////////////////////
+// Combat variables
+var hitPointPreview = exports.hitPointPreview = document.querySelector('#hitPoints');
+var armorClassPreview = exports.armorClassPreview = document.querySelector('#armorClass');
+var initiativeModPreview = exports.initiativeModPreview = document.querySelector('#initiative');
+var speedPreview = exports.speedPreview = document.querySelector('#speed');
+var passivePerceptionPreview = exports.passivePerceptionPreview = document.querySelector('#passivePerception');
+var darkvisionPreview = exports.darkvisionPreview = document.querySelector('#darkvisionPreview');
+var sizePreview = exports.sizePreview = document.querySelector('#size');
+var weaponProficiencesPreview = exports.weaponProficiencesPreview = document.querySelector('#weaponProficiencesPreview');
+// Saving Throws 
+var savingThrowList = exports.savingThrowList = document.querySelector('#savingThrowPreviewList');
+var savingThrowListItems = exports.savingThrowListItems = savingThrowList.children;
+// Special Resistances
+var specialResistances = exports.specialResistances = document.querySelector('#specialResistances');
+var poisonResistance = exports.poisonResistance = document.querySelector('#poisonResistance');
+var charmResistance = exports.charmResistance = document.querySelector('#charmResistance');
+var fearResistance = exports.fearResistance = document.querySelector('#fearResistance');

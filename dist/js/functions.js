@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = exports.capitialize = undefined;
 
-var _characterImages = require('./characterImages.js');
+var _characterImages = require("./characterImages.js");
 
 var sign;
 var modifier;
@@ -29,6 +29,7 @@ var setToMinMax = exports.setToMinMax = function setToMinMax(score) {
 // Set/Get functions
 ////////////////////////////////////////
 var addOptionsToSelect = exports.addOptionsToSelect = function addOptionsToSelect(selectElement, dataArray) {
+    selectElement.innerHTML = "";
     dataArray.map(function (optionText) {
         var optionElement = document.createElement("option");
         optionElement.textContent = optionText;

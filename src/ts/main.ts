@@ -46,21 +46,6 @@ let wisdom: string = "0";
 
 let charisma: string = "0";
 
-// Event listeners for rolling ability scores
-
-ele.rollStrength.addEventListener('click', () => func.setScore(ele.rolledStrength));
-
-ele.rollDexerity.addEventListener('click', () => func.setScore(ele.rolledDexerity));
-
-ele.rollConstitution.addEventListener('click', () => func.setScore(ele.rolledConstitution));
-
-ele.rollWisdom.addEventListener('click', () => func.setScore(ele.rolledWisdom));
-
-ele.rollIntelligence.addEventListener('click', () => func.setScore(ele.rolledIntelligence));
-
-ele.rollCharisma.addEventListener('click', () => func.setScore(ele.rolledCharisma));
-
-
 ////////////////////////////////////////////////////////////
 // Get character info input elements, populate with data
 // and add dynamic updating
@@ -72,8 +57,9 @@ ele.rollCharisma.addEventListener('click', () => func.setScore(ele.rolledCharism
 
 // User input in chronological order
 
-
 // Class Select
+
+// Add available classes to select and set value of class
 
 func.addOptionsToSelect(ele.cls, ClassList);
 
@@ -81,16 +67,21 @@ let selectedClass = <HTMLOptionElement>ele.cls.options[ele.cls.selectedIndex];
 
 let charClass: string = selectedClass.textContent.toLowerCase();
 
+// Set value of character property to current selected item
+// const setCharacterProperty = (property: string, selectElement: HTMLSelectElement) => {
+//   let selectedPropertyIndex = <HTMLOptionElement>selectElement.options[selectElement.selectedIndex];
+//   property = selectedPropertyIndex.textContent.toLowerCase().replace(/-/g,"");
+// }
+
+// Set value of class variable to current selected item
 const setClass = () => {
-  charClass = ele.cls.options[ele.cls.selectedIndex].textContent.toLowerCase().replace(/-/g,"");
+  selectedClass = ele.cls.options[ele.cls.selectedIndex];
+  charClass = selectedClass.textContent.toLowerCase().replace(/-/g,"");
 }
 
-func.setText(ele.classHelp, Classes[charClass].info);
+// Set class description text and change on class selection change
 
-ele.cls.addEventListener('change', function() {
-  setClass();
-  func.setText(ele.classHelp, Classes[charClass].info);
-});
+func.setText(ele.classHelp, Classes[charClass].info);
 
 
 // Race Select
@@ -106,12 +97,6 @@ const setRace = () => {
 }
 
 func.setText(ele.raceHelp, Races[charRace].info);
-
-ele.race.addEventListener('change', function() {
-  setRace();
-  func.setText(ele.raceHelp, Races[charRace].info);
-});
-
 
 // Subrace Select (Optional, if subrace exists)
 
@@ -139,9 +124,6 @@ const showOptionalSubraceSelect = () => {
 
 }
 
-// Subrace options regenerate on race selection change
-ele.race.addEventListener('change', showOptionalSubraceSelect);  
-
 const setSubrace = () => {
   // if subrace exists for selected race, subrace element is shown, otherwise it stays hidden
   if(!ele.subrace.parentElement.classList.contains("d-none")) {
@@ -150,14 +132,6 @@ const setSubrace = () => {
     return null;
   }
 }
-
-// On subrace selection, get value of subrace and display descriptive text
-ele.subrace.addEventListener('change', function() {
-  func.setText(ele.subraceHelp, "");
-  setSubrace();
-  func.setText(ele.subraceHelp, Races[charRace].subrace.helpText);
-
-});
 
 
 // Alignment
@@ -181,9 +155,6 @@ const availableAlignments = () => {
 
 }
 
-// Alignment options regenerate on race selection
-ele.race.addEventListener('change', availableAlignments);  
-
 
 // Name
 // see domElements.ts
@@ -200,8 +171,6 @@ const ageHelpText = () => {
   setRace();
   func.setText(ele.ageHelp, `${func.capitialize(charRace)} age ranges between ${Races[charRace].age.min} and  ${Races[charRace].age.max}` )
 }
-
-ele.race.addEventListener('change', ageHelpText);
 
 // Iniialize help text on page load
 ageHelpText();
@@ -225,9 +194,6 @@ const showDraconicAncestrySelect = () => {
         ele.draconicAncestryHelp.textContent = ''
       )
 }
-
-// Draconic ancestry options regenerate on race selection
-ele.race.addEventListener('change', showDraconicAncestrySelect);
 
 // Initialize on page load
 showDraconicAncestrySelect();
@@ -266,9 +232,6 @@ const showExtraLanguageInput = () => {
 
 }
 
-ele.race.addEventListener('change', showExtraLanguageInput);
-
-ele.subrace.addEventListener('change', showExtraLanguageInput);
 
 // Skill select
 
@@ -295,25 +258,16 @@ let selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
 // Skill functions
 
 const highlightAvailableSkills = () => {
+  
+  setClass();
 
   availableSkills = Classes[charClass].availableSkills;
-
-  ele.skill1.innerHTML = "";
-  ele.skill2.innerHTML = "";
-  ele.skill3.innerHTML = "";
 
   func.addOptionsToSelect(ele.skill1, availableSkills);
   func.addOptionsToSelect(ele.skill2, availableSkills);
   func.addOptionsToSelect(ele.skill3, availableSkills);
 
 }
-
-// dynamically change available skills based on character class
-
-ele.cls.addEventListener('change', () => {
-  setClass();
-  highlightAvailableSkills();
-});
 
 // Initialize state for selected class on document load
 
@@ -408,7 +362,7 @@ const generalInfo = () => {
 
   ele.agePreview.textContent = ele.age.value;
 
-  ele.clsPreview.textContent = selectedClass.textContent;
+  ele.clsPreview.textContent = func.capitialize(charClass);
 
   ele.alignmentPreview.textContent = selectedAlignment.textContent;
 
@@ -521,8 +475,6 @@ const showExtraModifiersInput = () => {
 
 }
 
-ele.race.addEventListener('change', showExtraModifiersInput);
-
 // Hide ability selected in either select element from the other select element
 
 const hideModSelection = (extraAbilityModifier, otherAbilityModifier) => {
@@ -542,14 +494,6 @@ const hideModSelection = (extraAbilityModifier, otherAbilityModifier) => {
 }
 
 hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2);
-
-ele.extraAbilityModifier1.addEventListener('change', function() {
-  hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2)
-})
-
-ele.extraAbilityModifier2.addEventListener('change', function() {
-  hideModSelection(ele.extraAbilityModifier2, ele.extraAbilityModifier1)
-})
 
 // if extra ability score is selected add +1 to ability score preview
 
@@ -950,8 +894,6 @@ const clearRacialSkils = () => {
 
 }
 
-ele.race.addEventListener('change', clearRacialSkils)
-ele.subrace.addEventListener('change', clearRacialSkils)
 
 ////////////////////////////////////////////////////////////
 // Combat
@@ -1145,6 +1087,60 @@ const combatCreation = () => {
   calculateWeaponProficiencies();
 
 }
+
+////////////////////////////////////////////////////////////
+// Event Listeners
+////////////////////////////////////////////////////////////
+
+// Event listeners for rolling ability scores
+
+ele.rollStrength.addEventListener('click', () => func.setScore(ele.rolledStrength));
+ele.rollDexerity.addEventListener('click', () => func.setScore(ele.rolledDexerity));
+ele.rollConstitution.addEventListener('click', () => func.setScore(ele.rolledConstitution));
+ele.rollWisdom.addEventListener('click', () => func.setScore(ele.rolledWisdom));
+ele.rollIntelligence.addEventListener('click', () => func.setScore(ele.rolledIntelligence));
+ele.rollCharisma.addEventListener('click', () => func.setScore(ele.rolledCharisma));
+
+// Handle Class selection changes
+
+ele.cls.addEventListener('change', function() {
+  setClass();
+  func.setText(ele.classHelp, Classes[charClass].info);
+  highlightAvailableSkills();
+});
+
+// Handle race and subrace selection changes
+
+ele.race.addEventListener('change', function() {
+  setRace();
+  func.setText(ele.raceHelp, Races[charRace].info);
+  showOptionalSubraceSelect();
+  availableAlignments();
+  ageHelpText();
+  showDraconicAncestrySelect();
+  showExtraLanguageInput();
+  showExtraModifiersInput();
+  clearRacialSkils();
+});
+
+// On subrace selection, get value of subrace and display descriptive text
+ele.subrace.addEventListener('change', function() {
+  setSubrace();
+  func.setText(ele.subraceHelp, Races[charRace].subrace.helpText);
+  showExtraLanguageInput();
+  clearRacialSkils();
+});
+
+// Hide ability from extra ability modifier list
+
+ele.extraAbilityModifier1.addEventListener('change', function() {
+  hideModSelection(ele.extraAbilityModifier1, ele.extraAbilityModifier2)
+})
+
+ele.extraAbilityModifier2.addEventListener('change', function() {
+  hideModSelection(ele.extraAbilityModifier2, ele.extraAbilityModifier1)
+})
+
 
 ////////////////////////////////////////////////////////////
 // Character Creation
