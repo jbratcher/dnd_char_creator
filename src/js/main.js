@@ -209,7 +209,7 @@ var generalInfo = function () {
     ele.currentLevel.textContent = String(Levels[0].level);
     ele.experienceNextLevel.textContent = String(Levels[0].experience);
     ele.namePreview.textContent = ele.name.value;
-    ele.racePreview.textContent = selectedRace.textContent;
+    ele.racePreview.textContent = func.capitialize(charRace);
     ele.genderPreview.textContent = ele.gender.value;
     ele.agePreview.textContent = ele.age.value;
     ele.clsPreview.textContent = func.capitialize(charClass);
@@ -710,6 +710,7 @@ ele.race.addEventListener('change', function () {
     showOptionalSubraceSelect();
     availableAlignments();
     ageHelpText();
+    dragonbornDraconicAncestry();
     showDraconicAncestrySelect();
     showExtraLanguageInput();
     showExtraModifiersInput();

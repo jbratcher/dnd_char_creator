@@ -15,7 +15,6 @@ export var setToMinMax = function (score) { return score > 18
 // Set/Get functions
 ////////////////////////////////////////
 export var addOptionsToSelect = function (selectElement, dataArray) {
-    selectElement.innerHTML = "";
     dataArray.map(function (optionText) {
         var optionElement = document.createElement("option");
         optionElement.textContent = optionText;

@@ -356,7 +356,7 @@ const generalInfo = () => {
 
   ele.namePreview.textContent = ele.name.value;
 
-  ele.racePreview.textContent = selectedRace.textContent;
+  ele.racePreview.textContent = func.capitialize(charRace);
 
   ele.genderPreview.textContent = ele.gender.value;
 
@@ -528,7 +528,7 @@ const addHalfElfAbilityMofifiers = () => {
 
 const dragonbornDraconicAncestry = () => {
   
-  let selectedDraconicAncestry = ele.draconicAncestry.options[ele.draconicAncestry.selectedIndex];
+  let selectedDraconicAncestry = <HTMLOptionElement>ele.draconicAncestry.options[ele.draconicAncestry.selectedIndex];
 
   let charDraconicAncestry: string = selectedDraconicAncestry.textContent.toLowerCase();
     
@@ -1117,6 +1117,7 @@ ele.race.addEventListener('change', function() {
   showOptionalSubraceSelect();
   availableAlignments();
   ageHelpText();
+  dragonbornDraconicAncestry();
   showDraconicAncestrySelect();
   showExtraLanguageInput();
   showExtraModifiersInput();
