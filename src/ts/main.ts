@@ -534,20 +534,23 @@ const dragonbornDraconicAncestry = () => {
     
   return Races[charRace].special.draconicAncestry
     ? (
-        ele.draconicAncestryPreview.parentElement.classList.remove('d-none'),
-        ele.draconicAncestryPreview.parentElement.classList.add('d-flex'),
+        func.showParentElement(ele.draconicAncestryPreview),
         ele.draconicAncestryPreview.setAttribute('title', Races.dragonborn.special.draconicAncestry.info),
         ele.dragonType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color),
         ele.damageType.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type),
         ele.breathWeapon.textContent = String(Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath),
-        ele.damageResistancePreview.parentElement.classList.remove('d-none'),
-        ele.damageResistancePreview.parentElement.classList.add('d-flex'),
+        func.showParentElement(ele.damageResistancePreview),
         ele.damageResistanceType.textContent = Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type
       )
     : (
-        ele.draconicAncestryPreview.parentElement.classList.remove('d-flex'),
-        ele.draconicAncestryPreview.parentElement.classList.add('d-none'),
-        ele.draconicAncestryHelp.textContent = ""
+        func.hideParentElement(ele.draconicAncestryPreview),
+        func.resetProps(ele.draconicAncestryPreview),
+        func.resetProps(ele.dragonType),
+        func.resetProps(ele.damageType),
+        func.resetProps(ele.breathWeapon),
+        func.hideParentElement(ele.damageResistancePreview),
+        func.resetProps(ele.damageResistanceType),
+        func.resetProps(ele.draconicAncestryHelp)
       )
     
 }
@@ -562,7 +565,7 @@ const dwarfStonecunning = () => {
     ? (
         func.showElementWithProps(ele.stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
       )
-    : ele.stonecunningPreview.parentElement.classList.add('d-none')
+    : func.hideParentElement(ele.stonecunningPreview)
   
 }
 
@@ -574,7 +577,7 @@ const dwarfToolProficiency = () => {
     ? (
         func.showElementWithProps(ele.toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
       )
-    : ele.toolProficiencyPreview.parentElement.classList.add('d-none')
+    : func.hideParentElement(ele.toolProficiencyPreview)
   
 }
 
@@ -642,8 +645,7 @@ const rockgnomeSpecials = () => {
     ? (
       func.showElementWithProps(ele.artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
       func.showElementWithProps(ele.tinkerPreview, Races[charRace].subrace.tinker.info, "Tinker"),
-        ele.tinkerInfo.setAttribute('title', Races[charRace].subrace.tinker.details),
-        ele.tinkerInfo.textContent = "Details"
+      func.showElementWithProps(ele.tinkerInfo, Races[charRace].subrace.tinker.details, "Details")
       )
     : null
   

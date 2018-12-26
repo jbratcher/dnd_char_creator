@@ -42,7 +42,7 @@ export const resetProps = (element) => {
   element.setAttribute('title', "");
 }
 
-export const showElement = element => {
+export const showParentElement = element => {
   element.parentElement.classList.remove('d-none');
   element.parentElement.classList.add('d-flex');
 };

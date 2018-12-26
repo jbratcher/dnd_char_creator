@@ -29,7 +29,7 @@ export var resetProps = function (element) {
     element.textContent = "";
     element.setAttribute('title', "");
 };
-export var showElement = function (element) {
+export var showParentElement = function (element) {
     element.parentElement.classList.remove('d-none');
     element.parentElement.classList.add('d-flex');
 };
