@@ -131,17 +131,26 @@ func.addOptionsToSelect(ele.skill2, _characterInfo.Skills);
 var skillList2 = ele.skill2.children;
 func.addOptionsToSelect(ele.skill3, _characterInfo.Skills);
 var skillList3 = ele.skill3.children;
+func.addOptionsToSelect(ele.skill4, _characterInfo.Skills);
+var skillList4 = ele.skill4.children;
 var availableSkills = _characterInfo.Classes[charClass].availableSkills;
 var selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
 var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
 var selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
+var selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function highlightAvailableSkills() {
     setClass();
+    var numberOfSkills = _characterInfo.Classes[charClass].skills;
     availableSkills = _characterInfo.Classes[charClass].availableSkills;
-    func.addOptionsToSelect(ele.skill1, availableSkills);
-    func.addOptionsToSelect(ele.skill2, availableSkills);
-    func.addOptionsToSelect(ele.skill3, availableSkills);
+    // hide any previously shown skill slots
+    for (var i = 1; i <= 4; i++) {
+        func.hideParentElement(eval("ele.skill" + i));
+    }
+    for (var j = 1; j <= numberOfSkills; j++) {
+        func.addOptionsToSelect(eval("ele.skill" + j), availableSkills);
+        func.showParentElement(eval("ele.skill" + j));
+    }
 };
 // Initialize state for selected class on document load
 highlightAvailableSkills();
@@ -316,16 +325,16 @@ var addHalfElfAbilityMofifiers = function addHalfElfAbilityMofifiers() {
 var dragonbornDraconicAncestry = function dragonbornDraconicAncestry() {
     var selectedDraconicAncestry = ele.draconicAncestry.options[ele.draconicAncestry.selectedIndex];
     var charDraconicAncestry = selectedDraconicAncestry.textContent.toLowerCase();
-    return _characterInfo.Races[charRace].special.draconicAncestry ? (ele.draconicAncestryPreview.parentElement.classList.remove('d-none'), ele.draconicAncestryPreview.parentElement.classList.add('d-flex'), ele.draconicAncestryPreview.setAttribute('title', _characterInfo.Races.dragonborn.special.draconicAncestry.info), ele.dragonType.textContent = String(_characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color), ele.damageType.textContent = String(_characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type), ele.breathWeapon.textContent = String(_characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath), ele.damageResistancePreview.parentElement.classList.remove('d-none'), ele.damageResistancePreview.parentElement.classList.add('d-flex'), ele.damageResistanceType.textContent = _characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type) : (ele.draconicAncestryPreview.parentElement.classList.remove('d-flex'), ele.draconicAncestryPreview.parentElement.classList.add('d-none'), ele.draconicAncestryHelp.textContent = "");
+    return _characterInfo.Races[charRace].special.draconicAncestry ? (func.showParentElement(ele.draconicAncestryPreview), ele.draconicAncestryPreview.setAttribute('title', _characterInfo.Races.dragonborn.special.draconicAncestry.info), ele.dragonType.textContent = String(_characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].color), ele.damageType.textContent = String(_characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type), ele.breathWeapon.textContent = String(_characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].breath), func.showParentElement(ele.damageResistancePreview), ele.damageResistanceType.textContent = _characterInfo.Races.dragonborn.special.draconicAncestry[charDraconicAncestry].type) : (func.hideParentElement(ele.draconicAncestryPreview), func.resetProps(ele.draconicAncestryPreview), func.resetProps(ele.dragonType), func.resetProps(ele.damageType), func.resetProps(ele.breathWeapon), func.hideParentElement(ele.damageResistancePreview), func.resetProps(ele.damageResistanceType), func.resetProps(ele.draconicAncestryHelp));
 };
 // Dwarf 
 // Dwarf Stonecunning
 var dwarfStonecunning = function dwarfStonecunning() {
-    return _characterInfo.Races[charRace].special.stonecunning ? func.showElementWithProps(ele.stonecunningPreview, _characterInfo.Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)") : ele.stonecunningPreview.parentElement.classList.add('d-none');
+    return _characterInfo.Races[charRace].special.stonecunning ? func.showElementWithProps(ele.stonecunningPreview, _characterInfo.Races[charRace].special.stonecunning.info, "Stonework (Int, Hist)") : func.hideParentElement(ele.stonecunningPreview);
 };
 // Dwarf tool proficiency
 var dwarfToolProficiency = function dwarfToolProficiency() {
-    return _characterInfo.Races[charRace].special.toolProficiency ? func.showElementWithProps(ele.toolProficiencyPreview, _characterInfo.Races[charRace].special.stonecunning.info, 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : ele.toolProficiencyPreview.parentElement.classList.add('d-none');
+    return _characterInfo.Races[charRace].special.toolProficiency ? func.showElementWithProps(ele.toolProficiencyPreview, _characterInfo.Races[charRace].special.stonecunning.info, 'Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)') : func.hideParentElement(ele.toolProficiencyPreview);
 };
 // Elf Keen Senses Perception Bonus Skill
 var elfKeenSenses = function elfKeenSenses() {
@@ -351,7 +360,7 @@ var halforcSavageAttacks = function halforcSavageAttacks() {
 };
 // Rock gnome special abilities
 var rockgnomeSpecials = function rockgnomeSpecials() {
-    return charSubrace === "rockgnome" ? (func.showElementWithProps(ele.artificersLoreInfo, _characterInfo.Races[charRace].subrace.artificersLore.info, "Details"), func.showElementWithProps(ele.tinkerPreview, _characterInfo.Races[charRace].subrace.tinker.info, "Tinker"), ele.tinkerInfo.setAttribute('title', _characterInfo.Races[charRace].subrace.tinker.details), ele.tinkerInfo.textContent = "Details") : null;
+    return charSubrace === "rockgnome" ? (func.showElementWithProps(ele.artificersLoreInfo, _characterInfo.Races[charRace].subrace.artificersLore.info, "Details"), func.showElementWithProps(ele.tinkerPreview, _characterInfo.Races[charRace].subrace.tinker.info, "Tinker"), func.showElementWithProps(ele.tinkerInfo, _characterInfo.Races[charRace].subrace.tinker.details, "Details")) : null;
 };
 // Tiefling special abilities\
 var tieflingHellishResistance = function tieflingHellishResistance() {
@@ -361,15 +370,11 @@ var tieflingInfernalLegacy = function tieflingInfernalLegacy() {
     return _characterInfo.Races[charRace].special.infernalLegacy ? func.showElementWithProps(ele.infernalLegacyInfo, _characterInfo.Races[charRace].special.infernalLegacy.info, "Details") : null;
 };
 // Skill functions
-// const showSkillSlots = (characterClass) => {
-//   // get number of skills for class
-//   const numberOfSkills: number = Classes[charClass].skills
-//   //loop through and display skill selects
-// }
 var getSelectedSkills = function getSelectedSkills() {
     selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
     selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
     selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
+    selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 };
 // Get any modifiers to the proficiency bonus for a skill
 var getSkillModifier = function getSkillModifier(skillText) {
@@ -383,14 +388,15 @@ var highightSkill = function highightSkill(skillText) {
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
         var skill = ele.skillsPreviewListItems[i];
         var skillName = ele.skillsPreviewListItems[i].childNodes[1];
-        var skillText_1 = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
-        skillText_1 === skillText_1 ? (skill.style.color = 'green', getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent), func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])) : null;
+        var skillTextString = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+        skillTextString === skillText ? (skill.style.color = 'green', getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent), func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])) : null;
     }
 };
 // highlight choosen skills on character creation
 var highlightSkills = function highlightSkills() {
     // Get current values of required info
     getSelectedSkills();
+    // showSkillSlots();
     updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {

@@ -25,6 +25,7 @@ export const setToMinMax = (score) => score > 18
 ////////////////////////////////////////
 
 export const addOptionsToSelect = (selectElement, dataArray) => {
+  selectElement.innerHTML = "";
   dataArray.map(optionText => {
     let optionElement: HTMLOptionElement = document.createElement("option");
     optionElement.textContent = optionText;
@@ -42,9 +43,9 @@ export const resetProps = (element) => {
   element.setAttribute('title', "");
 }
 
-export const showParentElement = element => {
-  element.parentElement.classList.remove('d-none');
-  element.parentElement.classList.add('d-flex');
+export const showElement = element => {
+  element.classList.remove('d-none');
+  element.classList.add('d-flex');
 };
 
 export const showElementWithProps = (element, titleText: string = "", contentText: string = "") => {
@@ -52,6 +53,11 @@ export const showElementWithProps = (element, titleText: string = "", contentTex
   element.parentElement.classList.add('d-flex');
   element.setAttribute('title', titleText);
   element.textContent = contentText;
+};
+
+export const showParentElement = element => {
+  element.parentElement.classList.remove('d-none');
+  element.parentElement.classList.add('d-flex');
 };
 
 export const setScore = (abilityScorePreview) => {

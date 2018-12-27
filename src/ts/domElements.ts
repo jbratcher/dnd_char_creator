@@ -108,6 +108,8 @@ export const skill2 = <HTMLSelectElement>document.querySelector('#skillsSelect2'
 
 export const skill3 = <HTMLSelectElement>document.querySelector('#skillsSelect3');
 
+export const skill4 = <HTMLSelectElement>document.querySelector('#skillsSelect4');
+
 
 ////////////////////////////////////////////////////////////
 // Level and experience elements (preview section)

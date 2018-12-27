@@ -15,6 +15,7 @@ export var setToMinMax = function (score) { return score > 18
 // Set/Get functions
 ////////////////////////////////////////
 export var addOptionsToSelect = function (selectElement, dataArray) {
+    selectElement.innerHTML = "";
     dataArray.map(function (optionText) {
         var optionElement = document.createElement("option");
         optionElement.textContent = optionText;
@@ -29,9 +30,9 @@ export var resetProps = function (element) {
     element.textContent = "";
     element.setAttribute('title', "");
 };
-export var showParentElement = function (element) {
-    element.parentElement.classList.remove('d-none');
-    element.parentElement.classList.add('d-flex');
+export var showElement = function (element) {
+    element.classList.remove('d-none');
+    element.classList.add('d-flex');
 };
 export var showElementWithProps = function (element, titleText, contentText) {
     if (titleText === void 0) { titleText = ""; }
@@ -40,6 +41,10 @@ export var showElementWithProps = function (element, titleText, contentText) {
     element.parentElement.classList.add('d-flex');
     element.setAttribute('title', titleText);
     element.textContent = contentText;
+};
+export var showParentElement = function (element) {
+    element.parentElement.classList.remove('d-none');
+    element.parentElement.classList.add('d-flex');
 };
 export var setScore = function (abilityScorePreview) {
     var score = rollAbilityScore();

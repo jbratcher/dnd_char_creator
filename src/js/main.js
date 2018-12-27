@@ -139,17 +139,26 @@ func.addOptionsToSelect(ele.skill2, Skills);
 var skillList2 = ele.skill2.children;
 func.addOptionsToSelect(ele.skill3, Skills);
 var skillList3 = ele.skill3.children;
+func.addOptionsToSelect(ele.skill4, Skills);
+var skillList4 = ele.skill4.children;
 var availableSkills = Classes[charClass].availableSkills;
 var selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
 var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
 var selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
+var selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function () {
     setClass();
+    var numberOfSkills = Classes[charClass].skills;
     availableSkills = Classes[charClass].availableSkills;
-    func.addOptionsToSelect(ele.skill1, availableSkills);
-    func.addOptionsToSelect(ele.skill2, availableSkills);
-    func.addOptionsToSelect(ele.skill3, availableSkills);
+    // hide any previously shown skill slots
+    for (var i = 1; i <= 4; i++) {
+        func.hideParentElement(eval("ele.skill" + i));
+    }
+    for (var j = 1; j <= numberOfSkills; j++) {
+        func.addOptionsToSelect(eval("ele.skill" + j), availableSkills);
+        func.showParentElement(eval("ele.skill" + j));
+    }
 };
 // Initialize state for selected class on document load
 highlightAvailableSkills();
@@ -412,15 +421,11 @@ var tieflingInfernalLegacy = function () {
         : null;
 };
 // Skill functions
-// const showSkillSlots = (characterClass) => {
-//   // get number of skills for class
-//   const numberOfSkills: number = Classes[charClass].skills
-//   //loop through and display skill selects
-// }
 var getSelectedSkills = function () {
     selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
     selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
     selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
+    selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 };
 // Get any modifiers to the proficiency bonus for a skill
 var getSkillModifier = function (skillText) {
@@ -434,8 +439,8 @@ var highightSkill = function (skillText) {
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
         var skill = ele.skillsPreviewListItems[i];
         var skillName = ele.skillsPreviewListItems[i].childNodes[1];
-        var skillText_1 = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
-        skillText_1 === skillText_1
+        var skillTextString = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+        skillTextString === skillText
             ? (skill.style.color = 'green',
                 getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
                 func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]))
@@ -446,6 +451,7 @@ var highightSkill = function (skillText) {
 var highlightSkills = function () {
     // Get current values of required info
     getSelectedSkills();
+    // showSkillSlots();
     updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {

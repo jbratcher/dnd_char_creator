@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = exports.capitialize = undefined;
+exports.setText = exports.appendSigntoValue = exports.getAbilityScoreModifier = exports.getCharacterAttributes = exports.getCharacterImage = exports.setScore = exports.showParentElement = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = exports.capitialize = undefined;
 
-var _characterImages = require('./characterImages.js');
+var _characterImages = require("./characterImages.js");
 
 var sign;
 var modifier;
@@ -29,6 +29,7 @@ var setToMinMax = exports.setToMinMax = function setToMinMax(score) {
 // Set/Get functions
 ////////////////////////////////////////
 var addOptionsToSelect = exports.addOptionsToSelect = function addOptionsToSelect(selectElement, dataArray) {
+    selectElement.innerHTML = "";
     dataArray.map(function (optionText) {
         var optionElement = document.createElement("option");
         optionElement.textContent = optionText;
@@ -44,8 +45,8 @@ var resetProps = exports.resetProps = function resetProps(element) {
     element.setAttribute('title', "");
 };
 var showElement = exports.showElement = function showElement(element) {
-    element.parentElement.classList.remove('d-none');
-    element.parentElement.classList.add('d-flex');
+    element.classList.remove('d-none');
+    element.classList.add('d-flex');
 };
 var showElementWithProps = exports.showElementWithProps = function showElementWithProps(element, titleText, contentText) {
     if (titleText === void 0) {
@@ -58,6 +59,10 @@ var showElementWithProps = exports.showElementWithProps = function showElementWi
     element.parentElement.classList.add('d-flex');
     element.setAttribute('title', titleText);
     element.textContent = contentText;
+};
+var showParentElement = exports.showParentElement = function showParentElement(element) {
+    element.parentElement.classList.remove('d-none');
+    element.parentElement.classList.add('d-flex');
 };
 var setScore = exports.setScore = function setScore(abilityScorePreview) {
     var score = rollAbilityScore();

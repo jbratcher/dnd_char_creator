@@ -61,6 +61,7 @@ var extraLanguageHelp = exports.extraLanguageHelp = document.querySelector('#ext
 var skill1 = exports.skill1 = document.querySelector('#skillsSelect1');
 var skill2 = exports.skill2 = document.querySelector('#skillsSelect2');
 var skill3 = exports.skill3 = document.querySelector('#skillsSelect3');
+var skill4 = exports.skill4 = document.querySelector('#skillsSelect4');
 ////////////////////////////////////////////////////////////
 // Level and experience elements (preview section)
 ////////////////////////////////////////////////////////////

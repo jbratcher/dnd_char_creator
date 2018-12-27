@@ -247,6 +247,10 @@ func.addOptionsToSelect(ele.skill3, Skills);
 
 let skillList3 = ele.skill3.children;
 
+func.addOptionsToSelect(ele.skill4, Skills);
+
+let skillList4 = ele.skill4.children;
+
 let availableSkills = Classes[charClass].availableSkills;
 
 let selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
@@ -255,17 +259,29 @@ let selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
 
 let selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
 
+let selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+
 // Skill functions
 
 const highlightAvailableSkills = () => {
   
   setClass();
+  
+  let numberOfSkills = Classes[charClass].skills;
 
   availableSkills = Classes[charClass].availableSkills;
-
-  func.addOptionsToSelect(ele.skill1, availableSkills);
-  func.addOptionsToSelect(ele.skill2, availableSkills);
-  func.addOptionsToSelect(ele.skill3, availableSkills);
+  
+  // hide any previously shown skill slots
+  for(let i = 1; i <=4; i++) {
+    func.hideParentElement(eval("ele.skill" + i));
+  }
+  
+  for(let j = 1; j <= numberOfSkills; j++) {
+    
+    func.addOptionsToSelect(eval("ele.skill" + j), availableSkills);
+    func.showParentElement(eval("ele.skill" + j));
+    
+  }
 
 }
 
@@ -672,19 +688,11 @@ const tieflingInfernalLegacy = () => {
 
 // Skill functions
 
-// const showSkillSlots = (characterClass) => {
-  
-//   // get number of skills for class
-//   const numberOfSkills: number = Classes[charClass].skills
-//   //loop through and display skill selects
-  
-  
-// }
-
 const getSelectedSkills = () => {
   selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
   selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
   selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
+  selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 }
 
 // Get any modifiers to the proficiency bonus for a skill
@@ -703,9 +711,9 @@ const highightSkill = skillText => {
   for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
     let skill = <HTMLElement>ele.skillsPreviewListItems[i];
     let skillName = <HTMLElement>ele.skillsPreviewListItems[i].childNodes[1];
-    let skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+    let skillTextString = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
 
-    skillText === skillText
+    skillTextString === skillText
       ? (
           skill.style.color = 'green',
           getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
@@ -720,6 +728,7 @@ const highightSkill = skillText => {
 const highlightSkills = () => {
   // Get current values of required info
   getSelectedSkills();
+  // showSkillSlots();
   updateProficiencyBonus();
   // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
   for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
