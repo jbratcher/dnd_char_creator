@@ -21,7 +21,7 @@ var totalMod; // integer value to combine modifier values before adding to key v
 var abilityScore; // character ability score
 var abilityScoreMod; // character ability score modifier
 var proficiencyBonus;
-var singleWord = /(\w+)/; // capture a single word (i.e. 'strength')
+var singleWord = /\w+/; // capture a single word (i.e. 'strength')
 // Setters for ability scores (string for textContent display)
 var strength = "0";
 var dexerity = "0";
@@ -133,6 +133,7 @@ func.addOptionsToSelect(ele.skill3, _characterInfo.Skills);
 var skillList3 = ele.skill3.children;
 func.addOptionsToSelect(ele.skill4, _characterInfo.Skills);
 var skillList4 = ele.skill4.children;
+var numberOfSkills = _characterInfo.Classes[charClass].skills;
 var availableSkills = _characterInfo.Classes[charClass].availableSkills;
 var selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
 var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
@@ -141,12 +142,13 @@ var selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function highlightAvailableSkills() {
     setClass();
-    var numberOfSkills = _characterInfo.Classes[charClass].skills;
+    numberOfSkills = _characterInfo.Classes[charClass].skills;
     availableSkills = _characterInfo.Classes[charClass].availableSkills;
     // hide any previously shown skill slots
     for (var i = 1; i <= 4; i++) {
         func.hideParentElement(eval("ele.skill" + i));
     }
+    // show number of skills based on class
     for (var j = 1; j <= numberOfSkills; j++) {
         func.addOptionsToSelect(eval("ele.skill" + j), availableSkills);
         func.showParentElement(eval("ele.skill" + j));
@@ -379,7 +381,7 @@ var getSelectedSkills = function getSelectedSkills() {
 // Get any modifiers to the proficiency bonus for a skill
 var getSkillModifier = function getSkillModifier(skillText) {
     var skillAbility = String(singleWord.exec(skillText));
-    var skillAbilityScore = lookupAbilityScore(skillAbility[0].toLowerCase());
+    var skillAbilityScore = lookupAbilityScore(skillAbility.toLowerCase());
     abilityScoreMod = func.getAbilityScoreModifier(skillAbilityScore);
     return totalMod = abilityScoreMod + proficiencyBonus;
 };
@@ -389,7 +391,7 @@ var highightSkill = function highightSkill(skillText) {
         var skill = ele.skillsPreviewListItems[i];
         var skillName = ele.skillsPreviewListItems[i].childNodes[1];
         var skillTextString = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
-        skillTextString === skillText ? (skill.style.color = 'green', getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent), func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])) : null;
+        skillText === skillTextString ? (skill.style.color = 'green', getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent), console.log(totalMod), func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])) : null;
     }
 };
 // highlight choosen skills on character creation

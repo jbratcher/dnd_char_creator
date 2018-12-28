@@ -30,7 +30,7 @@ let abilityScoreMod: number;  // character ability score modifier
 
 let proficiencyBonus: number;
 
-const singleWord = /(\w+)/;  // capture a single word (i.e. 'strength')
+const singleWord = /\w+/;  // capture a single word (i.e. 'strength')
 
 // Setters for ability scores (string for textContent display)
 
@@ -251,6 +251,8 @@ func.addOptionsToSelect(ele.skill4, Skills);
 
 let skillList4 = ele.skill4.children;
 
+let numberOfSkills = Classes[charClass].skills;
+
 let availableSkills = Classes[charClass].availableSkills;
 
 let selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
@@ -267,8 +269,7 @@ const highlightAvailableSkills = () => {
   
   setClass();
   
-  let numberOfSkills = Classes[charClass].skills;
-
+  numberOfSkills = Classes[charClass].skills;
   availableSkills = Classes[charClass].availableSkills;
   
   // hide any previously shown skill slots
@@ -276,11 +277,10 @@ const highlightAvailableSkills = () => {
     func.hideParentElement(eval("ele.skill" + i));
   }
   
+  // show number of skills based on class
   for(let j = 1; j <= numberOfSkills; j++) {
-    
     func.addOptionsToSelect(eval("ele.skill" + j), availableSkills);
     func.showParentElement(eval("ele.skill" + j));
-    
   }
 
 }
@@ -699,7 +699,7 @@ const getSelectedSkills = () => {
 const getSkillModifier = skillText => {
 
   let skillAbility: string = String(singleWord.exec(skillText));
-  let skillAbilityScore: number = lookupAbilityScore(skillAbility[0].toLowerCase());
+  let skillAbilityScore: number = lookupAbilityScore(skillAbility.toLowerCase());
   abilityScoreMod = func.getAbilityScoreModifier(skillAbilityScore);
   return totalMod = abilityScoreMod + proficiencyBonus;
 
@@ -713,10 +713,11 @@ const highightSkill = skillText => {
     let skillName = <HTMLElement>ele.skillsPreviewListItems[i].childNodes[1];
     let skillTextString = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
 
-    skillTextString === skillText
+    skillText === skillTextString
       ? (
           skill.style.color = 'green',
           getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
+          console.log(totalMod),
           func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])
         )
       : null;
