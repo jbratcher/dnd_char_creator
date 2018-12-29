@@ -597,6 +597,19 @@ const dwarfToolProficiency = () => {
   
 }
 
+// Dwarven Toughtness (Hill Dwarf)
+
+const addDwarvenToughness = () => {
+
+  setRace();
+
+  charRace === "dwarf"
+    ? dwarvenToughnessMod = 1
+    : dwarvenToughnessMod = 0
+  return dwarvenToughnessMod
+
+}
+
 // Elf Keen Senses Perception Bonus Skill
 
 const elfKeenSenses = () => {
@@ -717,7 +730,6 @@ const highightSkill = skillText => {
       ? (
           skill.style.color = 'green',
           getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
-          console.log(totalMod),
           func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])
         )
       : null;
@@ -742,6 +754,7 @@ const highlightSkills = () => {
       skillText === selectedSkill1.textContent.trim()
       || skillText === selectedSkill2.textContent.trim()
       || skillText === selectedSkill3.textContent.trim()
+      || skillText === selectedSkill4.textContent.trim()
     ) {
       skill.style.color = 'green';
       getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
@@ -751,27 +764,6 @@ const highlightSkills = () => {
       skill.style.color = '#ccc';
     }
   }
-}
-
-// Set value of Dwarven Toughtness hit point modifier based on race selection
-
-const addDwarvenToughness = () => {
-
-  setRace();
-
-  charRace === "dwarf"
-    ? dwarvenToughnessMod = 1
-    : dwarvenToughnessMod = 0
-  return dwarvenToughnessMod
-
-}
-
-const racialBonuses = () => {
-
-    addDwarvenToughness();
-
-    addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
-
 }
 
 const highlightRacialSKills = () => {
@@ -1166,8 +1158,6 @@ ele.createCharacterButton.addEventListener('click', e => {
   // Character Creation functions
 
   generalInfo();  // General tab functions
-
-  racialBonuses();  // Race bonus functions
 
   skillCreation(); // SKill tab functions
 

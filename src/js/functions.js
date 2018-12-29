@@ -22,6 +22,26 @@ export var addOptionsToSelect = function (selectElement, dataArray) {
         selectElement.appendChild(optionElement);
     });
 };
+// Append sign to value
+export var appendSigntoValue = function (value, node) {
+    value > 0 ? sign = "+" : sign = "-";
+    value = Math.abs(value);
+    node.textContent = sign + " " + value;
+};
+// Set modifier to ability score modifier value
+export var getAbilityScoreModifier = function (abilityScore) { return modifier = Math.floor((abilityScore / 2) - 5); };
+export var getCharacterImage = function (genderedImages) {
+    var randomIndex = randomIntFromRange(0, (genderedImages.length - 1));
+    return genderedImages[randomIndex];
+};
+// Get Character Attributes to set preview image
+export var getCharacterAttributes = function (charCls, charRace, charGender) {
+    if (charGender !== 'male' && charGender !== "female") {
+        var gender = randomBoolean();
+        gender ? charGender = "male" : charGender = "female";
+    }
+    return CharacterImages[charRace][charCls][charGender];
+};
 export var hideParentElement = function (element) {
     element.parentElement.classList.remove('d-flex');
     element.parentElement.classList.add('d-none');
@@ -50,26 +70,6 @@ export var setScore = function (abilityScorePreview) {
     var score = rollAbilityScore();
     setToMinMax(score);
     abilityScorePreview.textContent = String(score);
-};
-export var getCharacterImage = function (genderedImages) {
-    var randomIndex = randomIntFromRange(0, (genderedImages.length - 1));
-    return genderedImages[randomIndex];
-};
-// Get Character Attributes to set preview image
-export var getCharacterAttributes = function (charCls, charRace, charGender) {
-    if (charGender !== 'male' && charGender !== "female") {
-        var gender = randomBoolean();
-        gender ? charGender = "male" : charGender = "female";
-    }
-    return CharacterImages[charRace][charCls][charGender];
-};
-// Set modifier to ability score modifier value
-export var getAbilityScoreModifier = function (abilityScore) { return modifier = Math.floor((abilityScore / 2) - 5); };
-// Append sign to value
-export var appendSigntoValue = function (value, node) {
-    value > 0 ? sign = "+" : sign = "-";
-    value = Math.abs(value);
-    node.textContent = sign + " " + value;
 };
 // Clear element text then set to new value
 export var setText = function (element, text) {

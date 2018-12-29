@@ -369,6 +369,14 @@ var dwarfToolProficiency = function () {
         ? (func.showElementWithProps(ele.toolProficiencyPreview, Races[charRace].special.stonecunning.info, "Pick one: Smith\u2019s tools, Mason\u2019s tools, or Brewer\u2019s supplies)"))
         : func.hideParentElement(ele.toolProficiencyPreview);
 };
+// Dwarven Toughtness (Hill Dwarf)
+var addDwarvenToughness = function () {
+    setRace();
+    charRace === "dwarf"
+        ? dwarvenToughnessMod = 1
+        : dwarvenToughnessMod = 0;
+    return dwarvenToughnessMod;
+};
 // Elf Keen Senses Perception Bonus Skill
 var elfKeenSenses = function () {
     return Races[charRace].special.keenSenses
@@ -445,7 +453,6 @@ var highightSkill = function (skillText) {
         skillText === skillTextString
             ? (skill.style.color = 'green',
                 getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
-                console.log(totalMod),
                 func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]))
             : null;
     }
@@ -465,7 +472,8 @@ var highlightSkills = function () {
         ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
         if (skillText === selectedSkill1.textContent.trim()
             || skillText === selectedSkill2.textContent.trim()
-            || skillText === selectedSkill3.textContent.trim()) {
+            || skillText === selectedSkill3.textContent.trim()
+            || skillText === selectedSkill4.textContent.trim()) {
             skill.style.color = 'green';
             getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
             func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]);
@@ -475,18 +483,6 @@ var highlightSkills = function () {
             skill.style.color = '#ccc';
         }
     }
-};
-// Set value of Dwarven Toughtness hit point modifier based on race selection
-var addDwarvenToughness = function () {
-    setRace();
-    charRace === "dwarf"
-        ? dwarvenToughnessMod = 1
-        : dwarvenToughnessMod = 0;
-    return dwarvenToughnessMod;
-};
-var racialBonuses = function () {
-    addDwarvenToughness();
-    addHalfElfAbilityMofifiers(); // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 };
 var highlightRacialSKills = function () {
     setRace();
@@ -748,7 +744,6 @@ ele.createCharacterButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Character Creation functions
     generalInfo(); // General tab functions
-    racialBonuses(); // Race bonus functions
     skillCreation(); // SKill tab functions
     combatCreation(); // Combat tab functions
 });

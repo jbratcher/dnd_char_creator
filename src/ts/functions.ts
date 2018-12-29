@@ -33,6 +33,33 @@ export const addOptionsToSelect = (selectElement, dataArray) => {
   })
 };
 
+// Append sign to value
+
+export const appendSigntoValue = (value, node) => {
+  value > 0 ? sign = "+" : sign = "-";
+  value = Math.abs(value);
+  node.textContent = `${sign} ${value}`;
+};
+
+// Set modifier to ability score modifier value
+
+export const getAbilityScoreModifier = (abilityScore) => modifier = Math.floor((abilityScore / 2) - 5);
+
+export const getCharacterImage = (genderedImages) => {
+  let randomIndex: number = randomIntFromRange(0, (genderedImages.length-1));
+  return genderedImages[randomIndex];
+};
+
+// Get Character Attributes to set preview image
+
+export const getCharacterAttributes = (charCls, charRace, charGender) => {
+  if(charGender !== 'male' && charGender !== "female") {
+    let gender: boolean = randomBoolean();
+    gender ? charGender = "male" : charGender = "female";
+  }
+  return CharacterImages[charRace][charCls][charGender];
+};
+
 export const hideParentElement = (element) => {
   element.parentElement.classList.remove('d-flex');
   element.parentElement.classList.add('d-none')
@@ -64,33 +91,6 @@ export const setScore = (abilityScorePreview) => {
   let score: number = rollAbilityScore();
   setToMinMax(score);
   abilityScorePreview.textContent = String(score);
-};
-
-export const getCharacterImage = (genderedImages) => {
-  let randomIndex: number = randomIntFromRange(0, (genderedImages.length-1));
-  return genderedImages[randomIndex];
-};
-
-// Get Character Attributes to set preview image
-
-export const getCharacterAttributes = (charCls, charRace, charGender) => {
-  if(charGender !== 'male' && charGender !== "female") {
-    let gender: boolean = randomBoolean();
-    gender ? charGender = "male" : charGender = "female";
-  }
-  return CharacterImages[charRace][charCls][charGender];
-};
-
-// Set modifier to ability score modifier value
-
-export const getAbilityScoreModifier = (abilityScore) => modifier = Math.floor((abilityScore / 2) - 5);
-
-// Append sign to value
-
-export const appendSigntoValue = (value, node) => {
-  value > 0 ? sign = "+" : sign = "-";
-  value = Math.abs(value);
-  node.textContent = `${sign} ${value}`;
 };
 
 // Clear element text then set to new value
