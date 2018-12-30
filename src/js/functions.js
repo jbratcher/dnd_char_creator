@@ -22,6 +22,14 @@ export var addOptionsToSelect = function (selectElement, dataArray) {
         selectElement.appendChild(optionElement);
     });
 };
+export var addOptionsToSelectWithNull = function (selectElement, data) {
+    var optionElement1 = document.createElement("option");
+    optionElement1.textContent = "-";
+    selectElement.appendChild(optionElement1);
+    var optionElement2 = document.createElement("option");
+    optionElement2.textContent = data;
+    selectElement.appendChild(optionElement2);
+};
 // Append sign to value
 export var appendSigntoValue = function (value, node) {
     value > 0 ? sign = "+" : sign = "-";

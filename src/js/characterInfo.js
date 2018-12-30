@@ -374,9 +374,7 @@ export var Races = {
         },
         speed: 25,
         subrace: {
-            name: [
-                "Hill Dwarf"
-            ],
+            name: "Hill Dwarf",
             ability: "wisdom",
             modifier: 1,
             dwarvernToughness: {
@@ -429,9 +427,7 @@ export var Races = {
         },
         speed: 30,
         subrace: {
-            name: [
-                "High Elf"
-            ],
+            name: "High Elf",
             ability: "intelligence",
             modifier: 1,
             extraLanguage: 1,
@@ -481,9 +477,7 @@ export var Races = {
         },
         speed: 25,
         subrace: {
-            name: [
-                "Rock Gnome"
-            ],
+            name: "Rock Gnome",
             ability: "constitution",
             modifier: 1,
             artificersLore: {
@@ -575,9 +569,7 @@ export var Races = {
         },
         speed: 25,
         subrace: {
-            name: [
-                "Lightfoot"
-            ],
+            name: "Lightfoot",
             ability: "charisma",
             modifier: 1,
             naturallyStealthy: {

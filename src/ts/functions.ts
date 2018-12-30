@@ -33,6 +33,15 @@ export const addOptionsToSelect = (selectElement, dataArray) => {
   })
 };
 
+export const addOptionsToSelectWithNull = (selectElement, data) => {
+  let optionElement1: HTMLOptionElement = document.createElement("option");
+  optionElement1.textContent = "-"
+  selectElement.appendChild(optionElement1);
+  let optionElement2: HTMLOptionElement = document.createElement("option");
+  optionElement2.textContent = data;
+  selectElement.appendChild(optionElement2);
+};
+
 // Append sign to value
 
 export const appendSigntoValue = (value, node) => {

@@ -116,8 +116,7 @@ const showOptionalSubraceSelect = () => {
   // if race has a subrace, show and populate subrace select element
   Races[charRace].subrace
     ? (
-      func.addOptionsToSelect(ele.subrace, ["-"]),  // Make first option "null"
-      func.addOptionsToSelect(ele.subrace, Races[charRace].subrace.name),
+      func.addOptionsToSelectWithNull(ele.subrace, Races[charRace].subrace.name),
       ele.subraceSelectSection.classList.remove('d-none')
       )
     : ele.subraceSelectSection.classList.add('d-none')
@@ -182,7 +181,7 @@ const showDraconicAncestrySelect = () => {
 
   setRace();
 
-  // if ancestry exists, populate and show ancestry select element 
+  // if ancestry exists, populate and show ancestry select element
   Races[charRace].special.draconicAncestry
     ? (
         func.addOptionsToSelect(ele.draconicAncestry, Races[charRace].special.draconicAncestry.types),
@@ -266,17 +265,17 @@ let selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 // Skill functions
 
 const highlightAvailableSkills = () => {
-  
+
   setClass();
-  
+
   numberOfSkills = Classes[charClass].skills;
   availableSkills = Classes[charClass].availableSkills;
-  
+
   // hide any previously shown skill slots
   for(let i = 1; i <=4; i++) {
     func.hideParentElement(eval("ele.skill" + i));
   }
-  
+
   // show number of skills based on class
   for(let j = 1; j <= numberOfSkills; j++) {
     func.addOptionsToSelect(eval("ele.skill" + j), availableSkills);
@@ -319,12 +318,12 @@ const addExp = () => {
 }
 
 const setAbilityScorePreview = () => {
-    
+
   // loop through abilities lowercased
   Abilities.map(ability => {
     // get ability score from rolled score node
     let rolledScoreNode = eval("rolled" + ability);
-    // get preview element 
+    // get preview element
     let previewElement = eval(ability.toLowerCase() + "Preview");
     // set preview element text to ability score
     previewElement.textContent = rolledScoreNode.textContent;
@@ -339,9 +338,9 @@ const resetAbilityScores = () => {
 }
 
 const generalInfo = () => {
-  
+
   // initialize values at character creation
-  
+
   resetAbilityScores();
 
   // Get current state of info required to create character
@@ -349,21 +348,21 @@ const generalInfo = () => {
   setClass();
 
   setRace();
-  
+
   setSubrace();
-  
+
   // Post info from character creation to preview area
-  
+
   setAbilityScorePreview();
 
   selectedAlignment = ele.alignment.options[ele.alignment.selectedIndex];
 
   charGender = ele.gender.value.toLowerCase();
-  
+
   // convert languages array into line-separated list items (use innerHTML instead of textCotent)
-  
+
   let knownLanguages = Races[charRace].languages.toString().split().join("\r\n") + `${String(ele.extraLanguage.value)}`
-  
+
   func.showElementWithProps(ele.languagesPreview, "Known Languages", knownLanguages)
 
   ele.currentLevel.textContent = String(Levels[0].level);
@@ -478,7 +477,7 @@ func.addOptionsToSelect(ele.extraAbilityModifier1, Abilities);
 const showExtraModifiersInput = () => {
 
   setRace();
-  
+
   // Add ability options to extra ability select element
 
   charRace === 'halfelf'
@@ -543,11 +542,11 @@ const addHalfElfAbilityMofifiers = () => {
 // Dragonborn
 
 const dragonbornDraconicAncestry = () => {
-  
+
   let selectedDraconicAncestry = <HTMLOptionElement>ele.draconicAncestry.options[ele.draconicAncestry.selectedIndex];
 
   let charDraconicAncestry: string = selectedDraconicAncestry.textContent.toLowerCase();
-    
+
   return Races[charRace].special.draconicAncestry
     ? (
         func.showParentElement(ele.draconicAncestryPreview),
@@ -568,33 +567,33 @@ const dragonbornDraconicAncestry = () => {
         func.resetProps(ele.damageResistanceType),
         func.resetProps(ele.draconicAncestryHelp)
       )
-    
+
 }
 
-// Dwarf 
+// Dwarf
 
 // Dwarf Stonecunning
 
 const dwarfStonecunning = () => {
-  
+
   return Races[charRace].special.stonecunning
     ? (
         func.showElementWithProps(ele.stonecunningPreview, Races[charRace].special.stonecunning.info, `Stonework (Int, Hist)`)
       )
     : func.hideParentElement(ele.stonecunningPreview)
-  
+
 }
 
 // Dwarf tool proficiency
 
 const dwarfToolProficiency = () => {
-  
+
   return Races[charRace].special.toolProficiency
     ? (
         func.showElementWithProps(ele.toolProficiencyPreview, Races[charRace].special.stonecunning.info, `Pick one: Smith’s tools, Mason’s tools, or Brewer’s supplies)`)
       )
     : func.hideParentElement(ele.toolProficiencyPreview)
-  
+
 }
 
 // Dwarven Toughtness (Hill Dwarf)
@@ -613,63 +612,63 @@ const addDwarvenToughness = () => {
 // Elf Keen Senses Perception Bonus Skill
 
 const elfKeenSenses = () => {
-  
+
   return Races[charRace].special.keenSenses
     ? highightSkill('perception')
     : null
-  
+
 }
 
 // Elf Trance sleep skill
-  
+
 const elfTrance = () => {
-  
+
   return Races[charRace].special.trance
     ? func.showElementWithProps(ele.tranceInfo, Races[charRace].special.trance.info, "Details")
     : null
-  
-}  
+
+}
 
 // Halfling lightfoot stealth skill
 
 const lightfootNaturallyStealthy = () => {
-  
+
   return charSubrace === "lightfoot"
     ? func.showElementWithProps(ele.stealthInfo, Races[charRace].subrace.naturallyStealthy.info, "Details")
     : null
-  
+
 }
 
 // Half-orc special abilities
 
 const halforcMenacing = () => {
-  
+
   return Races[charRace].special.menacing
     ? func.showElementWithProps(ele.menacingInfo, Races[charRace].special.menacing.info, "Details")
     : null
-  
+
 }
 
 const halforcRelentlessEndurance = () => {
-  
+
   return Races[charRace].special.relentlessEndurance
     ? func.showElementWithProps(ele.relentlessEnduranceInfo, Races[charRace].special.relentlessEndurance.info, "Details")
     : null
-  
+
 }
 
 const halforcSavageAttacks = () => {
-  
+
   return Races[charRace].special.savageAttacks
     ? func.showElementWithProps(ele.savageAttacksInfo, Races[charRace].special.savageAttacks.info, "Details")
     : null
-  
+
 }
 
 // Rock gnome special abilities
 
 const rockgnomeSpecials = () => {
-  
+
   return charSubrace === "rockgnome"
     ? (
       func.showElementWithProps(ele.artificersLoreInfo, Races[charRace].subrace.artificersLore.info, "Details"),
@@ -677,26 +676,26 @@ const rockgnomeSpecials = () => {
       func.showElementWithProps(ele.tinkerInfo, Races[charRace].subrace.tinker.details, "Details")
       )
     : null
-  
+
 }
 
 
 // Tiefling special abilities\
 
 const tieflingHellishResistance = () => {
-  
+
   return Races[charRace].special.hellishResistance
     ? func.showElementWithProps(ele.hellishResistanceInfo, Races[charRace].special.hellishResistance.info, "Details")
     : null
-  
+
 }
 
 const tieflingInfernalLegacy = () => {
-  
+
   return Races[charRace].special.infernalLegacy
     ? func.showElementWithProps(ele.infernalLegacyInfo, Races[charRace].special.infernalLegacy.info, "Details")
     : null
-  
+
 }
 
 // Skill functions
@@ -724,12 +723,14 @@ const highightSkill = skillText => {
   for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
     let skill = <HTMLElement>ele.skillsPreviewListItems[i];
     let skillName = <HTMLElement>ele.skillsPreviewListItems[i].childNodes[1];
-    let skillTextString = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+    let skillTextString = String(skillName.textContent).toLowerCase();
 
     skillText === skillTextString
       ? (
           skill.style.color = 'green',
+          // get number value of modifer for skill (childNodes[3] is the ability score name)
           getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
+          // append modifier to related ability score (childNodes[5] is skill bonus)
           func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5])
         )
       : null;
@@ -747,8 +748,11 @@ const highlightSkills = () => {
   for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
     let skill = <HTMLElement>ele.skillsPreviewListItems[i];
     let skillName = <HTMLElement>ele.skillsPreviewListItems[i].childNodes[1];
-    let skillText = ele.skillsPreviewListItems[i].childNodes[1].textContent;
-    // reset modifier node to '-'
+    let skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent);
+    console.log(skillName);
+    console.log(skillText);
+    console.log(selectedSkill1.textContent.trim())
+    // reset modifier node to '-""
     ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
     if(
       skillText === selectedSkill1.textContent.trim()
@@ -756,11 +760,15 @@ const highlightSkills = () => {
       || skillText === selectedSkill3.textContent.trim()
       || skillText === selectedSkill4.textContent.trim()
     ) {
+      console.log("yes")
       skill.style.color = 'green';
+      // get number value of modifer for skill (childNodes[3] is the ability score name)
       getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
+      // append modifier to related ability score (childNodes[5] is skill bonus)
       func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]);
     } else {
       // if no match dim selection
+      console.log("no")
       skill.style.color = '#ccc';
     }
   }
@@ -781,35 +789,35 @@ const highlightRacialSKills = () => {
   addDwarvenToughness();
 
   // Dragonborn
-    
+
   dragonbornDraconicAncestry();
-  
+
   // Elf
 
   elfKeenSenses();
-  
+
   elfTrance();
-  
+
   // Half-Elf
-  
+
   addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 
   // Half-orc
 
   halforcMenacing();
-  
+
   halforcRelentlessEndurance();
-  
+
   halforcSavageAttacks();
-    
-  // Tiefling 
+
+  // Tiefling
 
   tieflingHellishResistance();
-  
+
   tieflingInfernalLegacy();
-  
+
   // Subrace skills
-  
+
   // Halfling Lightfoots
 
   lightfootNaturallyStealthy();
@@ -981,7 +989,7 @@ const calculateWeaponProficiencies = () => {
 const calculateSavingThrowMods = () => {
 
   setClass();
-  
+
   let abilities = Classes[charClass].savingThrows;
 
   abilities.map(ability => {
@@ -1174,7 +1182,7 @@ ele.createCharacterButton.addEventListener('click', e => {
 ele.levelUpButton.addEventListener('click', e => {
 
   e.preventDefault();
-  
+
   setClass();
 
   // Get level up variables

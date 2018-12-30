@@ -62,8 +62,7 @@ var showOptionalSubraceSelect = function () {
     charSubrace = null;
     // if race has a subrace, show and populate subrace select element
     Races[charRace].subrace
-        ? (func.addOptionsToSelect(ele.subrace, ["-"]), // Make first option "null"
-            func.addOptionsToSelect(ele.subrace, Races[charRace].subrace.name),
+        ? (func.addOptionsToSelectWithNull(ele.subrace, Races[charRace].subrace.name),
             ele.subraceSelectSection.classList.remove('d-none'))
         : ele.subraceSelectSection.classList.add('d-none');
 };
@@ -104,7 +103,7 @@ ageHelpText();
 // Dragonborn: Draconic Ancestry / Dragonborn "subrace"
 var showDraconicAncestrySelect = function () {
     setRace();
-    // if ancestry exists, populate and show ancestry select element 
+    // if ancestry exists, populate and show ancestry select element
     Races[charRace].special.draconicAncestry
         ? (func.addOptionsToSelect(ele.draconicAncestry, Races[charRace].special.draconicAncestry.types),
             ele.draconicAncestryHelp.textContent = 'Choose a dragon lineage.',
@@ -192,7 +191,7 @@ var setAbilityScorePreview = function () {
     Abilities.map(function (ability) {
         // get ability score from rolled score node
         var rolledScoreNode = eval("rolled" + ability);
-        // get preview element 
+        // get preview element
         var previewElement = eval(ability.toLowerCase() + "Preview");
         // set preview element text to ability score
         previewElement.textContent = rolledScoreNode.textContent;
@@ -356,7 +355,7 @@ var dragonbornDraconicAncestry = function () {
             func.resetProps(ele.damageResistanceType),
             func.resetProps(ele.draconicAncestryHelp));
 };
-// Dwarf 
+// Dwarf
 // Dwarf Stonecunning
 var dwarfStonecunning = function () {
     return Races[charRace].special.stonecunning
@@ -449,10 +448,12 @@ var highightSkill = function (skillText) {
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
         var skill = ele.skillsPreviewListItems[i];
         var skillName = ele.skillsPreviewListItems[i].childNodes[1];
-        var skillTextString = String(ele.skillsPreviewListItems[i].childNodes[1].textContent).toLowerCase();
+        var skillTextString = String(skillName.textContent).toLowerCase();
         skillText === skillTextString
             ? (skill.style.color = 'green',
+                // get number value of modifer for skill (childNodes[3] is the ability score name)
                 getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent),
+                // append modifier to related ability score (childNodes[5] is skill bonus)
                 func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]))
             : null;
     }
@@ -467,19 +468,26 @@ var highlightSkills = function () {
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
         var skill = ele.skillsPreviewListItems[i];
         var skillName = ele.skillsPreviewListItems[i].childNodes[1];
-        var skillText = ele.skillsPreviewListItems[i].childNodes[1].textContent;
-        // reset modifier node to '-'
+        var skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent);
+        console.log(skillName);
+        console.log(skillText);
+        console.log(selectedSkill1.textContent.trim());
+        // reset modifier node to '-""
         ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
         if (skillText === selectedSkill1.textContent.trim()
             || skillText === selectedSkill2.textContent.trim()
             || skillText === selectedSkill3.textContent.trim()
             || skillText === selectedSkill4.textContent.trim()) {
+            console.log("yes");
             skill.style.color = 'green';
+            // get number value of modifer for skill (childNodes[3] is the ability score name)
             getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
+            // append modifier to related ability score (childNodes[5] is skill bonus)
             func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]);
         }
         else {
             // if no match dim selection
+            console.log("no");
             skill.style.color = '#ccc';
         }
     }
@@ -502,7 +510,7 @@ var highlightRacialSKills = function () {
     halforcMenacing();
     halforcRelentlessEndurance();
     halforcSavageAttacks();
-    // Tiefling 
+    // Tiefling
     tieflingHellishResistance();
     tieflingInfernalLegacy();
     // Subrace skills

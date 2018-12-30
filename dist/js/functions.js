@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.setText = exports.setScore = exports.showParentElement = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.getCharacterAttributes = exports.getCharacterImage = exports.getAbilityScoreModifier = exports.appendSigntoValue = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = exports.capitialize = undefined;
+exports.setText = exports.setScore = exports.showParentElement = exports.showElementWithProps = exports.showElement = exports.resetProps = exports.hideParentElement = exports.getCharacterAttributes = exports.getCharacterImage = exports.getAbilityScoreModifier = exports.appendSigntoValue = exports.addOptionsToSelectWithNull = exports.addOptionsToSelect = exports.setToMinMax = exports.rollAbilityScore = exports.randomBoolean = exports.randomIntFromRange = exports.capitialize = undefined;
 
 var _characterImages = require("./characterImages.js");
 
@@ -35,6 +35,14 @@ var addOptionsToSelect = exports.addOptionsToSelect = function addOptionsToSelec
         optionElement.textContent = optionText;
         selectElement.appendChild(optionElement);
     });
+};
+var addOptionsToSelectWithNull = exports.addOptionsToSelectWithNull = function addOptionsToSelectWithNull(selectElement, data) {
+    var optionElement1 = document.createElement("option");
+    optionElement1.textContent = "-";
+    selectElement.appendChild(optionElement1);
+    var optionElement2 = document.createElement("option");
+    optionElement2.textContent = data;
+    selectElement.appendChild(optionElement2);
 };
 // Append sign to value
 var appendSigntoValue = exports.appendSigntoValue = function appendSigntoValue(value, node) {
