@@ -747,11 +747,7 @@ const highlightSkills = () => {
   // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
   for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
     let skill = <HTMLElement>ele.skillsPreviewListItems[i];
-    let skillName = <HTMLElement>ele.skillsPreviewListItems[i].childNodes[1];
     let skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent);
-    console.log(skillName);
-    console.log(skillText);
-    console.log(selectedSkill1.textContent.trim())
     // reset modifier node to '-""
     ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
     if(
@@ -760,7 +756,6 @@ const highlightSkills = () => {
       || skillText === selectedSkill3.textContent.trim()
       || skillText === selectedSkill4.textContent.trim()
     ) {
-      console.log("yes")
       skill.style.color = 'green';
       // get number value of modifer for skill (childNodes[3] is the ability score name)
       getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
@@ -768,7 +763,6 @@ const highlightSkills = () => {
       func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]);
     } else {
       // if no match dim selection
-      console.log("no")
       skill.style.color = '#ccc';
     }
   }
@@ -777,53 +771,38 @@ const highlightSkills = () => {
 const highlightRacialSKills = () => {
 
   setRace();
-
   setSubrace();
 
   // Dwarf
-
   dwarfStonecunning();
-
   dwarfToolProficiency();
-
   addDwarvenToughness();
 
   // Dragonborn
-
   dragonbornDraconicAncestry();
 
   // Elf
-
   elfKeenSenses();
-
   elfTrance();
 
   // Half-Elf
-
   addHalfElfAbilityMofifiers();  // Half-Elf racial ability score bonus (Any 2 plus Charisma)
 
   // Half-orc
-
   halforcMenacing();
-
   halforcRelentlessEndurance();
-
   halforcSavageAttacks();
 
   // Tiefling
-
   tieflingHellishResistance();
-
   tieflingInfernalLegacy();
 
   // Subrace skills
 
   // Halfling Lightfoots
-
   lightfootNaturallyStealthy();
 
   // Rock gnome special abilities
-
   rockgnomeSpecials();
 
 }
@@ -832,33 +811,29 @@ const highlightRacialSKills = () => {
 
 const skillCreation = () => {
 
+  // ensure prooficiency bonus to be added is up to date
   updateProficiencyBonus();
 
   // Highlight selected skills and append skill modifier
-
   highlightSkills();
 
   // Preview racial abilities
-
   highlightRacialSKills();
 
 }
 
 // Function to combine related functions (TODO: can be combined with other racial)
-
 const clearRacialSkils = () => {
 
   // set text content and attr to 'null', hide elements in preview
 
   // Combat tab
-
   func.resetProps(ele.weaponProficiencesPreview);
   func.resetProps(ele.poisonResistance);
   func.resetProps(ele.charmResistance);
   func.resetProps(ele.fearResistance);
 
   // Skills tab - Additional Skills
-
   func.resetProps(ele.languagesPreview);
   func.hideParentElement(ele.toolProficiencyPreview);
   func.resetProps(ele.toolProficiencyPreview);
@@ -914,13 +889,16 @@ const clearRacialSkils = () => {
 // Combat functions
 
 const initialHitPoints = () => {
+
   // 1st level is max hit points + constiution modifier + racial modifier
   let modifier: number = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod;
   let hitpoints: number = (Classes[charClass].hitdie + modifier);
   ele.hitPointPreview.textContent = String(hitpoints);
+
 }
 
 const addHitPoints = () => {
+
   let currentHitPoints: number = Number(ele.hitPointPreview.textContent);
   let rolledHitPoints: number = func.randomIntFromRange(1, Classes[charClass].hitdie)
   modifier = func.getAbilityScoreModifier(constitution) + dwarvenToughnessMod
@@ -930,19 +908,24 @@ const addHitPoints = () => {
     hitPointsToAdd = 1;
   }
   ele.hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
+
 }
 
-const armorClass = () => {
+const getArmorClass = () => {
+
   let base: number = 10;
   let dexMod: number = func.getAbilityScoreModifier(Number(dexerity))
   let armorMod: number = 0;
-  let ac = String(base + dexMod + armorMod);
-  ele.armorClassPreview.textContent = ac;
+  let armorClass = String(base + dexMod + armorMod);
+  ele.armorClassPreview.textContent = armorClass;
+
 }
 
 const initiativeMod = () => {
+
   let dexMod: number = func.getAbilityScoreModifier(Number(dexerity))
   ele.initiativeModPreview.textContent = String(dexMod);
+
 }
 
 const baseSpeed = () => ele.speedPreview.textContent = Races[charRace].speed;
@@ -950,12 +933,13 @@ const baseSpeed = () => ele.speedPreview.textContent = Races[charRace].speed;
 const passivePerception = () => ele.passivePerceptionPreview.textContent = String(10 + func.getAbilityScoreModifier(wisdom));
 
 const darkvision = () => {
+
   setRace();
-  if (Races[charRace].darkvision) {
-    ele.passivePerceptionPreview.textContent = '60 ft.'
-  } else {
-    ele.passivePerceptionPreview.textContent = 'None'
-  }
+
+  Races[charRace].darkvision
+    ? ele.darkvisionPreview.textContent = '60 ft.'
+    : ele.darkvisionPreview.textContent = '-'
+
 }
 
 const setCharacterSize = () => ele.sizePreview.textContent = Races[charRace].size;
@@ -993,7 +977,7 @@ const calculateSavingThrowMods = () => {
   let abilities = Classes[charClass].savingThrows;
 
   abilities.map(ability => {
-    // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+    // match modifer to saving throw item (i.e. strength mod to strength saving throw)
     for(let i = 0; i < ele.savingThrowListItems.length; i++) {
       let string: string = (singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
       if(string === ability) {
@@ -1013,40 +997,31 @@ const calculateSpecialResistances = () => {
   setRace();
 
   if(charRace === 'dwarf') {
-
     ele.poisonResistance.textContent = `Advantage, Resistance`;
     ele.poisonResistance.setAttribute('title', Races[charRace].special.resilience.info);
-
   }
 
   if(charRace === 'elf' || charRace === 'halfelf') {
-
     ele.charmResistance.textContent = 'Advantage';
     ele.charmResistance.setAttribute('title', Races[charRace].special.feyAncestry.info);
-
   }
 
   if(charRace === 'gnome') {
-
     let types = Races[charRace].special.gnomeCunning.type
-
     types.map(type => {
-    // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
-    for(let i = 0; i < ele.savingThrowListItems.length; i++) {
-      let string: string = (singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
-      if(string === type) {
-        ele.savingThrowListItems[i].childNodes[1].textContent += ` (Advantage)`;
+      // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+      for(let i = 0; i < ele.savingThrowListItems.length; i++) {
+        let string: string = (singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0]).toLowerCase();
+        if(string === type) {
+          ele.savingThrowListItems[i].childNodes[1].textContent += ` (Advantage)`;
+        }
       }
-    }
-  });
-
+    });
   }
 
   if(charRace === 'halfling') {
-
     ele.fearResistance.textContent = 'Advantage';
     ele.fearResistance.setAttribute('title', Races[charRace].special.brave.info);
-
   }
 
 }
@@ -1055,47 +1030,34 @@ const calculateSpecialResistances = () => {
 const combatCreation = () => {
 
   // Get character preview image based on class, race, and gender
-
   charImageSet();
 
   // Set initial hit point value for 1st level
-
   initialHitPoints();
 
   // Get dexerity and armor modifier and set armor class
-
-  armorClass();
+  getArmorClass();
 
   // Get dexerity modifier and set initiative bonus
-
   initiativeMod();
 
   // Get base speed based on chosen race
-
   baseSpeed();
 
   // Get wisdom modifier and set passive perception
-
   passivePerception();
 
   // Get darkvision boolean and set value
-
   darkvision();
 
   // Set any racial ability modifiers to ability scores
-
   racialAbilityModifier();
-
   subraceAbilityModifier();
 
   // Set the character size
-
   setCharacterSize();
-
   calculateSavingThrowMods();
-
   calculateSpecialResistances();
-
   calculateWeaponProficiencies();
 
 }
@@ -1165,11 +1127,14 @@ ele.createCharacterButton.addEventListener('click', e => {
 
   // Character Creation functions
 
-  generalInfo();  // General tab functions
+  // General tab functions
+  generalInfo();
 
-  skillCreation(); // SKill tab functions
+  // SKill tab functions
+  skillCreation();
 
-  combatCreation();  // Combat tab functions
+  // Combat tab functions
+  combatCreation();
 
 });
 
@@ -1194,9 +1159,7 @@ ele.levelUpButton.addEventListener('click', e => {
   }
 
   charLevelUp();
-
   addHitPoints();
-
   highlightSkills();
 
 });

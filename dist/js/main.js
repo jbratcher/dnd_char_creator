@@ -412,15 +412,10 @@ var highlightSkills = function highlightSkills() {
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
         var skill = ele.skillsPreviewListItems[i];
-        var skillName = ele.skillsPreviewListItems[i].childNodes[1];
         var skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent);
-        console.log(skillName);
-        console.log(skillText);
-        console.log(selectedSkill1.textContent.trim());
         // reset modifier node to '-""
         ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
         if (skillText === selectedSkill1.textContent.trim() || skillText === selectedSkill2.textContent.trim() || skillText === selectedSkill3.textContent.trim() || skillText === selectedSkill4.textContent.trim()) {
-            console.log("yes");
             skill.style.color = 'green';
             // get number value of modifer for skill (childNodes[3] is the ability score name)
             getSkillModifier(ele.skillsPreviewListItems[i].childNodes[3].textContent);
@@ -428,7 +423,6 @@ var highlightSkills = function highlightSkills() {
             func.appendSigntoValue(totalMod, ele.skillsPreviewListItems[i].childNodes[5]);
         } else {
             // if no match dim selection
-            console.log("no");
             skill.style.color = '#ccc';
         }
     }
@@ -462,6 +456,7 @@ var highlightRacialSKills = function highlightRacialSKills() {
 };
 // Skills combined function call
 var skillCreation = function skillCreation() {
+    // ensure prooficiency bonus to be added is up to date
     updateProficiencyBonus();
     // Highlight selected skills and append skill modifier
     highlightSkills();
@@ -536,12 +531,12 @@ var addHitPoints = function addHitPoints() {
     }
     ele.hitPointPreview.textContent = String(currentHitPoints + hitPointsToAdd);
 };
-var armorClass = function armorClass() {
+var getArmorClass = function getArmorClass() {
     var base = 10;
     var dexMod = func.getAbilityScoreModifier(Number(dexerity));
     var armorMod = 0;
-    var ac = String(base + dexMod + armorMod);
-    ele.armorClassPreview.textContent = ac;
+    var armorClass = String(base + dexMod + armorMod);
+    ele.armorClassPreview.textContent = armorClass;
 };
 var initiativeMod = function initiativeMod() {
     var dexMod = func.getAbilityScoreModifier(Number(dexerity));
@@ -555,11 +550,7 @@ var passivePerception = function passivePerception() {
 };
 var darkvision = function darkvision() {
     setRace();
-    if (_characterInfo.Races[charRace].darkvision) {
-        ele.passivePerceptionPreview.textContent = '60 ft.';
-    } else {
-        ele.passivePerceptionPreview.textContent = 'None';
-    }
+    _characterInfo.Races[charRace].darkvision ? ele.darkvisionPreview.textContent = '60 ft.' : ele.darkvisionPreview.textContent = '-';
 };
 var setCharacterSize = function setCharacterSize() {
     return ele.sizePreview.textContent = _characterInfo.Races[charRace].size;
@@ -581,7 +572,7 @@ var calculateSavingThrowMods = function calculateSavingThrowMods() {
     setClass();
     var abilities = _characterInfo.Classes[charClass].savingThrows;
     abilities.map(function (ability) {
-        // match modifer to saving throw item (i.e. strength mod to strenth saving throw)
+        // match modifer to saving throw item (i.e. strength mod to strength saving throw)
         for (var i = 0; i < ele.savingThrowListItems.length; i++) {
             var string = singleWord.exec(ele.savingThrowListItems[i].childNodes[1].textContent)[0].toLowerCase();
             if (string === ability) {
@@ -626,7 +617,7 @@ var combatCreation = function combatCreation() {
     // Set initial hit point value for 1st level
     initialHitPoints();
     // Get dexerity and armor modifier and set armor class
-    armorClass();
+    getArmorClass();
     // Get dexerity modifier and set initiative bonus
     initiativeMod();
     // Get base speed based on chosen race
@@ -705,9 +696,12 @@ ele.extraAbilityModifier2.addEventListener('change', function () {
 ele.createCharacterButton.addEventListener('click', function (e) {
     e.preventDefault();
     // Character Creation functions
-    generalInfo(); // General tab functions
-    skillCreation(); // SKill tab functions
-    combatCreation(); // Combat tab functions
+    // General tab functions
+    generalInfo();
+    // SKill tab functions
+    skillCreation();
+    // Combat tab functions
+    combatCreation();
 });
 ////////////////////////////////////////////////////////////
 // Preview Functions
