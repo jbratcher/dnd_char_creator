@@ -20,30 +20,31 @@ import {
 
 // Initialize  global variables
 
-let modifier: number;  // integer value that increases or decreases key values
+// integer value that increases or decreases key values
+let modifier: number;
 
-let totalMod: number;  // integer value to combine modifier values before adding to key value
+// integer value to combine modifier values before adding to key value
+let totalMod: number;
 
-let abilityScore: number;  // character ability score
+// character ability score
+let abilityScore: number;
 
-let abilityScoreMod: number;  // character ability score modifier
+// character ability score modifier
+let abilityScoreMod: number;
 
+// character proficiency bonus modifier
 let proficiencyBonus: number;
 
-const singleWord = /\w+/;  // capture a single word (i.e. 'strength')
+// capture a single word (i.e. 'strength')
+const singleWord = /\w+/;
 
-// Setters for ability scores (string for textContent display)
+// Setters for ability scores (default to string for textContent display)
 
 let strength: string = "0";
-
 let dexerity: string = "0";
-
 let constitution: string = "0";
-
 let intelligence: string = "0";
-
 let wisdom: string = "0";
-
 let charisma: string = "0";
 
 ////////////////////////////////////////////////////////////
@@ -250,9 +251,9 @@ func.addOptionsToSelect(ele.skill4, Skills);
 
 let skillList4 = ele.skill4.children;
 
-let numberOfSkills = Classes[charClass].skills;
+let numberOfSkills = Classes[charClass].skills.number;
 
-let availableSkills = Classes[charClass].availableSkills;
+let availableSkills = Classes[charClass].skills.available;
 
 let selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
 
@@ -268,8 +269,8 @@ const highlightAvailableSkills = () => {
 
   setClass();
 
-  numberOfSkills = Classes[charClass].skills;
-  availableSkills = Classes[charClass].availableSkills;
+  numberOfSkills = Classes[charClass].skills.number;
+  availableSkills = Classes[charClass].skills.available;
 
   // hide any previously shown skill slots
   for(let i = 1; i <=4; i++) {
@@ -701,10 +702,26 @@ const tieflingInfernalLegacy = () => {
 // Skill functions
 
 const getSelectedSkills = () => {
+
+  numberOfSkills = Classes[charClass].skills.number;
+
+  // limit skill selection to number of skills for selected class
+  // for(let i = 1; i <= numberOfSkills; i++) {
+  //   let skillVariable = eval("selectedSkill" + i);
+  //   console.log(skillVariable);
+  //   skillVariable = eval("ele.skill" + i + ".options[ele.skill1.selectedIndex]")
+  //   console.log(skillVariable);
+  // }
+
   selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
   selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
   selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
   selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+
+  console.log("selected skill 1: ", selectedSkill1);
+  console.log("selected skill 2: ", selectedSkill2);
+  console.log("selected skill 3: ", selectedSkill3);
+  console.log("selected skill 4: ", selectedSkill4);
 }
 
 // Get any modifiers to the proficiency bonus for a skill
@@ -1155,7 +1172,7 @@ ele.levelUpButton.addEventListener('click', e => {
   constitution = ele.rolledConstitution.textContent;
 
   if(ele.currentLevel.textContent === "20") {
-    return;
+    return null;
   }
 
   charLevelUp();

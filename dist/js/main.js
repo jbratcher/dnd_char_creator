@@ -13,16 +13,22 @@ var _characterInfo = require('./characterInfo.js');
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // Initialize  global variables
-var modifier; // integer value that increases or decreases key values
+// integer value that increases or decreases key values
+var modifier;
+// integer value to combine modifier values before adding to key value
 ////////////////////////////////////////
 // Imports
 ////////////////////////////////////////
-var totalMod; // integer value to combine modifier values before adding to key value
-var abilityScore; // character ability score
-var abilityScoreMod; // character ability score modifier
+var totalMod;
+// character ability score
+var abilityScore;
+// character ability score modifier
+var abilityScoreMod;
+// character proficiency bonus modifier
 var proficiencyBonus;
-var singleWord = /\w+/; // capture a single word (i.e. 'strength')
-// Setters for ability scores (string for textContent display)
+// capture a single word (i.e. 'strength')
+var singleWord = /\w+/;
+// Setters for ability scores (default to string for textContent display)
 var strength = "0";
 var dexerity = "0";
 var constitution = "0";
@@ -132,8 +138,8 @@ func.addOptionsToSelect(ele.skill3, _characterInfo.Skills);
 var skillList3 = ele.skill3.children;
 func.addOptionsToSelect(ele.skill4, _characterInfo.Skills);
 var skillList4 = ele.skill4.children;
-var numberOfSkills = _characterInfo.Classes[charClass].skills;
-var availableSkills = _characterInfo.Classes[charClass].availableSkills;
+var numberOfSkills = _characterInfo.Classes[charClass].skills.number;
+var availableSkills = _characterInfo.Classes[charClass].skills.available;
 var selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
 var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
 var selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
@@ -141,8 +147,8 @@ var selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
 // Skill functions
 var highlightAvailableSkills = function highlightAvailableSkills() {
     setClass();
-    numberOfSkills = _characterInfo.Classes[charClass].skills;
-    availableSkills = _characterInfo.Classes[charClass].availableSkills;
+    numberOfSkills = _characterInfo.Classes[charClass].skills.number;
+    availableSkills = _characterInfo.Classes[charClass].skills.available;
     // hide any previously shown skill slots
     for (var i = 1; i <= 4; i++) {
         func.hideParentElement(eval("ele.skill" + i));
@@ -378,10 +384,22 @@ var tieflingInfernalLegacy = function tieflingInfernalLegacy() {
 };
 // Skill functions
 var getSelectedSkills = function getSelectedSkills() {
+    numberOfSkills = _characterInfo.Classes[charClass].skills.number;
+    // limit skill selection to number of skills for selected class
+    // for(let i = 1; i <= numberOfSkills; i++) {
+    //   let skillVariable = eval("selectedSkill" + i);
+    //   console.log(skillVariable);
+    //   skillVariable = eval("ele.skill" + i + ".options[ele.skill1.selectedIndex]")
+    //   console.log(skillVariable);
+    // }
     selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
     selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
     selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
     selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+    console.log("selected skill 1: ", selectedSkill1);
+    console.log("selected skill 2: ", selectedSkill2);
+    console.log("selected skill 3: ", selectedSkill3);
+    console.log("selected skill 4: ", selectedSkill4);
 };
 // Get any modifiers to the proficiency bonus for a skill
 var getSkillModifier = function getSkillModifier(skillText) {
@@ -713,7 +731,7 @@ ele.levelUpButton.addEventListener('click', function (e) {
     // Get level up variables
     constitution = ele.rolledConstitution.textContent;
     if (ele.currentLevel.textContent === "20") {
-        return;
+        return null;
     }
     charLevelUp();
     addHitPoints();
