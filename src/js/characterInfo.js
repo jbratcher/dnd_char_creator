@@ -25,12 +25,18 @@ export var Classes = {
                 "Survival"
             ]
         },
+        tools: [
+            "none"
+        ],
         weapons: [
             "simple weapons",
             "martial weapons"
         ]
     },
     bard: {
+        armor: [
+            "light armor"
+        ],
         hitdie: 8,
         info: "Minstrel or joker with a trick or two up there sleeve.  Your companions will appreciate your company.",
         savingThrows: [
@@ -59,9 +65,24 @@ export var Classes = {
                 "Stealth",
                 "Survival"
             ]
-        }
+        },
+        tools: [
+            "Three musical instruments of your choice"
+        ],
+        weapons: [
+            "Simple weapons",
+            "hand crossbows",
+            "longswords",
+            "rapiers",
+            "shortswords"
+        ]
     },
     cleric: {
+        armor: [
+            "light armor",
+            "medium armor",
+            "shields"
+        ],
         hitdie: 8,
         info: "Heavily-armor magical healer who can also melee.",
         savingThrows: [
@@ -77,9 +98,21 @@ export var Classes = {
                 "Persuasion",
                 "Religion"
             ]
-        }
+        },
+        tools: [
+            "none"
+        ],
+        weapons: [
+            "Simple weapons"
+        ]
     },
     druid: {
+        armor: [
+            "light armor",
+            "medium armor",
+            "shields",
+            "non-metal"
+        ],
         hitdie: 8,
         info: "Natural spell-casters or shape-shifting warriors.",
         savingThrows: [
@@ -98,9 +131,28 @@ export var Classes = {
                 "Religion",
                 "Survival"
             ]
-        }
+        },
+        tools: [
+            "Herbalism kit"
+        ],
+        weapons: [
+            "clubs",
+            "daggers",
+            "darts",
+            "javelins",
+            "maces",
+            "quarterstaffs",
+            "scimitars",
+            "sickles",
+            "slings",
+            "spears"
+        ]
     },
     fighter: {
+        armor: [
+            "all armor",
+            "shields"
+        ],
         hitdie: 10,
         info: "The most skilled warriors can use any armor or weapon and take a beating.",
         savingThrows: [
@@ -119,9 +171,19 @@ export var Classes = {
                 "Perception",
                 "Survival"
             ]
-        }
+        },
+        tools: [
+            "none"
+        ],
+        weapons: [
+            "simple weapons",
+            "martial weapons"
+        ]
     },
     monk: {
+        armor: [
+            "none"
+        ],
         hitdie: 8,
         info: "Adept spiritual warriors that can cripple opponents.",
         savingThrows: [
@@ -138,9 +200,20 @@ export var Classes = {
                 "Religion",
                 "Stealth"
             ]
-        }
+        },
+        tools: [
+            "Choose one type of artisan’s tools or one musical instrument"
+        ],
+        weapons: [
+            "simple weapons",
+            "shortswords"
+        ]
     },
     paladin: {
+        armor: [
+            "all armor",
+            "shields"
+        ],
         hitdie: 10,
         info: "Spirtual warriors usually wearing heaving armor.  Can heal and smite.",
         savingThrows: [
@@ -157,9 +230,21 @@ export var Classes = {
                 "Persuasion",
                 "Religion"
             ]
-        }
+        },
+        tools: [
+            "none"
+        ],
+        weapons: [
+            "simple weapons",
+            "martial weapons"
+        ]
     },
     ranger: {
+        armor: [
+            "light armor",
+            "medium armor",
+            "shields"
+        ],
         hitdie: 10,
         info: "Range-focused warriors with survival and animal skills.",
         savingThrows: [
@@ -178,9 +263,19 @@ export var Classes = {
                 "Stealth",
                 "Survival"
             ]
-        }
+        },
+        tools: [
+            "none"
+        ],
+        weapons: [
+            "simple weapons",
+            "martial weapons"
+        ]
     },
     rogue: {
+        armor: [
+            "light armor"
+        ],
         hitdie: 8,
         info: "Warrior with varied skills. Realizes on wit and agility more than strength.",
         savingThrows: [
@@ -202,9 +297,22 @@ export var Classes = {
                 "Slieght of Hand",
                 "Stealth"
             ]
-        }
+        },
+        tools: [
+            "Thieves’ tools"
+        ],
+        weapons: [
+            "simple weapons",
+            "hand crossbows",
+            "longswords",
+            "rapiers",
+            "shortswords"
+        ]
     },
     sorcerer: {
+        armor: [
+            "none"
+        ],
         hitdie: 6,
         info: "Spell-caster inherent.",
         savingThrows: [
@@ -221,9 +329,22 @@ export var Classes = {
                 "Persuasion",
                 "Religion"
             ]
-        }
+        },
+        tools: [
+            "none"
+        ],
+        weapons: [
+            "daggers",
+            "darts",
+            "slings",
+            "quarterstaffs",
+            "light crossbows"
+        ]
     },
     warlock: {
+        armor: [
+            "light armor"
+        ],
         hitdie: 8,
         info: "Spell-caster who gets their strenght from a pact with a powerful being.",
         savingThrows: [
@@ -241,9 +362,18 @@ export var Classes = {
                 "Nature",
                 "Religion"
             ]
-        }
+        },
+        tools: [
+            "none"
+        ],
+        weapons: [
+            "simple weapons"
+        ]
     },
     wizard: {
+        armor: [
+            "none"
+        ],
         hitdie: 6,
         info: "Diverse spell-caster knowledgeable in the magical arts.",
         savingThrows: [
@@ -260,7 +390,17 @@ export var Classes = {
                 "Medicine",
                 "Religion"
             ]
-        }
+        },
+        tools: [
+            "none"
+        ],
+        weapons: [
+            "daggers",
+            "darts",
+            "slings",
+            "quarterstaffs",
+            "light crossbows"
+        ]
     }
 };
 ////////////////////////////////////////
