@@ -16,106 +16,152 @@ var Classes = exports.Classes = {
             number: 2,
             available: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
         },
+        startingEquipment: ["(a) a greataxe or (b) any martial melee weapon", "(a) two handaxes or (b) any simple weapon", "explorer’s pack", "4 javelins"],
+        tools: ["none"],
         weapons: ["simple weapons", "martial weapons"]
     },
     bard: {
+        armor: ["light armor"],
         hitdie: 8,
         info: "Minstrel or joker with a trick or two up there sleeve.  Your companions will appreciate your company.",
         savingThrows: ["dexerity", "charisma"],
         skills: {
             number: 3,
             available: ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Slieght of Hand", "Stealth", "Survival"]
-        }
+        },
+        startingEquipment: ["(a) a rapier, (b) a longsword, or (c) any simple weapon", "(a) a diplomat’s pack or (b) an entertainer’s pack", "(a) a lute or (b) any other musical instrument", "leather armor", "a dagger"],
+        tools: ["Three musical instruments of your choice"],
+        weapons: ["Simple weapons", "hand crossbows", "longswords", "rapiers", "shortswords"]
     },
     cleric: {
+        armor: ["light armor", "medium armor", "shields"],
         hitdie: 8,
         info: "Heavily-armor magical healer who can also melee.",
         savingThrows: ["wisdom", "charisma"],
         skills: {
             number: 2,
             available: ["History", "Insight", "Medicine", "Persuasion", "Religion"]
-        }
+        },
+        startingEquipment: ["(a) a mace or (b) a warhammer (if proficient)", "(a) scale mail, (b) leather armor, or (c) chain mail (if proficient)", "(a) a light crossbow and 20 bolts or (b) any simple weapon", "(a) a priest’s pack or (b) an explorer’s pack", "shield", "holy symbol"],
+        tools: ["none"],
+        weapons: ["Simple weapons"]
     },
     druid: {
+        armor: ["light armor", "medium armor", "shields", "non-metal"],
         hitdie: 8,
         info: "Natural spell-casters or shape-shifting warriors.",
         savingThrows: ["intelligence", "wisdom"],
         skills: {
             number: 2,
             available: ["Animal Handling", "Arcana", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"]
-        }
+        },
+        startingEquipment: ["(a) a wooden shield or (b) any simple weapon", "(a) a scimitar or (b) any simple melee weapon", "leather armor", "explorer’s pack", "druidic focus"],
+        tools: ["Herbalism kit"],
+        weapons: ["clubs", "daggers", "darts", "javelins", "maces", "quarterstaffs", "scimitars", "sickles", "slings", "spears"]
     },
     fighter: {
+        armor: ["all armor", "shields"],
         hitdie: 10,
         info: "The most skilled warriors can use any armor or weapon and take a beating.",
         savingThrows: ["strength", "constitution"],
         skills: {
             number: 2,
             available: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"]
-        }
+        },
+        startingEquipment: ["(a) chain mail or (b) leather armor", "a longbow and 20 arrows", "(a) a martial weapon and a shield or (b) two martial weapons", "(a) a light crossbow and 20 bolts or (b) two handaxes", "(a) a dungeoneer’s pack or (b) an explorer’s pack"],
+        tools: ["none"],
+        weapons: ["simple weapons", "martial weapons"]
     },
     monk: {
+        armor: ["none"],
         hitdie: 8,
         info: "Adept spiritual warriors that can cripple opponents.",
         savingThrows: ["strength", "dexerity"],
         skills: {
             number: 2,
             available: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"]
-        }
+        },
+        startingEquipment: ["(a) a shortsword or (b) any simple weapon", "(a) a dungeoneer’s pack or (b) an explorer’s pack", "10 darts"],
+        tools: ["Choose one type of artisan’s tools or one musical instrument"],
+        weapons: ["simple weapons", "shortswords"]
     },
     paladin: {
+        armor: ["all armor", "shields"],
         hitdie: 10,
         info: "Spirtual warriors usually wearing heaving armor.  Can heal and smite.",
         savingThrows: ["wisdom", "charisma"],
         skills: {
             number: 2,
             available: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"]
-        }
+        },
+        startingEquipment: ["(a) a martial weapon and a shield or (b) two martial weapons", "(a) five javelins or (b) any simple melee weapon", "(a) a priest’s pack or (b) an explorer’s pack", "Chain mail", "holy symbol"],
+        tools: ["none"],
+        weapons: ["simple weapons", "martial weapons"]
     },
     ranger: {
+        armor: ["light armor", "medium armor", "shields"],
         hitdie: 10,
         info: "Range-focused warriors with survival and animal skills.",
         savingThrows: ["strength", "dexerity"],
         skills: {
             number: 3,
             available: ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"]
-        }
+        },
+        startingEquipment: ["(a) scale mail or (b) leather armor", "(a) two shortswords or (b) two simple melee weapons", "(a) a dungeoneer’s pack or (b) an explorer’s pack", "A longbow and a quiver of 20 arrows"],
+        tools: ["none"],
+        weapons: ["simple weapons", "martial weapons"]
     },
     rogue: {
+        armor: ["light armor"],
         hitdie: 8,
         info: "Warrior with varied skills. Realizes on wit and agility more than strength.",
         savingThrows: ["dexerity", "intelligence"],
         skills: {
             number: 4,
             available: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Slieght of Hand", "Stealth"]
-        }
+        },
+        startingEquipment: ["(a) a rapier or (b) a shortsword", "(a) a shortbow and quiver of 20 arrows or (b) a shortsword", "(a) a burglar’s pack, (b) a dungeoneer’s pack, or (c) an explorer’s pack", "leather armor", "two daggers", "thieves’ tools"],
+        tools: ["Thieves’ tools"],
+        weapons: ["simple weapons", "hand crossbows", "longswords", "rapiers", "shortswords"]
     },
     sorcerer: {
+        armor: ["none"],
         hitdie: 6,
         info: "Spell-caster inherent.",
         savingThrows: ["constitution", "charisma"],
         skills: {
             number: 2,
             available: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"]
-        }
+        },
+        startingEquipment: ["(a) a light crossbow and 20 bolts or (b) any simple weapon", "(a) a component pouch or (b) an arcane focus", "(a) a dungeoneer’s pack or (b) an explorer’s pack", "2 daggers"],
+        tools: ["none"],
+        weapons: ["daggers", "darts", "slings", "quarterstaffs", "light crossbows"]
     },
     warlock: {
+        armor: ["light armor"],
         hitdie: 8,
         info: "Spell-caster who gets their strenght from a pact with a powerful being.",
         savingThrows: ["wisdom", "charisma"],
         skills: {
             number: 2,
             available: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"]
-        }
+        },
+        startingEquipment: ["(a) a light crossbow and 20 bolts or (b) any simple weapon", "(a) a component pouch or (b) an arcane focus", "(a) a scholar’s pack or (b) a dungeoneer’s pack", "leather armor", "any simple weapon", "two daggers"],
+        tools: ["none"],
+        weapons: ["simple weapons"]
     },
     wizard: {
+        armor: ["none"],
         hitdie: 6,
         info: "Diverse spell-caster knowledgeable in the magical arts.",
         savingThrows: ["intelligence", "wisdom"],
         skills: {
             number: 2,
             available: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"]
-        }
+        },
+        startingEquipment: ["(a) a quarterstaff or (b) a dagger", "(a) a component pouch or (b) an arcane focus", "(a) a scholar’s pack or (b) an explorer’s pack", "a spellbook"],
+        tools: ["none"],
+        weapons: ["daggers", "darts", "slings", "quarterstaffs", "light crossbows"]
     }
 };
 ////////////////////////////////////////

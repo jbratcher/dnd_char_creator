@@ -25,6 +25,12 @@ export var Classes = {
                 "Survival"
             ]
         },
+        startingEquipment: [
+            "(a) a greataxe or (b) any martial melee weapon",
+            "(a) two handaxes or (b) any simple weapon",
+            "explorer’s pack",
+            "4 javelins"
+        ],
         tools: [
             "none"
         ],
@@ -66,6 +72,13 @@ export var Classes = {
                 "Survival"
             ]
         },
+        startingEquipment: [
+            "(a) a rapier, (b) a longsword, or (c) any simple weapon",
+            "(a) a diplomat’s pack or (b) an entertainer’s pack",
+            "(a) a lute or (b) any other musical instrument",
+            "leather armor",
+            "a dagger"
+        ],
         tools: [
             "Three musical instruments of your choice"
         ],
@@ -99,6 +112,14 @@ export var Classes = {
                 "Religion"
             ]
         },
+        startingEquipment: [
+            "(a) a mace or (b) a warhammer (if proficient)",
+            "(a) scale mail, (b) leather armor, or (c) chain mail (if proficient)",
+            "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+            "(a) a priest’s pack or (b) an explorer’s pack",
+            "shield",
+            "holy symbol"
+        ],
         tools: [
             "none"
         ],
@@ -132,6 +153,13 @@ export var Classes = {
                 "Survival"
             ]
         },
+        startingEquipment: [
+            "(a) a wooden shield or (b) any simple weapon",
+            "(a) a scimitar or (b) any simple melee weapon",
+            "leather armor",
+            "explorer’s pack",
+            "druidic focus"
+        ],
         tools: [
             "Herbalism kit"
         ],
@@ -172,6 +200,13 @@ export var Classes = {
                 "Survival"
             ]
         },
+        startingEquipment: [
+            "(a) chain mail or (b) leather armor",
+            "a longbow and 20 arrows",
+            "(a) a martial weapon and a shield or (b) two martial weapons",
+            "(a) a light crossbow and 20 bolts or (b) two handaxes",
+            "(a) a dungeoneer’s pack or (b) an explorer’s pack"
+        ],
         tools: [
             "none"
         ],
@@ -201,6 +236,11 @@ export var Classes = {
                 "Stealth"
             ]
         },
+        startingEquipment: [
+            "(a) a shortsword or (b) any simple weapon",
+            "(a) a dungeoneer’s pack or (b) an explorer’s pack",
+            "10 darts"
+        ],
         tools: [
             "Choose one type of artisan’s tools or one musical instrument"
         ],
@@ -231,6 +271,13 @@ export var Classes = {
                 "Religion"
             ]
         },
+        startingEquipment: [
+            "(a) a martial weapon and a shield or (b) two martial weapons",
+            "(a) five javelins or (b) any simple melee weapon",
+            "(a) a priest’s pack or (b) an explorer’s pack",
+            "Chain mail",
+            "holy symbol"
+        ],
         tools: [
             "none"
         ],
@@ -264,6 +311,12 @@ export var Classes = {
                 "Survival"
             ]
         },
+        startingEquipment: [
+            "(a) scale mail or (b) leather armor",
+            "(a) two shortswords or (b) two simple melee weapons",
+            "(a) a dungeoneer’s pack or (b) an explorer’s pack",
+            "A longbow and a quiver of 20 arrows"
+        ],
         tools: [
             "none"
         ],
@@ -298,6 +351,14 @@ export var Classes = {
                 "Stealth"
             ]
         },
+        startingEquipment: [
+            "(a) a rapier or (b) a shortsword",
+            "(a) a shortbow and quiver of 20 arrows or (b) a shortsword",
+            "(a) a burglar’s pack, (b) a dungeoneer’s pack, or (c) an explorer’s pack",
+            "leather armor",
+            "two daggers",
+            "thieves’ tools"
+        ],
         tools: [
             "Thieves’ tools"
         ],
@@ -330,6 +391,12 @@ export var Classes = {
                 "Religion"
             ]
         },
+        startingEquipment: [
+            "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+            "(a) a component pouch or (b) an arcane focus",
+            "(a) a dungeoneer’s pack or (b) an explorer’s pack",
+            "2 daggers"
+        ],
         tools: [
             "none"
         ],
@@ -363,6 +430,14 @@ export var Classes = {
                 "Religion"
             ]
         },
+        startingEquipment: [
+            "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+            "(a) a component pouch or (b) an arcane focus",
+            "(a) a scholar’s pack or (b) a dungeoneer’s pack",
+            "leather armor",
+            "any simple weapon",
+            "two daggers"
+        ],
         tools: [
             "none"
         ],
@@ -391,6 +466,12 @@ export var Classes = {
                 "Religion"
             ]
         },
+        startingEquipment: [
+            "(a) a quarterstaff or (b) a dagger",
+            "(a) a component pouch or (b) an arcane focus",
+            "(a) a scholar’s pack or (b) an explorer’s pack",
+            "a spellbook"
+        ],
         tools: [
             "none"
         ],
