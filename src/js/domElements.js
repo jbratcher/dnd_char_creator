@@ -152,3 +152,8 @@ export var specialResistances = document.querySelector('#specialResistances');
 export var poisonResistance = document.querySelector('#poisonResistance');
 export var charmResistance = document.querySelector('#charmResistance');
 export var fearResistance = document.querySelector('#fearResistance');
+////////////////////////////////////////////////////////////
+// Inventory
+////////////////////////////////////////////////////////////
+// Inventory variables
+export var startingEquipmentPreview = document.querySelector("#startingEquipmentPreview");

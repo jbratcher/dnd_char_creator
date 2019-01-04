@@ -380,6 +380,12 @@
                       Combat
                     </a>
                   </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" id="inventory-tab" data-toggle="tab" href="#inventory" role="tab" aria-controls="inventory" aria-selected="false">
+                      Inventory
+                    </a>
+                  </li>
 
                 </ul>
 
@@ -771,7 +777,24 @@
                         <b>Fear: </b>
                         <span id="fearResistance">-</span>
                       </li>
+                      
+                    </ul>
 
+                  </div>
+                  
+                  <!-- Inventory Preview -->
+
+                  <div class="tab-pane fade" id="inventory" role="tabpanel" aria-labelledby="inventory-tab">
+
+                    <ul class="list-group list-group-flush mb-3">
+
+                      <li class="list-group-item d-flex justify-content-between">
+                        <b>Starting Equipment: </b>
+                        <ul id="startingEquipmentPreview">-</ul>
+                      </li>
+                    
+                    </ul>
+                    
                   </div>
 
                 </div>

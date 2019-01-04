@@ -713,6 +713,21 @@ var combatCreation = function () {
     calculateWeaponProficiencies();
 };
 ////////////////////////////////////////////////////////////
+// Inventory
+////////////////////////////////////////////////////////////
+var startingEquipment = function () {
+    setClass();
+    ele.startingEquipmentPreview.innerHTML = "";
+    Classes[charClass].startingEquipment.map(function (equipmentLine) {
+        var li = document.createElement("li");
+        li.textContent = "- " + equipmentLine;
+        ele.startingEquipmentPreview.appendChild(li);
+    });
+};
+var inventoryCreation = function () {
+    startingEquipment();
+};
+////////////////////////////////////////////////////////////
 // Event Listeners
 ////////////////////////////////////////////////////////////
 // Event listeners for rolling ability scores
@@ -767,6 +782,8 @@ ele.createCharacterButton.addEventListener('click', function (e) {
     skillCreation();
     // Combat tab functions
     combatCreation();
+    // Inventory tab functions
+    inventoryCreation();
 });
 ////////////////////////////////////////////////////////////
 // Preview Functions

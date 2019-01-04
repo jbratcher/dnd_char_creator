@@ -288,3 +288,12 @@ export const poisonResistance = <HTMLElement>document.querySelector('#poisonResi
 export const charmResistance = <HTMLElement>document.querySelector('#charmResistance');
 
 export const fearResistance = <HTMLElement>document.querySelector('#fearResistance');
+
+////////////////////////////////////////////////////////////
+// Inventory
+////////////////////////////////////////////////////////////
+
+// Inventory variables
+
+export const startingEquipmentPreview = <HTMLElement>document.querySelector("#startingEquipmentPreview");
+

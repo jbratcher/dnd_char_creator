@@ -1080,6 +1080,32 @@ const combatCreation = () => {
 }
 
 ////////////////////////////////////////////////////////////
+// Inventory
+////////////////////////////////////////////////////////////
+
+const startingEquipment = () => {
+  
+  setClass();
+  
+  ele.startingEquipmentPreview.innerHTML = "";
+  
+  Classes[charClass].startingEquipment.map(equipmentLine => {
+    let li = <HTMLElement>document.createElement("li");
+    li.textContent = "- " + equipmentLine
+    ele.startingEquipmentPreview.appendChild(li)
+  })
+
+}
+
+const inventoryCreation = () => {
+  
+  startingEquipment();
+  
+}
+
+
+
+////////////////////////////////////////////////////////////
 // Event Listeners
 ////////////////////////////////////////////////////////////
 
@@ -1152,6 +1178,9 @@ ele.createCharacterButton.addEventListener('click', e => {
 
   // Combat tab functions
   combatCreation();
+  
+  // Inventory tab functions
+  inventoryCreation();
 
 });
 
