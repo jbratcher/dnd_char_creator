@@ -440,15 +440,28 @@ var getSelectedSkills = function () {
     numberOfSkills = Classes[charClass].skills.number;
     // limit skill selection to number of skills for selected class
     // for(let i = 1; i <= numberOfSkills; i++) {
-    //   let skillVariable = eval("selectedSkill" + i);
-    //   console.log(skillVariable);
-    //   skillVariable = eval("ele.skill" + i + ".options[ele.skill1.selectedIndex]")
-    //   console.log(skillVariable);
+    //   console.log(selectedSkill[i]);
+    //   selectedSkill[i] = eval("ele.skill" + i + ".options[ele.skill1.selectedIndex]")
     // }
-    selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
-    selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
-    selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
-    selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+    numberOfSkills === 4
+        ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
+            selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
+            selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex],
+            selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex],
+            console.log("4 skills"))
+        : numberOfSkills === 3
+            ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
+                selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
+                selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex],
+                selectedSkill4 = selectedSkill1,
+                console.log("3 skills"))
+            : numberOfSkills === 2
+                ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
+                    selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
+                    selectedSkill3 = selectedSkill1,
+                    selectedSkill4 = selectedSkill2,
+                    console.log("2 skills"))
+                : console.log("Something went wrong");
     console.log("selected skill 1: ", selectedSkill1);
     console.log("selected skill 2: ", selectedSkill2);
     console.log("selected skill 3: ", selectedSkill3);
