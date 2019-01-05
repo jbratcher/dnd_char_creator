@@ -148,10 +148,10 @@ func.addOptionsToSelect(ele.skill4, Skills);
 var skillList4 = ele.skill4.children;
 var numberOfSkills = Classes[charClass].skills.number;
 var availableSkills = Classes[charClass].skills.available;
-var selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
-var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
-var selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
-var selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+var selectedSkill1 = null;
+var selectedSkill2 = null;
+var selectedSkill3 = null;
+var selectedSkill4 = null;
 // Skill functions
 var highlightAvailableSkills = function () {
     setClass();
@@ -439,10 +439,6 @@ var tieflingInfernalLegacy = function () {
 var getSelectedSkills = function () {
     numberOfSkills = Classes[charClass].skills.number;
     // limit skill selection to number of skills for selected class
-    // for(let i = 1; i <= numberOfSkills; i++) {
-    //   console.log(selectedSkill[i]);
-    //   selectedSkill[i] = eval("ele.skill" + i + ".options[ele.skill1.selectedIndex]")
-    // }
     numberOfSkills === 4
         ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
             selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
@@ -453,13 +449,10 @@ var getSelectedSkills = function () {
             ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
                 selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
                 selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex],
-                selectedSkill4 = selectedSkill1,
                 console.log("3 skills"))
             : numberOfSkills === 2
                 ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
                     selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
-                    selectedSkill3 = selectedSkill1,
-                    selectedSkill4 = selectedSkill2,
                     console.log("2 skills"))
                 : console.log("Something went wrong");
     console.log("selected skill 1: ", selectedSkill1);
@@ -493,7 +486,6 @@ var highightSkill = function (skillText) {
 var highlightSkills = function () {
     // Get current values of required info
     getSelectedSkills();
-    // showSkillSlots();
     updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
@@ -501,6 +493,12 @@ var highlightSkills = function () {
         var skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent);
         // reset modifier node to '-""
         ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
+        // for(let i=1; i <= numberOfSkills; i++) {
+        //   // compare skill text to only the number of skills selected by user
+        //   // if skill iterate is equal to skill text
+        //   if(skill text === eval("selectedSKill" + i + ".textContent.trim()")) {
+        //   }
+        // }
         if (skillText === selectedSkill1.textContent.trim()
             || skillText === selectedSkill2.textContent.trim()
             || skillText === selectedSkill3.textContent.trim()

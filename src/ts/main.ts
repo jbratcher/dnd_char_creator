@@ -251,17 +251,17 @@ func.addOptionsToSelect(ele.skill4, Skills);
 
 let skillList4 = ele.skill4.children;
 
-let numberOfSkills = Classes[charClass].skills.number;
+let numberOfSkills: number = Classes[charClass].skills.number;
 
-let availableSkills = Classes[charClass].skills.available;
+let availableSkills: Array<string> = Classes[charClass].skills.available;
 
-let selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
+let selectedSkill1: HTMLOptionElement = null;
 
-let selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
+let selectedSkill2: HTMLOptionElement = null;
 
-let selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
+let selectedSkill3: HTMLOptionElement = null;
 
-let selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+let selectedSkill4: HTMLOptionElement = null;
 
 // Skill functions
 
@@ -706,10 +706,6 @@ const getSelectedSkills = () => {
   numberOfSkills = Classes[charClass].skills.number;
 
   // limit skill selection to number of skills for selected class
-  // for(let i = 1; i <= numberOfSkills; i++) {
-  //   console.log(selectedSkill[i]);
-  //   selectedSkill[i] = eval("ele.skill" + i + ".options[ele.skill1.selectedIndex]")
-  // }
   
   numberOfSkills === 4
     ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
@@ -721,13 +717,10 @@ const getSelectedSkills = () => {
     ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
       selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
       selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex],
-      selectedSkill4 = selectedSkill1,
       console.log("3 skills"))
     : numberOfSkills === 2
     ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
       selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
-      selectedSkill3 = selectedSkill1,
-      selectedSkill4 = selectedSkill2,
       console.log("2 skills"))
     : console.log("Something went wrong")
 
@@ -772,7 +765,6 @@ const highightSkill = skillText => {
 const highlightSkills = () => {
   // Get current values of required info
   getSelectedSkills();
-  // showSkillSlots();
   updateProficiencyBonus();
   // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
   for(let i = 0; i < ele.skillsPreviewListItems.length; i++) {
@@ -780,6 +772,7 @@ const highlightSkills = () => {
     let skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent);
     // reset modifier node to '-""
     ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
+    
     if(
       skillText === selectedSkill1.textContent.trim()
       || skillText === selectedSkill2.textContent.trim()
