@@ -659,10 +659,10 @@ export const Races = {
             helpText: `As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.`
         },
         weaponProficiences: [
-            "Battleaxe",
-            "Handaxe",
-            "Light Hammer",
-            "Warhammer"
+            "battleaxe",
+            "handaxe",
+            "light hammer",
+            "warhammer"
         ]
 
     },
@@ -712,12 +712,12 @@ export const Races = {
             extraLanguage: 1,
             cantrip: 1,
             weaponProficiences: [
-                "Long Sword",
-                "Short Sword",
-                "Long Bow",
-                "Short Bow"
+                "long Sword",
+                "short Sword",
+                "long Bow",
+                "short Bow"
             ],
-            helpText: `As	a	high elf,	you	have a keen	mind and a mastery of at least the basics	of magic.`
+            helpText: `As a	high elf, you have a keen mind and a mastery of at least the basics	of magic.`
         }
 
     },

@@ -271,6 +271,7 @@ export const sizePreview = <HTMLElement>document.querySelector('#size');
 
 export const weaponProficiencesPreview = <HTMLElement>document.querySelector('#weaponProficiencesPreview');
 
+export const armorProficiencesPreview = <HTMLElement>document.querySelector('#armorProficiencesPreview');
 
 // Saving Throws 
 

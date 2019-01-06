@@ -144,6 +144,7 @@ export var passivePerceptionPreview = document.querySelector('#passivePerception
 export var darkvisionPreview = document.querySelector('#darkvisionPreview');
 export var sizePreview = document.querySelector('#size');
 export var weaponProficiencesPreview = document.querySelector('#weaponProficiencesPreview');
+export var armorProficiencesPreview = document.querySelector('#armorProficiencesPreview');
 // Saving Throws 
 export var savingThrowList = document.querySelector('#savingThrowPreviewList');
 export var savingThrowListItems = savingThrowList.children;

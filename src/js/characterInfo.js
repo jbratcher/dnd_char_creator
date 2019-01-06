@@ -637,10 +637,10 @@ export var Races = {
             helpText: "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience."
         },
         weaponProficiences: [
-            "Battleaxe",
-            "Handaxe",
-            "Light Hammer",
-            "Warhammer"
+            "battleaxe",
+            "handaxe",
+            "light hammer",
+            "warhammer"
         ]
     },
     elf: {
@@ -687,12 +687,12 @@ export var Races = {
             extraLanguage: 1,
             cantrip: 1,
             weaponProficiences: [
-                "Long Sword",
-                "Short Sword",
-                "Long Bow",
-                "Short Bow"
+                "long Sword",
+                "short Sword",
+                "long Bow",
+                "short Bow"
             ],
-            helpText: "As\ta\thigh elf,\tyou\thave a keen\tmind and a mastery of at least the basics\tof magic."
+            helpText: "As a\thigh elf, you have a keen mind and a mastery of at least the basics\tof magic."
         }
     },
     gnome: {

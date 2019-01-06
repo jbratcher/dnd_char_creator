@@ -717,10 +717,13 @@ const getSelectedSkills = () => {
     ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
       selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
       selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex],
+      selectedSkill4 = ele.skill1.options[ele.skill4.selectedIndex],
       console.log("3 skills"))
     : numberOfSkills === 2
     ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
       selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
+      selectedSkill3 = ele.skill1.options[ele.skill3.selectedIndex],
+      selectedSkill4 = ele.skill2.options[ele.skill4.selectedIndex],
       console.log("2 skills"))
     : console.log("Something went wrong")
 
@@ -969,21 +972,54 @@ const setCharacterSize = () => ele.sizePreview.textContent = Races[charRace].siz
 
 const calculateWeaponProficiencies = () => {
 
+  // class proficiencies
+  
+  setClass();
+  
+  ele.weaponProficiencesPreview.innerHTML = "";
+  
+  Classes[charClass].weapons.map(weapon => {
+    let li = <HTMLElement>document.createElement("li");
+    li.textContent = "- " + weapon
+    ele.weaponProficiencesPreview.appendChild(li)
+  })
+  
+  // racial proficiencies
+  
   setRace();
   setSubrace();
 
   charRace === 'dwarf'
     ? Races[charRace].weaponProficiences.map(weapon => {
-      ele.weaponProficiencesPreview.textContent += weapon + ", ";
-    })
-    : null;
-
+        let li = <HTMLElement>document.createElement("li");
+        li.textContent = "- " + weapon
+        ele.weaponProficiencesPreview.appendChild(li)
+      })
+    : null
+    
   charSubrace === 'highelf'
-    ? Races[charRace].subrace.weaponProficiences.map(weapon => {
-      ele.weaponProficiencesPreview.textContent += weapon + ", ";
+  ? Races[charRace].subrace.weaponProficiences.map(weapon => {
+      let li = <HTMLElement>document.createElement("li");
+      li.textContent = "- " + weapon
+      ele.weaponProficiencesPreview.appendChild(li)
     })
-    : null;
+  : null
 
+}
+
+const calculateArmorProficiencies = () => {
+
+  // class proficiencies
+  
+  setClass();
+  
+  ele.armorProficiencesPreview.innerHTML = "";
+  
+  Classes[charClass].armor.map(armor => {
+    let li = <HTMLElement>document.createElement("li");
+    li.textContent = "- " + armor
+    ele.armorProficiencesPreview.appendChild(li)
+  })
 
 }
 
@@ -1082,6 +1118,7 @@ const combatCreation = () => {
   calculateSavingThrowMods();
   calculateSpecialResistances();
   calculateWeaponProficiencies();
+  calculateArmorProficiencies();
 
 }
 

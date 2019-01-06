@@ -449,10 +449,13 @@ var getSelectedSkills = function () {
             ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
                 selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
                 selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex],
+                selectedSkill4 = ele.skill1.options[ele.skill4.selectedIndex],
                 console.log("3 skills"))
             : numberOfSkills === 2
                 ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex],
                     selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex],
+                    selectedSkill3 = ele.skill1.options[ele.skill3.selectedIndex],
+                    selectedSkill4 = ele.skill2.options[ele.skill4.selectedIndex],
                     console.log("2 skills"))
                 : console.log("Something went wrong");
     console.log("selected skill 1: ", selectedSkill1);
@@ -493,12 +496,6 @@ var highlightSkills = function () {
         var skillText = String(ele.skillsPreviewListItems[i].childNodes[1].textContent);
         // reset modifier node to '-""
         ele.skillsPreviewListItems[i].childNodes[5].textContent = "-";
-        // for(let i=1; i <= numberOfSkills; i++) {
-        //   // compare skill text to only the number of skills selected by user
-        //   // if skill iterate is equal to skill text
-        //   if(skill text === eval("selectedSKill" + i + ".textContent.trim()")) {
-        //   }
-        // }
         if (skillText === selectedSkill1.textContent.trim()
             || skillText === selectedSkill2.textContent.trim()
             || skillText === selectedSkill3.textContent.trim()
@@ -640,18 +637,41 @@ var darkvision = function () {
 };
 var setCharacterSize = function () { return ele.sizePreview.textContent = Races[charRace].size; };
 var calculateWeaponProficiencies = function () {
+    // class proficiencies
+    setClass();
+    ele.weaponProficiencesPreview.innerHTML = "";
+    Classes[charClass].weapons.map(function (weapon) {
+        var li = document.createElement("li");
+        li.textContent = "- " + weapon;
+        ele.weaponProficiencesPreview.appendChild(li);
+    });
+    // racial proficiencies
     setRace();
     setSubrace();
     charRace === 'dwarf'
         ? Races[charRace].weaponProficiences.map(function (weapon) {
-            ele.weaponProficiencesPreview.textContent += weapon + ", ";
+            var li = document.createElement("li");
+            li.textContent = "- " + weapon;
+            ele.weaponProficiencesPreview.appendChild(li);
         })
         : null;
     charSubrace === 'highelf'
         ? Races[charRace].subrace.weaponProficiences.map(function (weapon) {
-            ele.weaponProficiencesPreview.textContent += weapon + ", ";
+            var li = document.createElement("li");
+            li.textContent = "- " + weapon;
+            ele.weaponProficiencesPreview.appendChild(li);
         })
         : null;
+};
+var calculateArmorProficiencies = function () {
+    // class proficiencies
+    setClass();
+    ele.armorProficiencesPreview.innerHTML = "";
+    Classes[charClass].armor.map(function (armor) {
+        var li = document.createElement("li");
+        li.textContent = "- " + armor;
+        ele.armorProficiencesPreview.appendChild(li);
+    });
 };
 // Saving throws
 // See domElements.ts
@@ -722,6 +742,7 @@ var combatCreation = function () {
     calculateSavingThrowMods();
     calculateSpecialResistances();
     calculateWeaponProficiencies();
+    calculateArmorProficiencies();
 };
 ////////////////////////////////////////////////////////////
 // Inventory
