@@ -149,6 +149,7 @@ var passivePerceptionPreview = exports.passivePerceptionPreview = document.query
 var darkvisionPreview = exports.darkvisionPreview = document.querySelector('#darkvisionPreview');
 var sizePreview = exports.sizePreview = document.querySelector('#size');
 var weaponProficiencesPreview = exports.weaponProficiencesPreview = document.querySelector('#weaponProficiencesPreview');
+var armorProficiencesPreview = exports.armorProficiencesPreview = document.querySelector('#armorProficiencesPreview');
 // Saving Throws 
 var savingThrowList = exports.savingThrowList = document.querySelector('#savingThrowPreviewList');
 var savingThrowListItems = exports.savingThrowListItems = savingThrowList.children;
@@ -157,3 +158,8 @@ var specialResistances = exports.specialResistances = document.querySelector('#s
 var poisonResistance = exports.poisonResistance = document.querySelector('#poisonResistance');
 var charmResistance = exports.charmResistance = document.querySelector('#charmResistance');
 var fearResistance = exports.fearResistance = document.querySelector('#fearResistance');
+////////////////////////////////////////////////////////////
+// Inventory
+////////////////////////////////////////////////////////////
+// Inventory variables
+var startingEquipmentPreview = exports.startingEquipmentPreview = document.querySelector("#startingEquipmentPreview");

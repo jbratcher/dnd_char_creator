@@ -140,10 +140,10 @@ func.addOptionsToSelect(ele.skill4, _characterInfo.Skills);
 var skillList4 = ele.skill4.children;
 var numberOfSkills = _characterInfo.Classes[charClass].skills.number;
 var availableSkills = _characterInfo.Classes[charClass].skills.available;
-var selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
-var selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
-var selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
-var selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+var selectedSkill1 = null;
+var selectedSkill2 = null;
+var selectedSkill3 = null;
+var selectedSkill4 = null;
 // Skill functions
 var highlightAvailableSkills = function highlightAvailableSkills() {
     setClass();
@@ -386,16 +386,7 @@ var tieflingInfernalLegacy = function tieflingInfernalLegacy() {
 var getSelectedSkills = function getSelectedSkills() {
     numberOfSkills = _characterInfo.Classes[charClass].skills.number;
     // limit skill selection to number of skills for selected class
-    // for(let i = 1; i <= numberOfSkills; i++) {
-    //   let skillVariable = eval("selectedSkill" + i);
-    //   console.log(skillVariable);
-    //   skillVariable = eval("ele.skill" + i + ".options[ele.skill1.selectedIndex]")
-    //   console.log(skillVariable);
-    // }
-    selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex];
-    selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex];
-    selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex];
-    selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex];
+    numberOfSkills === 4 ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex], selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex], selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex], selectedSkill4 = ele.skill4.options[ele.skill4.selectedIndex], console.log("4 skills")) : numberOfSkills === 3 ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex], selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex], selectedSkill3 = ele.skill3.options[ele.skill3.selectedIndex], selectedSkill4 = ele.skill1.options[ele.skill4.selectedIndex], console.log("3 skills")) : numberOfSkills === 2 ? (selectedSkill1 = ele.skill1.options[ele.skill1.selectedIndex], selectedSkill2 = ele.skill2.options[ele.skill2.selectedIndex], selectedSkill3 = ele.skill1.options[ele.skill3.selectedIndex], selectedSkill4 = ele.skill2.options[ele.skill4.selectedIndex], console.log("2 skills")) : console.log("Something went wrong");
     console.log("selected skill 1: ", selectedSkill1);
     console.log("selected skill 2: ", selectedSkill2);
     console.log("selected skill 3: ", selectedSkill3);
@@ -425,7 +416,6 @@ var highightSkill = function highightSkill(skillText) {
 var highlightSkills = function highlightSkills() {
     // Get current values of required info
     getSelectedSkills();
-    // showSkillSlots();
     updateProficiencyBonus();
     // if selected skills match text of selected skill in preview section, highlight in green and append modifier, otherwise dim and remove modifier if present
     for (var i = 0; i < ele.skillsPreviewListItems.length; i++) {
@@ -574,14 +564,37 @@ var setCharacterSize = function setCharacterSize() {
     return ele.sizePreview.textContent = _characterInfo.Races[charRace].size;
 };
 var calculateWeaponProficiencies = function calculateWeaponProficiencies() {
+    // class proficiencies
+    setClass();
+    ele.weaponProficiencesPreview.innerHTML = "";
+    _characterInfo.Classes[charClass].weapons.map(function (weapon) {
+        var li = document.createElement("li");
+        li.textContent = "- " + weapon;
+        ele.weaponProficiencesPreview.appendChild(li);
+    });
+    // racial proficiencies
     setRace();
     setSubrace();
     charRace === 'dwarf' ? _characterInfo.Races[charRace].weaponProficiences.map(function (weapon) {
-        ele.weaponProficiencesPreview.textContent += weapon + ", ";
+        var li = document.createElement("li");
+        li.textContent = "- " + weapon;
+        ele.weaponProficiencesPreview.appendChild(li);
     }) : null;
     charSubrace === 'highelf' ? _characterInfo.Races[charRace].subrace.weaponProficiences.map(function (weapon) {
-        ele.weaponProficiencesPreview.textContent += weapon + ", ";
+        var li = document.createElement("li");
+        li.textContent = "- " + weapon;
+        ele.weaponProficiencesPreview.appendChild(li);
     }) : null;
+};
+var calculateArmorProficiencies = function calculateArmorProficiencies() {
+    // class proficiencies
+    setClass();
+    ele.armorProficiencesPreview.innerHTML = "";
+    _characterInfo.Classes[charClass].armor.map(function (armor) {
+        var li = document.createElement("li");
+        li.textContent = "- " + armor;
+        ele.armorProficiencesPreview.appendChild(li);
+    });
 };
 // Saving throws
 // See domElements.ts
@@ -652,6 +665,22 @@ var combatCreation = function combatCreation() {
     calculateSavingThrowMods();
     calculateSpecialResistances();
     calculateWeaponProficiencies();
+    calculateArmorProficiencies();
+};
+////////////////////////////////////////////////////////////
+// Inventory
+////////////////////////////////////////////////////////////
+var startingEquipment = function startingEquipment() {
+    setClass();
+    ele.startingEquipmentPreview.innerHTML = "";
+    _characterInfo.Classes[charClass].startingEquipment.map(function (equipmentLine) {
+        var li = document.createElement("li");
+        li.textContent = "- " + equipmentLine;
+        ele.startingEquipmentPreview.appendChild(li);
+    });
+};
+var inventoryCreation = function inventoryCreation() {
+    startingEquipment();
 };
 ////////////////////////////////////////////////////////////
 // Event Listeners
@@ -720,6 +749,8 @@ ele.createCharacterButton.addEventListener('click', function (e) {
     skillCreation();
     // Combat tab functions
     combatCreation();
+    // Inventory tab functions
+    inventoryCreation();
 });
 ////////////////////////////////////////////////////////////
 // Preview Functions

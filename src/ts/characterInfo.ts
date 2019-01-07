@@ -10,6 +10,21 @@ export const Classes = {
           "medium armor",
           "shields"
         ],
+        classAbilities: {
+            rage: null,
+            unarmoredDefense: null,
+            recklessAttack: null,
+            dangerSense: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            fastMovement: null,
+            feralInstinct: null,
+            brutalCritical: null,
+            relentlessRage: null,
+            persistentRage: null,
+            indomitableMight: null,
+            primalChampion: null
+        },
         hitdie: 12,
         info: "You are a savage warrior wearing little, if any, armor.  Tough to take down why enraged.",
         savingThrows: [
@@ -46,6 +61,29 @@ export const Classes = {
         armor: [
             "light armor"
         ],
+        classAbilities: {
+            spellCasting: {
+                cantrips: null,
+                spellSlots: null,
+                spellsKnown: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                ritualCasting: null,
+                spellCastingFocus: null
+            },
+            bardicInspiration: null,
+            jackOfAllTrades: null,
+            songOfRest: null,
+            bardCollege: null,
+            expertise: null,
+            abilityScoreImprovement: null,
+            fontOfInspiration: null,
+            counterCharm: null,
+            magicalSecrets: null,
+            superiorInspiration: null
+        },
         hitdie: 8,
         info: "Minstrel or joker with a trick or two up there sleeve.  Your companions will appreciate your company.",
         savingThrows: [
@@ -100,6 +138,27 @@ export const Classes = {
             "medium armor", 
             "shields"
         ],
+        classAbilities: {
+            spellcasting: {
+                cantrips: null,
+                preparingAndCastingSpells: null,
+                spellcastingAbilitiy: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                ritualCasting: null,
+                spellCastingFocus: null
+            },
+            divineDomain: {
+                domainSpells: null
+            },
+            channelDivinity: {
+                turnUndead: null
+            },
+            abilityScoreImprovement: null,
+            destroyUndead: null,
+            divineIntervention: null
+        },
         hitdie: 8,
         info: "Heavily-armor magical healer who can also melee.",
         savingThrows: [
@@ -139,6 +198,28 @@ export const Classes = {
             "shields",
             "non-metal"
         ],
+        classAbilities: {
+            drudic: null,
+            spellCasting: {
+                cantrips: null,
+                preparingAndCastingSpells: null,
+                spellCastingFocus: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                ritualCasting: null
+            },
+            wildShape: {
+                beastShapes: null
+            },
+            dangerSense: null,
+            druidCircle: null,
+            abilityScoreImprovement: null,
+            timelessBody: null,
+            beastSpells: null,
+            archDruid: null
+        },
         hitdie: 8,
         info: "Natural spell-casters or shape-shifting warriors.",
         savingThrows: [
@@ -187,6 +268,22 @@ export const Classes = {
             "all armor",
             "shields"
         ],
+        classAbilities: {
+            fightingStyle: {
+                archery: null,
+                defense: null,
+                dueling: null,
+                greatWeaponFighting: null,
+                protections: null,
+                twoWeaponFighting: null
+            },
+            secondWind: null,
+            actionSurge: null,
+            martialArchetype: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            indomitagble: null
+        },
         hitdie: 10,
         info: "The most skilled warriors can use any armor or weapon and take a beating.",
         savingThrows: [
@@ -226,6 +323,32 @@ export const Classes = {
         armor: [
             "none"
         ],
+        classAbilities: {
+            umarmoredDefense: null,
+            martialArts: null,
+            ki: {
+                kiSaveDC: null
+            },
+            unarmoredMovement: null,
+            monasticTradition: null,
+            flurryOfBlow: null,
+            patientDefense: null,
+            stepOfTheWind: null,
+            deflectMissles: null,
+            abilityScoreImprovement: null,
+            slowFall: null,
+            extraAttack: null,
+            stunningStrike: null,
+            kiEmpoweredStrikes: null,
+            evasion: null,
+            stillnessOfMind: null,
+            purityOfBody: null,
+            toungeOfSunAndMoon: null,
+            diamondSoul: null,
+            timelessBody: null,
+            emptyBody: null,
+            perfectSelf: null
+        },
         hitdie: 8,
         info: "Adept spiritual warriors that can cripple opponents.",
         savingThrows: [
@@ -262,6 +385,21 @@ export const Classes = {
             "all armor",
             "shields"
         ],
+        classAbilities: {
+            rage: null,
+            unarmoredDefense: null,
+            recklessAttack: null,
+            dangerSense: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            fastMovement: null,
+            feralInstinct: null,
+            brutalCritical: null,
+            relentlessRage: null,
+            persistentRage: null,
+            indomitableMight: null,
+            primalChampion: null
+        },
         hitdie: 10,
         info: "Spirtual warriors usually wearing heaving armor.  Can heal and smite.",
         savingThrows: [
@@ -301,6 +439,21 @@ export const Classes = {
             "medium armor",
             "shields"
         ],
+        classAbilities: {
+            rage: null,
+            unarmoredDefense: null,
+            recklessAttack: null,
+            dangerSense: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            fastMovement: null,
+            feralInstinct: null,
+            brutalCritical: null,
+            relentlessRage: null,
+            persistentRage: null,
+            indomitableMight: null,
+            primalChampion: null
+        },
         hitdie: 10,
         info: `Range-focused warriors with survival and animal skills.`,
         savingThrows: [
@@ -339,6 +492,21 @@ export const Classes = {
         armor: [
             "light armor"
         ],
+        classAbilities: {
+            rage: null,
+            unarmoredDefense: null,
+            recklessAttack: null,
+            dangerSense: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            fastMovement: null,
+            feralInstinct: null,
+            brutalCritical: null,
+            relentlessRage: null,
+            persistentRage: null,
+            indomitableMight: null,
+            primalChampion: null
+        },
         hitdie: 8,
         info: "Warrior with varied skills. Realizes on wit and agility more than strength.",
         savingThrows: [
@@ -385,6 +553,21 @@ export const Classes = {
         armor: [
             "none"
         ],
+        classAbilities: {
+            rage: null,
+            unarmoredDefense: null,
+            recklessAttack: null,
+            dangerSense: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            fastMovement: null,
+            feralInstinct: null,
+            brutalCritical: null,
+            relentlessRage: null,
+            persistentRage: null,
+            indomitableMight: null,
+            primalChampion: null
+        },
         hitdie: 6,
         info: "Spell-caster inherent.",
         savingThrows: [
@@ -424,6 +607,21 @@ export const Classes = {
         armor: [
             "light armor"
         ],
+        classAbilities: {
+            rage: null,
+            unarmoredDefense: null,
+            recklessAttack: null,
+            dangerSense: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            fastMovement: null,
+            feralInstinct: null,
+            brutalCritical: null,
+            relentlessRage: null,
+            persistentRage: null,
+            indomitableMight: null,
+            primalChampion: null
+        },
         hitdie: 8,
         info: "Spell-caster who gets their strenght from a pact with a powerful being.",
         savingThrows: [
@@ -462,6 +660,21 @@ export const Classes = {
         armor: [
             "none"
         ],
+        classAbilities: {
+            rage: null,
+            unarmoredDefense: null,
+            recklessAttack: null,
+            dangerSense: null,
+            abilityScoreImprovement: null,
+            extraAttack: null,
+            fastMovement: null,
+            feralInstinct: null,
+            brutalCritical: null,
+            relentlessRage: null,
+            persistentRage: null,
+            indomitableMight: null,
+            primalChampion: null
+        },
         hitdie: 6,
         info: "Diverse spell-caster knowledgeable in the magical arts.",
         savingThrows: [
