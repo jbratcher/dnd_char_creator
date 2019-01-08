@@ -378,19 +378,34 @@ export var Classes = {
             "shields"
         ],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            divineSense: null,
+            layOnHands: null,
+            fightingStyle: {
+                defense: null,
+                dueling: null,
+                greatWeaponFighting: null,
+                protection: null
+            },
+            spellCasting: {
+                preparingAndCastingSpells: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                spellCastingFocus: null
+            },
+            divineSmite: null,
+            divineHealth: null,
+            sacredOath: null,
+            oathSpells: null,
+            channelDivinity: null,
             abilityScoreImprovement: null,
             extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            auraOfProtetion: null,
+            auraOfCourage: null,
+            improvedDivineSmite: null,
+            cleansingTouch: null,
+            sacredOaths: null
         },
         hitdie: 10,
         info: "Spirtual warriors usually wearing heaving armor.  Can heal and smite.",
@@ -431,19 +446,31 @@ export var Classes = {
             "shields"
         ],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            favoredEnemy: null,
+            naturalExplorer: null,
+            fightingStyle: {
+                archery: null,
+                defense: null,
+                dueling: null,
+                twoWeaponFighting: null
+            },
+            spellCasgin: {
+                spellSlots: null,
+                spellsKnown: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                }
+            },
+            rangerArchetype: null,
+            primevalAwareness: null,
             abilityScoreImprovement: null,
             extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            landsStride: null,
+            hideInPlainSight: null,
+            Vanish: null,
+            feralSenses: null,
+            foeSlayer: null
         },
         hitdie: 10,
         info: "Range-focused warriors with survival and animal skills.",
@@ -483,19 +510,19 @@ export var Classes = {
             "light armor"
         ],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            expertise: null,
+            sneakAttack: null,
+            theivesCant: null,
+            cunningAction: null,
+            rougeArchetype: null,
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            uncannyDodge: null,
+            evasion: null,
+            reliableTalent: null,
+            blindSense: null,
+            slipperyMind: null,
+            elusive: null,
+            strokeOfLuck: null
         },
         hitdie: 8,
         info: "Warrior with varied skills. Realizes on wit and agility more than strength.",
@@ -543,19 +570,34 @@ export var Classes = {
             "none"
         ],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            spellCasting: {
+                cantrips: null,
+                spellSlots: null,
+                spellsKnown: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                spellCastingFocus: null
+            },
+            sorcerousOrigin: null,
+            fontOfMagic: {
+                sorceryPoints: null,
+                flexibleCasting: null,
+                creatingSpellSlots: null
+            },
+            metaMagic: {
+                carefullSpell: null,
+                distantSpell: null,
+                empoweredSpell: null,
+                extendedSpell: null,
+                heightenedSpell: null,
+                quickenedSpell: null,
+                subtleSpell: null,
+                twinnedSpell: null
+            },
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            sorcerousRegeneration: null
         },
         hitdie: 6,
         info: "Spell-caster inherent.",
@@ -596,19 +638,26 @@ export var Classes = {
             "light armor"
         ],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            otherworldlyPatron: null,
+            pactMagic: {
+                cantrips: null,
+                spellSlots: null,
+                spellsKnown: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                spellCastingFocus: null
+            },
+            eldritchInnovations: null,
+            pactBoon: {
+                pactOfTheChain: null,
+                pactOfTheBlade: null,
+                pactOfTheTome: null
+            },
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            mysticArcanum: null,
+            eldritchMaster: null
         },
         hitdie: 8,
         info: "Spell-caster who gets their strenght from a pact with a powerful being.",
@@ -648,19 +697,22 @@ export var Classes = {
             "none"
         ],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            spellCasting: {
+                cantrips: null,
+                spellBook: null,
+                preparingAndCastingSpells: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                ritualCasting: null,
+                spellCastingFocus: null
+            },
+            arcaneRecovery: null,
+            arcaneTradition: null,
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            spellMastery: null,
+            signatureSpells: null
         },
         hitdie: 6,
         info: "Diverse spell-caster knowledgeable in the magical arts.",
