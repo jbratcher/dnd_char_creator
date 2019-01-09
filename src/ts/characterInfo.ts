@@ -27,6 +27,128 @@ export const Classes = {
         },
         hitdie: 12,
         info: "You are a savage warrior wearing little, if any, armor.  Tough to take down why enraged.",
+        levels: [
+            {
+                level: 1,
+                features: ["Rage", "Unarmored Defense"],
+                rages: 2,
+                rageDamage: 2
+            },
+            {
+                level: 2,
+                features: ["Reckless Attack", "Danger Sense"],
+                rages: 2,
+                rageDamage: 2
+            },
+            {
+                level: 3,
+                features: ["Primal Path"],
+                rages: 3,
+                rageDamage: 2
+            },
+            {
+                level: 4,
+                features: ["Ability Score Improvment"],
+                rages: 3,
+                rageDamage: 2
+            },
+            {
+                level: 5,
+                features: ["Extra Attack", "Fast Movement"],
+                rages: 4,
+                rageDamage: 2
+            },
+            {
+                level: 6,
+                features: ["Path Feature"],
+                rages: 4,
+                rageDamage: 2
+            },
+            {
+                level: 7,
+                features: ["Feral Instinct"],
+                rages: 4,
+                rageDamage: 2
+            },
+            {
+                level: 8,
+                features: ["Ability Score Improvment"],
+                rages: 4,
+                rageDamage: 2
+            },
+            {
+                level: 9,
+                features: ["Brutal Critical (1 die)"],
+                rages: 4,
+                rageDamage: 3
+            },
+            {
+                level: 10,
+                features: ["Path Feature"],
+                rages: 4,
+                rageDamage: 3
+            },
+            {
+                level: 11,
+                features: ["Relentless Rage"],
+                rages: 4,
+                rageDamage: 3
+            },
+            {
+                level: 12,
+                features: ["Ability Score Improvment"],
+                rages: 5,
+                rageDamage: 3
+            },
+            {
+                level: 13,
+                features: ["Brutal Critical (2 dice)"],
+                rages: 5,
+                rageDamage: 3
+            },
+            {
+                level: 14,
+                features: ["Path Feature"],
+                rages: 5,
+                rageDamage: 3
+            },
+            {
+                level: 15,
+                features: ["Persistent Rage"],
+                rages: 5,
+                rageDamage: 3
+            },
+            {
+                level: 16,
+                features: ["Ability Score Improvment"],
+                rages: 5,
+                rageDamage: 4
+            },
+            {
+                level: 17,
+                features: ["Brutal Critical (3 dice)"],
+                rages: 6,
+                rageDamage: 4
+            },
+            {
+                level: 18,
+                features: ["Indomitable Might"],
+                rages: 6,
+                rageDamage: 4
+            },
+            {
+                level: 19,
+                features: ["Ability Score Improvment"],
+                rages: 6,
+                rageDamage: 4
+            },
+            {
+                level: 20,
+                features: ["Primal Champion"],
+                rages: "Unlimited",
+                rageDamage: 4
+            }
+        ],
         savingThrows: [
             "strength",
             "constitution"

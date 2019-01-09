@@ -26,6 +26,107 @@ var Classes = exports.Classes = {
         },
         hitdie: 12,
         info: "You are a savage warrior wearing little, if any, armor.  Tough to take down why enraged.",
+        levels: [{
+            level: 1,
+            features: ["Rage", "Unarmored Defense"],
+            rages: 2,
+            rageDamage: 2
+        }, {
+            level: 2,
+            features: ["Reckless Attack", "Danger Sense"],
+            rages: 2,
+            rageDamage: 2
+        }, {
+            level: 3,
+            features: ["Primal Path"],
+            rages: 3,
+            rageDamage: 2
+        }, {
+            level: 4,
+            features: ["Ability Score Improvment"],
+            rages: 3,
+            rageDamage: 2
+        }, {
+            level: 5,
+            features: ["Extra Attack", "Fast Movement"],
+            rages: 4,
+            rageDamage: 2
+        }, {
+            level: 6,
+            features: ["Path Feature"],
+            rages: 4,
+            rageDamage: 2
+        }, {
+            level: 7,
+            features: ["Feral Instinct"],
+            rages: 4,
+            rageDamage: 2
+        }, {
+            level: 8,
+            features: ["Ability Score Improvment"],
+            rages: 4,
+            rageDamage: 2
+        }, {
+            level: 9,
+            features: ["Brutal Critical (1 die)"],
+            rages: 4,
+            rageDamage: 3
+        }, {
+            level: 10,
+            features: ["Path Feature"],
+            rages: 4,
+            rageDamage: 3
+        }, {
+            level: 11,
+            features: ["Relentless Rage"],
+            rages: 4,
+            rageDamage: 3
+        }, {
+            level: 12,
+            features: ["Ability Score Improvment"],
+            rages: 5,
+            rageDamage: 3
+        }, {
+            level: 13,
+            features: ["Brutal Critical (2 dice)"],
+            rages: 5,
+            rageDamage: 3
+        }, {
+            level: 14,
+            features: ["Path Feature"],
+            rages: 5,
+            rageDamage: 3
+        }, {
+            level: 15,
+            features: ["Persistent Rage"],
+            rages: 5,
+            rageDamage: 3
+        }, {
+            level: 16,
+            features: ["Ability Score Improvment"],
+            rages: 5,
+            rageDamage: 4
+        }, {
+            level: 17,
+            features: ["Brutal Critical (3 dice)"],
+            rages: 6,
+            rageDamage: 4
+        }, {
+            level: 18,
+            features: ["Indomitable Might"],
+            rages: 6,
+            rageDamage: 4
+        }, {
+            level: 19,
+            features: ["Ability Score Improvment"],
+            rages: 6,
+            rageDamage: 4
+        }, {
+            level: 20,
+            features: ["Primal Champion"],
+            rages: "Unlimited",
+            rageDamage: 4
+        }],
         savingThrows: ["strength", "constitution"],
         skills: {
             number: 2,
@@ -211,19 +312,34 @@ var Classes = exports.Classes = {
     paladin: {
         armor: ["all armor", "shields"],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            divineSense: null,
+            layOnHands: null,
+            fightingStyle: {
+                defense: null,
+                dueling: null,
+                greatWeaponFighting: null,
+                protection: null
+            },
+            spellCasting: {
+                preparingAndCastingSpells: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                spellCastingFocus: null
+            },
+            divineSmite: null,
+            divineHealth: null,
+            sacredOath: null,
+            oathSpells: null,
+            channelDivinity: null,
             abilityScoreImprovement: null,
             extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            auraOfProtetion: null,
+            auraOfCourage: null,
+            improvedDivineSmite: null,
+            cleansingTouch: null,
+            sacredOaths: null
         },
         hitdie: 10,
         info: "Spirtual warriors usually wearing heaving armor.  Can heal and smite.",
@@ -239,19 +355,31 @@ var Classes = exports.Classes = {
     ranger: {
         armor: ["light armor", "medium armor", "shields"],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            favoredEnemy: null,
+            naturalExplorer: null,
+            fightingStyle: {
+                archery: null,
+                defense: null,
+                dueling: null,
+                twoWeaponFighting: null
+            },
+            spellCasgin: {
+                spellSlots: null,
+                spellsKnown: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                }
+            },
+            rangerArchetype: null,
+            primevalAwareness: null,
             abilityScoreImprovement: null,
             extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            landsStride: null,
+            hideInPlainSight: null,
+            Vanish: null,
+            feralSenses: null,
+            foeSlayer: null
         },
         hitdie: 10,
         info: "Range-focused warriors with survival and animal skills.",
@@ -267,19 +395,19 @@ var Classes = exports.Classes = {
     rogue: {
         armor: ["light armor"],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            expertise: null,
+            sneakAttack: null,
+            theivesCant: null,
+            cunningAction: null,
+            rougeArchetype: null,
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            uncannyDodge: null,
+            evasion: null,
+            reliableTalent: null,
+            blindSense: null,
+            slipperyMind: null,
+            elusive: null,
+            strokeOfLuck: null
         },
         hitdie: 8,
         info: "Warrior with varied skills. Realizes on wit and agility more than strength.",
@@ -295,19 +423,34 @@ var Classes = exports.Classes = {
     sorcerer: {
         armor: ["none"],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            spellCasting: {
+                cantrips: null,
+                spellSlots: null,
+                spellsKnown: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                spellCastingFocus: null
+            },
+            sorcerousOrigin: null,
+            fontOfMagic: {
+                sorceryPoints: null,
+                flexibleCasting: null,
+                creatingSpellSlots: null
+            },
+            metaMagic: {
+                carefullSpell: null,
+                distantSpell: null,
+                empoweredSpell: null,
+                extendedSpell: null,
+                heightenedSpell: null,
+                quickenedSpell: null,
+                subtleSpell: null,
+                twinnedSpell: null
+            },
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            sorcerousRegeneration: null
         },
         hitdie: 6,
         info: "Spell-caster inherent.",
@@ -323,19 +466,26 @@ var Classes = exports.Classes = {
     warlock: {
         armor: ["light armor"],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            otherworldlyPatron: null,
+            pactMagic: {
+                cantrips: null,
+                spellSlots: null,
+                spellsKnown: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                spellCastingFocus: null
+            },
+            eldritchInnovations: null,
+            pactBoon: {
+                pactOfTheChain: null,
+                pactOfTheBlade: null,
+                pactOfTheTome: null
+            },
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            mysticArcanum: null,
+            eldritchMaster: null
         },
         hitdie: 8,
         info: "Spell-caster who gets their strenght from a pact with a powerful being.",
@@ -351,19 +501,22 @@ var Classes = exports.Classes = {
     wizard: {
         armor: ["none"],
         classAbilities: {
-            rage: null,
-            unarmoredDefense: null,
-            recklessAttack: null,
-            dangerSense: null,
+            spellCasting: {
+                cantrips: null,
+                spellBook: null,
+                preparingAndCastingSpells: null,
+                spellCastingAbility: {
+                    spellSaveDC: null,
+                    spellAttackModifier: null
+                },
+                ritualCasting: null,
+                spellCastingFocus: null
+            },
+            arcaneRecovery: null,
+            arcaneTradition: null,
             abilityScoreImprovement: null,
-            extraAttack: null,
-            fastMovement: null,
-            feralInstinct: null,
-            brutalCritical: null,
-            relentlessRage: null,
-            persistentRage: null,
-            indomitableMight: null,
-            primalChampion: null
+            spellMastery: null,
+            signatureSpells: null
         },
         hitdie: 6,
         info: "Diverse spell-caster knowledgeable in the magical arts.",
