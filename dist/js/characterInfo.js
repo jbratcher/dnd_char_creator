@@ -163,6 +163,327 @@ var Classes = exports.Classes = {
         },
         hitdie: 8,
         info: "Minstrel or joker with a trick or two up there sleeve.  Your companions will appreciate your company.",
+        levels: [{
+            level: 1,
+            features: ["Spellcasting", "Bardic Inspiration (d6)"],
+            cantripsKnown: 2,
+            spellsKnown: 4,
+            spellSlotsPerLevel: {
+                '1st': 2,
+                '2nd': 0,
+                '3rd': 0,
+                '4th': 0,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 2,
+            features: ["Jack of All Trades", "Song of Rest (d6)"],
+            cantripsKnown: 2,
+            spellsKnown: 5,
+            spellSlotsPerLevel: {
+                '1st': 3,
+                '2nd': 0,
+                '3rd': 0,
+                '4th': 0,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 3,
+            features: ["Bard College", "Expertise"],
+            cantripsKnown: 2,
+            spellsKnown: 6,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 2,
+                '3rd': 0,
+                '4th': 0,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 4,
+            features: ["Ability Score Improvement"],
+            cantripsKnown: 3,
+            spellsKnown: 7,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 0,
+                '4th': 0,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 5,
+            features: ["Bardic Inspiration (d8)", "Font of Inspiration"],
+            cantripsKnown: 3,
+            spellsKnown: 8,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 2,
+                '4th': 0,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 6,
+            features: ["Countercharm", "Bard College feature"],
+            cantripsKnown: 3,
+            spellsKnown: 9,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 0,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 7,
+            features: [""],
+            cantripsKnown: 3,
+            spellsKnown: 10,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 1,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 8,
+            features: ["Ability Score Improvement"],
+            cantripsKnown: 3,
+            spellsKnown: 11,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 2,
+                '5th': 0,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 9,
+            features: ["Song of Rest (d8)"],
+            cantripsKnown: 3,
+            spellsKnown: 12,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 1,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 10,
+            features: ["Bardic Inspiration (d10)", "Expertise, Magical Secrets"],
+            cantripsKnown: 4,
+            spellsKnown: 14,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 0,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 11,
+            features: [""],
+            cantripsKnown: 4,
+            spellsKnown: 15,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 1,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 12,
+            features: ["Ability Score Improvement"],
+            cantripsKnown: 4,
+            spellsKnown: 15,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 1,
+                '7th': 0,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 13,
+            features: ["Song of Rest (d10)"],
+            cantripsKnown: 4,
+            spellsKnown: 16,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 1,
+                '7th': 1,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 14,
+            features: ["Magical Secrets", "Bard College feature"],
+            cantripsKnown: 4,
+            spellsKnown: 18,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 1,
+                '7th': 1,
+                '8th': 0,
+                '9th': 0
+            }
+        }, {
+            level: 15,
+            features: ["Bardic Inspiration (d12)"],
+            cantripsKnown: 4,
+            spellsKnown: 19,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 1,
+                '7th': 1,
+                '8th': 1,
+                '9th': 0
+            }
+        }, {
+            level: 16,
+            features: ["Ability Score Improvement"],
+            cantripsKnown: 4,
+            spellsKnown: 19,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 1,
+                '7th': 1,
+                '8th': 1,
+                '9th': 0
+            }
+        }, {
+            level: 17,
+            features: ["Song of Rest (d12)"],
+            cantripsKnown: 4,
+            spellsKnown: 20,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 2,
+                '6th': 1,
+                '7th': 1,
+                '8th': 1,
+                '9th': 1
+            }
+        }, {
+            level: 18,
+            features: ["Magical Secrets"],
+            cantripsKnown: 4,
+            spellsKnown: 22,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 3,
+                '6th': 1,
+                '7th': 1,
+                '8th': 1,
+                '9th': 1
+            }
+        }, {
+            level: 19,
+            features: ["Ability Score Improvement"],
+            cantripsKnown: 4,
+            spellsKnown: 22,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 3,
+                '6th': 2,
+                '7th': 1,
+                '8th': 1,
+                '9th': 1
+            }
+        }, {
+            level: 20,
+            features: ["Superior Inspiration"],
+            cantripsKnown: 4,
+            spellsKnown: 22,
+            spellSlotsPerLevel: {
+                '1st': 4,
+                '2nd': 3,
+                '3rd': 3,
+                '4th': 3,
+                '5th': 3,
+                '6th': 2,
+                '7th': 2,
+                '8th': 1,
+                '9th': 1
+            }
+        }],
         savingThrows: ["dexerity", "charisma"],
         skills: {
             number: 3,
@@ -881,7 +1202,7 @@ var Races = exports.Races = {
                 info: "You have resistance to fire damage."
             },
             infernalLegacy: {
-                info: "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells."
+                info: "You know the thaumaturgy cantrip. When you reach '3rd' level, you can cast the hellish rebuke spell as a '2nd'-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach '5th' level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells."
             }
         }
     }
